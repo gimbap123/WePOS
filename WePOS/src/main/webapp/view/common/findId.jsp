@@ -44,20 +44,25 @@
 				<h2>아이디 / 패스워드 찾기</h2>				
 			</div>
 			<div>
+				<form action="findId.do" method="post" >
 				<h3>아이디 찾기</h3>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-users"></i></span>
-					<input type="text" class="form-control" placeholder="이름">
+					<input type="text" class="form-control" name="userName" placeholder="이름">
 				</div>
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-					<input type="text" class="form-control" placeholder="이메일 주소">
+					<input type="text" class="form-control" name="userEmail" placeholder="이메일 주소">					
+				</div>
+				<div>
+					${userName}
 				</div>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 						<button type="submit" class="btn-u btn-block">아이디 찾기</button>
 					</div>
-				</div>	
+				</div>
+				</form>	
 			</div>
 			<p>
 			<div>
