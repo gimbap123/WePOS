@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,20 +45,27 @@
 				<h2>아이디 / 패스워드 찾기</h2>				
 			</div>
 			<div>
+				<form action="findId.do" method="post" >
 				<h3>아이디 찾기</h3>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-users"></i></span>
-					<input type="text" class="form-control" placeholder="이름">
+					<input type="text" class="form-control" name="userName" placeholder="이름">
 				</div>
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-					<input type="text" class="form-control" placeholder="이메일 주소">
+					<input type="text" class="form-control" name="userEmail" placeholder="이메일 주소">					
 				</div>
+				<c:if test="${userId != null}">
+					<div>
+						ID 검색 결과 : ${userId}
+					</div>
+				</c:if>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 						<button type="submit" class="btn-u btn-block">아이디 찾기</button>
 					</div>
-				</div>	
+				</div>
+				</form>	
 			</div>
 			<p>
 			<div>

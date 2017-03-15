@@ -24,8 +24,10 @@
  	 <bean class="com.wepos.common.controller.LoginController" />
  	 <bean class="com.wepos.common.controller.FindIdController" />
      <bean class="com.wepos.common.controller.ShowBoardController" />
-     <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
      
+     <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
+     <bean class="com.wepos.common.dao.CommonDaoImpl" />
+
 </beans>
 
 
