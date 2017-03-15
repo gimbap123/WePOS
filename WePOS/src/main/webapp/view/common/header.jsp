@@ -6,16 +6,16 @@
 <div class="header">
 	<div class="container">
 		<!-- Logo -->
-		<a class="logo" href="main.jsp"> <img src="../image/common/logo.png"
+		<a class="logo" href="main.do"> <img src="../image/common/logo.png"
 			alt="Logo">
 		</a>		
 		<!-- End Logo -->
 		<!-- Topbar -->
 		<div class="topbar">
 			<ul class="loginbar pull-right">
-				<li><a href="registration.jsp">회원가입</a></li>
+				<li><a href="registration.do">회원가입</a></li>
 				<li class="topbar-devider"></li>
-				<li><a href="Login.jsp">로그인</a></li>
+				<li><a href="login.do">로그인</a></li>
 			</ul>
 		</div>
 		<!-- End Topbar -->
