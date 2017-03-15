@@ -10,7 +10,7 @@
     </settings>
 	
 	<typeAliases>	   
-		<typeAlias type="com.wepos.common.dto.UsersDto"/> 
+		<typeAlias type="com.wepos.common.dto.UsersDto" alias="usersDto"/> 
 	</typeAliases>
 	
 	<mappers>	    
