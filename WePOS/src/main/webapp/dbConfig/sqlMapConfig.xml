@@ -3,9 +3,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<typeAliases>	    
+	<typeAliases>	   
+		<typeAlias type="com.wepos.common.dto.UsersDto"/> 
 	</typeAliases>
 	
 	<mappers>	    
+		<mapper resource="com/wepos/common/dao/CommonDaoMapper.xml"/>
 	</mappers>
 </configuration>
