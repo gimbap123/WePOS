@@ -7,4 +7,7 @@ public interface CommonDao {
 	// 아이디 찾기
 	public String findId(UsersDto user);
 	
+	// 회원가입
+	public int registration(UsersDto user);
+	
 }

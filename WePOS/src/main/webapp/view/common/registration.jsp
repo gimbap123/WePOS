@@ -31,9 +31,6 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
-
 <script language="JavaScript" src="../view/common/script.js"></script>
 
 </head>
@@ -60,8 +57,10 @@
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>
-					<input 	type="text" name="user_id" class="form-control" placeholder="ID">
+					<span>
+					<input 	type="text" name="user_id" class="form-control" placeholder="ID" position="relative" width="60%">					
 					<input type="button" onclick="checkId()" value="중복확인" >
+					</span>
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span>

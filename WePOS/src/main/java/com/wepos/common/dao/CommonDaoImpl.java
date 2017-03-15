@@ -8,5 +8,9 @@ public class CommonDaoImpl implements CommonDao {
 		
 		return null;
 	}
+	
+	public int registration(UsersDto user) {
+		return 0;
+	}
 
 }

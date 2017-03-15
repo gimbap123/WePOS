@@ -23,7 +23,6 @@
  	 <bean class="com.wepos.common.controller.RegistrationController" />
  	 <bean class="com.wepos.common.controller.LoginController" />
  	 <bean class="com.wepos.common.controller.FindIdController" />
-     
 </beans>
 
 
