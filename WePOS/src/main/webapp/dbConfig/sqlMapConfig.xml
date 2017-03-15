@@ -9,11 +9,20 @@
           <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 	
+	
+	
 	<typeAliases>	   
-		<typeAlias type="com.wepos.common.dto.UsersDto"/> 
+		<typeAlias alias="usersDto" type="com.wepos.common.dto.UsersDto"/> 
+		
+		<typeAlias alias="boardDto" type="com.wepos.common.dto.BoardDto"/> 
 	</typeAliases>
+	
+
 	
 	<mappers>	    
 		<mapper resource="com/wepos/common/dao/CommonDaoMapper.xml"/>
+		
+		<mapper resource="com/wepos/common/dao/BoardDaoMapper.xml"/>
 	</mappers>
+	
 </configuration>
