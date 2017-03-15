@@ -34,8 +34,11 @@ public class CommonController {
 	@RequestMapping(value="/common/findId.do", method=RequestMethod.POST)
 	public ModelAndView findIdProcess(@ModelAttribute UsersDto user)
 	{
-		String userName = commonDao.findId(user);
-		System.out.println("userName : " + userName);
-		return new ModelAndView("common/findId", "userName", userName);
+		String userId = commonDao.findId(user);
+		if(userId == null)
+		{
+			userId = "일치하는 아이디가 없습니다.";
+		}		
+		return new ModelAndView("common/findId", "userId", userId);
 	}
 }
