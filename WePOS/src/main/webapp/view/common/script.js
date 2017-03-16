@@ -1,51 +1,65 @@
 	function check(){
-		if(document.regForm.user_name.value=="" || document.regForm.user_name.value==null){
+		if(document.regForm.userName.value=="" || document.regForm.userName.value==null){
 			alert("이름을 입력하세요");
-			document.regForm.user_name.focus();
+			document.regForm.userName.focus();
 			return false;
 		}
-		if(document.regForm.user_id.value=="" || document.regForm.user_id.value==null){
+		if(document.regForm.userId.value=="" || document.regForm.userId.value==null){
 			alert("아이디를 입력하세요");
-			document.regForm.user_id.focus();
+			document.regForm.userId.focus();
 			return false;
 		}
-		if(document.regForm.user_password.value=="" || document.regForm.user_password.value==null){
+		if(document.regForm.userPassword.value=="" || document.regForm.userPassword.value==null){
 			alert("암호를 입력하세요");
-			document.regForm.user_password.focus();
+			document.regForm.userPassword.focus();
 			return false;
 		}
-		if(document.regForm.user_password2.value=="" || document.regForm.user_password2.value==null){
+		if(document.regForm.userPassword2.value=="" || document.regForm.userPassword2.value==null){
 			alert("암호확인을 입력하세요");
-			document.regForm.user_password2.focus();
+			document.regForm.userPassword2.focus();
 			return false;
 		}
-		if(document.regForm.user_phone.value=="" || document.regForm.user_phone.value==null){
+		if(document.regForm.userPhone.value=="" || document.regForm.userPhone.value==null){
 			alert("연락처를 입력하세요");
-			document.regForm.user_phone.focus();
+			document.regForm.userPhone.focus();
 			return false;
 		}
-		if(document.regForm.user_email.value=="" || document.regForm.user_email.value==null){
+		if(document.regForm.userEmail.value=="" || document.regForm.userEmail.value==null){
 			alert("이메일을 입력하세요");
-			document.regForm.user_email.focus();
+			document.regForm.userEmail.focus();
 			return false;
 		}
+		if(document.regForm.terms.checked==false)
+			alert("이용약관에 동의해 주세요");
 		else
-			checkPwd();		
+			checkPwd();
 	}
 	
 	function checkId(){
-		
+		var id=document.regForm.userId.value;
+		var idCheck=document.getElementById('idCheck');
+	        $.ajax({
+	        	url : 'checkId.do?userId=' + id,
+	        	type : 'post',
+	        	success : function(data) {
+	        		idCheck.innerHTML = data;
+	        	}
+	        });
+
+        /*if(idCheck=="이미 등록된 아이디입니다.")
+        	alert("testsetset");
+        	document.getElementById("ok").disabled="disabled";*/
 	}
 	
 	function checkPwd(){
-		var pwd1=document.regForm.user_password.value;
-		var pwd2=document.regForm.user_password2.value;
+		var pwd1=document.regForm.userPassword.value;
+		var pwd2=document.regForm.userPassword2.value;
 		if(pwd1==pwd2)
 			document.regForm.submit();
 		else{
 			alert("비밀번호가 일치하지 않습니다.");
-			document.regForm.user_password2.value="";
-			document.regForm.user_password2.focus();
+			document.regForm.userPassword2.value="";
+			document.regForm.userPassword2.focus();
 			return false;
 		}
 	}

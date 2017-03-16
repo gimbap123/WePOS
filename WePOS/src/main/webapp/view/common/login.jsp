@@ -31,6 +31,19 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../assets/css/custom.css">
 
+<script>
+	if(${result}==1){
+		alert("회원가입에 성공했습니다.");
+		document.loginForm.userid.focus();
+	}
+		
+	
+	else{
+		alert("회원가입에 실패했습니다.");
+		response.sendRedirect("/common/registration.do");
+	}	
+</script>
+
 </head>
 
 <body>
@@ -43,33 +56,35 @@
 			<div class="reg-block-header">
 				<h2>로그인</h2>
 			</div>
-
-			<div class="input-group margin-bottom-20">
-				<span class="input-group-addon"><i class="icon-user"></i></span> <input
-					type="text" class="form-control" placeholder="ID">
-			</div>
-			<div class="input-group margin-bottom-30">
-				<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-					type="text" class="form-control" placeholder="패스워드">
-			</div>
-			<div class="checkbox">
-				<label> <input type="checkbox">
-					<p>로그인 유지</p>
-				</label>
-			</div>
-			<span class="input-group-addon">
-				<a class="color-green" href="registration.do">회원가입</a>
-			</span>
-			<span class="input-group-addon">
-				<a class="color-green" href="findId.do">아이디 / 패스워드 찾기</a>
-			</span>
-
-			<hr>
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
-					<button type="submit" class="btn-u btn-block">로그인</button>
+			
+			<form name="loginForm" action="main.do" method="post">
+				<div class="input-group margin-bottom-20">
+					<span class="input-group-addon"><i class="icon-user"></i></span>
+					<input type="text" name="userId" class="form-control" placeholder="ID">
 				</div>
-			</div>
+				<div class="input-group margin-bottom-30">
+					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					<input type="text" name="userPassword" class="form-control" placeholder="패스워드">
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox">
+						<p>로그인 유지</p>
+					</label>
+				</div>
+				<span class="input-group-addon">
+					<a class="color-green" href="registration.do">회원가입</a>
+				</span>
+				<span class="input-group-addon">
+					<a class="color-green" href="findId.do">아이디 / 패스워드 찾기</a>
+				</span>
+	
+				<hr>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<button type="submit" class="btn-u btn-block">로그인</button>
+					</div>
+				</div>
+			</form>
 		</div>
 		<!--End Reg Block-->
 	</div>

@@ -20,9 +20,9 @@
 	
 	 <!-- 요청을 처리해주는 클래스 객체를 등록 -->
  	 <bean class="com.wepos.common.controller.CommonController" />
- 	 <bean class="com.wepos.common.controller.RegistrationController" />
+ 	 <!-- <bean class="com.wepos.common.controller.RegistrationController" />
  	 <bean class="com.wepos.common.controller.LoginController" />
- 	 <bean class="com.wepos.common.controller.FindIdController" />
+ 	 <bean class="com.wepos.common.controller.FindIdController" /> -->
  	 
  	 <bean class="com.wepos.common.dao.CommonDaoImpl" />
 </beans>
