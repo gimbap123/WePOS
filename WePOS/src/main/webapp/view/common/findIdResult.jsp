@@ -42,50 +42,28 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>아이디 / 비밀번호 찾기</h2>				
+				<h3>아이디 / 비밀번호 찾기 결과</h3>				
 			</div>
-			<div>
-				<form action="findId.do" method="post" >
-				<h3>아이디 찾기</h3>
-				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-users"></i></span>
-					<input type="text" class="form-control" name="userName" placeholder="이름">
-				</div>
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-					<input type="text" class="form-control" name="userEmail" placeholder="이메일 주소">					
-				</div>
-				<c:if test="${userId != null}">
-					<div>
-						ID 검색 결과 : ${userId}
-					</div>
-				</c:if>
+			<c:if test="${result == 1}">
+				<h3>입력하신 메일 주소로 </h3>
+				<h3>임시 비밀번호가 전송되었습니다.</h3>
+				<br>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">아이디 찾기</button>
+						<button type="button" class="btn-u btn-block" onclick="moveLogin()">로그인</button>
 					</div>
 				</div>
-				</form>	
-			</div>
-			<p>
-			<div>
-				<form action="findPw.do" method="post" >
-					<h3>비밀번호 찾기</h3>
-					<div class="input-group margin-bottom-10">
-						<span class="input-group-addon"><i class="icon-users"></i></span>
-						<input type="text" class="form-control" name="userId" placeholder="ID">
+			</c:if>
+			<c:if test="${result == 0}">
+				<h3>ID 또는 이메일 주소와 일치하는</h3>
+				<h3>정보가 없습니다.</h3>
+				<br>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<button type="button" class="btn-u btn-block" onclick="moveFindId()">아이디 / 비밀번호 찾기</button>
 					</div>
-					<div class="input-group margin-bottom-20">
-						<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-						<input type="text" class="form-control" name="userEmail" placeholder="이메일 주소">
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-offset-1">
-							<button type="submit" class="btn-u btn-block">비밀번호 찾기</button>
-						</div>
-					</div>
-				</form>	
-			</div>
+				</div>
+			</c:if>	
 		</div>
 		<!--End Reg Block-->
 	</div>
@@ -121,12 +99,17 @@
         fade: 1000,
         duration: 3000
     });
+    
+    function moveLogin()
+    {
+    	location.href = "login.do";
+    }
+    
+    function moveFindId()
+    {
+    	location.href = "findId.do";
+    }
 </script>
-	<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
 
 </body>
 </html>

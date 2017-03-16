@@ -10,6 +10,14 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 		return getSqlSession().selectOne("findId", user);
 	}
 	
+	public int findPw(UsersDto user) {
+		return getSqlSession().selectOne("findPw", user);
+	}
+	
+	public void updatePw(UsersDto user) {
+		getSqlSession().update("updatePw", user);
+	}
+	
 	public int registration(UsersDto user) {
 		return 0;
 	}
