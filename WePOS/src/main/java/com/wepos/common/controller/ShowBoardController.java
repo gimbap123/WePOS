@@ -37,7 +37,7 @@ public class ShowBoardController {
 			}else{
 				list = Collections.emptyList();
 			}
-			System.out.println("ListController클래스의 count="+count);
+			System.out.println("ShowBoardController클래스의 count="+count);
 			
 			
 			ModelAndView  mav = new ModelAndView();

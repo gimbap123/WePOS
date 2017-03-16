@@ -13,4 +13,10 @@ public interface BoardDao {
 	//총 레코드 수 구하기
 	public int getRowCount();	
 	
+	//글쓰기
+	public void boardInsert(BoardDto boardDto);
+	
+	//게시물 번호의 최대값
+	public int getNumber();
+	
 }

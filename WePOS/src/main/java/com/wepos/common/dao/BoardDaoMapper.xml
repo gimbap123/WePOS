@@ -14,4 +14,14 @@
 		select count(*) from board
 	</select>
 
+	<insert id="boardInsert" parameterType="boardDto">
+		insert into board
+		(board_number, board_type_code, total_id, board_title, board_content, board_date, board_read_cnt)
+		values(#{boardNumber}, 1, #{totalId}, #{boardTitle}, #{boardContent}, sysdate, 0)
+	</insert>
+
+	<select id="getNumber" resultType="int">
+		select max(board_number) from board 
+	</select>
+
 </mapper>

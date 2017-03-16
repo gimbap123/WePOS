@@ -69,7 +69,7 @@
 	                    <p>회원가입하시면 매장 예약, 메뉴 평점, 게시물 쓰기 등의 다양한 기능을 사용하실 수 있습니다.</p>
 	                </div>	                	                          
 	                <div class="col-md-3 btn-buy animated fadeInRight">
-	                    <a href="showBoard.do" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> 회원가입</a>
+	                    <a href="#" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> 회원가입</a>
 	                </div>
 	            </div>
 	        </div>

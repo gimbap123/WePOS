@@ -14,7 +14,7 @@
 
 <center>
 
-<form name="boardWrite" action="boardWrite">
+<form action="boardWrite.do">
 
 <table>
 	<tr>
@@ -31,8 +31,8 @@
 		<th>${data.boardNumber }</th>
 		<th>${data.boardTitle }</th>
 		<th>${data.totalId }</th>
-		<th>${data.date }</th>
-		<th>${data.readCnt}</th>
+		<th>${data.boardDate }</th>
+		<th>${data.boardReadCnt}</th>
 	</tr>
 	
 	</c:forEach>

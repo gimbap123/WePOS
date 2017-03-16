@@ -18,5 +18,15 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("selectOne");
 	}
+	
+	public void boardInsert(BoardDto boardDto) {
+		// TODO Auto-generated method stub
+		getSqlSession().insert("boardInsert", boardDto);
+	}
+	
+	public int getNumber() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getNumber");
+	}
 
 }
