@@ -1,5 +1,17 @@
 package com.wepos.common.controller;
 
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dao.CommonDao;
 import com.wepos.common.dto.UsersDto;
+import com.wepos.common.util.MailSendUtil;
+import com.wepos.common.util.RandomPasswordUtil;
 
 @Controller
 public class CommonController {
@@ -53,11 +67,11 @@ public class CommonController {
 	public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
 	{
 		ModelAndView mav=new ModelAndView();
-		String res = commonDao.checkId(id);
-		//System.out.println("중복여부 : " + res);
+		int res = commonDao.checkId(id);
+		System.out.println("중복여부 : " + res);
 		String result="";
 		
-		if(res!=null)
+		if(res==1)
 			result="이미 등록된 아이디입니다.";
 		else
 			result="사용 가능한 아이디입니다.";
@@ -79,9 +93,30 @@ public class CommonController {
 	@RequestMapping(value="/common/findId.do", method=RequestMethod.POST)
 	public ModelAndView findIdProcess(@ModelAttribute UsersDto user)
 	{
-		String userName = commonDao.findId(user);
-		System.out.println("userName : " + userName);
-		return new ModelAndView("common/findId", "userName", userName);
+		String userId = commonDao.findId(user);
+		if(userId == null)
+		{
+			userId = "일치하는 아이디가 없습니다.";
+		}		
+		return new ModelAndView("common/findId", "userId", userId);
+	}
+	
+	// 비밀번호 찾기 기능 수행
+	@RequestMapping("/common/findPw.do")
+	public ModelAndView findPwProcess(@ModelAttribute UsersDto user) throws AddressException, MessagingException
+	{
+		int result = commonDao.findPw(user);
+		
+		if(result == 1)
+		{
+			String newPassword = new RandomPasswordUtil().getRandomPassword();
+			user.setUserPassword(newPassword);
+			commonDao.updatePw(user);
+			MailSendUtil mailSendUtil = new MailSendUtil();
+			mailSendUtil.mailSender(user);
+		}
+		
+		return new ModelAndView("common/findIdResult", "result", result);
 	}
 	
 	// 로그인 ---------------------------------------------------------------------------------------------------------
@@ -90,8 +125,6 @@ public class CommonController {
 	{
 		return "common/login";
 	}
-	
-	
 
 }
 

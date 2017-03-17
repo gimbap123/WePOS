@@ -50,7 +50,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">자유 게시판</a></li>
+						<li><a href="showBoard.do">자유 게시판</a></li>
 						<li><a href="#">FAQ</a></li>
 						<li><a href="#">Q&A</a></li>
 					</ul></li>

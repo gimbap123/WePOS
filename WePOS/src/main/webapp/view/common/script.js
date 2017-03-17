@@ -1,5 +1,24 @@
-	function check(){
-		if(document.regForm.userName.value=="" || document.regForm.userName.value==null){
+
+	function checkWrite(){
+		if(document.boardWrite.boardTitle.value=="" || document.boardWrite.boardTitle.value==null){
+			alert("제목을 입력하세요");
+			document.boardWrite.boardTitle.focus();
+			return false;
+		}
+		
+		if(document.boardWrite.boardContent.value=="" || document.boardWrite.boardContent.value==null){
+			alert("내용을 입력하세요");
+			document.boardWrite.boardContent.focus();
+			return false;
+		}
+		
+		alert("글이 성공적으로 등록되었습니다!");
+		document.boardWrite.submit();
+	}
+
+
+function check(){
+		if(document.regForm.user_name.value=="" || document.regForm.user_name.value==null){
 			alert("이름을 입력하세요");
 			document.regForm.userName.focus();
 			return false;
