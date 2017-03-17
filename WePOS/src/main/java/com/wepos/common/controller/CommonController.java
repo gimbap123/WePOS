@@ -73,9 +73,10 @@ public class CommonController {
 		
 		if(res==1)
 			result="이미 등록된 아이디입니다.";
-		else
+		else if(res==0)
 			result="사용 가능한 아이디입니다.";
-		//mav.addObject("res",res.trim());
+		mav.addObject("res",res);
+		
 		mav.addObject("result",result.trim());
 		mav.setViewName("common/checkId");
 			

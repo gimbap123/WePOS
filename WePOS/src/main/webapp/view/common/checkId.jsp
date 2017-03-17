@@ -4,5 +4,6 @@
 <html>
 <body>
 	${result}
+	<input type="hidden" name="result" value="${res}">
 </body>
 </html>
