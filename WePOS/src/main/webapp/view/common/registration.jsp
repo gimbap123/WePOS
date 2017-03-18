@@ -60,11 +60,9 @@
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>					
 					<input 	type="text" name="userId" class="form-control" placeholder="ID" onblur="checkId()">
-					<!-- <input type="hidden" name="test" value="false"> -->
 				</div>
 				<div align="center">
 					<span id="idCheck"></span>
-					${res}
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span>

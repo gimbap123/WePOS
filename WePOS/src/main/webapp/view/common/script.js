@@ -48,12 +48,14 @@ function check(){
 			document.regForm.userEmail.focus();			
 			return false;
 		}
-		if(document.regForm.terms.checked==false)
+		if(document.regForm.terms.checked==false){
 			alert("이용약관에 동의해 주세요");
-		if(document.getElementById("idCheck").innerHTML.equals("이미 등록된 아이디입니다.")){
-		//if(document.getElementById("idCheck").innerHTML=="이미 등록된 아이디입니다."){	
-			alert("아이디를 확인해주세요.")
-			alert("${res}")
+			return false;
+		}		
+		if(document.regForm.result.value==1){
+			idCheck.style.color="red";
+			alert("아이디를 확인해주세요.");
+			document.regForm.userId.focus();
 			return false;
 		}
 		else
@@ -69,14 +71,12 @@ function check(){
 	        	type : 'post',
 	        	success : function(data) {
 	        		idCheck.innerHTML = data;
+	        		if(document.regForm.result.value==1)
+	        			idCheck.style.color="red";
+	        		if(document.regForm.result.value==0)
+	        			idCheck.style.color="blue";
 	        	}
 	        });
-	      /*  var result=document.result.value;
-	        alert(result);
-*/
-       /* if(${res}==1)
-        	alert("testsetset");
-        	document.getElementById("ok").disabled="disabled";*/
 	}
 	
 	function checkPwd(){

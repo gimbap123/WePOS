@@ -34,7 +34,6 @@
 <script>
 	if(${result}==1){
 		alert("회원가입에 성공했습니다.");
-		document.loginForm.userid.focus();
 	}
 		
 	
@@ -46,7 +45,7 @@
 
 </head>
 
-<body>
+<body onload="document.loginForm.userId.focus()">
 	<jsp:include page="../common/header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->
