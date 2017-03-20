@@ -29,8 +29,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<script language="JavaScript" src="../js/common/findIdJs.js"></script>
 
 </head>
 
@@ -42,10 +41,10 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>아이디 / 비밀번호 찾기</h2>				
+				<h2>아이디 / 패스워드 찾기</h2>				
 			</div>
 			<div>
-				<form action="findId.do" method="post" >
+				<form action="findId.do" method="post" name="findIdForm">
 				<h3>아이디 찾기</h3>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-users"></i></span>
@@ -62,15 +61,15 @@
 				</c:if>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">아이디 찾기</button>
+						<button type="submit" class="btn-u btn-block" onclick="checkFindId()">아이디 찾기</button>
 					</div>
 				</div>
 				</form>	
 			</div>
 			<p>
 			<div>
-				<form action="findPw.do" method="post" >
-					<h3>비밀번호 찾기</h3>
+				<form action="findPw.do" method="post" name="findPwForm">
+					<h3>패스워드 찾기</h3>
 					<div class="input-group margin-bottom-10">
 						<span class="input-group-addon"><i class="icon-users"></i></span>
 						<input type="text" class="form-control" name="userId" placeholder="ID">
@@ -81,7 +80,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
-							<button type="submit" class="btn-u btn-block">비밀번호 찾기</button>
+							<button type="submit" class="btn-u btn-block" onclick="checkFindPw()">패스워드 찾기</button>
 						</div>
 					</div>
 				</form>	
@@ -122,11 +121,5 @@
         duration: 3000
     });
 </script>
-	<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
-
 </body>
 </html>
