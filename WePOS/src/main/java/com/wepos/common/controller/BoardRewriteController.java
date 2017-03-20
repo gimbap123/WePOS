@@ -18,7 +18,11 @@ public class BoardRewriteController {
 	@RequestMapping("/common/boardRewrite.do")
 	public ModelAndView detail(@RequestParam("boardNumber") int boardNumber){
 		
-		//수정하기
+		BoardDto boardDto=new BoardDto();
+		
+		String boardTitle=boardDto.getBoardTitle();
+		String boardContent=boardDto.getBoardContent();
+		
 		
 		return null;
 			

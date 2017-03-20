@@ -25,4 +25,6 @@ public interface BoardDao {
 	//글 상세보기
 	public BoardDto selectBoard(int boardNumber);
 	
+
+	
 }
