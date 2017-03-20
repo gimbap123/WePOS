@@ -15,7 +15,7 @@ public class BoardRewriteController {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@RequestMapping("/common/boardDetail.do")
+	@RequestMapping("/common/boardRewrite.do")
 	public ModelAndView detail(@RequestParam("boardNumber") int boardNumber){
 		
 		//수정하기
