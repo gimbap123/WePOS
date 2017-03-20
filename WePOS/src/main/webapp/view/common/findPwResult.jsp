@@ -39,10 +39,11 @@
 		<!--Reg Block-->
 		<div class="reg-block-cus">
 			<div class="reg-block-header">
-				<h2>아이디 찾기 결과</h2>				
+				<h2>패스워드 찾기 결과</h2>				
 			</div>
-			<c:if test="${userId != null}">
-				<h3 align="center">고객님의 아이디는 <font color="#72c02c" style="font-weight: bold">${userId}</font> 입니다.</h3>					
+			<c:if test="${result == 1}">
+				<h3 align="center">입력하신 메일 주소로</h3>
+				<h3 align="center">임시 패스워드가 전송되었습니다.</h3>			
 				<br>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
@@ -50,8 +51,8 @@
 					</div>
 				</div>				
 			</c:if>
-			<c:if test="${userId == null}">
-				<h3 align="center">입력하신 정보와 일치하는 회원이 없습니다.</h3>
+			<c:if test="${result == 0}">
+				<h3 align="center">입력하신 정보와 일치하는 회원이 없습니다.</h3>		
 				<br>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
@@ -93,7 +94,7 @@
       ], {
         fade: 1000,
         duration: 3000
-    });    
+    });
   
 </script>
 
