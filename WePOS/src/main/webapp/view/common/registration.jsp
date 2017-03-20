@@ -31,7 +31,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../view/common/script.js?v=1"></script>
+<script language="JavaScript" src="../js/common/registration.js"></script>
 
 
 </head>
@@ -65,15 +65,15 @@
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" name="userPassword" class="form-control" placeholder="패스워드">
+					<input type="password" name="userPassword" class="form-control" placeholder="패스워드 (8자 이상 / 영문,숫자,특수기호 조합)">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="password" name="userPassword2" class="form-control" placeholder="패스워드 확인">
+					<input type="password" name="userPassword1" class="form-control" placeholder="패스워드 확인">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-screen-smartphone"></i></span>
-					<input type="text" name="userPhone" class="form-control" placeholder="연락처">
+					<input type="text" name="userPhone" class="form-control" placeholder="연락처 (- 생략)">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
@@ -89,7 +89,7 @@
 	
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="check()" value="가입하기">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="checkBlank()" value="가입하기">
 					</div>
 				</div>
 			</form>
