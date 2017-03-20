@@ -41,48 +41,71 @@ function checkWrite(){
 		document.boardWrite.submit();
 	}
 
-
-function check(){
-		if(document.regForm.user_name.value=="" || document.regForm.user_name.value==null){
-			alert("이름을 입력하세요");
-			document.regForm.user_name.focus();
-			return false;
-		}
-		if(document.regForm.user_id.value=="" || document.regForm.user_id.value==null){
-			alert("아이디를 입력하세요");
-			document.regForm.user_id.focus();
-			return false;
-		}
-		if(document.regForm.user_password.value=="" || document.regForm.user_password.value==null){
-			alert("암호를 입력하세요");
-			document.regForm.user_password.focus();
-			return false;
-		}
-		if(document.regForm.user_password2.value=="" || document.regForm.user_password2.value==null){
-			alert("암호확인을 입력하세요");
-			document.regForm.user_password2.focus();
-			return false;
-		}
-		if(document.regForm.user_phone.value=="" || document.regForm.user_phone.value==null){
-			alert("연락처를 입력하세요");
-			document.regForm.user_phone.focus();
-			return false;
-		}
-		if(document.regForm.user_email.value=="" || document.regForm.user_email.value==null){
-			alert("이메일을 입력하세요");
-			document.regForm.user_email.focus();
-			return false;
-		}
-		else
-			checkPwd();		
+// 회원가입
+function check()
+{
+	if(document.regForm.userName.value=="" || document.regForm.userName.value==null)
+	{
+		alert("이름을 입력하세요");
+		document.regForm.userName.focus();
+		return false;
 	}
-
+	if(document.regForm.userId.value=="" || document.regForm.userId.value==null)
+	{
+		alert("아이디를 입력하세요");
+		document.regForm.userId.focus();
+		return false;
+	}
+	if(document.regForm.userPassword.value=="" || document.regForm.userPassword.value==null)
+	{
+		alert("암호를 입력하세요");
+		document.regForm.userPassword.focus();
+		return false;
+	}
+	if(document.regForm.userPassword2.value=="" || document.regForm.userPassword2.value==null)
+	{
+		alert("암호확인을 입력하세요");
+		document.regForm.userPassword2.focus();
+		return false;
+	}
+	if(document.regForm.userPhone.value=="" || document.regForm.userPhone.value==null)
+	{
+		alert("연락처를 입력하세요");
+		document.regForm.userPhone.focus();
+		return false;
+	}
+	if(document.regForm.userEmail.value=="" || document.regForm.userEmail.value==null)
+	{
+		alert("이메일을 입력하세요");
+		document.regForm.userEmail.focus();	
+		return false;
+	}
+	if(document.regForm.terms.checked==false)
+	{
+		alert("이용약관에 동의해 주세요");
+		return false;
+	}		
+	if(document.regForm.result.value==1)
+	{
+		idCheck.style.color="red";
+		alert("아이디를 확인해주세요.");
+		document.regForm.userId.focus();
+		return false;
+	}
+	else
+		checkPwd();
+}
 
 	
 function checkId()
 {
 	var id=document.regForm.userId.value;
 	var idCheck=document.getElementById('idCheck');
+	if(id.length<3){
+		idCheck.innerHTML="아이디는 세 글자 이상입니다.";
+		idCheck.style.color="red";
+		return false;
+	}
 	$.ajax({	 
 		url : 'checkId.do?userId=' + id,
 		type : 'post',
@@ -91,10 +114,11 @@ function checkId()
 			if(document.regForm.result.value==1)
 				idCheck.style.color="red";
 			if(document.regForm.result.value==0)
-				idCheck.style.color="blue";
+				idCheck.style.color="green";
 	       	}
-	});
+	});	
 }
+
 	
 function checkPwd()
 {

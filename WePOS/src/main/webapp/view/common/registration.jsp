@@ -32,7 +32,6 @@
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
 <script language="JavaScript" src="../view/common/script.js?v=1"></script>
-<script src="../view/common/jquery-1.11.0.min.js"></script>
 
 
 </head>
