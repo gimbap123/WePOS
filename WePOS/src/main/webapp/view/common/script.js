@@ -101,6 +101,11 @@ function checkId()
 {
 	var id=document.regForm.userId.value;
 	var idCheck=document.getElementById('idCheck');
+	if(id.length<3){
+		idCheck.innerHTML="아이디는 세 글자 이상입니다.";
+		idCheck.style.color="red";
+		return false;
+	}
 	$.ajax({	 
 		url : 'checkId.do?userId=' + id,
 		type : 'post',
@@ -109,10 +114,11 @@ function checkId()
 			if(document.regForm.result.value==1)
 				idCheck.style.color="red";
 			if(document.regForm.result.value==0)
-				idCheck.style.color="blue";
+				idCheck.style.color="green";
 	       	}
-	});
+	});	
 }
+
 	
 function checkPwd()
 {
