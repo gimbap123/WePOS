@@ -1,20 +1,21 @@
 
 //글수정하기
-function boardRewrite(){
-	if(document.boardDetail.boardTitle.value=="" || document.boardDetail.boardTitle.value==null){
+function boardRewriteProc()
+{
+	if(document.boardRewrite.boardTitle.value=="" || document.boardRewrite.boardTitle.value==null){
 		alert("제목을 입력하세요");
-		document.boardDetail.boardTitle.focus();
+		document.boardRewrite.boardTitle.focus();
 		return false;
 	}
 	
-	if(document.boardDetail.boardContent.value=="" || document.boardDetail.boardContent.value==null){
+	if(document.boardRewrite.boardContent.value=="" || document.boardRewrite.boardContent.value==null){
 		alert("내용을 입력하세요");
-		document.boardDetail.boardContent.focus();
+		document.boardRewrite.boardContent.focus();
 		return false;
 	}
 	 
 	alert("글이 성공적으로 수정되었습니다!");
-	document.boardDetail.submit();
+	document.boardRewrite.submit();
 }
 
 //글쓰기
