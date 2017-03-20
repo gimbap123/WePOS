@@ -11,10 +11,11 @@ function checkFindId()
 		alert("이름과 이메일 주소를 입력하세요.");
 		return false;	
 	}
+	document.findIdForm.submit();
 }
 
 function checkFindPw()
-{
+{	
 	var userId = document.findPwForm.userId.value; 
 	var userEmail = document.findPwForm.userEmail.value;
 	if(userId == "" || userEmail == "")
@@ -22,4 +23,5 @@ function checkFindPw()
 		alert("아이디와 이메일 주소를 입력하세요.");
 		return false;	
 	}
+	document.findPwForm.submit();	
 }
