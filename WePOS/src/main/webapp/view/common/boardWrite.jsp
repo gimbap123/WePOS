@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<script language="JavaScript" src="../view/common/script.js?v=1"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 
 </head>
 <body>

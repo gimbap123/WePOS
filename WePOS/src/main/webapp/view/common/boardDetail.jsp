@@ -31,7 +31,7 @@
 <hr>
 
 <input type="button" value="수정하기" onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}'">
-<input type="button" value="삭제하기" onClick="">
+<input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'">
 <input type="button" value="돌아가기" onClick="location.href='showBoard.do'">
 
 </center>

@@ -25,7 +25,8 @@
      <bean class="com.wepos.common.controller.BoardWriteController" />
      <bean class="com.wepos.common.controller.BoardDetailController" />
      <bean class="com.wepos.common.controller.BoardRewriteController" />
-     
+     <bean class="com.wepos.common.controller.BoardDeleteController" />
+   
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
 
 

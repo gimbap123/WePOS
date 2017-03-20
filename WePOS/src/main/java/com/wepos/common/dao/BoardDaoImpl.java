@@ -44,4 +44,9 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		getSqlSession().update("updateBoard", boardDto);
 	}
 	
+	public void boardDelete(int boardNumber) {
+		// TODO Auto-generated method stub
+		getSqlSession().delete("boardDelete", boardNumber);
+	}
+	
 }

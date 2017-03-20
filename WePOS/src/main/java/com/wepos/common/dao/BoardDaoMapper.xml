@@ -37,5 +37,9 @@
 	<update id="updateBoard" parameterType="int">
 		update board set board_title=#{boardTitle}, board_content=#{boardContent} where board_number=#{boardNumber}
 	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		delete from board where board_number=#{boardNumber}
+	</delete>
 
 </mapper>
