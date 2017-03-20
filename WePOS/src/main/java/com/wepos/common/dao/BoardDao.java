@@ -19,4 +19,10 @@ public interface BoardDao {
 	//게시물 번호의 최대값
 	public int getNumber();
 	
+	//조회수 증가
+	public void plusReadCnt(int boardNumber);
+	
+	//글 상세보기
+	public BoardDto selectBoard(int boardNumber);
+	
 }

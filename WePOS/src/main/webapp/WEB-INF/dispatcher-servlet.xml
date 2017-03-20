@@ -25,6 +25,8 @@
  	 <bean class="com.wepos.common.controller.FindIdController" />
      <bean class="com.wepos.common.controller.ShowBoardController" />
      <bean class="com.wepos.common.controller.BoardWriteController" />
+     <bean class="com.wepos.common.controller.BoardDetailController" />
+     <bean class="com.wepos.common.controller.BoardRewriteController" />
      
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
      <bean class="com.wepos.common.dao.CommonDaoImpl" />

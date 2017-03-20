@@ -16,6 +16,10 @@
 
 <form action="boardWrite.do">
 
+<h3>글 목록보기</h3>
+
+<hr>
+
 <table>
 	<tr>
 		<th>글번호</th>
@@ -28,18 +32,21 @@
 <c:forEach var="data" items="${list}" >
 
 	<tr>
-		<th>${data.boardNumber }</th>
-		<th>${data.boardTitle }</th>
-		<th>${data.totalId }</th>
-		<th>${data.boardDate }</th>
-		<th>${data.boardReadCnt}</th>
+		<td>${data.boardNumber }</td>
+		<td><a href="boardDetail.do?boardNumber=${data.boardNumber}">${data.boardTitle }</a></td>
+		<td>${data.totalId }</td>
+		<td>${data.boardDate }</td>
+		<td>${data.boardReadCnt}</td>
 	</tr>
 	
 	</c:forEach>
 	
 </table>
 
+	<hr>
+
 <input type="submit" value="글쓰기">
+<input type="button" value="홈으로" onClick="location.href='main.do'">
 
 </form>
 
