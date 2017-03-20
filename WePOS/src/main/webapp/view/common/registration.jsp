@@ -31,7 +31,9 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../view/common/script.js"></script>
+<script language="JavaScript" src="../view/common/script.js?v=1"></script>
+<script src="../view/common/jquery-1.11.0.min.js"></script>
+
 
 </head>
 
@@ -53,42 +55,42 @@
 			<form name="regForm" action="registration.do" method="post">
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user-follow"></i></span>
-					<input type="text" name="user_name" class="form-control" placeholder="이름">
+					<input type="text" name="userName" class="form-control" placeholder="이름">
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>
-					<span>
-					<input 	type="text" name="user_id" class="form-control" placeholder="ID" position="relative" width="60%">					
-					<input type="button" onclick="checkId()" value="중복확인" >
-					</span>
+					<span class="input-group-addon"><i class="icon-star"></i></span>					
+					<input 	type="text" name="userId" class="form-control" placeholder="ID" onblur="checkId()">
+				</div>
+				<div align="center">
+					<span id="idCheck"></span>
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" name="user_password" class="form-control" placeholder="패스워드">
+					<input type="password" name="userPassword" class="form-control" placeholder="패스워드">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="password" name="user_password2" class="form-control" placeholder="패스워드 확인">
+					<input type="password" name="userPassword2" class="form-control" placeholder="패스워드 확인">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-screen-smartphone"></i></span>
-					<input type="text" name="user_phone" class="form-control" placeholder="연락처">
+					<input type="text" name="userPhone" class="form-control" placeholder="연락처">
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-					<input type="text" name="user_email" class="form-control" placeholder="이메일">
+					<input type="text" name="userEmail" class="form-control" placeholder="이메일">
 				</div>
 				<hr>
 	
 				<div class="checkbox">
-					<label> <input type="checkbox"> 
+					<label> <input type="checkbox" name="terms"> 
 					<a target="_blank" href="page_terms.html">이용약관</a>에 동의합니다.
 					</label>
 				</div>
 	
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<input type="button" class="btn-u btn-block" onclick="check()" value="가입하기">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="check()" value="가입하기">
 					</div>
 				</div>
 			</form>

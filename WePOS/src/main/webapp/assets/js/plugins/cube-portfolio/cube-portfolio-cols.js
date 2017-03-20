@@ -1,4 +1,4 @@
-var CubePortfolio = function () {
+/*var CubePortfolio = function () {
 
     return {
 
@@ -27,3 +27,4 @@ var CubePortfolio = function () {
     
 }();
 
+*/

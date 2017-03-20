@@ -16,5 +16,7 @@ public interface CommonDao {
 	// 회원가입
 	public int registration(UsersDto user);
 	
+	// 아이디 중복검사
+	public int checkId(UsersDto user);
 	
 }

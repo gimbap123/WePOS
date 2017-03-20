@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dao.CommonDao;
@@ -30,14 +31,59 @@ public class CommonController {
 	@Autowired
 	private CommonDao commonDao;
 	
-	// 메인 페이지로 이동
+	// 메인 페이지로 이동-----------------------------------------------------------------------------------------
 	@RequestMapping("/common/main.do")
 	public String mainView()
 	{
 		return "common/main";
 	}
 	
-	// 아이디 찾기 페이지로 이동	
+	// 회원가입 ------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/common/registration.do",method=RequestMethod.GET)
+	public String registrationView()
+	{
+		return "common/registration";
+	}
+	
+	@RequestMapping(value="/common/registration.do",method=RequestMethod.POST)
+	public ModelAndView registrationProcess(@ModelAttribute UsersDto users){
+		ModelAndView mav=new ModelAndView();
+		int result=commonDao.registration(users);
+		System.out.println("result = "+result);
+		mav.addObject("result", result);
+		
+		if(result==1){			
+			mav.setViewName("common/login");
+		}
+			
+		if(result==0){
+			mav.setViewName("common/main");
+		}		
+		return mav;
+	}
+	// 아이디 중복검사
+	@RequestMapping(value="/common/checkId.do", method=RequestMethod.POST)
+	//public ModelAndView checkIdProcess(@RequestParam("userId") UsersDto id)
+	public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
+	{
+		ModelAndView mav=new ModelAndView();
+		int res = commonDao.checkId(id);
+		System.out.println("중복여부 : " + res);
+		String result="";
+		
+		if(res==1)
+			result="이미 등록된 아이디입니다.";
+		else if(res==0)
+			result="사용 가능한 아이디입니다.";
+		mav.addObject("res",res);
+		
+		mav.addObject("result",result.trim());
+		mav.setViewName("common/checkId");
+			
+		return mav;
+	}
+	
+	// 아이디 찾기 페이지로 이동	----------------------------------------------------------------------------------
 	@RequestMapping(value="/common/findId.do", method=RequestMethod.GET)
 	public String findIdView()
 	{
@@ -74,4 +120,19 @@ public class CommonController {
 		return new ModelAndView("common/findIdResult", "result", result);
 	}
 	
+	// 로그인 ---------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/common/login.do", method=RequestMethod.GET)
+	public String loginView()
+	{
+		return "common/login";
+	}
+
 }
+
+
+
+
+
+
+
+

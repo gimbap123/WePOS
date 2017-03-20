@@ -19,44 +19,18 @@
 	</bean>   
 	
 	 <!-- 요청을 처리해주는 클래스 객체를 등록 -->
- 	 <bean class="com.wepos.common.controller.CommonController" />
- 	 <bean class="com.wepos.common.controller.RegistrationController" />
- 	 <bean class="com.wepos.common.controller.LoginController" />
- 	 <bean class="com.wepos.common.controller.FindIdController" />
+ 	 <bean class="com.wepos.common.controller.CommonController" /> 	 
+ 	 <bean class="com.wepos.common.dao.CommonDaoImpl" />
      <bean class="com.wepos.common.controller.ShowBoardController" />
      <bean class="com.wepos.common.controller.BoardWriteController" />
      <bean class="com.wepos.common.controller.BoardDetailController" />
      <bean class="com.wepos.common.controller.BoardRewriteController" />
      
+     <bean class="com.wepos.common.controller.BoardWriteController" />     
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
-     <bean class="com.wepos.common.dao.CommonDaoImpl" />
+
 
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
