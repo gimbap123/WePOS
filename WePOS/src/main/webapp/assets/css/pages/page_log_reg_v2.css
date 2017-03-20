@@ -70,3 +70,13 @@ body {
 		margin: 60px auto;
 	}
 }
+
+/* .reg-block 커스터마이징  */
+.reg-block-cus {
+	width: 480px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	border-top: solid 2px #72c02c;	
+	border-bottom: solid 2px #72c02c;
+}

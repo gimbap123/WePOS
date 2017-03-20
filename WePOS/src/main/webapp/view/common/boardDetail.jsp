@@ -16,29 +16,25 @@
 	BoardDto boardDto=new BoardDto();
 %>
 
-<form name="boardRewrite" action="boardRewrite.do">
-
 <center>
 
 <h3>글 상세보기</h3>
 
 <hr>
-
-제    목:<input type="text" name="boardTitle" value="${boardDto.boardTitle}"><br>
-작성자:<input type="text" value="${boardDto.totalId}"><br>
-등록일:<input type="text" value="${boardDto.boardDate}"><br>
-조회수:<input type="text" value="${boardDto.boardReadCnt}"><br>
-내    용:<input type="text" name="boardContent" value="${boardDto.boardContent}"><br>
-
+글번호=>${boardDto.boardNumber}<br>
+제　목=>${boardDto.boardTitle}<br>
+작성자=>${boardDto.totalId}<br>
+등록일=>${boardDto.boardDate}<br>
+조회수=>${boardDto.boardReadCnt}<br>
+내　용=>${boardDto.boardContent}<br>
+ 
 <hr>
 
-<input type="button" value="수정완료" onClick="boardRewrite()">
-<input type="button" value="삭제하기" onClick="">
+<input type="button" value="수정하기" onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}'">
+<input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'">
 <input type="button" value="돌아가기" onClick="location.href='showBoard.do'">
 
 </center>
-
-</form>
 
 </body>
 </html>

@@ -74,7 +74,7 @@
 					<a class="color-green" href="registration.do">회원가입</a>
 				</span>
 				<span class="input-group-addon">
-					<a class="color-green" href="findId.do">아이디 / 패스워드 찾기</a>
+					<a class="color-green" href="findIdPw.do">아이디 / 패스워드 찾기</a>
 				</span>
 	
 				<hr>

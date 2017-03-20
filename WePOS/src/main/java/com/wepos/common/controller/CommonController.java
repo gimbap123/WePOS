@@ -83,26 +83,22 @@ public class CommonController {
 		return mav;
 	}
 	
-	// 아이디 찾기 페이지로 이동	----------------------------------------------------------------------------------
-	@RequestMapping(value="/common/findId.do", method=RequestMethod.GET)
+	// 아이디 / 패스워드 찾기 페이지로 이동	
+	@RequestMapping("/common/findIdPw.do")
 	public String findIdView()
 	{
-		return "common/findId";
+		return "common/findIdPw";
 	}
 	
 	// 아이디 찾기 기능 수행
-	@RequestMapping(value="/common/findId.do", method=RequestMethod.POST)
+	@RequestMapping("/common/findId.do")
 	public ModelAndView findIdProcess(@ModelAttribute UsersDto user)
 	{
-		String userId = commonDao.findId(user);
-		if(userId == null)
-		{
-			userId = "일치하는 아이디가 없습니다.";
-		}		
-		return new ModelAndView("common/findId", "userId", userId);
+		String userId = commonDao.findId(user);		
+		return new ModelAndView("common/findIdResult", "userId", userId);
 	}
 	
-	// 비밀번호 찾기 기능 수행
+	// 패스워드 찾기 기능 수행
 	@RequestMapping("/common/findPw.do")
 	public ModelAndView findPwProcess(@ModelAttribute UsersDto user) throws AddressException, MessagingException
 	{
@@ -117,7 +113,7 @@ public class CommonController {
 			mailSendUtil.mailSender(user);
 		}
 		
-		return new ModelAndView("common/findIdResult", "result", result);
+		return new ModelAndView("common/findPwResult", "result", result);
 	}
 	
 	// 로그인 ---------------------------------------------------------------------------------------------------------

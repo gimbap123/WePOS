@@ -29,7 +29,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/common/findIdJs.js"></script>
+<script language="JavaScript" src="../js/common/findIdPwJs.js"></script>
 
 </head>
 
@@ -53,15 +53,10 @@
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
 					<input type="text" class="form-control" name="userEmail" placeholder="이메일 주소">					
-				</div>
-				<c:if test="${userId != null}">
-					<div>
-						ID 검색 결과 : ${userId}
-					</div>
-				</c:if>
+				</div>				
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block" onclick="checkFindId()">아이디 찾기</button>
+						<button type="button" class="btn-u btn-block" onclick="checkFindId()">아이디 찾기</button>
 					</div>
 				</div>
 				</form>	
@@ -80,7 +75,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
-							<button type="submit" class="btn-u btn-block" onclick="checkFindPw()">패스워드 찾기</button>
+							<button type="button" class="btn-u btn-block" onclick="checkFindPw()">패스워드 찾기</button>
 						</div>
 					</div>
 				</form>	
