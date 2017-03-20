@@ -39,4 +39,9 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		return getSqlSession().selectOne("selectBoard", boardNumber);
 	}
 	
+	public void boardRewrite(BoardDto boardDto) {
+		// TODO Auto-generated method stub
+		getSqlSession().update("updateBoard", boardDto);
+	}
+	
 }

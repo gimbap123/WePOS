@@ -25,6 +25,7 @@ public interface BoardDao {
 	//글 상세보기
 	public BoardDto selectBoard(int boardNumber);
 	
-
+	//글 수정하기
+	public void boardRewrite(BoardDto boardDto);
 	
 }
