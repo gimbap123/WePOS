@@ -34,10 +34,7 @@ public class BoardWriteController {
 		System.out.println("getNumber="+boardDto.getBoardNumber());
 		
 		boardDao.boardInsert(boardDto); //입력받은값+게시물번호, 파일변경
-		
-		System.out.println("test");
-		
-		
+				
 		//글 목록으로 이동
 		return "redirect:/common/showBoard.do";
 		

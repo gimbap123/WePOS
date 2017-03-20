@@ -29,4 +29,14 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		return getSqlSession().selectOne("getNumber");
 	}
 
+	public void plusReadCnt(int boardNumber) {
+		// TODO Auto-generated method stub
+		getSqlSession().update("plusReadCnt", boardNumber);
+	}
+	
+	public BoardDto selectBoard(int boardNumber) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("selectBoard", boardNumber);
+	}
+	
 }

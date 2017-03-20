@@ -24,4 +24,16 @@
 		select max(board_number) from board 
 	</select>
 
+	<update id="plusReadCnt" parameterType="int">
+		update board set board_read_cnt=board_read_cnt+1 where board_number=#{boardNumber}
+	</update>
+
+	<select id="selectBoard" resultType="boardDto" parameterType="int">
+		select board_number, board_title, total_id, board_date, board_content, board_read_cnt
+			from board
+				where board_number=#{boardNumber}
+	</select>
+
+
+
 </mapper>
