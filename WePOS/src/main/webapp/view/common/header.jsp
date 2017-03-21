@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--=== Header ===-->
@@ -13,9 +14,16 @@
 		<!-- Topbar -->
 		<div class="topbar">
 			<ul class="loginbar pull-right">
-				<li><a href="registration.do">회원가입</a></li>
-				<li class="topbar-devider"></li>
-				<li><a href="login.do">로그인</a></li>
+				<c:if test="${sessionScope.id == null}">
+					<li><a href="registration.do">회원가입</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="login.do">로그인</a></li>
+				</c:if>
+				<c:if test="${sessionScope.id != null}">
+					<li><a href="#">회원정보수정</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="logout.do">로그아웃</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!-- End Topbar -->
@@ -36,6 +44,20 @@
 						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
 				<!-- End WE POS -->
+				
+				<!-- 매장 관리(관리자 기능) -->
+				
+				<!-- End 매장 관리(관리자 기능) -->
+				<c:if test="${sessionScope.userType == 2}">
+				<li class="dropdown"><a href="javascript:void(0);"
+					class="dropdown-toggle" data-toggle="dropdown"> 매장 관리 </a>
+					<ul class="dropdown-menu">
+						<li><a href="#">매장 영업</a></li>
+						<li><a href="#">메뉴 관리</a></li>
+						<li><a href="#">테이블 관리</a></li>
+						<li><a href="#">매출 통계</a></li>
+					</ul></li>
+				</c:if>
 
 				<!-- 검 색 -->
 				<li class="dropdown"><a href="javascript:void(0);"
