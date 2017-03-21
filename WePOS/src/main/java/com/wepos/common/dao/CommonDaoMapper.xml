@@ -23,5 +23,21 @@
 	<update id="updatePw" parameterType="usersDto">
 		update users set user_password = #{userPassword} where user_id = #{userId}
 	</update>
+	
+	<select id="userLogin" parameterType="map" resultType="int">
+		select count(*) from users where user_id = #{id} and user_password = #{password}
+	</select>
+	
+	<select id="mgrLogin" parameterType="map" resultType="int">
+		select count(*) from mgr where mgr_id = #{id} and mgr_password = #{password}	
+	</select>
+	
+	<insert id="userLoginLog" parameterType="userLoginDto">
+		insert into user_login values(#{userId}, sysdate, #{userLoginState})
+	</insert>
+	
+	<insert id="mgrLoginLog" parameterType="mgrLoginDto">
+		insert into mgr_login values(#{mgrId}, sysdate, #{mgrLoginState})
+	</insert>
 
 </mapper>

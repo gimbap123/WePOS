@@ -1,6 +1,10 @@
 package com.wepos.common.dao;
 
+import java.util.Map;
+
 import com.wepos.common.dto.UsersDto;
+import com.wepos.mgr.dto.MgrLoginDto;
+import com.wepos.user.dto.UserLoginDto;
 
 public interface CommonDao {
 
@@ -19,4 +23,15 @@ public interface CommonDao {
 	// 아이디 중복검사
 	public int checkId(UsersDto user);
 	
+	// 일반 회원 로그인 검사
+	public int userLogin(Map<String, String> loginInfo);
+	
+	// 관리자 로그인 검사
+	public int mgrLogin(Map<String, String> loginInfo);
+	
+	// 일반 회원 로그인 기록
+	public void userLoginLog(UserLoginDto userLoginDto);
+	
+	// 관리자 로그인 기록
+	public void mgrLoginLog(MgrLoginDto mgrLoginDto);
 }

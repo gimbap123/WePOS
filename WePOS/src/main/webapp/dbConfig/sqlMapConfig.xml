@@ -12,6 +12,8 @@
 	<typeAliases>	   
 		<typeAlias alias="usersDto" type="com.wepos.common.dto.UsersDto"/> 		
 		<typeAlias alias="boardDto" type="com.wepos.common.dto.BoardDto"/> 
+		<typeAlias alias="userLoginDto" type="com.wepos.user.dto.UserLoginDto"/>
+		<typeAlias alias="mgrLoginDto" type="com.wepos.mgr.dto.MgrLoginDto"/>
 	</typeAliases>
 		
 	<mappers>	    
