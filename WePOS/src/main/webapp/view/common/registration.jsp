@@ -58,7 +58,7 @@
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<input 	type="text" id="userId"  name="userId" class="form-control" placeholder="ID" onblur="checkId()">
+					<input 	type="text" id="userId"  name="userId" class="form-control" placeholder="ID" onblur="checkId()" >
 				</div>
 				<div align="center">
 					<span id="idCheck"></span>

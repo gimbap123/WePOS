@@ -31,20 +31,9 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../assets/css/custom.css">
 
-<script>
-	if(${result}!=null && ${result}==1){
-		alert("회원가입에 성공했습니다.");
-	}		
-	
-	else{
-		alert("회원가입에 실패했습니다.");
-		response.sendRedirect("/common/registration.do");
-	}	
-</script>
-
 </head>
 
-<body onload="document.loginForm.userId.focus()">
+<body onload="document.loginForm.id.focus()">
 	<jsp:include page="../common/header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->

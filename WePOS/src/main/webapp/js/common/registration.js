@@ -62,7 +62,13 @@ function checkPhone(){
 		return false;
 	}else{
 		checkEmail();
-	}	
+	}
+	
+	if (/(\w)\1\1\1\1/.test($('#userPhone'))) {
+		alert('연락처에 같은 문자를 5번 이상 반복하실 수 없습니다.');
+		$('#userPhone').focus();
+		return false;
+	}
 }
 
 // 이메일 유효성 검사
@@ -114,6 +120,7 @@ function checkId()
 				$('#idCheck').attr("style","color:blue");
 	       	}
 	});	
+	//alert($('#result').val());
 }
 
 // 비밀번호 유효성 검사 및 폼 전송	
@@ -151,8 +158,12 @@ function checkPwd()
 		return false;
 	}
 	
-	if(pwd==pwd1)
+	if(pwd==pwd1){
+		alert("회원가입 성공");
 		document.regForm.submit();
+		
+	}
+		
 	else
 	{
 		alert("패스워드가 일치하지 않습니다.");

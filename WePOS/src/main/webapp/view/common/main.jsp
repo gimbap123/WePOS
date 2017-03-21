@@ -29,13 +29,6 @@
 
 <link rel="stylesheet" href="../assets/plugins/parallax-slider/css/parallax-slider.css">
 
-<script>
-	if(${result}!=null && ${result}==0){
-		alert("회원가입에 실패했습니다.");
-		response.sendRedirect("/common/registration.do");
-	}	
-</script>
-
 <title>We POS</title>
 </head>
 <body>
