@@ -41,6 +41,19 @@
 		alert("회원가입에 실패했습니다.");
 		response.sendRedirect("/common/registration.do");
 	}	
+	
+	function checkLogin()
+	{
+		var id = document.loginForm.id.value;
+		var password = document.loginForm.password.value;
+		
+		if(id == "" || password == "")
+		{
+			alert("아이디와 패스워드를 입력하세요.");
+			return false;	
+		}
+		document.loginForm.submit();
+	}
 </script>
 
 </head>
@@ -80,7 +93,7 @@
 				<hr>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">로그인</button>
+						<button type="button" class="btn-u btn-block" onclick="checkLogin()">로그인</button>
 					</div>
 				</div>
 			</form>
