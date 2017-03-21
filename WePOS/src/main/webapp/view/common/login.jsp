@@ -32,10 +32,9 @@
 <link rel="stylesheet" href="../assets/css/custom.css">
 
 <script>
-	if(${result}==1){
+	if(${result}!=null && ${result}==1){
 		alert("회원가입에 성공했습니다.");
-	}
-		
+	}		
 	
 	else{
 		alert("회원가입에 실패했습니다.");

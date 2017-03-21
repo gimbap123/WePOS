@@ -77,7 +77,7 @@ public class CommonController {
 			result="사용 가능한 아이디입니다.";
 		
 		mav.addObject("res",res);		
-		mav.addObject("result",result.trim());
+		mav.addObject("result",result);
 		mav.setViewName("common/checkId");
 			
 		return mav;
