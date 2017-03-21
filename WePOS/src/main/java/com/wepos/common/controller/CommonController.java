@@ -192,6 +192,34 @@ public class CommonController {
 		return  "/common/main";
 	}
 	
+	@RequestMapping(value="/common/showUserInfo.do")
+	public ModelAndView showUserInfoView(@ModelAttribute UsersDto users)
+	{
+		ModelAndView mav=new ModelAndView();
+		UsersDto userInfo=commonDao.showUserInfo(users);
+		mav.addObject("userInfo",userInfo);
+		mav.setViewName("common/updateUserInfo");	
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/common/updateUserInfo.do")
+	public ModelAndView updateUserInfoProcess(@ModelAttribute UsersDto users){
+		ModelAndView mav=new ModelAndView();
+		int result=commonDao.updateUserInfo(users);
+		System.out.println("수정결과 = "+result);
+		mav.addObject("result", result);
+		
+		if(result==1){			
+			mav.setViewName("common/main");
+		}
+			
+		if(result==0){
+			mav.setViewName("common/updateUserInfo");
+		}		
+		return mav;
+	}
+	
 
 }
 

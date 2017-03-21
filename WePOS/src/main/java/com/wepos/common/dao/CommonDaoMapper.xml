@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="registration" parameterType="usersDto">
-		insert into users values(#{userId},1,#{userPassword},#{userName},#{userPhone},#{userEmail},1000)
+		insert into users values(#{userId},1,#{userPassword},#{userName},#{userPhone},#{userEmail},0)
 	</insert>
 	
 	<select id="checkId" parameterType="usersDto" resultType="int">
@@ -39,5 +39,13 @@
 	<insert id="mgrLoginLog" parameterType="mgrLoginDto">
 		insert into mgr_login values(#{mgrId}, sysdate, #{mgrLoginState})
 	</insert>
+	
+	<select id="showUserInfo" parameterType="usersDto" resultType="usersDto">
+		select * from users where user_id=#{userId}
+	</select>
+	
+	<update id="updateUserInfo" parameterType="usersDto">
+		update users set user_id=#{userId},grade_code=1,user_password=#{userPassword},user_name=#{userName},user_phone=#{userPhone},user_email=#{userEmail},user_expense=0 where user_id=#{userId}
+	</update>
 
 </mapper>

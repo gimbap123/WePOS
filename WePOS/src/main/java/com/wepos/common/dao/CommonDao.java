@@ -34,4 +34,8 @@ public interface CommonDao {
 	
 	// 관리자 로그인 기록
 	public void mgrLoginLog(MgrLoginDto mgrLoginDto);
+	
+	// 회원정보 수정
+	public UsersDto showUserInfo(UsersDto user);
+	public int updateUserInfo(UsersDto user);
 }

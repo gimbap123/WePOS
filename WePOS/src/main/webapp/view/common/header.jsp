@@ -20,7 +20,7 @@
 					<li><a href="login.do">로그인</a></li>
 				</c:if>
 				<c:if test="${sessionScope.id != null}">
-					<li><a href="#">회원정보수정</a></li>
+					<li><a href="showUserInfo.do?userId=${sessionScope.id}">회원정보수정</a></li>
 					<li class="topbar-devider"></li>
 					<li><a href="logout.do">로그아웃</a></li>
 				</c:if>

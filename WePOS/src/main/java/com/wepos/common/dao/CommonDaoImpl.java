@@ -45,5 +45,13 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 	public void mgrLoginLog(MgrLoginDto mgrLoginDto) {
 		getSqlSession().insert("mgrLoginLog", mgrLoginDto);		
 	}
+	
+	public UsersDto showUserInfo(UsersDto user){
+		return getSqlSession().selectOne("showUserInfo",user);
+	}
+	
+	public int updateUserInfo(UsersDto user) {
+		return getSqlSession().update("updateUserInfo",user);		
+	}
 
 }
