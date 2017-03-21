@@ -19,7 +19,7 @@
 	BoardDto boardDto=new BoardDto();
 %> --%>
 
-<form name="boardRewrite" method="post" action="boardRewrite.do">
+<form name="boardRewrite" enctype="multipart/form-data" method="post" action="boardRewrite.do">
 
 <center>
 
@@ -35,7 +35,11 @@
 등록일:<input type="text" value="${boardDto.boardDate}" readonly><br>
 조회수:<input type="text" value="${boardDto.boardReadCnt}" readonly><br>
 내    용:<input type="text" name="boardContent" value="${boardDto.boardContent}"><br>
- 
+첨부파일:<input type="text" value="${boardDto.boardFile}" readonly><br>
+<input type="file" name="upload" value="파일 첨부"><br>
+<c:if test="${!empty boardDto.boardFile }">
+	(${boardDto.boardFile }) 파일이 등록되어 있습니다.<br>
+</c:if>
 <hr>
 
 <input type="button" value="수정완료" onclick="boardRewriteProc()">

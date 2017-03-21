@@ -27,6 +27,7 @@
 		<th>작성자</th>
 		<th>작성일</th>
 		<th>조회수</th>
+		<th>첨부파일</th>
 	</tr>
 
 <c:forEach var="data" items="${list}" >
@@ -37,6 +38,7 @@
 		<td>${data.totalId }</td>
 		<td>${data.boardDate }</td>
 		<td>${data.boardReadCnt}</td>
+		<td>${data.boardFile}</td>
 	</tr>
 	
 	</c:forEach>

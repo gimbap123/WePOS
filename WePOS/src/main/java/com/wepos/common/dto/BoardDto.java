@@ -2,6 +2,8 @@ package com.wepos.common.dto;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardDto {
 
 	private int boardNumber;
@@ -12,6 +14,7 @@ public class BoardDto {
 	private int boardTypeCode;
 	private String boardContent;
 	private String boardFile;
+	private MultipartFile upload;
 	
 	public int getBoardNumber() {
 		return boardNumber;
@@ -75,6 +78,14 @@ public class BoardDto {
 
 	public void setBoardFile(String boardFile) {
 		this.boardFile = boardFile;
+	}
+
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
 	}
 
 	@Override

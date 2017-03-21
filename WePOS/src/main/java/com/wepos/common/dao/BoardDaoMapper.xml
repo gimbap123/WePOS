@@ -5,9 +5,9 @@
 <mapper namespace="com.wepos.common.dao.BoardDaoImpl">
 
 	<select id="selectList" resultType="boardDto">
-		select board_number, board_title, total_id, board_date, board_read_cnt
+		select board_number, board_title, total_id, board_date, board_read_cnt, board_file
 			from board
-				order by board_number
+				order by board_number desc
 	</select>
 	
 	<select id="selectOne" resultType="int">
@@ -16,8 +16,7 @@
 
 	<insert id="boardInsert" parameterType="boardDto">
 		insert into board
-		(board_number, board_type_code, total_id, board_title, board_content, board_date, board_read_cnt)
-		values(#{boardNumber}, 1, #{totalId}, #{boardTitle}, #{boardContent}, sysdate, 0)
+		values(board_seq.nextval, 1, #{totalId}, #{boardTitle}, #{boardContent}, sysdate, 0, #{boardFile, jdbcType=VARCHAR})
 	</insert>
 
 	<select id="getNumber" resultType="int">
@@ -29,13 +28,14 @@
 	</update>
 
 	<select id="selectBoard" resultType="boardDto" parameterType="int">
-		select board_number, board_title, total_id, board_date, board_content, board_read_cnt
+		select board_number, board_title, total_id, board_date, board_content, board_read_cnt, board_file
 			from board
 				where board_number=#{boardNumber}
 	</select>
 
 	<update id="updateBoard" parameterType="int">
-		update board set board_title=#{boardTitle}, board_content=#{boardContent} where board_number=#{boardNumber}
+		update board set board_title=#{boardTitle}, board_content=#{boardContent}, board_file=#{boardFile, jdbcType=VARCHAR}
+		where board_number=#{boardNumber}
 	</update>
 	
 	<delete id="boardDelete" parameterType="int">
