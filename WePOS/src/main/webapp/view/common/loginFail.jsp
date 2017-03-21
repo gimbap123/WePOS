@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,61 +29,27 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
-
-<script>
-	if(${result}!=null && ${result}==1){
-		alert("회원가입에 성공했습니다.");
-	}		
-	
-	else{
-		alert("회원가입에 실패했습니다.");
-		response.sendRedirect("/common/registration.do");
-	}	
-</script>
-
 </head>
 
-<body onload="document.loginForm.userId.focus()">
-	<jsp:include page="../common/header.jsp" flush="false" />
+<body>
+	<jsp:include page="header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->
 	<div class="container">
 		<!--Reg Block-->
-		<div class="reg-block">
+		<div class="reg-block-cus">
 			<div class="reg-block-header">
-				<h2>로그인</h2>
-			</div>
-			
-			<form name="loginForm" action="login.do" method="post">
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="icon-user"></i></span>
-					<input type="text" name="id" class="form-control" placeholder="ID">
+				<h2>로그인 결과</h2>				
+			</div>		
+			<h3 align="center">아이디와 패스워드가 일치하지 않습니다.</h3>
+			<h3 align="center">다시 확인해주세요.</h3>
+			<br>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<button type="button" class="btn-u btn-block" onclick="location.href='login.do'">로그인</button>
+					<button type="button" class="btn-u btn-block" onclick="location.href='findIdPw.do'">아이디 / 패스워드 찾기</button>
 				</div>
-				<div class="input-group margin-bottom-30">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="text" name="password" class="form-control" placeholder="패스워드">
-				</div>
-				<div class="checkbox">
-					<label> <input type="checkbox">
-						<p>로그인 유지</p>
-					</label>
-				</div>
-				<span class="input-group-addon">
-					<a class="color-green" href="registration.do">회원가입</a>
-				</span>
-				<span class="input-group-addon">
-					<a class="color-green" href="findIdPw.do">아이디 / 패스워드 찾기</a>
-				</span>
-	
-				<hr>
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">로그인</button>
-					</div>
-				</div>
-			</form>
+			</div>		
 		</div>
 		<!--End Reg Block-->
 	</div>
@@ -117,13 +84,9 @@
       ], {
         fade: 1000,
         duration: 3000
-    });
+    });    
+  
 </script>
-	<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
 
 </body>
 </html>

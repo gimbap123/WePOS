@@ -1,5 +1,7 @@
 package com.wepos.common.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -11,7 +13,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +30,8 @@ import com.wepos.common.dao.CommonDao;
 import com.wepos.common.dto.UsersDto;
 import com.wepos.common.util.MailSendUtil;
 import com.wepos.common.util.RandomPasswordUtil;
+import com.wepos.mgr.dto.MgrLoginDto;
+import com.wepos.user.dto.UserLoginDto;
 
 @Controller
 public class CommonController {
@@ -122,6 +130,79 @@ public class CommonController {
 	{
 		return "common/login";
 	}
+	
+	// 로그인 기능 수행(세션 userType에서 1은 일반회원, 2는 관리자)
+	@RequestMapping(value="/common/login.do", method=RequestMethod.POST)
+	public String loginProcess(HttpSession session,
+			@RequestParam("id") String id, @RequestParam("password") String password)
+	{
+		Map<String, String> loginInfo = new HashMap<String, String>();
+		loginInfo.put("id", id);
+		loginInfo.put("password", password);
+		
+		String result = "";
+		int count = commonDao.userLogin(loginInfo);
+		
+		if(count == 0)
+		{
+			count = commonDao.mgrLogin(loginInfo);
+			if(count == 0)
+			{
+				result = "/common/loginFail";
+			}
+			else
+			{
+				MgrLoginDto mgrLoginDto = new MgrLoginDto();
+				mgrLoginDto.setMgrId(id);
+				mgrLoginDto.setMgrLoginState('1');
+				commonDao.mgrLoginLog(mgrLoginDto);
+				
+				session.setAttribute("id", id);
+				session.setAttribute("userType", 2);
+				result = "/common/main";	
+			}
+		}
+		else
+		{
+			UserLoginDto userLoginDto = new UserLoginDto();
+			userLoginDto.setUserId(id);
+			userLoginDto.setUserLoginState('1');
+			commonDao.userLoginLog(userLoginDto);
+			
+			session.setAttribute("id", id);
+			session.setAttribute("userType", 1);
+			result = "/common/main";	
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/common/logout.do")
+	public String logoutProcess(HttpSession session)
+	{
+		String id = (String)session.getAttribute("id");
+		int userType = (Integer) session.getAttribute("userType");
+		
+		if(userType == 1)
+		{
+			UserLoginDto userLoginDto = new UserLoginDto();
+			userLoginDto.setUserId(id);
+			userLoginDto.setUserLoginState('0');
+			commonDao.userLoginLog(userLoginDto);			
+		}
+		else if(userType == 2)
+		{
+			MgrLoginDto mgrLoginDto = new MgrLoginDto();
+			mgrLoginDto.setMgrId(id);
+			mgrLoginDto.setMgrLoginState('0');
+			commonDao.mgrLoginLog(mgrLoginDto);
+		}
+				
+		session.invalidate();
+		
+		return  "/common/main";
+	}
+	
 
 }
 
