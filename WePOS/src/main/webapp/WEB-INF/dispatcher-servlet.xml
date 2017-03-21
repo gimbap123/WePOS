@@ -28,6 +28,20 @@
      <bean class="com.wepos.common.controller.BoardDeleteController" />
    
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
+     
+	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
+	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />
+
+
+	<!-- 파일 업로드 및 다운로드 설정  -->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 		<property name="maxUploadSize" value="52428800" />
+ 		<property name="defaultEncoding" value="UTF-8" />
+ 	</bean>
+
+	<!-- 다운로드 할 때만 처리해주는 전용 ViewResolver -->
+ 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+
 
 
 </beans>

@@ -26,11 +26,11 @@ public class BoardDeleteController {
 	@RequestMapping(value="/common/boardDelete.do", method=RequestMethod.POST)
 	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber){
 						
-		//BoardDto boardDto=new BoardDto();
+		//BoardDto boardDto=new BoardDto(); 틀림
 		
 		System.out.println("POST방식의 boardNumber="+boardNumber);
 		
-		//System.out.println("boardDto의 getBoardNumber()="+boardDto.getBoardContent());
+		//System.out.println("boardDto의 getBoardNumber()="+boardDto.getBoardContent()); 틀림
 		
 		boardDao.boardDelete(boardNumber);		
 		
