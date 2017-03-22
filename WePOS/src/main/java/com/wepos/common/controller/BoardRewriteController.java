@@ -24,6 +24,11 @@ public class BoardRewriteController {
 	@RequestMapping(value="/common/boardRewrite.do", method=RequestMethod.GET)
 	public ModelAndView updateReady(@RequestParam("boardNumber") int boardNumber){
 			BoardDto boardDto=boardDao.selectBoard(boardNumber);
+			
+			if(boardDto.getTotalId()==null){
+				
+			}
+			
 		return new ModelAndView("/common/boardRewrite", "boardDto", boardDto);		
 	}
 	

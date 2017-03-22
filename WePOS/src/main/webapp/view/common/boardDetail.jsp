@@ -9,6 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
+
 </head>
 <body>
 
@@ -30,9 +33,15 @@
 첨부파일=><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
 <hr>
 
+<c:if test="${sessionScope.id==boardDto.totalId}">
 <input type="button" value="수정하기" onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}'">
 <input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'">
 <input type="button" value="돌아가기" onClick="location.href='showBoard.do'">
+</c:if>
+
+<c:if test="${sessionScope.id==null || sessionScope.id!=boardDto.totalId}">
+<input type="button" value="돌아가기" onClick="location.href='showBoard.do'">
+</c:if>
 
 </center>
 

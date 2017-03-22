@@ -47,8 +47,14 @@
 
 	<hr>
 
+<c:if test="${sessionScope.id==null}">
+<input type="button" value="홈으로" onClick="location.href='main.do'">
+</c:if>
+
+<c:if test="${sessionScope.id!=null}">
 <input type="submit" value="글쓰기">
 <input type="button" value="홈으로" onClick="location.href='main.do'">
+</c:if>
 
 </form>
 
