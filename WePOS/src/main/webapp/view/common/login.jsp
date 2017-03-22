@@ -93,7 +93,7 @@
 				<hr>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="button" class="btn-u btn-block" onclick="checkLogin()">로그인</button>
+						<button type="button" class="btn-u btn-block" onclick="checkLogin()">로그인</button>										
 					</div>
 				</div>
 			</form>
