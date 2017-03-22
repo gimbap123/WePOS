@@ -63,7 +63,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 검 색 </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">매장 검색</a></li>
+						<li><a href="searchShop.do">매장 검색</a></li>
 						<li><a href="#">상품 검색</a></li>
 					</ul></li>
 				<!-- End 검색 -->
