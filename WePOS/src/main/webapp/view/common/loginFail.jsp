@@ -45,10 +45,12 @@
 			<h3 align="center">다시 확인해주세요.</h3>
 			<br>
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
+				<span class="col-md-5 col-md-offset-1">
 					<button type="button" class="btn-u btn-block" onclick="location.href='login.do'">로그인</button>
+				</span>
+				<span class="col-md-5 col-md-offset-0">
 					<button type="button" class="btn-u btn-block" onclick="location.href='findIdPw.do'">아이디 / 패스워드 찾기</button>
-				</div>
+				</span>				
 			</div>		
 		</div>
 		<!--End Reg Block-->

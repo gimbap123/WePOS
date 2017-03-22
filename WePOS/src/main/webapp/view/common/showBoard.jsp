@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>We POS</title>
 </head>
 <body>
 
@@ -47,9 +47,14 @@
 
 	<hr>
 
-<input type="submit" value="글쓰기">
-<input type="button" value="홈으로" onClick="location.href='main.do'">
-
+<c:if test="${sessionScope.id==null}">  
+	<input type="button" value="홈으로" onClick="location.href='main.do'">  
+</c:if>  
+  
+<c:if test="${sessionScope.id!=null}">
+	<input type="submit" value="글쓰기">
+	<input type="button" value="홈으로" onClick="location.href='main.do'">
+</c:if>
 </form>
 
 </center>

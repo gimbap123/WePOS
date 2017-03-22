@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>We POS</title>
 
 <script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 

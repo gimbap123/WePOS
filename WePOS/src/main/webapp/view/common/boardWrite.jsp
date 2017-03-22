@@ -4,19 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>We POS</title>
 
 <script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 
 </head>
 <body>
-
+<jsp:include page="header.jsp" flush="false" /> 
 <h3>자유게시판</h3>
 <hr>
 <form name="boardWrite" enctype="multipart/form-data" method="post" action="boardWrite.do">
-<input type="text" name="boardTitle" value="제목"><p>
-<input type="text" name="totalId" value="아이디"><p>
-<textarea rows="10" cols="50" style="resize: none" name="boardContent">내용을 입력하세요.</textarea><p>
+<input type="text" name="boardTitle" placeholder="제목"><p>  
+ <input type="text" name="totalId" value="${sessionScope.id}" readonly><p>  
+ <textarea rows="10" cols="50" style="resize: none" name="boardContent" placeholder="내용을 입력하세요."></textarea>p>  
 <hr>
 <input type="button" value="등록" onclick="checkWrite()">
 <input type="button" value="목록" onclick="javascript:history.back()">
