@@ -37,18 +37,6 @@ function checkNull()
 		$('#userEmail').focus();	
 		return false;
 	}
-	if($('#terms').is(":checked")==false)
-	{
-		alert("이용약관에 동의해 주세요");
-		return false;
-	}		
-	if($('#result').val()==1)
-	{
-		$('#idCheck').attr("style","color:red");
-		alert("아이디를 확인해주세요.");
-		$('#userId').focus();
-		return false;
-	}
 	else
 		checkPhone();
 }
@@ -82,45 +70,6 @@ function checkEmail(){
 		checkPwd();
 	}
 
-}
-
-// 아이디 중복 및 유효성 검사
-function checkId()
-{	
-	var exptext= /^[a-z0-9]{4,12}$/;
-	var chk_num = $('#userId').val().search(/[0-9]/g);
-	var chk_eng = $('#userId').val().search(/[a-z]/ig);
-	
-	// 아이디 글자수 제한
-	if(exptext.test($('#userId').val())==false || $('#userId').val().indexOf(' ')>-1){
-		$('#idCheck').html("아이디는 영문+숫자 4~12자리");
-		$('#idCheck').attr("style","color:red");
-		return false;
-	}
-	// 아이디 영문자+숫자 조합
-	if (chk_num < 0 || chk_eng < 0) {
-		$('#idCheck').html("아이디는 영문+숫자 4~12자리");
-		$('#idCheck').attr("style","color:red");
-		return false;
-	}
-	// 아이디에 같은 문자 반복 제한
-	if (/(\w)\1\1\1/.test($('#userId'))) {
-		$('#idCheck').html('아이디에 같은 문자를 4번 이상 반복하실 수 없습니다.');
-		$('#idCheck').attr("style","color:red");
-		return false;
-	}
-	$.ajax({	 
-		url : 'checkId.do?userId=' + $('#userId').val(),
-		type : 'post',
-		success : function(data) {
-			$('#idCheck').html(data);
-			if($('#result').val()==1)
-				$('#idCheck').attr("style","color:red");
-			if($('#result').val()==0)
-				$('#idCheck').attr("style","color:blue");
-	       	}
-	});	
-	//alert($('#result').val());
 }
 
 // 비밀번호 유효성 검사 및 폼 전송	
@@ -159,9 +108,8 @@ function checkPwd()
 	}
 	
 	if(pwd==pwd1){
-		alert("회원가입 성공");
-		document.regForm.submit();
-		
+		alert("회원정보 수정 성공");
+		document.updateForm.submit();		
 	}
 		
 	else

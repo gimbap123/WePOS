@@ -4,6 +4,6 @@
 <html>
 <body>
 	${result}
-	<input type="hidden" name="result" value="${res}">
+	<input type="hidden" id="result" value="${res}">
 </body>
 </html>

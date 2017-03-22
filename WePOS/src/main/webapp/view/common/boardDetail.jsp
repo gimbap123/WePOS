@@ -27,7 +27,7 @@
 등록일=>${boardDto.boardDate}<br>
 조회수=>${boardDto.boardReadCnt}<br>
 내　용=>${boardDto.boardContent}<br>
-첨부파일=>${boardDto.boardFile}
+첨부파일=><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
 <hr>
 
 <input type="button" value="수정하기" onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}'">

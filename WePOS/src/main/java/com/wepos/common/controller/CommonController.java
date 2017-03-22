@@ -74,7 +74,7 @@ public class CommonController {
 			result="사용 가능한 아이디입니다.";
 		
 		mav.addObject("res",res);		
-		mav.addObject("result",result.trim());
+		mav.addObject("result",result);
 		mav.setViewName("common/checkId");
 			
 		return mav;
@@ -190,6 +190,34 @@ public class CommonController {
 		session.invalidate();
 		
 		return  "/common/main";
+	}
+	
+	@RequestMapping(value="/common/showUserInfo.do")
+	public ModelAndView showUserInfoView(@ModelAttribute UsersDto users)
+	{
+		ModelAndView mav=new ModelAndView();
+		UsersDto userInfo=commonDao.showUserInfo(users);
+		mav.addObject("userInfo",userInfo);
+		mav.setViewName("common/updateUserInfo");	
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/common/updateUserInfo.do")
+	public ModelAndView updateUserInfoProcess(@ModelAttribute UsersDto users){
+		ModelAndView mav=new ModelAndView();
+		int result=commonDao.updateUserInfo(users);
+		System.out.println("수정결과 = "+result);
+		mav.addObject("result", result);
+		
+		if(result==1){			
+			mav.setViewName("common/main");
+		}
+			
+		if(result==0){
+			mav.setViewName("common/updateUserInfo");
+		}		
+		return mav;
 	}
 	
 
