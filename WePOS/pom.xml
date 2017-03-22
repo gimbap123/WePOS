@@ -126,8 +126,15 @@
     		<artifactId>mail</artifactId>
     		<version>1.4.7</version>
 		</dependency>
+		
+		<dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-validator</artifactId>
+        	<version>5.2.4.Final</version>
+    	</dependency>
+    
 	</dependencies>
-
+		
 	<build>
 		<finalName>WePOS</finalName>
 	</build>

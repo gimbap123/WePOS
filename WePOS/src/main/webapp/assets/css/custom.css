@@ -1,1 +1,6 @@
 /* Add here all your css styles (customizations) */
+
+/* /view/common/searchShop.jsp */
+form#searchShop {
+  display: table-row-group; 
+}

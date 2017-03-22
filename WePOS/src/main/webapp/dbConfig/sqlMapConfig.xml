@@ -14,11 +14,13 @@
 		<typeAlias alias="boardDto" type="com.wepos.common.dto.BoardDto"/> 
 		<typeAlias alias="userLoginDto" type="com.wepos.user.dto.UserLoginDto"/>
 		<typeAlias alias="mgrLoginDto" type="com.wepos.mgr.dto.MgrLoginDto"/>
+		<typeAlias alias="shopDto" type="com.wepos.common.dto.ShopDto"/>
 	</typeAliases>
 		
 	<mappers>	    
 		<mapper resource="com/wepos/common/dao/CommonDaoMapper.xml"/>		
 		<mapper resource="com/wepos/common/dao/BoardDaoMapper.xml"/>
+		<mapper resource="com/wepos/common/dao/ShopDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>
