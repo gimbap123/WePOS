@@ -78,9 +78,12 @@
 				<hr>
 		
 				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="checkNull()" value="수정하기">
-					</div>
+					<span class="col-md-5 col-md-offset-1">
+						<input type="button" id="cancel" class="btn-u btn-block" onclick="location='main.do'" value="취 소" float="left">
+					</span>
+					<span class="col-md-5 col-md-offset-0">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="checkNull()" value="수정하기" float="right">
+					</span>
 				</div>
 			</form>
 		</div>
