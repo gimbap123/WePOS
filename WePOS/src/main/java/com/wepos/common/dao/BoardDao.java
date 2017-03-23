@@ -8,7 +8,7 @@ import com.wepos.common.dto.BoardDto;
 public interface BoardDao {
 
 	//글 목록보기
-	public List<BoardDto> list();
+	public List<BoardDto> list(Map<String, Object> map);
 	
 	//총 레코드 수 구하기
 	public int getRowCount();	
