@@ -64,17 +64,20 @@ public class CommonController {
 	public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
 	{
 		ModelAndView mav=new ModelAndView();
-		int res = commonDao.checkId(id);
-		System.out.println("중복여부 : " + res);
-		String result="";
+		int checkIdFromUsers = commonDao.checkIdFromUsers(id);
+		int checkIdFromMgr = commonDao.checkIdFromMgr(id);
+		System.out.println("checkIdFromUsers 중복여부 : " + checkIdFromUsers);
+		System.out.println("checkIdFromMgr 중복여부 : " + checkIdFromMgr);
+		String comment="";
 		
-		if(res==1)
-			result="이미 등록된 아이디입니다.";
-		else if(res==0)
-			result="사용 가능한 아이디입니다.";
+		if(checkIdFromUsers==1 || checkIdFromMgr==1)
+			comment="이미 등록된 아이디입니다.";
+		else if(checkIdFromUsers==0 || checkIdFromMgr==0)
+			comment="사용 가능한 아이디입니다.";
 		
-		mav.addObject("res",res);		
-		mav.addObject("result",result);
+		mav.addObject("checkIdFromUsers",checkIdFromUsers);
+		mav.addObject("checkIdFromMgr",checkIdFromMgr);
+		mav.addObject("comment",comment);
 		mav.setViewName("common/checkId");
 			
 		return mav;

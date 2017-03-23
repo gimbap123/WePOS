@@ -31,7 +31,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/common/registration.js?v=2"></script>
+<script language="JavaScript" src="../js/common/registrationJs.js?v=1"></script>
 
 
 </head>

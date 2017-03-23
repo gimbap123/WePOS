@@ -114,10 +114,15 @@ function checkId()
 		type : 'post',
 		success : function(data) {
 			$('#idCheck').html(data);
-			if($('#result').val()==1)
+			if($('#checkIdFromUsers').val()==1 || $('#checkIdFromMgr').val()==1){
 				$('#idCheck').attr("style","color:red");
-			if($('#result').val()==0)
+				return false;
+			}				
+			if($('#checkIdFromUsers').val()==0 || $('#checkIdFromMgr').val()==0){
 				$('#idCheck').attr("style","color:blue");
+				return false;
+			}
+				
 	       	}
 	});	
 	//alert($('#result').val());
