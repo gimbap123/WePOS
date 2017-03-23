@@ -12,8 +12,12 @@
 		insert into users values(#{userId},1,#{userPassword},#{userName},#{userPhone},#{userEmail},0)
 	</insert>
 	
-	<select id="checkId" parameterType="usersDto" resultType="int">
+	<select id="checkIdFromUsers" parameterType="usersDto" resultType="int">
 		select count(*) from users where user_id=#{userId}
+	</select>
+	
+	<select id="checkIdFromMgr" parameterType="usersDto" resultType="int">
+		select count(*) from mgr where mgr_id=#{userId}
 	</select>
 
 	<select id="findPw" parameterType="usersDto" resultType="int">
