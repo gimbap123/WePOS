@@ -58,6 +58,12 @@ public class CommonController {
 		}		
 		return mav;
 	}
+	// 이용약관
+	@RequestMapping("/common/terms.do")
+	public String termsView()
+	{
+		return "common/terms";
+	}
 	// 아이디 중복검사
 	@RequestMapping(value="/common/checkId.do", method=RequestMethod.POST)
 	//public ModelAndView checkIdProcess(@RequestParam("userId") UsersDto id)

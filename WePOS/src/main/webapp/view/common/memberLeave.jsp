@@ -29,6 +29,16 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css?ver=2">
 
+<script>
+	function check(){
+		if($('#agreement').is(":checked")==false)
+		{
+			alert("안내사항에 동의해 주세요");
+			return false;
+		}
+	}
+</script>
+
 </head>
 
 <body>
@@ -55,16 +65,16 @@
 			<h4 align="center">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</h4> --%>
 			<hr>
 			<div class="checkbox" align="center">
-					<label> <input type="checkbox" id="terms"> 
+					<label> <input type="checkbox" id="agreement"> 
 						안내 사항을 모두 확인하였으며, 이에 동의합니다.
 					</label>
 				</div>
 			<div class="row">				
 				<span class="col-md-5 col-md-offset-1">
-					<button type="button" class="btn-u btn-block" onclick="location.href='login.do'">취소</button>
+					<button type="button" class="btn-u btn-block" onclick="history.back()">취소</button>
 				</span>
 				<span class="col-md-5 col-md-offset-0">
-					<button type="button" class="btn-u btn-block" onclick="location.href='findIdPw.do'">회원탈퇴</button>
+					<button type="button" class="btn-u btn-block" onclick="check()">회원탈퇴</button>
 				</span>				
 			</div>		
 		</div>
