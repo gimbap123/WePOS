@@ -17,15 +17,53 @@
  
  	<select id="selectList" resultType="boardDto" parameterType="map">
 		select board_number, board_title, total_id, board_date, board_read_cnt
-			from(select a.*, rownum rnum from (select * from board order by board_number desc) a) 
+			from(select a.*, rownum rnum from (select * from board
+			
+				<!-- 동적으로 필드 변경을 할 때 where 태그를 사용 -->
+    	    	<where>
+    	    		<!-- 검색분야를 입력했다면 -->
+					<if test="keyWord!=null and keyField=='title'">
+						board_title like '%' || #{keyWord} || '%'
+					</if>
+					<if test="keyWord!=null and keyField=='writer'">
+						total_id like '%' || #{keyWord} || '%'
+					</if>
+					<if test="keyWord!=null and keyField=='content'">
+						board_content like '%' || #{keyWord} || '%'
+					</if>
+					<if test="keyWord!=null and keyField=='all'">
+						board_title like '%' || #{keyWord} || '%' or
+						total_id like '%' || #{keyWord} || '%' or
+						board_content like '%' || #{keyWord} || '%'
+					</if>
+    	    	</where>
+			
+			 order by board_number desc) a) 
 	<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 	]]>
 				order by board_number desc
 	</select>
 	
-	<select id="selectOne" resultType="int">
+	<select id="selectOne" parameterType="map" resultType="int">
 		select count(*) from board
+		<where>
+        	<!-- 검색분야를 입력했다면 -->
+			<if test="keyWord!=null and keyField=='title'">
+				board_title like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='writer'">
+				total_id like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='content'">
+				board_content like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='all'">
+				board_title like '%' || #{keyWord} || '%' or
+				total_id like '%' || #{keyWord} || '%' or
+				board_content like '%' || #{keyWord} || '%'
+			</if>
+       	</where>
 	</select>
 
 	<insert id="boardInsert" parameterType="boardDto">
