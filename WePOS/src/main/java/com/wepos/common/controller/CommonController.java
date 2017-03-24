@@ -204,6 +204,7 @@ public class CommonController {
 		return  "/common/main";
 	}
 	
+	// 회원정보 수정
 	@RequestMapping(value="/common/showUserInfo.do")
 	public ModelAndView showUserInfoView(@ModelAttribute UsersDto users)
 	{
@@ -232,6 +233,14 @@ public class CommonController {
 		return mav;
 	}
 	
+	// 회원탈퇴
+	@RequestMapping(value="/common/memberLeave.do",method=RequestMethod.GET)
+	public ModelAndView memberLeaveView(@ModelAttribute UsersDto users)
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("common/memberLeave");
+		return mav;
+	}
 
 }
 

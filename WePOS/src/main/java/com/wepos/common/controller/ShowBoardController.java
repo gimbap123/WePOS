@@ -1,8 +1,11 @@
 package com.wepos.common.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,8 @@ import com.wepos.common.util.PagingUtil;
 
 @Controller
 public class ShowBoardController {
+	
+		private Logger log = Logger.getLogger(this.getClass());
 
 		@Autowired
 		private BoardDao boardDao;
@@ -22,18 +27,30 @@ public class ShowBoardController {
 		@RequestMapping("/common/showBoard.do")
 		public ModelAndView showBoard(@RequestParam(value="pageNum", defaultValue="1") int currentPage){ 
 						
+			if(log.isDebugEnabled()){
+				System.out.println("ListController의 list.do");
+				log.debug("currentPage : " + currentPage);
+			}			
+			
+			Map<String, Object> map = new HashMap<String, Object>();
 			
 			//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
 			int count = boardDao.getRowCount();
 		    
 			//PagingUtil page = new PagingUtil(currentPage, count, 10,10, "list.do");
-			PagingUtil page = new PagingUtil(currentPage, count, 3,3, "list.do");
+			PagingUtil page = new PagingUtil(currentPage, count, 3, 3, "showBoard.do");
 			
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
 			
 			List<BoardDto> list = null;
 			if(count > 0){
 				System.out.println("여기는 DAO 호출");
-				list = boardDao.list();
+		
+				System.out.println("start="+page.getStartCount());
+				System.out.println("end="+page.getEndCount());
+				
+				list = boardDao.list(map);
 			}else{
 				list = Collections.emptyList();
 			}

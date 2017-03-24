@@ -4,9 +4,23 @@
 	 
 <mapper namespace="com.wepos.common.dao.BoardDao">
 
-	<select id="selectList" resultType="boardDto">
-		select board_number, board_title, total_id, board_date, board_read_cnt, board_file
+<!-- 
+	<select id="selectList" resultType="boardDto" parameterType="map">
+		select rownum rnum board_number, board_title, total_id, board_date, board_read_cnt
 			from board
+	<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
+				order by board_number desc
+	</select>
+ -->	
+ 
+ 	<select id="selectList" resultType="boardDto" parameterType="map">
+		select board_number, board_title, total_id, board_date, board_read_cnt
+			from(select a.*, rownum rnum from (select * from board order by board_number desc) a) 
+	<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
 				order by board_number desc
 	</select>
 	

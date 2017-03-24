@@ -96,13 +96,22 @@
           <table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
             <thead>
               <tr>
-                <th align="center">글번호</th>
-                <th align="center">글제목</th>
-                <th align="center">작성자</th>
-                <th align="center">등록일</th>
-                <th align="center">조회수</th>
+                <th align="center" width="10%">글번호</th>
+                <th align="center" width="50%">글제목</th>
+                <th align="center" width="15%">작성자</th>
+                <th align="center" width="15%">등록일</th>
+                <th align="center" width="10%">조회수</th>
               </tr>
             </thead>
+            
+            
+	<c:if test="${count==0}">
+		<tr>
+			<td colspan="5" align="center"> 등록된 게시물이 없습니다</td>
+		</tr>
+	</c:if>
+            
+            
             <tbody>
               <c:forEach var="data" items="${list}" >
                 <tr>
@@ -114,6 +123,11 @@
                 </tr>
               </c:forEach>
             </tbody>
+            
+            <tr>
+				<td align="center" colspan="5">${pagingHtml}</td>
+			</tr>
+            
           </table>
           
           <hr style="margin: 10px">

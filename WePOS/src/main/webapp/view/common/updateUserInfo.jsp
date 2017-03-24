@@ -44,7 +44,7 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>회원정보 수정</h2>
+				<h2>회원정보 수정</h2>	
 			</div>
 			
 			<form name="updateForm" action="updateUserInfo.do" method="post">
@@ -76,13 +76,18 @@
 					<input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="이메일" value="${userInfo.userEmail}">
 				</div>
 				<hr>
+				<div align="center">
+				WePOS를 더 이상 사용하지 않는다면 &nbsp;&nbsp;
+				<a href="memberLeave.do?userId=${sessionScope.id}">회원탈퇴</a>
+				</div>
+				<br>
 		
 				<div class="row">
 					<span class="col-md-5 col-md-offset-1">
-						<input type="button" id="cancel" class="btn-u btn-block" onclick="location='main.do'" value="취 소" float="left">
+						<input type="button" id="cancel" class="btn-u btn-block" onclick="'" value="취 소" float="left">
 					</span>
 					<span class="col-md-5 col-md-offset-0">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="checkNull()" value="수정하기" float="right">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="수정하기" float="right">
 					</span>
 				</div>
 			</form>
