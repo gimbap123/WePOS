@@ -123,7 +123,7 @@ public class CommonController {
 		return "common/login";
 	}
 	
-	// 로그인 기능 수행(세션 userType에서 1은 일반회원, 2는 관리자)
+	// 로그인 기능 수행(세션 userType에서 1 - 일반회원, 2 - 관리자, 3 - WePOS 관리자)
 	@RequestMapping(value="/common/login.do", method=RequestMethod.POST)
 	public String loginProcess(HttpSession session,
 			@RequestParam("id") String id, @RequestParam("password") String password)
@@ -150,7 +150,8 @@ public class CommonController {
 				commonDao.mgrLoginLog(mgrLoginDto);
 				
 				session.setAttribute("id", id);
-				session.setAttribute("userType", 2);
+				session.setAttribute("userType", 2);				
+				
 				result = "/common/main";	
 			}
 		}
@@ -162,7 +163,15 @@ public class CommonController {
 			commonDao.userLoginLog(userLoginDto);
 			
 			session.setAttribute("id", id);
-			session.setAttribute("userType", 1);
+			if("admin".equals(id))
+			{
+				session.setAttribute("userType", 3);
+			}
+			else
+			{
+				session.setAttribute("userType", 1);
+			}
+			
 			result = "/common/main";	
 		}
 		
