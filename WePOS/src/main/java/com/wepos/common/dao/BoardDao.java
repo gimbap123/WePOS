@@ -11,7 +11,7 @@ public interface BoardDao {
 	public List<BoardDto> list(Map<String, Object> map);
 	
 	//총 레코드 수 구하기
-	public int getRowCount();	
+	public int getRowCount(Map<String, Object> map);	
 	
 	//글쓰기
 	public void boardInsert(BoardDto boardDto);

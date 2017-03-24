@@ -1,3 +1,12 @@
+//글 검색하기
+function searchCheck(){
+	if(document.searchBoard.keyWord.value=='' && !document.searchBoard.kwyField.value=='all'){
+		alert('검색어를 입력하세요');
+		document.searchBoard.keyWord.focus();
+		return false;
+	}
+}
+
 
 //글수정하기
 function boardRewriteProc()
@@ -17,6 +26,7 @@ function boardRewriteProc()
 	alert("글이 성공적으로 수정되었습니다!");
 	document.boardRewrite.submit();
 }
+
 
 //글쓰기
 function checkWrite(){
