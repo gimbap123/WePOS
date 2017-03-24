@@ -25,17 +25,24 @@ public class ShowBoardController {
 		private BoardDao boardDao;
 		
 		@RequestMapping("/common/showBoard.do")
-		public ModelAndView showBoard(@RequestParam(value="pageNum", defaultValue="1") int currentPage){ 
+		public ModelAndView showBoard(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+				@RequestParam(value="keyField", defaultValue="") String keyField,
+				@RequestParam(value="keyWord", defaultValue="") String keyWord){ 
 						
 			if(log.isDebugEnabled()){
 				System.out.println("ListController의 list.do");
 				log.debug("currentPage : " + currentPage);
+				log.debug("keyField : " + keyField);
+				log.debug("keyWord : " + keyWord);
 			}			
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
+			map.put("keyField", keyField); //검색분야
+			map.put("keyWord", keyWord); //검색어
+			
 			//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
-			int count = boardDao.getRowCount();
+			int count = boardDao.getRowCount(map);
 		    
 			//PagingUtil page = new PagingUtil(currentPage, count, 10,10, "list.do");
 			PagingUtil page = new PagingUtil(currentPage, count, 3, 3, "showBoard.do");

@@ -1,5 +1,7 @@
 package com.wepos.common.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ShopDto {
   private int shopCode;
   private int shopTypeCode;
@@ -8,6 +10,9 @@ public class ShopDto {
   private String shopName;
   private String shopDesc;
   private String shopAddress;
+  private String shopFile;
+  private MultipartFile upload;
+  
   public int getShopCode() {
     return shopCode;
   }
@@ -50,5 +55,17 @@ public class ShopDto {
   public void setShopAddress( String shopAddress ) {
     this.shopAddress = shopAddress;
   }
+  public String getShopFile() {
+	return shopFile;
+  }
+  public void setShopFile(String shopFile) {
+	this.shopFile = shopFile;
+  }
+  public MultipartFile getUpload() {
+	return upload;
+  }
+  public void setUpload(MultipartFile upload) {
+	this.upload = upload;
+  }  
   
 }

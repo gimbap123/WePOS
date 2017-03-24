@@ -60,7 +60,7 @@
 <body>
 
 
-<form action="boardWrite.do">
+<form action="showBoard.do" name="searchBoard" onsubmit="return searchCheck()">
 
 
 <div class="wrapper">
@@ -73,12 +73,12 @@
       <div class="container">
         <div class="col-md-6 col-md-offset-3">
           <h2 style="text-align: center;">여러분의 소중한 후기를 남겨주세요!</h2>
-          <div class="input-group">
+          <!-- <div class="input-group">
             <form id="searchShop" action="searchShopProc.do" name="searchShop" method="get">
                 </button>
               </span>
             </form>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -90,7 +90,22 @@
         <div class="panel-heading">
           <h3 class="panel-title">
             <i class="icon-note"></i> 자유게시판 ( 총  ${count} 건의 글 )
+            
+
+            <div align="right" style="vertical-align: middle;">
+            <select name="keyField" style="color: black; font-size: small;" >
+				<option value="title">글제목</option>
+				<option value="writer">작성자</option>
+				<option value="content">글내용</option>
+			<option value="all">전체</option>
+			</select>
+			<input type="text" size="20" name="keyWord" style="height: 20px; color: black;">
+			<input type="submit" value="검색" style="width: 50px; height: 20px; vertical-align: middle; text-align: center;">
+            </div>
+
+            
           </h3>
+               
         </div>
         <div class="table-responsive">
           <table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
@@ -143,7 +158,7 @@
 <c:if test="${sessionScope.id!=null}">
 	<!-- <input type="submit" value="글쓰기" style="margin: 0 5px 5px 0">
 	<input type="button" value="홈으로" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> -->
-	<button class="btn-u" type="submit" style="margin: 0 5px 5px 0"> 
+	<button class="btn-u" type="button" style="margin: 0 5px 5px 0" onclick="location.href='boardWrite.do'"> 
 	<i class="icon-pencil"></i>
 	</button>
 	<button class="btn-u" type="button" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> 
@@ -157,68 +172,6 @@
       </div>
       <!-- End Table Search Panel v1 -->
     </div>
-    
-    
-<%--     
-<c:if test="${sessionScope.id==null}">  
-	<input type="button" value="홈으로" onClick="location.href='main.do'">  
-</c:if>  
-  
-<c:if test="${sessionScope.id!=null}">
-	<input type="submit" value="글쓰기">
-	<input type="button" value="홈으로" onClick="location.href='main.do'">
-</c:if>
- --%>
-
-
-<%-- 
-<center>
-
-<form action="boardWrite.do">
-
-<h3>글 목록보기</h3>
-
-<hr>
-
-<table>
-	<tr>
-		<th>글번호</th>
-		<th>글제목</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		<th>조회수</th>
-		<th>첨부파일</th>
-	</tr>
-
-<c:forEach var="data" items="${list}" >
-
-	<tr>
-		<td>${data.boardNumber }</td>
-		<td><a href="boardDetail.do?boardNumber=${data.boardNumber}">${data.boardTitle }</a></td>
-		<td>${data.totalId }</td>
-		<td>${data.boardDate }</td>
-		<td>${data.boardReadCnt}</td>
-		<td>${data.boardFile}</td>
-	</tr>
-	
-	</c:forEach>
-	
-</table>
-
-	<hr>
-
-<c:if test="${sessionScope.id==null}">  
-	<input type="button" value="홈으로" onClick="location.href='main.do'">  
-</c:if>  
-  
-<c:if test="${sessionScope.id!=null}">
-	<input type="submit" value="글쓰기">
-	<input type="button" value="홈으로" onClick="location.href='main.do'">
-</c:if>
-</form>
-
-</center>
- --%>
 
 
 <!-- End Content -->
