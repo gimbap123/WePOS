@@ -1,6 +1,6 @@
 package com.wepos.admin.dto;
 
-public class City {
+public class CityDto {
 
 	private int cityCode;
 	private String cityName;

@@ -3,13 +3,21 @@
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	 
 <mapper namespace="com.wepos.admin.dao.AdminDao">
-	<select id="getShopType" resultType="shopType">
+	<select id="getShopType" resultType="shopTypeDto">
 		select * from shop_type
 	</select>
 	
-	<select id="getCity" resultType="city">
+	<select id="getCity" resultType="cityDto">
 		select * from city
 	</select>
 	
+	<select id="searchLocal" parameterType="int" resultType="localDto">
+		select * from local where city_code = #{cityCode}
+	</select>
+	
+	<insert id="shopRegistration" parameterType="shopDto">
+		insert into shop values(shop_seq.nextval, #{shopTypeCode}, 
+			#{cityCode}, #{localCode}, #{shopName}, #{shopDesc}, #{shopAddress})
+	</insert>
 	
 </mapper>
