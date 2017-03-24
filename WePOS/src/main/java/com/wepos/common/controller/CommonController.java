@@ -178,6 +178,7 @@ public class CommonController {
 		return result;
 	}
 	
+	// 로그아웃 기능 수행
 	@RequestMapping("/common/logout.do")
 	public String logoutProcess(HttpSession session)
 	{

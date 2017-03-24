@@ -46,13 +46,13 @@
 			<div class="reg-block-header">
 				<h2>매장 추가</h2>				
 			</div>			
-			<form name="shopRegForm" action="shopRegistration.do" method="post">
+			<form name="shopRegForm" action="shopRegistration.do" method="post" enctype="multipart/form-data">
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user-follow"></i></span>
 					<input type="text" id="shopName" name="shopName" class="form-control" placeholder="매장 이름">
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
+					<span class="input-group-addon"><i class="icon-star"></i></span>		
 					<select class="form-control" id="shopTypeCode" name="shopTypeCode">
 						<option value="0">매장 종류를 선택하세요.</option>
 						<c:forEach items="${shopTypeList}" var="shopType">
@@ -61,7 +61,7 @@
 					</select>
 				</div>	
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
 					<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
 						<option value="0">지역을 선택하세요.</option>
 						<c:forEach items="${cityList}" var="city">
@@ -73,12 +73,16 @@
 					</select>
 				</div>	
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
 					<input 	type="text" id="shopAddress" name="shopAddress" class="form-control" placeholder="나머지 주소" >
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
+					<span class="input-group-addon"><i class="icon-speech"></i></span>									
 					<input 	type="text" id="shopDesc" name="shopDesc" class="form-control" placeholder="매장 설명" >
+				</div>		
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class="icon-docs"></i></span>
+					<input type="file" class="form-control">
 				</div>			
 				<hr>
 				<div class="row">
