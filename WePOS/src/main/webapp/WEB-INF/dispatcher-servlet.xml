@@ -26,13 +26,9 @@
 	</bean>   
 	
 	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
- 	 <bean class="com.wepos.common.controller.CommonController" />  	 
-     <bean class="com.wepos.common.controller.ShowBoardController" />
-     <bean class="com.wepos.common.controller.BoardWriteController" />
-     <bean class="com.wepos.common.controller.BoardDetailController" />
-     <bean class="com.wepos.common.controller.BoardRewriteController" />
-     <bean class="com.wepos.common.controller.BoardDeleteController" />
-     <bean class="com.wepos.common.controller.SearchShopController" />
+ 	 <bean class="com.wepos.common.controller.CommonController" /> 
+     <bean class="com.wepos.common.controller.SearchShopController" />     
+     <bean class="com.wepos.common.controller.BoardController" />
      <bean class="com.wepos.admin.controller.AdminController" />
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->

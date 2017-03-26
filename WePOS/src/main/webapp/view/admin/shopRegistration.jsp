@@ -82,7 +82,7 @@
 				</div>		
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-docs"></i></span>
-					<input type="file" class="form-control">
+					<input type="file" class="form-control" name="upload">
 				</div>			
 				<hr>
 				<div class="row">
