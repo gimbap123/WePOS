@@ -32,18 +32,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script type="text/javascript">
-	function localClick()
-	{
-		var localCode = document.shopRegForm.cityCode.value
-		if(localCode == 0)
-		{
-			alert("지역을 먼저 선택하세요.");
-			return;
-		}		
-	}
-
-</script>
+<script language="JavaScript" src="../js/admin/shopRegistrationJs.js"></script>
 
 </head>
 
@@ -57,14 +46,14 @@
 			<div class="reg-block-header">
 				<h2>매장 추가</h2>				
 			</div>			
-			<form name="shopRegForm" action="#" method="post">
+			<form name="shopRegForm" action="shopRegistration.do" method="post" enctype="multipart/form-data">
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user-follow"></i></span>
-					<input type="text" name="shopName" class="form-control" placeholder="매장 이름">
+					<input type="text" id="shopName" name="shopName" class="form-control" placeholder="매장 이름">
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<select class="form-control" name="shopTypeCode">
+					<span class="input-group-addon"><i class="icon-star"></i></span>		
+					<select class="form-control" id="shopTypeCode" name="shopTypeCode">
 						<option value="0">매장 종류를 선택하세요.</option>
 						<c:forEach items="${shopTypeList}" var="shopType">
 							<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
@@ -72,29 +61,33 @@
 					</select>
 				</div>	
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<select class="form-control" name="cityCode">
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
+					<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
 						<option value="0">지역을 선택하세요.</option>
 						<c:forEach items="${cityList}" var="city">
 							<option value="${city.cityCode}">${city.cityName}</option>
 						</c:forEach>
 					</select>
-					<select class="form-control" onclick="localClick()" name="localCode">
+					<select class="form-control" id="localCode" name="localCode" >
 						<option value="0">시, 군을 선택하세요.</option>
 					</select>
 				</div>	
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<input 	type="text" name="shopAddress" class="form-control" placeholder="상세 주소" >
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
+					<input 	type="text" id="shopAddress" name="shopAddress" class="form-control" placeholder="나머지 주소" >
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<input 	type="text" name="shopDesc" class="form-control" placeholder="매장 설명" >
+					<span class="input-group-addon"><i class="icon-speech"></i></span>									
+					<input 	type="text" id="shopDesc" name="shopDesc" class="form-control" placeholder="매장 설명" >
+				</div>		
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class="icon-docs"></i></span>
+					<input type="file" class="form-control">
 				</div>			
-				<hr>	
+				<hr>
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<input type="button" id="ok" class="btn-u btn-block"  value="추가하기">
+						<input type="button" id="ok" class="btn-u btn-block"  value="추가하기" onclick="checkShopRegistration()">
 					</div>
 				</div>
 			</form>

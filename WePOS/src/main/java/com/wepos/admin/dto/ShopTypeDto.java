@@ -1,6 +1,6 @@
 package com.wepos.admin.dto;
 
-public class ShopType {
+public class ShopTypeDto {
 	
 	private int shopTypeCode;
 	private String shopTypeName;

@@ -6,8 +6,8 @@
 <!--=== Header ===-->
 <div class="header">
 	<div class="container">
-		<!-- Logo -->
-		<a class="logo" href="main.do"> <img src="../image/common/logo.png"
+		<!-- Logo -->		
+		<a class="logo" href="../common/main.do"> <img src="../image/common/logo.png"
 			alt="Logo">
 		</a>		
 		<!-- End Logo -->
@@ -20,9 +20,9 @@
 					<li><a href="login.do">로그인</a></li>
 				</c:if>
 				<c:if test="${sessionScope.id != null}">
-					<li><a href="showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
+					<li><a href="../common/showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
 					<li class="topbar-devider"></li>
-					<li><a href="logout.do">로그아웃</a></li>
+					<li><a href="../common/logout.do">로그아웃</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -64,7 +64,7 @@
 					class="dropdown-toggle" data-toggle="dropdown"> 관리자 기능 </a>
 					<ul class="dropdown-menu">
 						<li><a href="#">매장 관리자 추가</a></li>
-						<li><a href="/WePOS/admin/shopRegistration.do">매장 추가</a></li>						
+						<li><a href="../admin/shopRegistration.do">매장 추가</a></li>						
 					</ul></li>
 				</c:if>
 				<!-- End WePOS 관리자 기능 -->

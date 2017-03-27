@@ -49,7 +49,7 @@
 	</select>
 	
 	<update id="updateUserInfo" parameterType="usersDto">
-		update users set user_id=#{userId},grade_code=1,user_password=#{userPassword},user_name=#{userName},user_phone=#{userPhone},user_email=#{userEmail},user_expense=0 where user_id=#{userId}
+		update users set user_password=#{userPassword},user_phone=#{userPhone},user_email=#{userEmail} where user_id=#{userId}
 	</update>
 
 </mapper>
