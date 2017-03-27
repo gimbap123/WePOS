@@ -1,3 +1,16 @@
+//글 삭제하기
+function boardDelete(){
+	var del = confirm("이 글을 정말 삭제할까요?");
+	if(del == true){ 
+	  alert("글이 정상적으로 삭제되었습니다")
+	  document.boardDetail.submit();
+	}
+	else if(del == false){
+	  alert("글 삭제가 최소되었습니다")
+	  return false;
+	}
+}
+
 //글 검색하기
 function searchCheck(){
 	if(document.searchBoard.keyWord.value=='' && !document.searchBoard.kwyField.value=='all'){
