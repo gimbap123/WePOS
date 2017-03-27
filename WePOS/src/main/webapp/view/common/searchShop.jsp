@@ -133,6 +133,7 @@
           </table>
         </div>
       </div>
+      <button class="btn-u btn-u-blue" type="button"><i class="fa fa-cloud"></i><a href="<c:url value="/pos/posMain.do" />">POS 이동</a></button>
       <!-- End Table Search Panel v1 -->
     </div>
 

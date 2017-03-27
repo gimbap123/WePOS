@@ -16,8 +16,8 @@
     
     <!-- 경로 매핑설정 --> 
     <mvc:annotation-driven />
-    <mvc:resources mapping="/assets/**"
-      location="/assets/" />     
+    <mvc:resources mapping="/assets/**" location="/assets/" />     
+    
      
     <!-- ViewResolver : 요청명령어에 따른 prefix(경로), suffix(파일의 확장자) -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">		
@@ -27,12 +27,15 @@
 	
 	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
  	 <bean class="com.wepos.common.controller.CommonController" />  	 
-     <bean class="com.wepos.common.controller.ShowBoardController" />
-     <bean class="com.wepos.common.controller.BoardWriteController" />
-     <bean class="com.wepos.common.controller.BoardDetailController" />
-     <bean class="com.wepos.common.controller.BoardRewriteController" />
-     <bean class="com.wepos.common.controller.BoardDeleteController" />
-     <bean class="com.wepos.common.controller.SearchShopController" />
+   <bean class="com.wepos.common.controller.ShowBoardController" />
+   <bean class="com.wepos.common.controller.BoardWriteController" />
+   <bean class="com.wepos.common.controller.BoardDetailController" />
+   <bean class="com.wepos.common.controller.BoardRewriteController" />
+   <bean class="com.wepos.common.controller.BoardDeleteController" />
+   <bean class="com.wepos.common.controller.SearchShopController" />
+  
+   <!-- POS Main --> 
+   <bean class="com.wepos.pos.controller.PosMainController" />
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
