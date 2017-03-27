@@ -26,8 +26,12 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 		return getSqlSession().insert("registration",user);
 	}
 	
-	public int checkId(UsersDto user) {
-		return getSqlSession().selectOne("checkId",user);
+	public int checkIdFromUsers(UsersDto user) {
+		return getSqlSession().selectOne("checkIdFromUsers",user);
+	}
+	
+	public int checkIdFromMgr(UsersDto user) {
+		return getSqlSession().selectOne("checkIdFromMgr",user);
 	}
 	
 	public int userLogin(Map<String, String> loginInfo) {

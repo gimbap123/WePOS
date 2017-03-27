@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,66 +32,63 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/common/updateUserInfoJs.js?v=2"></script>
-
+<script language="JavaScript" src="../js/admin/shopRegistrationJs.js"></script>
 
 </head>
 
 <body>
-	<jsp:include page="header.jsp" flush="false" />
+	<jsp:include page="../common/header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->
 	<div class="container">
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>회원정보 수정</h2>	
-			</div>
-			
-			<form name="updateForm" action="updateUserInfo.do" method="post">
+				<h2>매장 추가</h2>				
+			</div>			
+			<form name="shopRegForm" action="shopRegistration.do" method="post" enctype="multipart/form-data">
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user-follow"></i></span>
-					<input type="text" id="userName" name="userName" class="form-control" value="${userInfo.userName}" readOnly>
+					<input type="text" id="shopName" name="shopName" class="form-control" placeholder="매장 이름">
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-star"></i></span>					
-					<input 	type="text" id="userId"  name="userId" class="form-control" value="${userInfo.userId}" readOnly >
-				</div>
-				<div align="center">
-					<span id="idCheck"></span>
+					<span class="input-group-addon"><i class="icon-star"></i></span>		
+					<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+						<option value="0">매장 종류를 선택하세요.</option>
+						<c:forEach items="${shopTypeList}" var="shopType">
+							<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
+						</c:forEach>
+					</select>
+				</div>	
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
+					<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
+						<option value="0">지역을 선택하세요.</option>
+						<c:forEach items="${cityList}" var="city">
+							<option value="${city.cityCode}">${city.cityName}</option>
+						</c:forEach>
+					</select>
+					<select class="form-control" id="localCode" name="localCode" >
+						<option value="0">시, 군을 선택하세요.</option>
+					</select>
+				</div>	
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
+					<input 	type="text" id="shopAddress" name="shopAddress" class="form-control" placeholder="나머지 주소" >
 				</div>
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="패스워드 (영문+숫자  8~12자리)" >
-				</div>
+					<span class="input-group-addon"><i class="icon-speech"></i></span>									
+					<input 	type="text" id="shopDesc" name="shopDesc" class="form-control" placeholder="매장 설명" >
+				</div>		
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="password" id="userPassword1" name="userPassword1" class="form-control" placeholder="패스워드 확인">
-				</div>
-				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-screen-smartphone"></i></span>
-					<input type="text" id="userPhone" name="userPhone" class="form-control" placeholder="연락처 (- 생략)" value="${userInfo.userPhone}">
-				</div>
-				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
-					<input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="이메일" value="${userInfo.userEmail}">
-				</div>
+					<span class="input-group-addon"><i class="icon-docs"></i></span>
+					<input type="file" class="form-control">
+				</div>			
 				<hr>
-				<div align="center">
-				WePOS를 더 이상 사용하지 않는다면 &nbsp;&nbsp;
-				<a href="memberLeave.do?userId=${sessionScope.id}">회원탈퇴</a>
-				</div>
-				<br>
-		
 				<div class="row">
-					<span class="col-md-5 col-md-offset-1">
-
-						<input type="button" id="cancel" class="btn-u btn-block" onclick="checkNull()" value="취 소" float="left">
-
-					</span>
-					<span class="col-md-5 col-md-offset-0">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="checkNull()" value="수정하기" float="right">
-					</span>
+					<div class="col-md-10 col-md-offset-1">
+						<input type="button" id="ok" class="btn-u btn-block"  value="추가하기" onclick="checkShopRegistration()">
+					</div>
 				</div>
 			</form>
 		</div>
@@ -109,9 +107,7 @@
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/backstretch/jquery.backstretch.min.js"></script>
-	<!-- JS Customization -->
-	<script type="text/javascript" src="../assets/js/custom.js"></script>
+		src="../assets/plugins/backstretch/jquery.backstretch.min.js"></script>	
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../assets/js/app.js"></script>
 	<script type="text/javascript">

@@ -9,14 +9,14 @@ import com.wepos.common.dto.BoardDto;
 
 public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 
-	public List<BoardDto> list() {
+	public List<BoardDto> list(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectList("selectList");
+		return getSqlSession().selectList("selectList", map);
 	}
 
-	public int getRowCount() {
+	public int getRowCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectOne("selectOne");
+		return getSqlSession().selectOne("selectOne", map);
 	}
 	
 	public void boardInsert(BoardDto boardDto) {

@@ -31,7 +31,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/common/registrationJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/registrationJs.js?v=3"></script>
 
 
 </head>
@@ -83,7 +83,7 @@
 	
 				<div class="checkbox">
 					<label> <input type="checkbox" id="terms"> 
-					<a target="_blank" href="page_terms.html">이용약관</a>에 동의합니다.
+					<a target="_blank" href="terms.do">이용약관</a>에 동의합니다.
 					</label>
 				</div>
 	

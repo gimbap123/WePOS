@@ -41,7 +41,7 @@ function checkNull()
 	{
 		alert("이용약관에 동의해 주세요");
 		return false;
-	}		
+	}
 	if($('#result').val()==1)
 	{
 		$('#idCheck').attr("style","color:red");
@@ -60,15 +60,15 @@ function checkPhone(){
 		alert("올바른 연락처 형식이 아닙니다.");
 		$('#userPhone').focus();
 		return false;
-	}else{
-		checkEmail();
 	}
-	
-	if (/(\w)\1\1\1\1/.test($('#userPhone'))) {
+	if (/(\w)\1\1\1\1/.test($('#userPhone').val())) {
 		alert('연락처에 같은 문자를 5번 이상 반복하실 수 없습니다.');
 		$('#userPhone').focus();
 		return false;
 	}
+	else{
+		checkEmail();
+	}	
 }
 
 // 이메일 유효성 검사
@@ -114,10 +114,15 @@ function checkId()
 		type : 'post',
 		success : function(data) {
 			$('#idCheck').html(data);
-			if($('#result').val()==1)
+			if($('#checkIdFromUsers').val()==1 || $('#checkIdFromMgr').val()==1){
 				$('#idCheck').attr("style","color:red");
-			if($('#result').val()==0)
+				return false;
+			}				
+			if($('#checkIdFromUsers').val()==0 || $('#checkIdFromMgr').val()==0){
 				$('#idCheck').attr("style","color:blue");
+				return false;
+			}
+				
 	       	}
 	});	
 	//alert($('#result').val());

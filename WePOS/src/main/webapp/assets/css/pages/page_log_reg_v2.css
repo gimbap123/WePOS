@@ -80,3 +80,16 @@ body {
 	border-top: solid 2px #72c02c;	
 	border-bottom: solid 2px #72c02c;
 }
+
+/* 회원탈퇴 페이지 양식 */
+.reg-block-cus1 {
+	width: 700px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	border-top: solid 2px #72c02c;	
+	border-bottom: solid 2px #72c02c;
+}
+
+
+

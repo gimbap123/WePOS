@@ -36,11 +36,13 @@
   
    <!-- POS Main --> 
    <bean class="com.wepos.pos.controller.PosMainController" />
+
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
      <bean class="com.wepos.common.dao.CommonDaoImpl" />
      <bean class="com.wepos.common.dao.ShopDaoImpl" />
+     <bean class="com.wepos.admin.dao.AdminDaoImpl" />
           
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
 	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />

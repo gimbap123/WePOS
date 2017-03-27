@@ -58,23 +58,32 @@ public class CommonController {
 		}		
 		return mav;
 	}
+	// 이용약관
+	@RequestMapping("/common/terms.do")
+	public String termsView()
+	{
+		return "common/terms";
+	}
 	// 아이디 중복검사
 	@RequestMapping(value="/common/checkId.do", method=RequestMethod.POST)
 	//public ModelAndView checkIdProcess(@RequestParam("userId") UsersDto id)
 	public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
 	{
 		ModelAndView mav=new ModelAndView();
-		int res = commonDao.checkId(id);
-		System.out.println("중복여부 : " + res);
-		String result="";
+		int checkIdFromUsers = commonDao.checkIdFromUsers(id);
+		int checkIdFromMgr = commonDao.checkIdFromMgr(id);
+		System.out.println("checkIdFromUsers 중복여부 : " + checkIdFromUsers);
+		System.out.println("checkIdFromMgr 중복여부 : " + checkIdFromMgr);
+		String comment="";
 		
-		if(res==1)
-			result="이미 등록된 아이디입니다.";
-		else if(res==0)
-			result="사용 가능한 아이디입니다.";
+		if(checkIdFromUsers==1 || checkIdFromMgr==1)
+			comment="이미 등록된 아이디입니다.";
+		else if(checkIdFromUsers==0 || checkIdFromMgr==0)
+			comment="사용 가능한 아이디입니다.";
 		
-		mav.addObject("res",res);		
-		mav.addObject("result",result);
+		mav.addObject("checkIdFromUsers",checkIdFromUsers);
+		mav.addObject("checkIdFromMgr",checkIdFromMgr);
+		mav.addObject("comment",comment);
 		mav.setViewName("common/checkId");
 			
 		return mav;
@@ -120,7 +129,7 @@ public class CommonController {
 		return "common/login";
 	}
 	
-	// 로그인 기능 수행(세션 userType에서 1은 일반회원, 2는 관리자)
+	// 로그인 기능 수행(세션 userType에서 1 - 일반회원, 2 - 관리자, 3 - WePOS 관리자)
 	@RequestMapping(value="/common/login.do", method=RequestMethod.POST)
 	public String loginProcess(HttpSession session,
 			@RequestParam("id") String id, @RequestParam("password") String password)
@@ -147,7 +156,8 @@ public class CommonController {
 				commonDao.mgrLoginLog(mgrLoginDto);
 				
 				session.setAttribute("id", id);
-				session.setAttribute("userType", 2);
+				session.setAttribute("userType", 2);				
+				
 				result = "/common/main";	
 			}
 		}
@@ -159,13 +169,22 @@ public class CommonController {
 			commonDao.userLoginLog(userLoginDto);
 			
 			session.setAttribute("id", id);
-			session.setAttribute("userType", 1);
+			if("admin".equals(id))
+			{
+				session.setAttribute("userType", 3);
+			}
+			else
+			{
+				session.setAttribute("userType", 1);
+			}
+			
 			result = "/common/main";	
 		}
 		
 		return result;
 	}
 	
+	// 로그아웃 기능 수행
 	@RequestMapping("/common/logout.do")
 	public String logoutProcess(HttpSession session)
 	{
@@ -192,6 +211,7 @@ public class CommonController {
 		return  "/common/main";
 	}
 	
+	// 회원정보 수정
 	@RequestMapping(value="/common/showUserInfo.do")
 	public ModelAndView showUserInfoView(@ModelAttribute UsersDto users)
 	{
@@ -220,6 +240,14 @@ public class CommonController {
 		return mav;
 	}
 	
+	// 회원탈퇴
+	@RequestMapping(value="/common/memberLeave.do",method=RequestMethod.GET)
+	public ModelAndView memberLeaveView(@ModelAttribute UsersDto users)
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("common/memberLeave");
+		return mav;
+	}
 
 }
 

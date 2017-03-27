@@ -21,7 +21,8 @@ public interface CommonDao {
 	public int registration(UsersDto user);
 	
 	// 아이디 중복검사
-	public int checkId(UsersDto user);
+	public int checkIdFromUsers(UsersDto user);
+	public int checkIdFromMgr(UsersDto user);
 	
 	// 일반 회원 로그인 검사
 	public int userLogin(Map<String, String> loginInfo);

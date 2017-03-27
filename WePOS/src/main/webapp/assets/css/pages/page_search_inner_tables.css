@@ -6,6 +6,12 @@
 	background: url(../../img/patterns/breadcrumbs.png) repeat;
 }
 
+.search-block99 {
+	padding: 20px 0 20px;
+	border-bottom: 1px solid #eee;
+	background: url(../../img/patterns/breadcrumbs.png) repeat;
+}
+
 .search-block h2 {
 	font-size: 24px;
 	font-weight: 200;

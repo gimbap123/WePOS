@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,67 +27,56 @@
 	href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 
 <!-- CSS Page Style -->
-<link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
-
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css?ver=2">
 
 <script>
-		
-	function checkLogin()
-	{
-		var id = document.loginForm.id.value;
-		var password = document.loginForm.password.value;
-		
-		if(id == "" || password == "")
+	function check(){
+		if($('#agreement').is(":checked")==false)
 		{
-			alert("아이디와 패스워드를 입력하세요.");
-			return false;	
+			alert("안내사항에 동의해 주세요");
+			return false;
 		}
-		document.loginForm.submit();
 	}
 </script>
+
 </head>
 
-<body onload="document.loginForm.id.focus()">
-	<jsp:include page="../common/header.jsp" flush="false" />
+<body>
+	<jsp:include page="header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->
 	<div class="container">
 		<!--Reg Block-->
-		<div class="reg-block">
+		<div class="reg-block-cus1">
 			<div class="reg-block-header">
-				<h2>로그인</h2>
+				<h2>회원탈퇴</h2>
+				<p>
+					회원탈퇴를 신청하시기 전에 안내사항을 꼭 확인해주세요.
+				</p>
 			</div>
-			
-			<form name="loginForm" action="login.do" method="post">
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="icon-user"></i></span>
-					<input type="text" name="id" class="form-control" placeholder="ID">
-				</div>
-				<div class="input-group margin-bottom-30">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="password" name="password" class="form-control" placeholder="패스워드" onKeyDown="if (event.keyCode==13) checkLogin()">
-				</div>
-				<div class="checkbox">
-					<label> <input type="checkbox">
-						<p>로그인 유지</p>
+			<ul>
+				<li>사용하고 계신 아이디(${sessionScope.id})는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</li><br>
+				<li>탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.</li><br>
+				<li>회원 정보는 탈퇴 즉시 삭제되며, 별도의 용도로 사용되지 않습니다.</li><br>
+				<li>예약 내역이 있다면 확인해주세요.</li><br>
+				<li>탈퇴 후에는 아이디 <font color="red">${sessionScope.id}</font> 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</li>
+			</ul>
+			<%-- <h4 align="center">사용하고 계신 아이디(${sessionScope.id})는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h4>
+			<h4 align="center">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</h4> --%>
+			<hr>
+			<div class="checkbox" align="center">
+					<label> <input type="checkbox" id="agreement"> 
+						안내 사항을 모두 확인하였으며, 이에 동의합니다.
 					</label>
 				</div>
-				<span class="input-group-addon">
-					<a class="color-green" href="registration.do">회원가입</a>
+			<div class="row">				
+				<span class="col-md-5 col-md-offset-1">
+					<button type="button" class="btn-u btn-block" onclick="history.back()">취소</button>
 				</span>
-				<span class="input-group-addon">
-					<a class="color-green" href="findIdPw.do">아이디 / 패스워드 찾기</a>
-				</span>
-	
-				<hr>
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<button type="button" class="btn-u btn-block" onclick="checkLogin()">로그인</button>										
-					</div>
-				</div>
-			</form>
+				<span class="col-md-5 col-md-offset-0">
+					<button type="button" class="btn-u btn-block" onclick="check()">회원탈퇴</button>
+				</span>				
+			</div>		
 		</div>
 		<!--End Reg Block-->
 	</div>
@@ -121,13 +111,9 @@
       ], {
         fade: 1000,
         duration: 3000
-    });
+    });    
+  
 </script>
-	<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
 
 </body>
 </html>
