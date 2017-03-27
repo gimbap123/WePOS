@@ -100,7 +100,8 @@
 			<option value="all">전체</option>
 			</select>
 			<input type="text" size="20" name="keyWord" style="height: 20px; color: black;">
-			<input type="submit" value="검색" style="width: 50px; height: 20px; vertical-align: middle; text-align: center;">
+			<!-- <input type="submit" value="검색" style="width: 50px; height: 20px; vertical-align: middle; text-align: center; color: gray;"> -->
+            <b><a href="javascript:document.searchBoard.submit()" style="color: white; text-decoration: none;">[FIND]</a></b>
             </div>
 
             
