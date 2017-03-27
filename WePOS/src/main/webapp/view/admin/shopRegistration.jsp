@@ -7,8 +7,6 @@
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="favicon.ico">
@@ -34,6 +32,7 @@
 
 <script language="JavaScript" src="../js/admin/shopRegistrationJs.js"></script>
 
+<title>We POS</title>
 </head>
 
 <body>

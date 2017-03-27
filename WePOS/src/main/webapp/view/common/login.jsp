@@ -46,6 +46,8 @@
 		document.loginForm.submit();
 	}
 </script>
+
+<title>We POS</title>
 </head>
 
 <body onload="document.loginForm.id.focus()">

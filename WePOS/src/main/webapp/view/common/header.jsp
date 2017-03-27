@@ -74,6 +74,7 @@
 					class="dropdown-toggle" data-toggle="dropdown"> 검 색 </a>
 					<ul class="dropdown-menu">
 						<li><a href="../common/searchShop.do">매장 검색</a></li>
+						<li><a href="../common/searchShop2.do">매장 검색2</a></li>						
 						<li><a href="#">상품 검색</a></li>
 					</ul></li>
 				<!-- End 검색 -->

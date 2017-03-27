@@ -14,5 +14,9 @@ public interface ShopDao {
   
   // 검색 매장 갯수
   public int findShopCount( String shopName );
+  
+  
+  // 매장 검색
+  public List<ShopDto> searchShop(String shopName);
 }
 

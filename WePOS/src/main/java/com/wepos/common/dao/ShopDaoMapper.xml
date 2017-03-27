@@ -21,4 +21,12 @@
   <select id="allShopCount" resultType="int">
     select count(*) from shop
   </select>
+  
+  
+  <select id="searchShop" parameterType="String" resultType="shopDto">
+  	select * from shop
+  	where shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'  	
+  	order by shop_code
+  </select>
+  
 </mapper>
