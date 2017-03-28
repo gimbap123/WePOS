@@ -21,4 +21,31 @@
   <select id="allShopCount" resultType="int">
     select count(*) from shop
   </select>
+  
+  
+  <select id="searchShop" parameterType="map" resultType="shopDto">
+  	select s.shop_code, s.shop_type_code, s.city_code, s.local_code, s.shop_name, s.shop_desc, s.shop_file, 
+  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address
+  	from
+  	(
+  		select rnumshop.*, rownum as rnum
+		from
+		(
+			select *
+			from shop
+			<where>
+				<if test="shopName != null">
+					shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'  				
+				</if>
+			</where>			
+			order by shop_code
+		) rnumshop	
+  	) s
+  	inner join city c on s.city_code = c.city_code
+	inner join local l on c.city_code = l.city_code and s.local_code = l.local_code
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>  
+  </select>
+  
 </mapper>

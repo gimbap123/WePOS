@@ -35,6 +35,8 @@
 		{
 			alert("안내사항에 동의해 주세요");
 			return false;
+		}else{
+			$('#deleteForm').submit();
 		}
 	}
 </script>
@@ -69,13 +71,15 @@
 						안내 사항을 모두 확인하였으며, 이에 동의합니다.
 					</label>
 				</div>
-			<div class="row">				
+			<div class="row">
+			<form id="deleteForm" action="deleteUserInfoProcess.do?userId=${sessionScope.id}" method="post">
 				<span class="col-md-5 col-md-offset-1">
 					<button type="button" class="btn-u btn-block" onclick="history.back()">취소</button>
 				</span>
 				<span class="col-md-5 col-md-offset-0">
 					<button type="button" class="btn-u btn-block" onclick="check()">회원탈퇴</button>
-				</span>				
+				</span>
+			</form>	
 			</div>		
 		</div>
 		<!--End Reg Block-->

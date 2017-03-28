@@ -34,6 +34,10 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 		return getSqlSession().selectOne("checkIdFromMgr",user);
 	}
 	
+	public int checkIdFromDeletedId(UsersDto user) {
+		return getSqlSession().selectOne("checkIdFromDeletedId",user);
+	}
+	
 	public int userLogin(Map<String, String> loginInfo) {
 		return getSqlSession().selectOne("userLogin", loginInfo);
 	}
@@ -56,6 +60,26 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 	
 	public int updateUserInfo(UsersDto user) {
 		return getSqlSession().update("updateUserInfo",user);		
+	}
+	
+	public int deleteUserInfoFromUserLogin(String user) {
+		return getSqlSession().delete("deleteUserInfoFromUserLogin",user);
+	}
+	
+	public int deleteUserInfoFromUsers(String user) {
+		return getSqlSession().delete("deleteUserInfoFromUsers",user);
+	}
+	
+	public int deleteUserInfoFromMgrLogin(String user) {
+		return getSqlSession().delete("deleteUserInfoFromMgrLogin",user);
+	}
+	
+	public int deleteUserInfoFromMgr(String user) {
+		return getSqlSession().delete("deleteUserInfoFromMgr",user);
+	}
+	
+	public int deletedId(String user) {
+		return getSqlSession().insert("deletedId", user);
 	}
 
 }

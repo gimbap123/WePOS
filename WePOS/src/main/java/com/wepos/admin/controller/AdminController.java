@@ -66,7 +66,8 @@ public class AdminController {
 	public String shopRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopDto shop) throws IOException, Exception
 	{
 		String newFileName = "";
-		String filePath = request.getSession().getServletContext().getRealPath("/") + "downloadFile/";
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
 		if(!shop.getUpload().isEmpty())
 		{
 			newFileName = FileUtil.rename(shop.getUpload().getOriginalFilename());
@@ -75,7 +76,7 @@ public class AdminController {
 			shop.getUpload().transferTo(file);
 		}
 		
-		adminDao.shopRegistration(shop);		
+		adminDao.shopRegistration(shop);	
 		return "redirect:/admin/shopRegistration.do";
 	}
 }

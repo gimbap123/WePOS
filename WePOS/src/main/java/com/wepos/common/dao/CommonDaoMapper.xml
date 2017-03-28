@@ -19,6 +19,10 @@
 	<select id="checkIdFromMgr" parameterType="usersDto" resultType="int">
 		select count(*) from mgr where mgr_id=#{userId}
 	</select>
+	
+	<select id="checkIdFromDeletedId" parameterType="usersDto" resultType="int">
+		select count(*) from deleted_id where id=#{userId}
+	</select>
 
 	<select id="findPw" parameterType="usersDto" resultType="int">
 		select count(*) from users where user_id = #{userId} and user_email = #{userEmail}
@@ -51,5 +55,25 @@
 	<update id="updateUserInfo" parameterType="usersDto">
 		update users set user_password=#{userPassword},user_phone=#{userPhone},user_email=#{userEmail} where user_id=#{userId}
 	</update>
+	
+	<delete id="deleteUserInfoFromUserLogin" parameterType="String">
+		delete from user_login where user_id=#{userId}
+	</delete>
+	
+	<delete id="deleteUserInfoFromUsers" parameterType="String">
+		delete from users where user_id=#{userId}
+	</delete>
+	
+	<delete id="deleteUserInfoFromMgrLogin" parameterType="String">
+		delete from mgr_login where mgr_id=#{mgrId}
+	</delete>
+	
+	<delete id="deleteUserInfoFromMgr" parameterType="String">
+		delete from mgr where mgr_id=#{mgrId}
+	</delete>
+	
+	<insert id="deletedId" parameterType="String">
+		insert into deleted_id values(#{userId})
+	</insert>
 
 </mapper>
