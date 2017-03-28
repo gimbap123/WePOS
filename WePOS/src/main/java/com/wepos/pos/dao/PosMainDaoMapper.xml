@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.pos.dao.PosMainDao">
+  
+  <select id="getShopInfo" parameterType="int" resultType="PosMainDto">
+     select s.shop_code, s.shop_name, t.table_code, t.table_name
+     from shop s, tables t
+     where s.shop_code = t.shop_code
+     and s.shop_code = #{shopCode}
+  </select>
+  
+  <select id="getTableCount" parameterType="int" resultType="int">
+    select count(table_code)
+    from shop s, tables t
+    where s.shop_code = t.shop_code
+    and s.shop_code = #{shopCode}
+  </select>
+</mapper>

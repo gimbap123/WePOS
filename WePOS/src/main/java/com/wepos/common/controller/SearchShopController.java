@@ -39,9 +39,6 @@ public class SearchShopController {
 
     resultCount = shopDao.findShopCount( shopName );
     System.out.println( shopName );
-    System.out
-        .println( "CommandControll > searchShopProc() > findShopCount() : "
-            + resultCount );
     shopList = shopDao.findShopList( shopName );
 
     mav.addObject( "allShopCount", allShopCount );
