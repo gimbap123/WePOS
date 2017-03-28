@@ -46,28 +46,4 @@ public class AdminMgrController {
 		return "redirect:/admin/shopRegistration.do";
 	}
 	
-	
-	/*// 아이디 중복검사
-		@RequestMapping(value="/common/checkId.do")
-		public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
-		{
-			ModelAndView mav=new ModelAndView();
-			int checkIdFromUsers = adminDao.checkIdFromUsers(id);
-			int checkIdFromMgr = adminDao.checkIdFromMgr(id);
-			System.out.println("checkIdFromUsers 중복여부 : " + checkIdFromUsers);
-			System.out.println("checkIdFromMgr 중복여부 : " + checkIdFromMgr);
-			String comment="";
-			
-			if(checkIdFromUsers==1 || checkIdFromMgr==1)
-				comment="이미 등록된 아이디입니다.";
-			else if(checkIdFromUsers==0 || checkIdFromMgr==0)
-				comment="사용 가능한 아이디입니다.";
-			
-			mav.addObject("checkIdFromUsers",checkIdFromUsers);
-			mav.addObject("checkIdFromMgr",checkIdFromMgr);
-			mav.addObject("comment",comment);
-			mav.setViewName("../common/checkId");
-				
-			return mav;
-		}*/
 }

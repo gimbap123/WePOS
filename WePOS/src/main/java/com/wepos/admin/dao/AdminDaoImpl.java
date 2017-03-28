@@ -34,12 +34,4 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 	
 	
 	
-	public int checkIdFromUsers(UsersDto user) {
-		return getSqlSession().selectOne("checkIdFromUsers",user);
-	}
-	
-	public int checkIdFromMgr(UsersDto user) {
-		return getSqlSession().selectOne("checkIdFromMgr",user);
-	}
-	
 }
