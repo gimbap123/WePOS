@@ -26,16 +26,16 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 		return getSqlSession().insert("registration",user);
 	}
 	
-	public int checkIdFromUsers(UsersDto user) {
-		return getSqlSession().selectOne("checkIdFromUsers",user);
+	public int checkIdFromUsers(String userId) {
+		return getSqlSession().selectOne("checkIdFromUsers",userId);
 	}
 	
-	public int checkIdFromMgr(UsersDto user) {
-		return getSqlSession().selectOne("checkIdFromMgr",user);
+	public int checkIdFromMgr(String mgrId) {
+		return getSqlSession().selectOne("checkIdFromMgr",mgrId);
 	}
 	
-	public int checkIdFromDeletedId(UsersDto user) {
-		return getSqlSession().selectOne("checkIdFromDeletedId",user);
+	public int checkIdFromDeletedId(String deletedId) {
+		return getSqlSession().selectOne("checkIdFromDeletedId",deletedId);
 	}
 	
 	public int userLogin(Map<String, String> loginInfo) {
@@ -62,24 +62,24 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 		return getSqlSession().update("updateUserInfo",user);		
 	}
 	
-	public int deleteUserInfoFromUserLogin(String user) {
-		return getSqlSession().delete("deleteUserInfoFromUserLogin",user);
+	public int deleteUserInfoFromUserLogin(String userId) {
+		return getSqlSession().delete("deleteUserInfoFromUserLogin",userId);
 	}
 	
-	public int deleteUserInfoFromUsers(String user) {
-		return getSqlSession().delete("deleteUserInfoFromUsers",user);
+	public int deleteUserInfoFromUsers(String userId) {
+		return getSqlSession().delete("deleteUserInfoFromUsers",userId);
 	}
 	
-	public int deleteUserInfoFromMgrLogin(String user) {
-		return getSqlSession().delete("deleteUserInfoFromMgrLogin",user);
+	public int deleteUserInfoFromMgrLogin(String mgrId) {
+		return getSqlSession().delete("deleteUserInfoFromMgrLogin",mgrId);
 	}
 	
-	public int deleteUserInfoFromMgr(String user) {
-		return getSqlSession().delete("deleteUserInfoFromMgr",user);
+	public int deleteUserInfoFromMgr(String mgrId) {
+		return getSqlSession().delete("deleteUserInfoFromMgr",mgrId);
 	}
 	
-	public int deletedId(String user) {
-		return getSqlSession().insert("deletedId", user);
+	public int deletedId(String userId) {
+		return getSqlSession().insert("deletedId", userId);
 	}
 
 }

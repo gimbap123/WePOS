@@ -21,9 +21,9 @@ public interface CommonDao {
 	public int registration(UsersDto user);
 	
 	// 아이디 중복검사
-	public int checkIdFromUsers(UsersDto user);
-	public int checkIdFromMgr(UsersDto user);
-	public int checkIdFromDeletedId(UsersDto user);
+	public int checkIdFromUsers(String userId);
+	public int checkIdFromMgr(String mgrId);
+	public int checkIdFromDeletedId(String deletedId);
 	
 	// 일반 회원 로그인 검사
 	public int userLogin(Map<String, String> loginInfo);
@@ -42,9 +42,9 @@ public interface CommonDao {
 	public int updateUserInfo(UsersDto user);
 	
 	// 회원 탈퇴
-	public int deleteUserInfoFromUserLogin(String user);
-	public int deleteUserInfoFromUsers(String user);
-	public int deleteUserInfoFromMgrLogin(String user);
-	public int deleteUserInfoFromMgr(String user);
-	public int deletedId(String user);
+	public int deleteUserInfoFromUserLogin(String userId);
+	public int deleteUserInfoFromUsers(String userId);
+	public int deleteUserInfoFromMgrLogin(String mgrId);
+	public int deleteUserInfoFromMgr(String mgrId);
+	public int deletedId(String userId);
 }
