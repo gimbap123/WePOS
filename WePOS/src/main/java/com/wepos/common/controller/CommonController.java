@@ -209,7 +209,9 @@ public class CommonController {
 			commonDao.mgrLoginLog(mgrLoginDto);
 		}
 				
-		session.invalidate();
+		session.removeAttribute("id");
+		session.removeAttribute("userType");
+		/*session.invalidate();*/
 		
 		return  "/common/main";
 	}
