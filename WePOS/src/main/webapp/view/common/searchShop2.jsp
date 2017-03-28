@@ -83,13 +83,16 @@
                     	</div>
                     	<div class="cbp-title-dark">
                     		<div class="cbp-l-grid-agency-title">${shop.shopName}</div>
-                    		<div class="cbp-l-grid-agency-desc">${shop.shopDesc}</div>
+                    		<div class="cbp-l-grid-agency-desc">${shop.shopAddress}</div>
                 		</div>
    	 				</div>
    	 			</c:forEach>
    	 		</div>
+   	 		<div class="margin-bottom-30"></div>
+    		${pagingHtml}    		
     	</div>
-		
+    	
+    		
 		
 	<%-- 	<!--=== Content Part ===-->
 		<div class="container content">

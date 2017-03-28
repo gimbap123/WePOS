@@ -1,6 +1,7 @@
 package com.wepos.common.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -25,8 +26,8 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
   }
 
   
-  public List<ShopDto> searchShop(String shopName) {
-		List<ShopDto> shopList = getSqlSession().selectList("searchShop", shopName);
+  public List<ShopDto> searchShop(Map<String, Object> map) {
+		List<ShopDto> shopList = getSqlSession().selectList("searchShop", map);
 		return shopList;
 	}
   
