@@ -8,6 +8,7 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.UsersDto;
 
 public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 
@@ -30,4 +31,15 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 		getSqlSession().insert("shopRegistration", shop);
 	}
 
+	
+	
+	
+	public int checkIdFromUsers(UsersDto user) {
+		return getSqlSession().selectOne("checkIdFromUsers",user);
+	}
+	
+	public int checkIdFromMgr(UsersDto user) {
+		return getSqlSession().selectOne("checkIdFromMgr",user);
+	}
+	
 }

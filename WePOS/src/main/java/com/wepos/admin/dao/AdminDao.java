@@ -6,6 +6,7 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.UsersDto;
 
 public interface AdminDao {
 	
@@ -20,4 +21,14 @@ public interface AdminDao {
 	
 	// 매장 추가
 	public void shopRegistration(ShopDto shop);
+	
+	
+	//---------------------------------------------
+	
+	
+	// 아이디 중복검사
+		public int checkIdFromUsers(UsersDto user);
+		public int checkIdFromMgr(UsersDto user);
+	
+	
 }
