@@ -6,5 +6,6 @@
 	${comment}
 	<input type="hidden" id="checkIdFromUsers" value="${checkIdFromUsers}">
 	<input type="hidden" id="checkIdFromMgr" value="${checkIdFromMgr}">
+	<input type="hidden" id="checkIdFromList" value="${checkIdFromList}">
 </body>
 </html>

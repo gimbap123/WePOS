@@ -72,17 +72,20 @@ public class CommonController {
 		ModelAndView mav=new ModelAndView();
 		int checkIdFromUsers = commonDao.checkIdFromUsers(id);
 		int checkIdFromMgr = commonDao.checkIdFromMgr(id);
+		int checkIdFromList=commonDao.checkIdFromDeletedId(id);
 		System.out.println("checkIdFromUsers 중복여부 : " + checkIdFromUsers);
 		System.out.println("checkIdFromMgr 중복여부 : " + checkIdFromMgr);
+		System.out.println("checkIdFromList 중복여부 : " + checkIdFromList);
 		String comment="";
 		
-		if(checkIdFromUsers==1 || checkIdFromMgr==1)
+		if(checkIdFromUsers==1 || checkIdFromMgr==1 || checkIdFromList==1)
 			comment="이미 등록된 아이디입니다.";
-		else if(checkIdFromUsers==0 || checkIdFromMgr==0)
+		else if(checkIdFromUsers==0 || checkIdFromMgr==0 || checkIdFromList==0)
 			comment="사용 가능한 아이디입니다.";
 		
 		mav.addObject("checkIdFromUsers",checkIdFromUsers);
 		mav.addObject("checkIdFromMgr",checkIdFromMgr);
+		mav.addObject("checkIdFromList",checkIdFromList);
 		mav.addObject("comment",comment);
 		mav.setViewName("common/checkId");
 			
@@ -241,11 +244,57 @@ public class CommonController {
 	}
 	
 	// 회원탈퇴
-	@RequestMapping(value="/common/memberLeave.do",method=RequestMethod.GET)
-	public ModelAndView memberLeaveView(@ModelAttribute UsersDto users)
+	@RequestMapping(value="/common/deleteUserInfoView.do")
+	public ModelAndView deleteUserInfoView(HttpSession session)
 	{
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("common/memberLeave");
+		mav.setViewName("common/deleteUserInfo");
+		return mav;
+	}
+	
+	@RequestMapping(value="/common/deleteUserInfoProcess.do")
+	public ModelAndView deleteUserInfoProcess(HttpSession session)
+	{
+		ModelAndView mav=new ModelAndView();
+		int userType=(Integer)session.getAttribute("userType");
+		System.out.println("userType="+userType);
+		if(userType==1){
+			int deleteFromUserLogin=commonDao.deleteUserInfoFromUserLogin((String)session.getAttribute("id"));
+			if(deleteFromUserLogin==1){
+				int deleteFromUsers=commonDao.deleteUserInfoFromUsers((String)session.getAttribute("id"));
+				System.out.println("회원탈퇴 성공 여부 = "+deleteFromUsers);
+				if(deleteFromUsers==1){
+					int deletedId=commonDao.deletedId((String)session.getAttribute("id"));
+					if(deletedId==1)
+						System.out.println("삭제 아이디 등록성공");
+					session.removeAttribute("id");
+					session.removeAttribute("userType");
+					mav.setViewName("common/main");
+				}
+			}else{
+				System.out.println("에러");
+				mav.setViewName("common/deleteUserInfo");
+			}
+		}
+		if(userType==2){
+			int deleteFromMgrLogin=commonDao.deleteUserInfoFromMgrLogin((String)session.getAttribute("id"));
+			if(deleteFromMgrLogin==1){
+				int deleteFromMgr=commonDao.deleteUserInfoFromMgr((String)session.getAttribute("id"));
+				System.out.println("회원탈퇴 성공 여부 = "+deleteFromMgr);
+				if(deleteFromMgr==1){
+					int deletedId=commonDao.deletedId((String)session.getAttribute("id"));
+					if(deletedId==1)
+						System.out.println("삭제 아이디 등록성공");
+					session.removeAttribute("id");
+					session.removeAttribute("userType");
+					mav.setViewName("common/main");
+				}
+			}else{
+				System.out.println("에러");
+				mav.setViewName("common/deleteUserInfo");
+			}
+		}
+		
 		return mav;
 	}
 
