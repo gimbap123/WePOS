@@ -67,7 +67,7 @@ public class CommonController {
 	// 아이디 중복검사
 	@RequestMapping(value="/common/checkId.do", method=RequestMethod.POST)
 	//public ModelAndView checkIdProcess(@RequestParam("userId") UsersDto id)
-	public ModelAndView checkIdProcess(@ModelAttribute UsersDto id)
+	public ModelAndView checkIdProcess(@RequestParam("userId") String id)
 	{
 		ModelAndView mav=new ModelAndView();
 		int checkIdFromUsers = commonDao.checkIdFromUsers(id);
