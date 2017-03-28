@@ -30,6 +30,7 @@
      <bean class="com.wepos.common.controller.SearchShopController" />     
      <bean class="com.wepos.common.controller.BoardController" />
      <bean class="com.wepos.admin.controller.AdminController" />
+     <bean class="com.wepos.admin.controller.AdminMgrController" />
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 

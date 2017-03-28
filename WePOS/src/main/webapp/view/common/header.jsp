@@ -63,7 +63,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 관리자 기능 </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">매장 관리자 추가</a></li>
+						<li><a href="../admin/shopMgrRegistration.do">매장 관리자 추가</a></li>
 						<li><a href="../admin/shopRegistration.do">매장 추가</a></li>						
 					</ul></li>
 				</c:if>
@@ -72,9 +72,8 @@
 				<!-- 검 색 -->
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 검 색 </a>
-					<ul class="dropdown-menu">
-						<li><a href="../common/searchShop.do">매장 검색</a></li>
-						<li><a href="../common/searchShop2.do">매장 검색2</a></li>						
+					<ul class="dropdown-menu">		
+						<li><a href="../common/searchShop.do">매장 검색</a></li>						
 						<li><a href="#">상품 검색</a></li>
 					</ul></li>
 				<!-- End 검색 -->

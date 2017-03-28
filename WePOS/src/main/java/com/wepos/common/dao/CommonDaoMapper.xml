@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id="checkIdFromUsers" parameterType="String" resultType="int">
-		select count(*) from users where user_id=#{userId}
+		select count(*) from users where user_id = #{userId}
 	</select>
 	
 	<select id="checkIdFromMgr" parameterType="String" resultType="int">
