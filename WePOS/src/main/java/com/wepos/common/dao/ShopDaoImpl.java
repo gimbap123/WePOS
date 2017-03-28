@@ -24,6 +24,12 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
     return getSqlSession().selectOne( "findShopCount", shopName );
   }
 
+  
+  public List<ShopDto> searchShop(String shopName) {
+		List<ShopDto> shopList = getSqlSession().selectList("searchShop", shopName);
+		return shopList;
+	}
+  
 
 }
 

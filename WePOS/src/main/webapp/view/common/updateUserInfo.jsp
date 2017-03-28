@@ -78,7 +78,7 @@
 				<hr>
 				<div align="center">
 				WePOS를 더 이상 사용하지 않는다면 &nbsp;&nbsp;
-				<a href="memberLeave.do?userId=${sessionScope.id}">회원탈퇴</a>
+				<a href="deleteUserInfoView.do?userId=${sessionScope.id}">회원탈퇴</a>
 				</div>
 				<br>
 		

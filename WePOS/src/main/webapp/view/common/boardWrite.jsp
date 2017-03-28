@@ -95,32 +95,73 @@
         <div class="table-responsive">
           <table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
 
-
 			<tr>
 				<td width="5%" align="center">제　목</td>
 				<td><input type="text'" size="95%" name="boardTitle" placeholder="제목을 입력하여 주세요."></td>
 			</tr>	
-
 			<tr>
 				<td width="5%" align="center">작성자</td>
 				<td><input type="text'" size="95%" name="totalId" value="${sessionScope.id}" readonly></td>
 			</tr>
-          
           	<tr>
 				<td width="5%" align="center">내　용</td>
 				<td><textarea rows="20" cols="95%" style="resize: none" name="boardContent" placeholder="내용을 입력하세요."></textarea></td> 
 			</tr>
-			
-			
 					
-		</table>
-<!--           
+		
+		<!-- <hr style="margin: 5px 0 5px 0"> -->
+		
+			<tr>
+				<td width="5%" align="center">파　일</td>
+				<td><input type="file" name="upload" value="파일 첨부"></td>
+			</tr>
 
- <textarea rows="10" cols="50" style="resize: none" name="boardContent" placeholder="내용을 입력하세요."></textarea><p>  
-<hr>
-<input type="button" value="등록" onclick="checkWrite()">
-<input type="button" value="목록" onclick="javascript:history.back()">
-<input type="file" name="upload" value="파일 첨부">
+		<!-- <hr style="margin: 5px 0 5px 0"> -->
+
+			<tr>
+			<td colspan="2" align="right">
+				<input type="button" value="등록" onclick="checkWrite()">
+				<input type="button" value="목록" onclick="javascript:history.back()">
+			</td>
+			</tr>
+
+		</form>
+
+		
+		</table>
+
+		
+        </div>
+      </div>
+      <!-- End Table Search Panel v1 -->
+    </div>
+    
+
+
+<!-- End Content -->
+		<jsp:include page="footer.jsp" flush="false" />
+	</div>
+	<!--/wrapper-->
+	
+<!-- JS Global Compulsory -->			
+<script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
+<script type="text/javascript" src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+
+<!-- JS Page Level -->           
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      	App.init();       
+        ParallaxSlider.initParallaxSlider();
+    });
+</script>
 </form>
 
 

@@ -1,11 +1,14 @@
 package com.wepos.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +20,7 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.util.FileUtil;
 
 @Controller
 public class AdminController {
@@ -59,9 +63,20 @@ public class AdminController {
 	
 	// 매장 추가 기능 수행
 	@RequestMapping(value = "/admin/shopRegistration.do", method = RequestMethod.POST)
-	public String shopRegistrationProcess(@ModelAttribute ShopDto shop)
+	public String shopRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopDto shop) throws IOException, Exception
 	{
-		adminDao.shopRegistration(shop);		
+		String newFileName = "";
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		if(!shop.getUpload().isEmpty())
+		{
+			newFileName = FileUtil.rename(shop.getUpload().getOriginalFilename());
+			shop.setShopFile(newFileName);
+			File file = new File(filePath + newFileName);
+			shop.getUpload().transferTo(file);
+		}
+		
+		adminDao.shopRegistration(shop);	
 		return "redirect:/admin/shopRegistration.do";
 	}
 }

@@ -15,9 +15,9 @@
 		<div class="topbar">
 			<ul class="loginbar pull-right">
 				<c:if test="${sessionScope.id == null}">
-					<li><a href="registration.do">회원가입</a></li>
+					<li><a href="../common/registration.do">회원가입</a></li>
 					<li class="topbar-devider"></li>
-					<li><a href="login.do">로그인</a></li>
+					<li><a href="../common/login.do">로그인</a></li>
 				</c:if>
 				<c:if test="${sessionScope.id != null}">
 					<li><a href="../common/showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
@@ -73,7 +73,8 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 검 색 </a>
 					<ul class="dropdown-menu">
-						<li><a href="searchShop.do">매장 검색</a></li>
+						<li><a href="../common/searchShop.do">매장 검색</a></li>
+						<li><a href="../common/searchShop2.do">매장 검색2</a></li>						
 						<li><a href="#">상품 검색</a></li>
 					</ul></li>
 				<!-- End 검색 -->
@@ -82,7 +83,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
 					<ul class="dropdown-menu">
-						<li><a href="showBoard.do">자유 게시판</a></li>
+						<li><a href="../common/showBoard.do">자유 게시판</a></li>
 						<li><a href="#">FAQ</a></li>
 						<li><a href="#">Q&A</a></li>
 					</ul></li>
