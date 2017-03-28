@@ -1,11 +1,18 @@
 package com.wepos.pos.dto;
 
 public class PosMainDto {
+  private int mgrId;
   private int shopCode;
   private String shopName;
   private int tableCode;
   private String tableName;
   
+  public int getMgrId() {
+    return mgrId;
+  }
+  public void setMgrId( int mgrId ) {
+    this.mgrId = mgrId;
+  }
   public int getShopCode() {
     return shopCode;
   }
@@ -35,4 +42,5 @@ public class PosMainDto {
     return "PosMainDto [shopCode = " + shopCode + ", shopName = " + shopName + ", tableCode = " + tableCode + ", tableName = " + tableName 
         + "]";
   }
+  
 }

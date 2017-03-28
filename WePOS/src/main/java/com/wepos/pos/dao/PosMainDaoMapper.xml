@@ -4,7 +4,7 @@
    
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
   
-  <select id="getShopInfo" parameterType="int" resultType="PosMainDto">
+  <select id="getShopList" parameterType="int" resultType="PosMainDto">
      select s.shop_code, s.shop_name, t.table_code, t.table_name
      from shop s, tables t
      where s.shop_code = t.shop_code
@@ -16,5 +16,12 @@
     from shop s, tables t
     where s.shop_code = t.shop_code
     and s.shop_code = #{shopCode}
+  </select>
+  
+  <!-- 매니저 아이디로 매장 코드 구함 -->
+  <select id="getShopInfo" parameterType="String" resultType="PosMainDto">
+    select *
+    from shop
+    where shop_code = ( select shop_code from mgr where mgr_id = #{mgr_id} )
   </select>
 </mapper>

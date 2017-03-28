@@ -21,19 +21,27 @@ public class PosMainController {
   
   // 포스 페이지로 이동
   @RequestMapping( value = "/pos/posMain.do" )
-  public ModelAndView posProc(
+  public ModelAndView showPosMain(
       @RequestParam( value = "shopCode" ) int shopCode ) {
     
-    // PosMainDto posMainDto = posMainDao.getShopInfo( shopCode );
-    List<PosMainDto> posInfo = posMainDao.getShopInfo( shopCode );
-    System.out.println( "PosMainController > posProc > posMainDto : " + posInfo );
+    List<PosMainDto> posInfo = posMainDao.getShopList( shopCode );
     
     int tableCount = posMainDao.getTableCount( shopCode );
-    System.out.println( "PosMainController > posProc > tableCount : " + tableCount );
     
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "posInfo", posInfo );
     mav.addObject( "tableCount", tableCount );
+    return mav;
+  }
+ 
+  // 매니저 아이디로 매장 정보 구함
+  @RequestMapping( value = "/pos/getShopInfo.do" )
+  public ModelAndView getShopInfo(
+      @RequestParam( value = "mgrId" ) String mgrId ) {
+    
+    PosMainDto posMainDto = posMainDao.getShopInfo( mgrId );
+    ModelAndView mav = new ModelAndView( "pos/getShopInfo" );
+    mav.addObject( "shopInfo", posMainDto );
     return mav;
   }
 }

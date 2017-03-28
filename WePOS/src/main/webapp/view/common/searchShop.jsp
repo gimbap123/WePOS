@@ -6,7 +6,7 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="kr">
 <!--<![endif]-->
 <head>
 <title>We POS</title>
@@ -59,21 +59,6 @@
     <!--=== Header ===-->
     <jsp:include page="header.jsp" flush="false" />
     <!--=== End Header ===-->
-
-    <!--=== Breadcrumbs ===-->
-    <!--
-    <div class="breadcrumbs breadcrumbs-dark">
-        <div class="container">
-            <h1 class="pull-left">Search Tables</h1>
-            <ul class="pull-right breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="">Page</a></li>
-                <li class="active">Search Tables</li>
-            </ul>
-        </div>
-    </div>
--->
-    <!--=== End Breadcrumbs ===-->
 
     <!--=== Search Block Version 2 ===-->
     <div class="search-block">
