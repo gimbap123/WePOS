@@ -262,7 +262,7 @@ public class CommonController {
 		System.out.println("userType="+userType);
 		if(userType==1){
 			int deleteFromUserLogin=commonDao.deleteUserInfoFromUserLogin((String)session.getAttribute("id"));
-			if(deleteFromUserLogin==1){
+			if(deleteFromUserLogin>=1){
 				int deleteFromUsers=commonDao.deleteUserInfoFromUsers((String)session.getAttribute("id"));
 				System.out.println("회원탈퇴 성공 여부 = "+deleteFromUsers);
 				if(deleteFromUsers==1){
@@ -280,7 +280,7 @@ public class CommonController {
 		}
 		if(userType==2){
 			int deleteFromMgrLogin=commonDao.deleteUserInfoFromMgrLogin((String)session.getAttribute("id"));
-			if(deleteFromMgrLogin==1){
+			if(deleteFromMgrLogin>=1){
 				int deleteFromMgr=commonDao.deleteUserInfoFromMgr((String)session.getAttribute("id"));
 				System.out.println("회원탈퇴 성공 여부 = "+deleteFromMgr);
 				if(deleteFromMgr==1){
