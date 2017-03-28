@@ -23,40 +23,8 @@ public class SearchShopController {
 
   @Autowired
   private ShopDao shopDao;
-
-  // 매장검색
-  @RequestMapping( value = "/common/searchShop.do" )
-  public ModelAndView searchShop() {
-    int allShopCount = shopDao.allShopCount();
-    ModelAndView mav = new ModelAndView( "common/searchShop" );
-    mav.addObject( "allShopCount", allShopCount );
-    mav.addObject( "resultCount", 0 );
-    return mav;
-  }
-
-  @RequestMapping( value = "/common/searchShopProc.do" )
-  public ModelAndView searchShopProc(
-      @RequestParam( value = "shopName" ) String shopName ) {
-    int allShopCount = shopDao.allShopCount();
-
-    ModelAndView mav = new ModelAndView( "common/searchShop" );
-    List<ShopDto> shopList = null;
-    int resultCount = 0;
-
-    resultCount = shopDao.findShopCount( shopName );
-    System.out.println( shopName );
-    System.out
-        .println( "CommandControll > searchShopProc() > findShopCount() : "
-            + resultCount );
-    shopList = shopDao.findShopList( shopName );
-
-    mav.addObject( "allShopCount", allShopCount );
-    mav.addObject( "shopList", shopList );
-    mav.addObject( "resultCount", resultCount );
-    return mav;
-  }
-  
-  @RequestMapping(value = "/common/searchShop2.do", method = RequestMethod.GET)
+    
+  @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
   public ModelAndView searchShopView(HttpServletRequest request, 
 		  @RequestParam(value="pageNum", defaultValue="1") int currentPage, 
 		  @RequestParam(value = "shopName", defaultValue = "") String shopName)
@@ -65,8 +33,8 @@ public class SearchShopController {
 	  int index = filePath.indexOf("\\WePOS");
 	  filePath = filePath.substring(index);
 	  
-	  int shopCount = shopDao.findShopCount(shopName);
-	  PagingUtil page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop2.do");
+	  int shopCount = shopDao.searchShopCount(shopName);
+	  PagingUtil page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
 	  
 	  Map<String, Object> map = new HashMap<String, Object>();
 	  map.put("shopName", shopName);
@@ -97,7 +65,7 @@ public class SearchShopController {
 	  }
 	  
 	  ModelAndView mav = new ModelAndView();
-	  mav.setViewName("common/searchShop2");
+	  mav.setViewName("common/searchShop");
 	  mav.addObject("shopList", shopList);
 	  mav.addObject("shopCount", shopCount);
 	  mav.addObject("pagingHtml", page.getPagingHtml()); 
