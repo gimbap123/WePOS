@@ -1,6 +1,9 @@
 package com.wepos.common.controller;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,59 +16,60 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.util.PagingUtil;
 
 @Controller
 public class SearchShopController {
 
   @Autowired
   private ShopDao shopDao;
-
-  // 매장검색
-  @RequestMapping( value = "/common/searchShop.do" )
-  public ModelAndView searchShop() {
-    int allShopCount = shopDao.allShopCount();
-    ModelAndView mav = new ModelAndView( "common/searchShop" );
-    mav.addObject( "allShopCount", allShopCount );
-    mav.addObject( "resultCount", 0 );
-    return mav;
-  }
-
-  @RequestMapping( value = "/common/searchShopProc.do" )
-  public ModelAndView searchShopProc(
-      @RequestParam( value = "shopName" ) String shopName ) {
-    int allShopCount = shopDao.allShopCount();
-
-    ModelAndView mav = new ModelAndView( "common/searchShop" );
-    List<ShopDto> shopList = null;
-    int resultCount = 0;
-
-    resultCount = shopDao.findShopCount( shopName );
-    System.out.println( shopName );
-    shopList = shopDao.findShopList( shopName );
-
-    mav.addObject( "allShopCount", allShopCount );
-    mav.addObject( "shopList", shopList );
-    mav.addObject( "resultCount", resultCount );
-    return mav;
-  }
-  
-  @RequestMapping(value = "/common/searchShop2.do", method = RequestMethod.GET)
-  public ModelAndView searchShopView(HttpServletRequest request, @RequestParam(value = "shopName", defaultValue = "") String shopName)
+    
+  @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
+  public ModelAndView searchShopView(HttpServletRequest request, 
+		  @RequestParam(value="pageNum", defaultValue="1") int currentPage, 
+		  @RequestParam(value = "shopName", defaultValue = "") String shopName)
   {
 	  String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 	  int index = filePath.indexOf("\\WePOS");
 	  filePath = filePath.substring(index);
 	  
-	  ModelAndView mav = new ModelAndView();
-	  List<ShopDto> shopList = shopDao.searchShop(shopName);
-	  for(ShopDto shop : shopList)
+	  int shopCount = shopDao.searchShopCount(shopName);
+	  PagingUtil page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
+	  
+	  Map<String, Object> map = new HashMap<String, Object>();
+	  map.put("shopName", shopName);
+	  map.put("start", page.getStartCount());
+	  map.put("end", page.getEndCount());	  
+	  
+	  List<ShopDto> shopList = null;
+	  
+	  if(shopCount > 0)
 	  {
-		  String fileName = shop.getShopFile();		
-		  shop.setShopFile(filePath + fileName);		
+		  shopList = shopDao.searchShop(map);
+		  for(ShopDto shop : shopList)
+		  {
+			  if(shop.getShopFile() != null)
+			  {
+				  String fileName = shop.getShopFile();		
+				  shop.setShopFile(filePath + fileName);
+			  }
+			  else
+			  {
+				  shop.setShopFile("/WePOS/uploadFile/nullImg.jpg");
+			  }		  
+		  }	 		  		  
+	  }  
+	  else
+	  {
+		  shopList = Collections.emptyList();
 	  }
 	  
-	  mav.setViewName("common/searchShop2");
+	  ModelAndView mav = new ModelAndView();
+	  mav.setViewName("common/searchShop");
 	  mav.addObject("shopList", shopList);
+	  mav.addObject("shopCount", shopCount);
+	  mav.addObject("pagingHtml", page.getPagingHtml()); 
+	  
 	  return mav;
   }
 }

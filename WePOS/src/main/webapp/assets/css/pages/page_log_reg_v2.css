@@ -91,5 +91,29 @@ body {
 	border-bottom: solid 2px #72c02c;
 }
 
+/* 이용약관 페이지 양식 */
+.reg-block-cus2 {
+	width: 700px;
+	min-height:100%;
+	padding: 20px;
+	margin: 20px auto;
+	background: #fff;
+	border-top: solid 2px #72c02c;	
+	border-bottom: solid 2px #72c02c;
+}
+
+.terms{
+	border:solid 1px #72c02c;
+	width: 600px;
+	height:150px;
+	padding: 20px;
+	margin: 20px auto;
+	font-size: 14px;
+    line-height: 1.5;
+    font-family: '맑은 고딕','Malgun Gothic','돋움','dotum','Apple SD Gothic Neo','sans-serif';
+    color: #1e1e1e;
+    letter-spacing: -1px;
+    overflow-y:auto;
+}
 
 
