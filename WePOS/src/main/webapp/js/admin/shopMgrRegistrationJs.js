@@ -147,11 +147,11 @@ function checkId()
 		type : 'post',
 		success : function(data) {
 			$('#mgrIdCheck').html(data);
-			if($('#checkIdFromUsers').val()==1 || $('#checkIdFromMgr').val()==1){
+			if($('#checkIdFromUsers').val()==1 || $('#checkIdFromMgr').val()==1 || $('#checkIdFromList').val()==1){
 				$('#mgrIdCheck').attr("style","color:red");
 				return false;
 			}				
-			if($('#checkIdFromUsers').val()==0 || $('#checkIdFromMgr').val()==0){
+			if($('#checkIdFromUsers').val()==0 || $('#checkIdFromMgr').val()==0 || $('#checkIdFromList').val()==0){
 				$('#mgrIdCheck').attr("style","color:blue");
 				return false;
 			}
