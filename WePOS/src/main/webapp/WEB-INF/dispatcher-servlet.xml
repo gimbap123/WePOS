@@ -16,8 +16,8 @@
     
     <!-- 경로 매핑설정 --> 
     <mvc:annotation-driven />
-    <mvc:resources mapping="/assets/**"
-      location="/assets/" />     
+    <mvc:resources mapping="/assets/**" location="/assets/" />     
+    
      
     <!-- ViewResolver : 요청명령어에 따른 prefix(경로), suffix(파일의 확장자) -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">		
@@ -26,10 +26,12 @@
 	</bean>   
 	
 	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
- 	 <bean class="com.wepos.common.controller.CommonController" /> 
-     <bean class="com.wepos.common.controller.SearchShopController" />     
-     <bean class="com.wepos.common.controller.BoardController" />
+ 	 <bean class="com.wepos.common.controller.CommonController" />  	 
+  <bean class="com.wepos.common.controller.SearchShopController" />
+   <bean class="com.wepos.common.controller.BoardController" />
      <bean class="com.wepos.admin.controller.AdminController" />
+   <bean class="com.wepos.pos.controller.PosMainController" />
+
      <bean class="com.wepos.admin.controller.AdminMgrController" />
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
@@ -37,6 +39,7 @@
      <bean class="com.wepos.common.dao.CommonDaoImpl" />
      <bean class="com.wepos.common.dao.ShopDaoImpl" />
      <bean class="com.wepos.admin.dao.AdminDaoImpl" />
+     <bean class="com.wepos.pos.dao.PosMainDaoImpl" />
           
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
 	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />

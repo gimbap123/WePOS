@@ -162,6 +162,65 @@
         ParallaxSlider.initParallaxSlider();
     });
 </script>
+</form>
+
+
+ -->           
+                       
+<%--           
+<div align="right">
+<c:if test="${sessionScope.id==null}">  
+	<!-- <input type="button" value="홈으로" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> --> 
+	<button class="btn-u" type="button" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> 
+	<i class="icon-home"></i>
+	</button>
+</c:if>  
+  
+<c:if test="${sessionScope.id!=null}">
+	<!-- <input type="submit" value="글쓰기" style="margin: 0 5px 5px 0">
+	<input type="button" value="홈으로" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> -->
+	<button class="btn-u" type="button" style="margin: 0 5px 5px 0" onclick="location.href='boardWrite.do'"> 
+	<i class="icon-pencil"></i>
+	</button>
+	<button class="btn-u" type="button" onClick="location.href='main.do'" style="margin: 0 5px 5px 0"> 
+	<i class="icon-home"></i>
+	</button>
+</c:if>
+</div>
+ --%>
+
+
+        </div>
+      </div>
+      <!-- End Table Search Panel v1 -->
+    </div>
+    
+
+
+<!-- End Content -->
+		<jsp:include page="footer.jsp" flush="false" />
+	</div>
+	<!--/wrapper-->
+	
+<!-- JS Global Compulsory -->			
+<script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
+<script type="text/javascript" src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+
+<!-- JS Page Level -->           
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      	App.init();       
+        ParallaxSlider.initParallaxSlider();
+    });
+</script>
 
 </form>
 
