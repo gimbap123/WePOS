@@ -16,7 +16,7 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 
 	public int getRowCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectOne("selectOne", map);
+		return getSqlSession().selectOne("getRowCount", map);
 	}
 	
 	public void boardInsert(BoardDto boardDto) {
@@ -34,9 +34,9 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		getSqlSession().update("plusReadCnt", boardNumber);
 	}
 	
-	public BoardDto selectBoard(int boardNumber) {
+	public BoardDto selectBoard(BoardDto boardDto) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectOne("selectBoard", boardNumber);
+		return getSqlSession().selectOne("selectBoard", boardDto);
 	}
 	
 	public void boardRewrite(BoardDto boardDto) {
@@ -44,9 +44,9 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		getSqlSession().update("updateBoard", boardDto);
 	}
 	
-	public void boardDelete(int boardNumber) {
+	public void boardDelete(BoardDto boardDto) {
 		// TODO Auto-generated method stub
-		getSqlSession().delete("boardDelete", boardNumber);
+		getSqlSession().delete("boardDelete", boardDto);
 	}
 	
 }

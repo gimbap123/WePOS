@@ -19,6 +19,8 @@
 		<typeAlias alias="cityDto" type="com.wepos.admin.dto.CityDto"/>
 		<typeAlias alias="localDto" type="com.wepos.admin.dto.LocalDto"/>
 		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.MgrLoginDto" />
+		<typeAlias alias="PosMainDto" type="com.wepos.pos.dto.PosMainDto"/>
+
 	</typeAliases>
 		
 	<mappers>	    
@@ -26,6 +28,7 @@
 		<mapper resource="com/wepos/common/dao/BoardDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/ShopDaoMapper.xml"/>
 		<mapper resource="com/wepos/admin/dao/AdminDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosMainDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,27 +38,49 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp" flush="false" />
-
+	
 		<!--=== Search Block Version 2 ===-->
 		<div class="search-block">
-			<div class="container">
-				<div class="col-md-6 col-md-offset-3">
-					<h2>매장 검색</h2>
-					<div class="input-group">
-						<form id="searchShop" action="#" name="searchShop" method="get">
+			<div class="container">	
+				
+					<div class="col-md-6 col-md-offset-3" style="margin-bottom: 10px">
+						<h2>매장 검색</h2>
+						<div class="row">
+							<div class="col-md-4">
+								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+									<option value="0">매장 종류</option>		
+								</select>	
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+									<option value="0">지역</option>		
+								</select>	
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+									<option value="0">시, 군</option>		
+								</select>																						
+							</div>											
+						</div>
+					</div>
+									
+					<div class="col-md-6 col-md-offset-3">
+						<!-- <h2>매장 검색</h2> -->
+						<div class="input-group">		
+							<form id="searchShop" action="#" name="searchShop" method="get">																											
 							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요">
-							 <span class="input-group-btn">
-								<button class="btn-u" type="button" onclick="submit()">
+							<span class="input-group-btn">
+								<button class="btn-u" type="button" style="height: 100%;" onclick="submit()">
 									<i class="fa fa-search"></i>
 								</button>
 							</span>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>		
-		<!--=== End Search Block Version 2 ===-->
-		
+							</form>								
+						</div>			
+					</div>							
+			</div>		
+		</div>
+		<!--=== End Search Block Version 2 ===-->		
+	
 		<br>
 		<!--=== Cube-Portfdlio ===-->
    	 	<div class="cube-portfolio container margin-bottom-60">

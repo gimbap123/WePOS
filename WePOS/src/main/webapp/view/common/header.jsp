@@ -7,8 +7,7 @@
 <div class="header">
 	<div class="container">
 		<!-- Logo -->		
-		<a class="logo" href="../common/main.do"> <img src="../image/common/logo.png"
-			alt="Logo">
+		<a class="logo" href="../common/main.do"> <img src="../image/common/logo.png" alt="Logo">
 		</a>		
 		<!-- End Logo -->
 		<!-- Topbar -->
@@ -39,7 +38,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> WE POS </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">공지사항</a></li>
+						<li><a href="../common/showBoard.do?boardTypeCode=1">공지사항</a></li>
 						<li><a href="#">We POS 소개</a></li>
 						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
@@ -50,7 +49,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 매장 관리 </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">매장 영업</a></li>
+						<li><a href="<c:url value="/pos/getShopInfo.do?mgrId=${sessionScope.id}"/>">매장 영업</a></li>
 						<li><a href="#">메뉴 관리</a></li>
 						<li><a href="#">테이블 관리</a></li>
 						<li><a href="#">매출 통계</a></li>
@@ -81,9 +80,8 @@
 				<!-- 게시판 -->
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
-					<ul class="dropdown-menu">
-						<li><a href="../common/showBoard.do">자유 게시판</a></li>
-						<li><a href="#">FAQ</a></li>
+					<ul class="dropdown-menu">						
+						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
 						<li><a href="#">Q&A</a></li>
 					</ul></li>
 				<!-- End 게시판 -->
