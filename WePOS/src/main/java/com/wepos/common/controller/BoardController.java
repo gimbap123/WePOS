@@ -53,17 +53,19 @@ public class BoardController {
 		//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
 		int count = boardDao.getRowCount(map);
 		System.out.println("count="+count);
-	    		
-		PagingUtil page = null;
+	    
+		String paramString = null;
 		if("".equals(keyField) && "".equals(keyWord))
 		{
-			page = new PagingUtil(currentPage, count, 2, 3, "showBoard.do", boardTypeCode);
+			paramString = "?boardTypeCode=" + boardTypeCode;
 		}
 		else
 		{
-			page = new PagingUtil(keyField, keyWord, currentPage, count, 2, 3, "showBoard.do", boardTypeCode);					
-		}		
+			paramString = "?boardTypeCode=" + boardTypeCode + "&keyField=" + keyField + "&keyWord=" + keyWord;
+		}
 		
+		PagingUtil page = new PagingUtil(paramString, currentPage, count, 2, 3, "showBoard.do");
+				
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 		

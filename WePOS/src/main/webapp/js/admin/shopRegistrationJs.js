@@ -5,9 +5,11 @@
 function searchLocal()
 {
 	var cityCode = document.shopRegForm.cityCode.value
+	
+	$("#localCode").html('<option value="0">시, 군을 선택하세요.</option>');
+	
 	if(cityCode == 0)
-	{	
-		$("#localCode").html('<option value="0">시, 군을 선택하세요.</option>');
+	{		
 		return;
 	}		
 		
