@@ -14,21 +14,35 @@ public class PagingUtil {
 	 * blockPage : 한 화면에 보여줄 페이지 수
 	 * pageUrl : 호출 페이지 url
 	 * addKey : 부가적인 key 없을 때는 null 처리 (&num=23형식으로 전달할 것)
+	 * boardTypeCode : 게시판 타입 코드로 0이면 게시판 페이지에 대한 페이징 처리가 아니다., 1이상이면 게시판 페이지에 대한 페이징 처리
 	 * */
 	public PagingUtil(int currentPage, int totalCount, int blockCount,
 			int blockPage, String pageUrl) {
-		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,null);
+		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,null, 0);
 	}
+	
+	public PagingUtil(int currentPage, int totalCount, int blockCount,
+			int blockPage, String pageUrl, int boardTypeCode) {
+		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,null,boardTypeCode);
+	}
+	
 	public PagingUtil(int currentPage, int totalCount, int blockCount,
 			int blockPage, String pageUrl, String addKey) {
-		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,addKey);
+		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,addKey, 0);
 	}
+	
 	public PagingUtil(String keyField, String keyWord, int currentPage, int totalCount, int blockCount,
 			int blockPage,String pageUrl) {
-		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,null);
+		this(null,null,currentPage,totalCount,blockCount,blockPage,pageUrl,null, 0);
 	}
+	
 	public PagingUtil(String keyField, String keyWord, int currentPage, int totalCount, int blockCount,
-			int blockPage,String pageUrl,String addKey) {
+			int blockPage,String pageUrl, int boardTypeCode) {
+		this(keyField,keyWord,currentPage,totalCount,blockCount,blockPage,pageUrl,null, boardTypeCode);
+	}
+	
+	public PagingUtil(String keyField, String keyWord, int currentPage, int totalCount, int blockCount,
+			int blockPage,String pageUrl,String addKey, int boardTypeCode) {
 		
 		if(addKey == null) addKey = ""; //부가키가 null 일때 ""처리
 		
@@ -58,13 +72,30 @@ public class PagingUtil {
 		if (currentPage > blockPage) 
 		{
 			pagingHtml.append("<li>");
-			if(keyWord==null)  // 검색 미사용시
-			{  
-				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + addKey +">");
-			}else
+			
+			// boardTypeCode가 0이면 게시판 관련 페이지가 아니다
+			if(boardTypeCode==0)
 			{
-				pagingHtml.append("<a href="+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (startPage - 1) + addKey +">");
+				if(keyWord==null)  // 검색 미사용시
+				{  
+					pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + addKey +">");
+				}else
+				{
+					pagingHtml.append("<a href="+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (startPage - 1) + addKey +">");
+				}
 			}
+			else
+			{
+				if(keyWord==null)  // 검색 미사용시
+				{  
+					pagingHtml.append("<a href="+pageUrl+"?boardTypeCode="+boardTypeCode+"&pageNum="+ (startPage - 1) + addKey +">");
+				}
+				else
+				{
+					pagingHtml.append("<a href="+pageUrl+"?boardTypeCode="+boardTypeCode+"&keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (startPage - 1) + addKey +">");
+				}				
+			}					
+								
 			pagingHtml.append("이전");
 			pagingHtml.append("</a></li>");
 		}
@@ -85,14 +116,31 @@ public class PagingUtil {
 			else 
 			{
 				pagingHtml.append("<li>");
-				if(keyWord==null)  // 검색 미사용시
+				
+				// boardTypeCode가 0이면 게시판 관련 페이지가 아니다
+				if(boardTypeCode==0)
 				{
-					pagingHtml.append("<a href='"+pageUrl+"?pageNum=");
+					if(keyWord==null)  // 검색 미사용시
+					{
+						pagingHtml.append("<a href='"+pageUrl+"?pageNum=");
+					}
+					else
+					{
+						pagingHtml.append("<a href='"+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum=");
+					}
 				}
 				else
 				{
-					pagingHtml.append("<a href='"+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum=");
+					if(keyWord==null)  // 검색 미사용시
+					{
+						pagingHtml.append("<a href='"+pageUrl+"?boardTypeCode="+boardTypeCode+"&pageNum=");
+					}
+					else
+					{
+						pagingHtml.append("<a href='"+pageUrl+"?boardTypeCode="+boardTypeCode+"&keyField="+keyField+"&keyWord="+keyWord+"&pageNum=");
+					}
 				}
+								
 				pagingHtml.append(i);
 				pagingHtml.append(addKey+"'>");
 				pagingHtml.append(i);
@@ -104,16 +152,33 @@ public class PagingUtil {
 		if (totalPage - startPage >= blockPage) 
 		{
 			pagingHtml.append("<li>");
-			if(keyWord==null)  // 검색 미사용시
+			
+			// boardTypeCode가 0이면 게시판 관련 페이지가 아니다
+			if(boardTypeCode==0)
 			{
-				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + addKey +">");
+				if(keyWord==null)  // 검색 미사용시
+				{
+					pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + addKey +">");
+				}
+				else
+				{
+					pagingHtml.append("<a href="+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (endPage + 1) + addKey +">");
+				}
 			}
 			else
 			{
-				pagingHtml.append("<a href="+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (endPage + 1) + addKey +">");
+				if(keyWord==null)  // 검색 미사용시
+				{
+					pagingHtml.append("<a href="+pageUrl+"?boardTypeCode="+boardTypeCode+"&pageNum="+ (endPage + 1) + addKey +">");
+				}
+				else
+				{
+					pagingHtml.append("<a href="+pageUrl+"?boardTypeCode="+boardTypeCode+"&keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (endPage + 1) + addKey +">");
+				}
 			}
-				pagingHtml.append("다음");
-				pagingHtml.append("</a></li>");
+						
+			pagingHtml.append("다음");
+			pagingHtml.append("</a></li>");
 		}		
 		
 		pagingHtml.append("</ul>");

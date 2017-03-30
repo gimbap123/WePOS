@@ -1,17 +1,18 @@
 package com.wepos.pos.controller;
 
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.TablesDto;
 import com.wepos.pos.dao.PosMainDao;
-import com.wepos.pos.dto.PosMainDto;
 
 @Controller
 public class PosMainController {
@@ -23,14 +24,19 @@ public class PosMainController {
   @RequestMapping( value = "/pos/posMain.do" )
   public ModelAndView showPosMain(
       @RequestParam( value = "shopCode" ) int shopCode ) {
-    
-    List<PosMainDto> posInfo = posMainDao.getShopList( shopCode );
-    
+  
+    // 매장 코드 번호로 매장 정보 Select
+    ShopDto shop = posMainDao.getShop( shopCode );
+    // 매장 내 테이블 정보 select
+    List<TablesDto> tables = posMainDao.getTables( shopCode );
+    // 매장 내 테이블 숫자 select
     int tableCount = posMainDao.getTableCount( shopCode );
     
     ModelAndView mav = new ModelAndView( "pos/posMain" );
-    mav.addObject( "posInfo", posInfo );
+    mav.addObject( "shop", shop );
+    mav.addObject( "tables", tables );
     mav.addObject( "tableCount", tableCount );
+    
     return mav;
   }
  
@@ -39,9 +45,10 @@ public class PosMainController {
   public ModelAndView getShopInfo(
       @RequestParam( value = "mgrId" ) String mgrId ) {
     
-    PosMainDto posMainDto = posMainDao.getShopInfo( mgrId );
+    int shopCode = posMainDao.getShopCode( mgrId );
+    System.out.println( shopCode );
     ModelAndView mav = new ModelAndView( "pos/getShopInfo" );
-    mav.addObject( "shopInfo", posMainDto );
+    mav.addObject( "shopCode", shopCode );
     return mav;
   }
 }

@@ -39,7 +39,12 @@ public class PosMainDto {
   }
   @Override
   public String toString() {
-    return "PosMainDto [shopCode = " + shopCode + ", shopName = " + shopName + ", tableCode = " + tableCode + ", tableName = " + tableName 
+    return "PosMainDto ["
+        + " mgrId = " + mgrId + ","
+        + " shopCode = " + shopCode + ","
+        + " shopName = " + shopName + ","
+        + " tableCode = " + tableCode + ","
+        + " tableName = " + tableName 
         + "]";
   }
   

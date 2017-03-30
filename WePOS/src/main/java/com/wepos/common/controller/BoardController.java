@@ -53,11 +53,16 @@ public class BoardController {
 		//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
 		int count = boardDao.getRowCount(map);
 		System.out.println("count="+count);
-	    
-		//PagingUtil page = new PagingUtil(currentPage, count, 10,10, "list.do");
-
-		PagingUtil page = new PagingUtil(currentPage, count, 5, 3, "showBoard.do");
-
+	    		
+		PagingUtil page = null;
+		if("".equals(keyField) && "".equals(keyWord))
+		{
+			page = new PagingUtil(currentPage, count, 2, 3, "showBoard.do", boardTypeCode);
+		}
+		else
+		{
+			page = new PagingUtil(keyField, keyWord, currentPage, count, 2, 3, "showBoard.do", boardTypeCode);					
+		}		
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
@@ -228,14 +233,7 @@ public class BoardController {
     	// =>Model(키, 저장할값) =>request.setAttribute(키, 저장할값)
     	return new ModelAndView("downloadView", "downloadFile", downloadFile);
     }
-    
-    // 글 삭제 페이지로 이동
-    @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.GET)
-	public ModelAndView boardDelete(@RequestParam int boardNumber)
-    {		
-		return new ModelAndView("common/boardDelete", "boardNumber", boardNumber);
-	}
-    
+       
     // 글 삭제 기능 수행
     @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.POST)
 	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber,

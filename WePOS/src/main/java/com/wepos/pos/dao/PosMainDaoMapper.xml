@@ -4,13 +4,6 @@
    
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
   
-  <select id="getShopList" parameterType="int" resultType="PosMainDto">
-     select s.shop_code, s.shop_name, t.table_code, t.table_name
-     from shop s, tables t
-     where s.shop_code = t.shop_code
-     and s.shop_code = #{shopCode}
-  </select>
-  
   <select id="getTableCount" parameterType="int" resultType="int">
     select count(table_code)
     from shop s, tables t
@@ -19,9 +12,23 @@
   </select>
   
   <!-- 매니저 아이디로 매장 코드 구함 -->
-  <select id="getShopInfo" parameterType="String" resultType="PosMainDto">
-    select *
+  <select id="getShopCode" parameterType="String" resultType="int">
+    select shop_code
     from shop
     where shop_code = ( select shop_code from mgr where mgr_id = #{mgr_id} )
+  </select>
+  
+  <!-- 매장 코드로 매장 정보 구함 -->
+  <select id="getShop" parameterType="int" resultType="shopDto" >
+    select *
+    from shop
+    where shop_code = #{shop_code}
+  </select>
+  
+  <!-- 매장 코드로 매장 테이블 정보 select -->
+  <select id="getTables" parameterType="int" resultType="TablesDto">
+    select * 
+    from tables 
+    where shop_code= #{shop_code}
   </select>
 </mapper>

@@ -109,6 +109,8 @@
 							<c:if test="${boardTypeCode==2}">
 							<i class="icon-note"></i> FAQ ( 총 ${count} 건의 글 )
 							</c:if>
+							
+							<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
 
 							<hr style="margin: 1px 0 1px 0">
 
