@@ -10,9 +10,9 @@ import com.wepos.common.dto.ShopDto;
 public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 
 
-  public int searchShopCount( String shopName ) {
+  public int searchShopCount(Map<String, Object> map) {
     // TODO Auto-generated method stub
-    return getSqlSession().selectOne( "searchShopCount", shopName );
+    return getSqlSession().selectOne("searchShopCount", map);
   }
 
   

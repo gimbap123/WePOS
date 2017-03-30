@@ -40,14 +40,31 @@ public class SearchShopController {
 	  int index = filePath.indexOf("\\WePOS");
 	  filePath = filePath.substring(index);
 	  
-	  int shopCount = shopDao.searchShopCount(shop.getShopName());
-	  PagingUtil page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
+	  if("".equals(shop.getShopName()))
+	  {
+		  shop.setShopName(null);
+	  }
 	  
 	  Map<String, Object> map = new HashMap<String, Object>();
 	  map.put("shopName", shop.getShopName());
 	  map.put("shopTypeCode", shop.getShopTypeCode());
 	  map.put("cityCode", shop.getCityCode());
 	  map.put("localCode", shop.getLocalCode());
+	  
+	  int shopCount = shopDao.searchShopCount(map);
+	  PagingUtil page = null;
+	  if(shop.getShopTypeCode() == 0 && shop.getCityCode() == 0 && shop.getLocalCode() == 0 
+			  && shop.getShopName() == null)
+	  {
+		  page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
+	  }
+	  else
+	  {
+		  String paramString = "?shopName=" + shop.getShopName() + "&shopTypeCode=" + shop.getShopTypeCode() +
+				  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  page = new PagingUtil(paramString, currentPage, shopCount, 6, 5, "searchShop.do");
+	  }	  
+	  	  
 	  map.put("start", page.getStartCount());
 	  map.put("end", page.getEndCount());	  
 	  
