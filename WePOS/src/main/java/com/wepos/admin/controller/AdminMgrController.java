@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.admin.dao.AdminDao;
+import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
-import com.wepos.common.dto.UsersDto;
+import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.ShopMgrDto;
 
 @Controller
@@ -37,13 +40,60 @@ public class AdminMgrController {
 	}
 	
 	
+	
+	// 선택한 매장의 코드 가져오기
+		@RequestMapping(value = "/admin/searchShopCode.do", produces = "text/html;charset=UTF-8")
+		@ResponseBody
+		public String searchShopCode(@RequestParam("shopTypeCode") int shopTypeCode)
+		{
+			System.out.println("shopTypeCode="+shopTypeCode);
+			
+			List<ShopDto> shopList = adminDao.searchShopCode(shopTypeCode);
+			StringBuffer sb = new StringBuffer();
+			
+			for(ShopDto shop : shopList)
+			{			
+				sb.append("<option value=\"");
+				sb.append(shop.getShopCode());
+				sb.append("\">");
+				sb.append(shop.getShopName());
+				sb.append("</option>");			
+			}		
+			return sb.toString();
+		}
+	
+	
+	
 	// 관리자 추가 기능 수행
 	@RequestMapping(value = "/admin/shopMgrRegistration.do", method = RequestMethod.POST)
 	public String shopMgrRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopMgrDto shopMgrDto) throws IOException, Exception
 	{
-				
-		/*adminDao.shopMgrRegistration(shopMgrDto);		*/
-		return "redirect:/admin/shopRegistration.do";
+		
+		String shopTypeCode=request.getParameter("shopTypeCode");
+		System.out.println("shopTypeCode="+shopTypeCode);
+		
+		if(shopTypeCode.equals(1)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(2)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(3)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(4)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		
+		System.out.println("mgrId="+shopMgrDto.getMgrId());
+		System.out.println("shopCode="+shopMgrDto.getShopCode());
+		System.out.println("mgrPassword="+shopMgrDto.getMgrPassword());
+		System.out.println("mgrName="+shopMgrDto.getMgrName());
+		System.out.println("mgrPhone="+shopMgrDto.getMgrPhone());
+		
+		adminDao.insertMgr(shopMgrDto);
+		
+		return "redirect:/common/main.do";
 	}
 	
 }

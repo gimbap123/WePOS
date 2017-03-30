@@ -49,13 +49,18 @@
           </button>
           <!-- End Toggle -->
           <!-- Logo -->
+          <div class="test">
+            shopInfo = ${shop} <br>
+            showName = ${shop.shopName} <br>
+            tables = ${tables}<br>
+          </div>
           <div class="logo">
             <a href="index.html"> <img id="logo-header" src="<c:url value="/image/common/logo.png"/>" alt="Logo" />
             </a>
           </div>
           <!-- End Logo -->
         </div>
-        <a class="btn btn-success btn-lg btn-block" href="#">${posInfo[0].shopName}</a>
+        <a class="btn btn-success btn-lg btn-block" href="#">${shop.shopName}</a>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <div class="menu-container">
@@ -100,11 +105,12 @@
         총 테이블 <span class="badge">${tableCount}</span>
       </button>
       <br>
-      <c:forEach var="tableCount" begin="1" end="${tableCount}">
+      <c:forEach var="i" begin="0" end="${tableCount-1}">
         <div class="panel panel-success pos-table">
           <div class="panel-heading">
             <h3 class="panel-title" id="panel-title">
-              Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
+              <a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon">${tables[i].tableName}</span></a>
+              <span class="badge">${tables[i].tableMax}인</span>
             </h3>
           </div>
           <div class="panel-body">Panel content</div>

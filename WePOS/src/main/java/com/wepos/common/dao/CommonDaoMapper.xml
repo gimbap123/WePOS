@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="checkIdFromDeletedId" parameterType="String" resultType="int">
-		select count(*) from deleted_id where id=#{deletedId}
+		select count(*) from deleted_id where user_id=#{deletedId}
 	</select>
 
 	<select id="findPw" parameterType="usersDto" resultType="int">
@@ -73,7 +73,7 @@
 	</delete>
 	
 	<insert id="deletedId" parameterType="String">
-		insert into deleted_id values(#{userId})
+		insert into deleted_id(user_id) values(#{userId})
 	</insert>
 
 </mapper>

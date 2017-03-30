@@ -85,7 +85,7 @@
 				<div class="row">
 					<span class="col-md-5 col-md-offset-1">
 
-						<input type="button" id="cancel" class="btn-u btn-block" onclick="checkNull()" value="취 소" float="left">
+						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
 
 					</span>
 					<span class="col-md-5 col-md-offset-0">
