@@ -29,6 +29,6 @@ public interface BoardDao {
 	public void boardRewrite(BoardDto boardDto);
 	
 	//글 삭제하기
-	public void boardDelete(int boardNumber);
+	public void boardDelete(BoardDto boardDto);
 	
 }

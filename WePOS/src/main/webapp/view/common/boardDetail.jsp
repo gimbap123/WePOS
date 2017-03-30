@@ -81,7 +81,7 @@
 		</div>
 		<!--/container-->
 		<form name="boardDetail" enctype="multipart/form-data" method="post"
-			action="boardDelete.do">
+			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
 
 			<input type="hidden" name="boardNumber"
 				value="${boardDto.boardNumber}">

@@ -236,10 +236,17 @@ public class BoardController {
     
     // 글 삭제 기능 수행
     @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.POST)
-	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber)
+	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber,
+														@RequestParam(value="boardTypeCode") int boardTypeCode)
     {
-		boardDao.boardDelete(boardNumber);		
-		return "redirect:/common/showBoard.do";
+		//boardDao.boardDelete(boardNumber);		
+		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
+		BoardDto boardDto=new BoardDto();
+    	boardDto.setBoardNumber(boardNumber);
+    	boardDto.setBoardTypeCode(boardTypeCode);    	
+    	boardDao.boardDelete(boardDto);
+    	
+    	return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
 	}
     
 }
