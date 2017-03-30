@@ -86,9 +86,9 @@
 			<input type="hidden" name="boardNumber"
 				value="${boardDto.boardNumber}">
 
-			<div class="container content-sm">
+			<div class="container content-sm" align="center">
 				<!-- Begin Table Search Panel v1 -->
-				<div class="table-search-v1 panel panel-dark margin-bottom-50">
+				<div class="table-search-v1 panel panel-dark margin-bottom-50" style="width:60%">
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							<i class="icon-bubble "></i> 글 상세보기 ( ${boardDto.boardNumber}번 게시글 )
@@ -100,25 +100,22 @@
 							class="table table-bordered table-striped table-hover tablesorter">
 
 							<tr>
-								<td width="5%" align="center">제 목</td>
-								<td><input type="text" size="95%" name="boardTitle"
-									value="${boardDto.boardTitle}" readonly></td>
+								<td width="10%" align="center">제 목</td>
+								<td>${boardDto.boardTitle}</td>
 							</tr>
 							<tr>
-								<td width="5%" align="center">작성자</td>
-								<td><input type="text" size="95%" name="totalId"
-									value="${boardDto.totalId}" readonly></td>
+								<td width="10%" align="center">작성자</td>
+								<td>${boardDto.totalId}</td>
 							</tr>
 							<tr>
-								<td width="5%" align="center">내 용</td>
-								<td><textarea rows="20" cols="95%" style="resize: none"
-										name="boardContent" readonly>${boardDto.boardContent}</textarea></td>
+								<td width="10%" align="center">내 용</td>
+								<td style="height:250px">${boardDto.boardContent}</td>	
 							</tr>
 
 							<!-- <hr style="margin: 5px 0 5px 0"> -->
 
 							<tr>
-								<td width="5%" align="center">파 일</td>
+								<td width="10%" align="center">파 일</td>
 								<td><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a></td>
 							</tr>
 

@@ -79,9 +79,9 @@
     <form name="boardRewrite" enctype="multipart/form-data" method="post" action="boardRewrite.do?boardTypeCode=${boardTypeCode}">
     	<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
     
-	    <div class="container content-sm">
+	    <div class="container content-sm" align="center">
 	      <!-- Begin Table Search Panel v1 -->
-			<div class="table-search-v1 panel panel-dark margin-bottom-50">
+			<div class="table-search-v1 panel panel-dark margin-bottom-50" style="width:60%">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 		            <i class="icon-bubble "></i> 글 수정하기 ( ${boardDto.boardNumber}번 게시글 )
@@ -92,23 +92,23 @@
 					<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">	
 		
 						<tr>
-							<td width="5%" align="center">제　목</td>
-							<td><input type="text'" size="95%" name="boardTitle" value="${boardDto.boardTitle}"></td>
+							<td width="10%" align="center">제 목</td>
+							<td><input type="text'" size="80%" name="boardTitle" value="${boardDto.boardTitle}"></td>
 						</tr>	
 						<tr>
-							<td width="5%" align="center">작성자</td>
-							<td><input type="text'" size="95%" name="totalId" value="${boardDto.totalId}" readonly></td>
+							<td width="10%" align="center">작성자</td>
+							<td><input type="text'" size="80%" name="totalId" value="${boardDto.totalId}" readonly></td>
 						</tr>
 			          	<tr>
-							<td width="5%" align="center">내　용</td>
-							<td><textarea rows="20" cols="95%" style="resize: none" name="boardContent">${boardDto.boardContent}</textarea></td> 
+							<td width="10%" align="center">내 용</td>
+							<td><textarea rows="20" cols="81%" style="resize: none" name="boardContent">${boardDto.boardContent}</textarea></td> 
 						</tr>
 								
 					
 					<!-- <hr style="margin: 5px 0 5px 0"> -->
 					
 						<tr>
-							<td width="5%" align="center">파　일</td>
+							<td width="10%" align="center">파　일</td>
 							<td><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
 						<hr style="margin: 5px 0 5px 0" width="10px">
 							<input type="file" name="upload" value="파일 첨부">

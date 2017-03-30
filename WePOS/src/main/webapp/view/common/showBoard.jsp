@@ -75,7 +75,7 @@
 				<div class="container">
 					<div class="col-md-8 col-md-offset-1">
 						<h2 style="text-align: left;">
-							<img src="../image/common/boardImage.png"
+							<img src="../image/common/wepos.png"
 								style="float: left; margin: 0 10px 0 10px">여러분의 소중한 후기를
 							남겨주세요!
 						</h2>
