@@ -18,6 +18,7 @@
 		<typeAlias alias="shopTypeDto" type="com.wepos.admin.dto.ShopTypeDto"/>
 		<typeAlias alias="cityDto" type="com.wepos.admin.dto.CityDto"/>
 		<typeAlias alias="localDto" type="com.wepos.admin.dto.LocalDto"/>
+		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.MgrLoginDto" />
 	</typeAliases>
 		
 	<mappers>	    

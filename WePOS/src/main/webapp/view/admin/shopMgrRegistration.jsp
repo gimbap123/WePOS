@@ -47,6 +47,8 @@
 				<h2>매장 관리자 추가</h2>				
 			</div>			
 			<form name="shopMgrRegForm" action="shopMgrRegistration.do" method="post">
+			
+			
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>		
 					<select class="form-control" id="shopTypeCode" name="shopTypeCode">
@@ -56,6 +58,21 @@
 						</c:forEach>
 					</select>
 				</div>
+				
+				<%-- <div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
+					<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
+						<option value="0">지역을 선택하세요.</option>
+						<c:forEach items="${cityList}" var="city">
+							<option value="${city.cityCode}">${city.cityName}</option>
+						</c:forEach>
+					</select>
+					<select class="form-control" id="localCode" name="localCode" >
+						<option value="0">시, 군을 선택하세요.</option>
+					</select>
+				</div> --%>
+				
+				
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user-follow"></i></span>
 					<input type="text" id="mgrId" name="mgrId" class="form-control" placeholder="관리자 아이디" onblur="checkId()">

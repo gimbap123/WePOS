@@ -51,7 +51,7 @@ public class BoardController {
 		int count = boardDao.getRowCount(map);
 	    
 		//PagingUtil page = new PagingUtil(currentPage, count, 10,10, "list.do");
-		PagingUtil page = new PagingUtil(currentPage, count, 3, 3, "showBoard.do");
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "showBoard.do");
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

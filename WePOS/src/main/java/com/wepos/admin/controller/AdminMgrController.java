@@ -41,8 +41,31 @@ public class AdminMgrController {
 	@RequestMapping(value = "/admin/shopMgrRegistration.do", method = RequestMethod.POST)
 	public String shopMgrRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopMgrDto shopMgrDto) throws IOException, Exception
 	{
-				
-		/*adminDao.shopMgrRegistration(shopMgrDto);		*/
+		
+		String shopTypeCode=request.getParameter("shopTypeCode");
+		System.out.println("shopTypeCode="+shopTypeCode);
+		
+		if(shopTypeCode.equals(1)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(2)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(3)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		if(shopTypeCode.equals(4)){
+			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+		}
+		
+		System.out.println("mgrId="+shopMgrDto.getMgrId());
+		System.out.println("shopCode="+shopMgrDto.getShopCode());
+		System.out.println("mgrPassword="+shopMgrDto.getMgrPassword());
+		System.out.println("mgrName="+shopMgrDto.getMgrName());
+		System.out.println("mgrPhone="+shopMgrDto.getMgrPhone());
+		
+		adminDao.insertMgr(shopMgrDto);
+		
 		return "redirect:/admin/shopRegistration.do";
 	}
 	

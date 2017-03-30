@@ -21,6 +21,9 @@
 	</insert>
 	
 	
+	<insert id="insertMgr" parameterType="shopMgrDto">
+		insert into mgr values(#{mgrId}, #{shopCode}, #{mgrPassword}, #{mgrName}, #{mgrPhone})
+	</insert>
 	
 
 </mapper>
