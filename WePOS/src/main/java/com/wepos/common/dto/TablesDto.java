@@ -7,6 +7,7 @@ public class TablesDto {
   private String tableDesc;
   private char tableState;
   private int tableMax;
+  
   public int getTableCode() {
     return tableCode;
   }
@@ -42,5 +43,17 @@ public class TablesDto {
   }
   public void setTableMax( int tableMax ) {
     this.tableMax = tableMax;
+  }
+  
+  @Override
+  public String toString() {
+    return "Tables Dto ["
+        + " tableCode = " + tableCode + ","
+        + " shopCode = " + shopCode + ","
+        + " tableName = " + tableName + ","
+        + " tableDesc = " + tableDesc + ","
+        + " tableState = " + tableState + "," 
+        + " tableMax = " + tableMax 
+        + "]";
   }
 }
