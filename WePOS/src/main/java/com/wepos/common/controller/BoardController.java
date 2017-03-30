@@ -233,14 +233,7 @@ public class BoardController {
     	// =>Model(키, 저장할값) =>request.setAttribute(키, 저장할값)
     	return new ModelAndView("downloadView", "downloadFile", downloadFile);
     }
-    
-    // 글 삭제 페이지로 이동
-    @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.GET)
-	public ModelAndView boardDelete(@RequestParam int boardNumber)
-    {		
-		return new ModelAndView("common/boardDelete", "boardNumber", boardNumber);
-	}
-    
+       
     // 글 삭제 기능 수행
     @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.POST)
 	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber,
