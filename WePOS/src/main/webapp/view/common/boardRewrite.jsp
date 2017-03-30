@@ -76,78 +76,67 @@
     <!--/container-->
     
     
-    <form name="boardRewrite" enctype="multipart/form-data" method="post" action="boardRewrite.do">
+    <form name="boardRewrite" enctype="multipart/form-data" method="post" action="boardRewrite.do?boardTypeCode=${boardTypeCode}">
+    	<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
     
-    
-    <div class="container content-sm">
-      <!-- Begin Table Search Panel v1 -->
-      <div class="table-search-v1 panel panel-dark margin-bottom-50">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <i class="icon-bubble "></i> 글 수정하기 ( ${boardDto.boardNumber}번 게시글 )
-          </h3>
-        </div>
-        
-        
-        <div class="table-responsive">
-          <table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
-
-			<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
-
-			<tr>
-				<td width="5%" align="center">제　목</td>
-				<td><input type="text'" size="95%" name="boardTitle" value="${boardDto.boardTitle}"></td>
-			</tr>	
-			<tr>
-				<td width="5%" align="center">작성자</td>
-				<td><input type="text'" size="95%" name="totalId" value="${boardDto.totalId}" readonly></td>
-			</tr>
-          	<tr>
-				<td width="5%" align="center">내　용</td>
-				<td><textarea rows="20" cols="95%" style="resize: none" name="boardContent">${boardDto.boardContent}</textarea></td> 
-			</tr>
+	    <div class="container content-sm">
+	      <!-- Begin Table Search Panel v1 -->
+			<div class="table-search-v1 panel panel-dark margin-bottom-50">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+		            <i class="icon-bubble "></i> 글 수정하기 ( ${boardDto.boardNumber}번 게시글 )
+		          	</h3>
+		        </div>        
+	        
+		        <div class="table-responsive">
+					<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">	
+		
+						<tr>
+							<td width="5%" align="center">제　목</td>
+							<td><input type="text'" size="95%" name="boardTitle" value="${boardDto.boardTitle}"></td>
+						</tr>	
+						<tr>
+							<td width="5%" align="center">작성자</td>
+							<td><input type="text'" size="95%" name="totalId" value="${boardDto.totalId}" readonly></td>
+						</tr>
+			          	<tr>
+							<td width="5%" align="center">내　용</td>
+							<td><textarea rows="20" cols="95%" style="resize: none" name="boardContent">${boardDto.boardContent}</textarea></td> 
+						</tr>
+								
 					
-		
-		<!-- <hr style="margin: 5px 0 5px 0"> -->
-		
-			<tr>
-				<td width="5%" align="center">파　일</td>
-				<td><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
-			<hr style="margin: 5px 0 5px 0" width="10px">
-				<input type="file" name="upload" value="파일 첨부">
-			<hr style="margin: 5px 0 5px 0" width="10px">
-				<c:if test="${!empty boardDto.boardFile }">
-					이미 (${boardDto.boardFile }) 파일이 등록되어 있습니다.
-				</c:if></td>
-			</tr>
-
-		<!-- <hr style="margin: 5px 0 5px 0"> -->
-
-			<tr>
-			<td colspan="2" align="right">
+					<!-- <hr style="margin: 5px 0 5px 0"> -->
+					
+						<tr>
+							<td width="5%" align="center">파　일</td>
+							<td><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
+						<hr style="margin: 5px 0 5px 0" width="10px">
+							<input type="file" name="upload" value="파일 첨부">
+						<hr style="margin: 5px 0 5px 0" width="10px">
+							<c:if test="${!empty boardDto.boardFile }">
+								이미 (${boardDto.boardFile }) 파일이 등록되어 있습니다.
+							</c:if></td>
+						</tr>
 			
-			<input type="button" value="수정완료" onclick="boardRewriteProc()">
-			<input type="button" value="목록으로" onclick="location.href='showBoard.do'">
+					<!-- <hr style="margin: 5px 0 5px 0"> -->
 			
-			
-			</td>
-			</tr>
-
-		</form>
-
-		
-		</table>
-
-		
-        </div>
-      </div>
+						<tr>
+							<td colspan="2" align="right">
+							
+							<input type="button" value="수정완료" onclick="boardRewriteProc()">
+							<input type="button" value="목록으로" onclick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">		
+							
+							</td>
+						</tr>
+					</table>		
+				</div>
+			</div>
       <!-- End Table Search Panel v1 -->
-    </div>
-    
-
+		</div>
+    </form>
 
 <!-- End Content -->
-		<jsp:include page="footer.jsp" flush="false" />
+	<jsp:include page="footer.jsp" flush="false" />
 	</div>
 	<!--/wrapper-->
 	
@@ -170,8 +159,6 @@
         ParallaxSlider.initParallaxSlider();
     });
 </script>
-
-</form>
 
 </body>
 </html>

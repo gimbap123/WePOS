@@ -23,7 +23,7 @@ public interface BoardDao {
 	public void plusReadCnt(int boardNumber);
 	
 	//글 상세보기
-	public BoardDto selectBoard(int boardNumber);
+	public BoardDto selectBoard(BoardDto boardDto);
 	
 	//글 수정하기
 	public void boardRewrite(BoardDto boardDto);

@@ -153,7 +153,7 @@
 									<tr>
 										<td style="text-align:center">${data.boardNumber }</td>
 										<td style="text-align:center"><a
-											href="boardDetail.do?boardNumber=${data.boardNumber}">${data.boardTitle }</a></td>
+											href="boardDetail.do?boardNumber=${data.boardNumber}&boardTypeCode=${boardTypeCode}">${data.boardTitle }</a></td>
 										<td style="text-align:center">${data.totalId }</td>
 										<td style="text-align:center">${data.boardDate }</td>
 										<td style="text-align:center">${data.boardReadCnt}</td>

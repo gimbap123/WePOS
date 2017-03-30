@@ -82,10 +82,10 @@
 	</select>
 
 	<update id="plusReadCnt" parameterType="int">
-		update board set board_read_cnt=board_read_cnt+1 where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
+		update board set board_read_cnt=board_read_cnt+1 where board_number=#{boardNumber}
 	</update>
 
-	<select id="selectBoard" resultType="boardDto" parameterType="int">
+	<select id="selectBoard" resultType="boardDto" parameterType="boardDto">
 		select board_number, board_title, total_id, board_date, board_content, board_read_cnt, board_file
 			from board
 				where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}

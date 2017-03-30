@@ -128,22 +128,29 @@ public class BoardController {
 	
 	// 글 수정 페이지로 이동
 	@RequestMapping(value="/common/boardRewrite.do", method=RequestMethod.GET)
-	public ModelAndView boardRewriteView(@RequestParam("boardNumber") int boardNumber)
+	public ModelAndView boardRewriteView(@ModelAttribute BoardDto boardDto,@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{
-		BoardDto boardDto=boardDao.selectBoard(boardNumber);
-		return new ModelAndView("/common/boardRewrite", "boardDto", boardDto);		
+		boardDto.setBoardTypeCode(boardTypeCode);
+		boardDto=boardDao.selectBoard(boardDto);
+		ModelAndView mav=new ModelAndView();
+    	mav.addObject("boardTypeCode", boardTypeCode);
+    	mav.addObject("boardDto",boardDto);
+    	mav.setViewName("/common/boardRewrite");
+    	
+    	return mav;	
 	}
 	
 	// 글 수정 기능 수행
 	@RequestMapping(value="/common/boardRewrite.do", method=RequestMethod.POST)
-	public String boardRewriteProcess(@ModelAttribute BoardDto boardDto)
+	public String boardRewriteProcess(@ModelAttribute BoardDto boardDto,@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{
+		
 		//업로드가 되어있지 않다면 상관이 없는데 만약 업로드가 되어있는 기존 파일을 수정하고 싶다면..
 		// ==>새로 업로드 할 파일을 업로드할 때 새로운 파일명으로 변경합니다
 		BoardDto board=null;
 		String oldFileName=""; //기존 파일명을 저장할 변수
 		//수정하기 전의 상태의 레코드를 먼저 불러옵니다
-		board=boardDao.selectBoard(boardDto.getBoardNumber());
+		board=boardDao.selectBoard(boardDto);
 		
 		oldFileName=board.getBoardFile();
 					
@@ -182,23 +189,32 @@ public class BoardController {
 		}
 		
 		//실제로 DB상에 반영
+		boardDto.setBoardTypeCode(boardTypeCode);
 		boardDao.boardRewrite(boardDto);
 			
-		return "redirect:/common/showBoard.do";
+		return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
 	}
 	
 	// 글 상세보기 페이지로 이동
 	@RequestMapping("/common/boardDetail.do")
-	public ModelAndView boardDetailView(@RequestParam("boardNumber") int boardNumber)
+	public ModelAndView boardDetailView(@RequestParam("boardNumber") int boardNumber,	
+																	@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{		
     	//조회수를 증가시킵니다
     	boardDao.plusReadCnt(boardNumber);
     	
     	//1.위 seq값에 해당하는 값만 출력합니다
-    	BoardDto boardDto=boardDao.selectBoard(boardNumber);
+    	BoardDto boardDto=new BoardDto();
+    	boardDto.setBoardNumber(boardNumber);
+    	boardDto.setBoardTypeCode(boardTypeCode);    	
+    	boardDto=boardDao.selectBoard(boardDto);
     	
-    	// 1)이동할 페이지명 2)키명(모델 키명) 3)모델 Value명
-    	return new ModelAndView("/common/boardDetail", "boardDto", boardDto);		
+    	ModelAndView mav=new ModelAndView();
+    	mav.addObject("boardTypeCode", boardTypeCode);
+    	mav.addObject("boardDto",boardDto);
+    	mav.setViewName("/common/boardDetail");
+    	
+    	return mav;		
 	}
 	
 	// 파일 다운로드

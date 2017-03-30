@@ -125,19 +125,18 @@
 							<!-- <hr style="margin: 5px 0 5px 0"> -->
 
 							<tr>
-								<td colspan="2" align="right"><c:if
-										test="${sessionScope.id==boardDto.totalId}">
-										<input type="button" value="수정하기"
-											onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}'">
-										<%-- <input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'"> --%>
-										<input type="button" value="삭제하기" onClick="boardDelete()">
-										<input type="button" value="돌아가기"
-											onClick="location.href='showBoard.do'">
-									</c:if> <c:if
-										test="${sessionScope.id==null || sessionScope.id!=boardDto.totalId}">
-										<input type="button" value="돌아가기"
-											onClick="location.href='showBoard.do'">
-									</c:if></td>
+								<td colspan="2" align="right">
+								<c:if test="${sessionScope.id==boardDto.totalId}">
+									<input type="button" value="수정하기"
+											onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}'">
+									<%-- <input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'"> --%>
+									<input type="button" value="삭제하기" onClick="boardDelete()">
+									<input type="button" value="돌아가기"	onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+								</c:if>
+								<c:if test="${sessionScope.id==null || sessionScope.id!=boardDto.totalId}">
+									<input type="button" value="돌아가기" onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+								</c:if>
+								</td>
 							</tr>
 						</table>
 
