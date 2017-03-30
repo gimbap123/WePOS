@@ -2,6 +2,25 @@
  * shopMgrRegistration.jsp의 자바스크립트
  */
 
+
+function searchShopCode()
+{
+	var shopTypeCode = document.shopMgrRegForm.shopTypeCode.value
+
+	$("#shopCode").html('<option value="0">매장을 선택하세요.</option>');
+	
+	if(shopTypeCode == 0)
+	{	
+		return;
+	}		
+		
+	$.post("searchShopCode.do", {shopTypeCode : shopTypeCode}, function(result)
+	{			
+		$("#shopCode").append(result);
+	})		
+}
+
+
 function checkShopMgrRegistration()
 {
 	if($("#shopTypeCode").val() == 0)

@@ -25,5 +25,8 @@
 		insert into mgr values(#{mgrId}, #{shopCode}, #{mgrPassword}, #{mgrName}, #{mgrPhone})
 	</insert>
 	
+	<select id="searchShopCode" parameterType="int" resultType="shopDto">
+		select * from shop where shop_type_code=#{shopTypeCode}
+	</select>
 
 </mapper>

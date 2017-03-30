@@ -32,10 +32,15 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 		getSqlSession().insert("shopRegistration", shop);
 	}
 
+	//매장 관리자 추가
 	public void insertMgr(ShopMgrDto shopMgrDto) {
-		// TODO Auto-generated method stub
 		getSqlSession().insert("insertMgr", shopMgrDto);
 	}
 	
+	//세부 매장 불러오기
+	public List<ShopDto> searchShopCode(int shopTypeCode) {
+		List<ShopDto> shopList =  getSqlSession().selectList("searchShopCode", shopTypeCode);
+		return shopList;
+	}
 	
 }

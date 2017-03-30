@@ -32,7 +32,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/admin/shopMgrRegistrationJs.js?v=3"></script>
+<script language="JavaScript" src="../js/admin/shopMgrRegistrationJs.js?v=2"></script>
 
 </head>
 
@@ -51,26 +51,16 @@
 			
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>		
-					<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+					<select class="form-control" id="shopTypeCode" name="shopTypeCode" onchange="searchShopCode()">
 						<option value="0">매장 종류를 선택하세요.</option>
 						<c:forEach items="${shopTypeList}" var="shopType">
 							<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
 						</c:forEach>
 					</select>
+					<select class="form-control" id="shopCode" name="shopCode" >
+						<option value="0">해당 매장을 선택하세요</option>
+					</select>
 				</div>
-				
-				<%-- <div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class=" icon-pin"></i></span>					
-					<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
-						<option value="0">지역을 선택하세요.</option>
-						<c:forEach items="${cityList}" var="city">
-							<option value="${city.cityCode}">${city.cityName}</option>
-						</c:forEach>
-					</select>
-					<select class="form-control" id="localCode" name="localCode" >
-						<option value="0">시, 군을 선택하세요.</option>
-					</select>
-				</div> --%>
 				
 				
 				<div class="input-group margin-bottom-10">

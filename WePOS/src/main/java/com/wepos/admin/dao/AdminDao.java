@@ -29,5 +29,7 @@ public interface AdminDao {
 	//관리자 추가
 	public void insertMgr(ShopMgrDto shopMgrDto);	
 	
+	//세부 매장 가져오기
+	public List<ShopDto> searchShopCode(int shopTypeCode);
 	
 }
