@@ -2,6 +2,8 @@ package com.wepos.pos.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.TablesDto;
 import com.wepos.pos.dao.PosMainDao;
 
 @Controller
@@ -21,15 +24,19 @@ public class PosMainController {
   @RequestMapping( value = "/pos/posMain.do" )
   public ModelAndView showPosMain(
       @RequestParam( value = "shopCode" ) int shopCode ) {
-   
-    
+  
+    // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
+    // 매장 내 테이블 정보 select
+    List<TablesDto> tables = posMainDao.getTables( shopCode );
+    // 매장 내 테이블 숫자 select
     int tableCount = posMainDao.getTableCount( shopCode );
-    System.out.println( shopCode + " / " + shop );
     
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shop", shop );
+    mav.addObject( "tables", tables );
     mav.addObject( "tableCount", tableCount );
+    
     return mav;
   }
  

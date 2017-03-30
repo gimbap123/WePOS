@@ -24,4 +24,11 @@
     from shop
     where shop_code = #{shop_code}
   </select>
+  
+  <!-- 매장 코드로 매장 테이블 정보 select -->
+  <select id="getTables" parameterType="int" resultType="TablesDto">
+    select * 
+    from tables 
+    where shop_code= #{shop_code}
+  </select>
 </mapper>
