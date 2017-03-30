@@ -22,22 +22,22 @@
 				<!-- 동적으로 필드 변경을 할 때 where 태그를 사용 -->
     	    	<where>
     	    		<if test="boardTypeCode!=null">
-						board_type_code=#{boardTypeCode}
+						and board_type_code=#{boardTypeCode}
 					</if>
     	    		<!-- 검색분야를 입력했다면 -->
 					<if test="keyWord!=null and keyField=='title'">
-						board_title like '%' || #{keyWord} || '%'
+						and board_title like '%' || #{keyWord} || '%'
 					</if>
 					<if test="keyWord!=null and keyField=='writer'">
-						total_id like '%' || #{keyWord} || '%'
+						and total_id like '%' || #{keyWord} || '%'
 					</if>
 					<if test="keyWord!=null and keyField=='content'">
-						board_content like '%' || #{keyWord} || '%'
+						and board_content like '%' || #{keyWord} || '%'
 					</if>
 					<if test="keyWord!=null and keyField=='all'">
-						board_title like '%' || #{keyWord} || '%' or
-						total_id like '%' || #{keyWord} || '%' or
-						board_content like '%' || #{keyWord} || '%'
+						and (board_title like '%' || #{keyWord} || '%' or
+							total_id like '%' || #{keyWord} || '%' or
+							board_content like '%' || #{keyWord} || '%')
 					</if>
     	    	</where>
 			
@@ -52,22 +52,22 @@
 		select count(*) from board 
 		<where>
 			<if test="boardTypeCode!=null">
-				board_type_code=#{boardTypeCode}
+				and board_type_code=#{boardTypeCode}
 			</if>			
         	<!-- 검색분야를 입력했다면 -->
 			<if test="keyWord!=null and keyField=='title'">
-				board_title like '%' || #{keyWord} || '%'
+				and board_title like '%' || #{keyWord} || '%'
 			</if>
 			<if test="keyWord!=null and keyField=='writer'">
-				total_id like '%' || #{keyWord} || '%'
+				and total_id like '%' || #{keyWord} || '%'
 			</if>
 			<if test="keyWord!=null and keyField=='content'">
-				board_content like '%' || #{keyWord} || '%'
+				and board_content like '%' || #{keyWord} || '%'
 			</if>
 			<if test="keyWord!=null and keyField=='all'">
-				board_title like '%' || #{keyWord} || '%' or
-				total_id like '%' || #{keyWord} || '%' or
-				board_content like '%' || #{keyWord} || '%'
+				and (board_title like '%' || #{keyWord} || '%' or
+					total_id like '%' || #{keyWord} || '%' or
+					board_content like '%' || #{keyWord} || '%')
 			</if>
        	</where>
 	</select>
