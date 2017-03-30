@@ -24,6 +24,15 @@
 				<if test="shopName != null">
 					shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'  				
 				</if>
+				<if test="shopTypeCode != 0">
+					and shop_type_code = #{shopTypeCode}
+				</if>
+				<if test="cityCode != 0">
+					and city_code = #{cityCode}
+				</if>
+				<if test="localCode != 0">
+					and local_code = #{localCode}
+				</if>
 			</where>			
 			order by shop_code
 		) rnumshop	
