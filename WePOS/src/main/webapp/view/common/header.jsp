@@ -38,7 +38,7 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> WE POS </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">공지사항</a></li>
+						<li><a href="../common/showBoard.do?boardTypeCode=1">공지사항</a></li>
 						<li><a href="#">We POS 소개</a></li>
 						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
@@ -80,9 +80,8 @@
 				<!-- 게시판 -->
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
-					<ul class="dropdown-menu">
-						<li><a href="../common/showBoard.do">자유 게시판</a></li>
-						<li><a href="#">FAQ</a></li>
+					<ul class="dropdown-menu">						
+						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
 						<li><a href="#">Q&A</a></li>
 					</ul></li>
 				<!-- End 게시판 -->

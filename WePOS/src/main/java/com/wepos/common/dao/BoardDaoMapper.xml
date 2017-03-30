@@ -21,6 +21,9 @@
 			
 				<!-- 동적으로 필드 변경을 할 때 where 태그를 사용 -->
     	    	<where>
+    	    		<if test="boardTypeCode!=null">
+						board_type_code=#{boardTypeCode}
+					</if>
     	    		<!-- 검색분야를 입력했다면 -->
 					<if test="keyWord!=null and keyField=='title'">
 						board_title like '%' || #{keyWord} || '%'
@@ -40,14 +43,17 @@
 			
 			 order by board_number desc) a) 
 	<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
+		WHERE (rnum >= #{start} AND rnum <= #{end})
 	]]>
 				order by board_number desc
 	</select>
 	
-	<select id="selectOne" parameterType="map" resultType="int">
-		select count(*) from board
+	<select id="getRowCount" parameterType="map" resultType="int">
+		select count(*) from board 
 		<where>
+			<if test="boardTypeCode!=null">
+				board_type_code=#{boardTypeCode}
+			</if>			
         	<!-- 검색분야를 입력했다면 -->
 			<if test="keyWord!=null and keyField=='title'">
 				board_title like '%' || #{keyWord} || '%'
@@ -68,30 +74,30 @@
 
 	<insert id="boardInsert" parameterType="boardDto">
 		insert into board
-		values(board_seq.nextval, 1, #{totalId}, #{boardTitle}, #{boardContent}, sysdate, 0, #{boardFile, jdbcType=VARCHAR})
+		values(board_seq.nextval, #{boardTypeCode}, #{totalId}, #{boardTitle}, #{boardContent}, sysdate, 0, #{boardFile, jdbcType=VARCHAR})
 	</insert>
 
 	<select id="getNumber" resultType="int">
-		select max(board_number) from board 
+		select max(board_number) from board where board_type_code=#{boardTypeCode}
 	</select>
 
 	<update id="plusReadCnt" parameterType="int">
-		update board set board_read_cnt=board_read_cnt+1 where board_number=#{boardNumber}
+		update board set board_read_cnt=board_read_cnt+1 where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</update>
 
 	<select id="selectBoard" resultType="boardDto" parameterType="int">
 		select board_number, board_title, total_id, board_date, board_content, board_read_cnt, board_file
 			from board
-				where board_number=#{boardNumber}
+				where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</select>
 
 	<update id="updateBoard" parameterType="int">
 		update board set board_title=#{boardTitle}, board_content=#{boardContent}, board_file=#{boardFile, jdbcType=VARCHAR}
-		where board_number=#{boardNumber}
+		where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</update>
 	
 	<delete id="boardDelete" parameterType="int">
-		delete from board where board_number=#{boardNumber}
+		delete from board where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</delete>
 
 </mapper>

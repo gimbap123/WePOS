@@ -16,7 +16,7 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 
 	public int getRowCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectOne("selectOne", map);
+		return getSqlSession().selectOne("getRowCount", map);
 	}
 	
 	public void boardInsert(BoardDto boardDto) {

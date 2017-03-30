@@ -32,7 +32,8 @@ public class BoardController {
 	// 게시판 목록 페이지로 이용
 	@RequestMapping("/common/showBoard.do")
 	public ModelAndView showBoardView(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-			@RequestParam(value="keyField", defaultValue="") String keyField, @RequestParam(value="keyWord", defaultValue="") String keyWord)
+			@RequestParam(value="keyField", defaultValue="") String keyField, @RequestParam(value="keyWord", defaultValue="") String keyWord,
+			@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{ 
 		if(log.isDebugEnabled())
 		{
@@ -40,18 +41,21 @@ public class BoardController {
 			log.debug("currentPage : " + currentPage);
 			log.debug("keyField : " + keyField);
 			log.debug("keyWord : " + keyWord);
+			log.debug("boardTypeCode : " + boardTypeCode);
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("keyField", keyField); //검색분야
 		map.put("keyWord", keyWord); //검색어
+		map.put("boardTypeCode", boardTypeCode);
 		
 		//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
 		int count = boardDao.getRowCount(map);
+		System.out.println("count="+count);
 	    
 		//PagingUtil page = new PagingUtil(currentPage, count, 10,10, "list.do");
-		PagingUtil page = new PagingUtil(currentPage, count, 3, 3, "showBoard.do");
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 3, "showBoard.do");
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
@@ -70,22 +74,26 @@ public class BoardController {
 		mav.setViewName("/common/showBoard"); //boardList.jsp 페이지로 이동하라
 		mav.addObject("count", count); //총 레코드 수
 		mav.addObject("list", list); //화면에 출력할 데이터
-		mav.addObject("pagingHtml", page.getPagingHtml()); //링크 문자열 
+		mav.addObject("pagingHtml", page.getPagingHtml()); //링크 문자열
+		mav.addObject("boardTypeCode",boardTypeCode);
 		
 		return mav;
 	}
 	
 	// 게시판 글쓰기 페이지로 이동
 	@RequestMapping(value="/common/boardWrite.do", method=RequestMethod.GET) 
-	public String boardWriteView() 
-	{		
-		return "/common/boardWrite";
+	public ModelAndView boardWriteView(@RequestParam(value="boardTypeCode") int boardTypeCode ) 
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("boardTypeCode",boardTypeCode);
+		mav.setViewName("/common/boardWrite");
+		return mav;
 	}
 	
 	// 글쓰기 기능 수행
 	@RequestMapping(value="/common/boardWrite.do", method=RequestMethod.POST)
 	public String boardWriteProcess(@ModelAttribute BoardDto boardDto) 
-	{			
+	{
 		//파일 첨부 유무를 따져야 합니다
 		try
 		{
@@ -115,7 +123,7 @@ public class BoardController {
 		}
 					
 		//글 목록으로 이동
-		return "redirect:/common/showBoard.do";		
+		return "redirect:/common/showBoard.do?boardTypeCode="+boardDto.getBoardTypeCode();		
 	}
 	
 	// 글 수정 페이지로 이동
