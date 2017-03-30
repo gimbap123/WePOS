@@ -49,13 +49,17 @@
           </button>
           <!-- End Toggle -->
           <!-- Logo -->
+          <div class="test">
+            shopInfo = ${shop} <br>
+            showName = ${shop.shopName} <br>
+          </div>
           <div class="logo">
             <a href="index.html"> <img id="logo-header" src="<c:url value="/image/common/logo.png"/>" alt="Logo" />
             </a>
           </div>
           <!-- End Logo -->
         </div>
-        <a class="btn btn-success btn-lg btn-block" href="#">${posInfo[0].shopName}</a>
+        <a class="btn btn-success btn-lg btn-block" href="#">${shop.shopName}</a>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <div class="menu-container">
