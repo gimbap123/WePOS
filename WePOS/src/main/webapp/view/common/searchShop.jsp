@@ -73,7 +73,7 @@
 						<div class="input-group">	
 							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요">
 							<span class="input-group-btn">
-								<button class="btn-u" type="button" style="height: 100%" onclick="submit()">
+								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
 								</button>
 							</span>								
@@ -92,7 +92,7 @@
    	 				<div class="cbp-item">
    	 					<div class="cbp-caption margin-bottom-20">
    	 						<div class="cbp-caption-defaultWrap">
-                        		<img src="${shop.shopFile}" alt="">
+                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
                     		</div>
                     		<div class="cbp-caption-activeWrap">
                     			<div class="cbp-l-caption-alignCenter">
