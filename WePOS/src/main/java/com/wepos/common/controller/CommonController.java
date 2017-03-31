@@ -299,6 +299,12 @@ public class CommonController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/common/shopDetail.do")
+	public String shopDetailView()
+	{
+		return "common/shopDetail";
+	}
 
 }
 
