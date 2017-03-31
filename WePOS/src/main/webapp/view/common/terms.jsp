@@ -80,15 +80,14 @@
 				</div>
 			<div class="row">
 			<form id="deleteForm" action="registration.do" method="get">
-				<span class="col-md-2 col-md-offset-1">
-					<!-- <button type="button" class="btn-u2" onclick="history.back()">이전으로</button> -->
-					<a href="../common/main.do">이전으로</a>
+				<span class="input-group-addon"style="border:0px;position:relative">
+					<a class="color-green" href="../common/main.do">이전으로</a>
 				</span>
-				<span class="col-md-5 col-md-offset-0">
-					<button type="button" class="btn-u btn-block" onclick="check()">동의하기</button>
+				<span class="input-group-addon" style="border:0px;position:relative">
+					<button type="button" class="btn-u btn-large btn-u-blue" onclick="check()">동의하기</button>
 				</span>
 			</form>	
-			</div>		
+			</div>
 		</div>
 		<!--End Reg Block-->
 	</div>
