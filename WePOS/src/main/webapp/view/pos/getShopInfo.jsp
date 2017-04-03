@@ -1,4 +1,4 @@
-<%@ page language="java" contenttype="text/html; charset=utf-8" pageencoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
 <!--<meta http-equiv="refresh" content='0; url=<c:url value="/pos/posMain.do?shopCode=${shopInfo.shopCode}"/>'> -->
