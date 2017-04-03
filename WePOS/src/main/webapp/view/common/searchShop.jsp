@@ -30,8 +30,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<script language="JavaScript" src="../js/common/searchShopJs.js"></script>
 
 <title>We POS</title>
 </head>
@@ -42,41 +41,45 @@
 		<!--=== Search Block Version 2 ===-->
 		<div class="search-block">
 			<div class="container">	
-				
+				<form id="searchShopForm" action="#" name="searchShopForm" method="get">
 					<div class="col-md-6 col-md-offset-3" style="margin-bottom: 10px">
 						<h2>매장 검색</h2>
 						<div class="row">
 							<div class="col-md-4">
 								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
 									<option value="0">매장 종류</option>		
+									<c:forEach items="${shopTypeList}" var="shopType">
+										<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
+									</c:forEach>
 								</select>	
 							</div>
 							<div class="col-md-4">
-								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
-									<option value="0">지역</option>		
-								</select>	
+								<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
+									<option value="0">지역</option>	
+									<c:forEach items="${cityList}" var="city">
+										<option value="${city.cityCode}">${city.cityName}</option>
+									</c:forEach>
+								</select>
 							</div>
 							<div class="col-md-4">
-								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
+								<select class="form-control" id="localCode" name="localCode">
 									<option value="0">시, 군</option>		
 								</select>																						
 							</div>											
 						</div>
-					</div>
+					</div>									
 									
-					<div class="col-md-6 col-md-offset-3">
-						<!-- <h2>매장 검색</h2> -->
-						<div class="input-group">		
-							<form id="searchShop" action="#" name="searchShop" method="get">																											
+					<div class="col-md-6 col-md-offset-3">							
+						<div class="input-group">	
 							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요">
 							<span class="input-group-btn">
-								<button class="btn-u" type="button" style="height: 100%;" onclick="submit()">
+								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
 								</button>
-							</span>
-							</form>								
+							</span>								
 						</div>			
-					</div>							
+					</div>
+				</form>											
 			</div>		
 		</div>
 		<!--=== End Search Block Version 2 ===-->		
@@ -89,13 +92,13 @@
    	 				<div class="cbp-item">
    	 					<div class="cbp-caption margin-bottom-20">
    	 						<div class="cbp-caption-defaultWrap">
-                        		<img src="${shop.shopFile}" alt="">
+                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
                     		</div>
                     		<div class="cbp-caption-activeWrap">
                     			<div class="cbp-l-caption-alignCenter">
                     				<div class="cbp-l-caption-body">
                     					<ul class="link-captions no-bottom-space">
-                    						<li><a href="#"><i class="rounded-x fa fa-link"></i></a></li>
+                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-link"></i></a></li>
                                     		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="Design Object"><i class="rounded-x fa fa-search"></i></a></li>
                     					</ul>
                     				</div>
@@ -112,41 +115,8 @@
    	 		<div class="margin-bottom-30"></div>
     		${pagingHtml}    		
     	</div>
-    	
-    		
+		<!--=== End Cube-Portfdlio ===-->
 		
-	<%-- 	<!--=== Content Part ===-->
-		<div class="container content">
-			<div class="row">
-				<div class="col-md-9">	
-					<c:forEach items="${shopList}" var="shop">
-						
-					
-					
-					</c:forEach>
-								
-					<!-- <div class="row clients-page">
-						<div class="col-md-2">
-                        	<img src="../image/common/sliderBg.png" class="img-responsive hover-effect" alt="" height="100px"/>                    	
-                    	</div>
-                    	<div class="col-md-10">
-                        	<h3>Cisco Systems, Inc</h3>
-                        	<ul class="list-inline">
-                            	<li><i class="fa fa-map-marker color-green"></i> USA</li>
-                            	<li><i class="fa fa-globe color-green"></i> <a class="linked" href="#">http://www.example.com</a></li>
-                            	<li><i class="fa fa-briefcase color-green"></i> Web Design &amp; Development</li>
-                        	</ul>
-                        	<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati</p>
-                        	<p>Olerano ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna edetquam lacus. Fusce condimentum eleifend enim a sint occaecati feugiat..</p>
-                    	</div>
-					</div> -->
-					
-					
-					
-				</div>
-			</div>
-		</div> --%>
-		<!--=== End Content Part ===-->
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>
 	<!--/wrapper-->

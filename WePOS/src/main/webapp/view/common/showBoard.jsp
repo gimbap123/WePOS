@@ -75,22 +75,21 @@
 				<div class="container">
 					<div class="col-md-8 col-md-offset-1">
 						<h2 style="text-align: left;">
-							<img src="../image/common/boardImage.png"
-								style="float: left; margin: 0 10px 0 10px">여러분의 소중한 후기를
-							남겨주세요!
+							<img src="../image/common/wepos.png" style="float: left; margin: 0 10px 0 10px">
+							여러분의 소중한 후기를 남겨주세요!
 						</h2>
 
 						<hr style="margin: 5px 0 0 5px">
 
 						<h5>
-							자유게시판은 회원 여러분들이 자유롭게 글을 등록하는 공간입니다.<br> 게시판에 글을 등록하시면 저희
-							WePOS에서 제공하는 다양한 혜택을<br> 누리실 수 있습니다. 여러분의 많은 관심을 부탁드립니다.
-							감사합니다!<br>
+							자유게시판은 회원 여러분들이 자유롭게 글을 등록하는 공간입니다.<br> 
+							게시판에 글을 등록하시면 저희 WePOS에서 제공하는 다양한 혜택을<br> 
+							누리실 수 있습니다. 여러분의 많은 관심을 부탁드립니다. 감사합니다!<br>
 						</h5>
 
 						<h6>
-							(타인을 비방하는 글이나 상업성 광고 및 개인정보 유출 등에 해당하는 글은<br> 작성자에게 별도의 통보없이
-							즉시 삭제되오니 참고 부탁드립니다.)
+							(타인을 비방하는 글이나 상업성 광고 및 개인정보 유출 등에 해당하는 글은<br> 
+							작성자에게 별도의 통보없이 즉시 삭제되오니 참고 부탁드립니다.)
 						</h6>
 					</div>
 				</div>
@@ -154,8 +153,12 @@
 								<c:forEach var="data" items="${list}">
 									<tr>
 										<td style="text-align:center">${data.boardNumber }</td>
-										<td style="text-align:center"><a
-											href="boardDetail.do?boardNumber=${data.boardNumber}&boardTypeCode=${boardTypeCode}">${data.boardTitle }</a></td>
+										<td style="text-align:center">
+											<a href="boardDetail.do?boardNumber=${data.boardNumber}&boardTypeCode=${boardTypeCode}">
+											<%-- <a href="test.do?boardNumber=${data.boardNumber}&boardTypeCode=${boardTypeCode}"> --%>
+												${data.boardTitle }
+											</a>
+										</td>
 										<td style="text-align:center">${data.totalId }</td>
 										<td style="text-align:center">${data.boardDate }</td>
 										<td style="text-align:center">${data.boardReadCnt}</td>

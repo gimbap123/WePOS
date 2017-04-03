@@ -5,9 +5,22 @@
 <mapper namespace="com.wepos.common.dao.ShopDao">
  
   <!-- 검색된 매장 갯수 --> 
-  <select id="searchShopCount" parameterType="String" resultType="Integer">
+  <select id="searchShopCount" parameterType="map" resultType="Integer">
     select count(shop_name) from shop
-    where shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'
+    <where>
+    	<if test="shopName != null">
+			shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'  				
+		</if>
+		<if test="shopTypeCode != 0">
+			and shop_type_code = #{shopTypeCode}
+		</if>
+		<if test="cityCode != 0">
+			and city_code = #{cityCode}
+		</if>
+		<if test="localCode != 0">
+			and local_code = #{localCode}
+		</if>
+    </where>    
   </select>  
   
   <select id="searchShop" parameterType="map" resultType="shopDto">
@@ -24,6 +37,15 @@
 				<if test="shopName != null">
 					shop_name like '%' || #{shopName, jdbcType=VARCHAR} || '%'  				
 				</if>
+				<if test="shopTypeCode != 0">
+					and shop_type_code = #{shopTypeCode}
+				</if>
+				<if test="cityCode != 0">
+					and city_code = #{cityCode}
+				</if>
+				<if test="localCode != 0">
+					and local_code = #{localCode}
+				</if>
 			</where>			
 			order by shop_code
 		) rnumshop	
@@ -33,6 +55,15 @@
   	<![CDATA[
 		where rnum >= #{start} and rnum <= #{end}
 	]]>  
+  </select>
+  
+  <select id="getShopDetail" parameterType="String" resultType="shopDto">
+  	select s.shop_code, s.shop_type_code, s.city_code, s.local_code, s.shop_name, s.shop_desc, s.shop_file, s.shop_phone,
+  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address
+  	from shop s
+  	inner join city c on s.city_code = c.city_code
+	inner join local l on c.city_code = l.city_code and s.local_code = l.local_code
+  	where s.shop_code = #{shopCode}
   </select>
   
 </mapper>

@@ -83,71 +83,61 @@
 		<form name="boardDetail" enctype="multipart/form-data" method="post"
 			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
 
-			<input type="hidden" name="boardNumber"
-				value="${boardDto.boardNumber}">
+			<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
 
-			<div class="container content-sm">
-				<!-- Begin Table Search Panel v1 -->
-				<div class="table-search-v1 panel panel-dark margin-bottom-50">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<i class="icon-bubble "></i> 글 상세보기 ( ${boardDto.boardNumber}번 게시글 )
-						</h3>
-					</div>
-
-					<div class="table-responsive">
-						<table id="resultTable"
-							class="table table-bordered table-striped table-hover tablesorter">
-
-							<tr>
-								<td width="5%" align="center">제 목</td>
-								<td><input type="text" size="95%" name="boardTitle"
-									value="${boardDto.boardTitle}" readonly></td>
-							</tr>
-							<tr>
-								<td width="5%" align="center">작성자</td>
-								<td><input type="text" size="95%" name="totalId"
-									value="${boardDto.totalId}" readonly></td>
-							</tr>
-							<tr>
-								<td width="5%" align="center">내 용</td>
-								<td><textarea rows="20" cols="95%" style="resize: none"
-										name="boardContent" readonly>${boardDto.boardContent}</textarea></td>
-							</tr>
-
-							<!-- <hr style="margin: 5px 0 5px 0"> -->
-
-							<tr>
-								<td width="5%" align="center">파 일</td>
-								<td><a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a></td>
-							</tr>
-
-							<!-- <hr style="margin: 5px 0 5px 0"> -->
-
-							<tr>
-								<td colspan="2" align="right">
+			<div class="container content" style="width: 60%; min-height: 558px">
+				<div class="row blog-page">
+					<div class="col-md-12">
+						<div class="blog margin-bottom-40">
+							<h2>${boardDto.boardTitle}</h2>
+							<div class="blog-post-tags">
+								<ul class="list-unstyled list-inline blog-info">
+									<li><i class="fa fa-calendar"></i> ${boardDto.boardDate}</li>
+									<li><i class="fa fa-pencil"></i> ${boardDto.totalId}</li>
+									<li><i class="fa fa-comments"></i> <a href="#">10개의 댓글</a></li>
+								</ul>
+								<ul class="list-unstyled list-inline blog-tags">
+									<li><i class="fa fa-tags"></i> <a href="#">Technology</a>
+										<a href="#">Education</a> <a href="#">Internet</a> <a href="#">Media</a>
+									</li>
+								</ul>
+							</div>
+							<hr>
+							<div class="blog-img">
+								<!-- <img class="img-responsive" src="../assets/img/bg/18.jpg" alt="">
+								<img class="img-responsive" src="../assets/img/bg/14.jpg" alt=""> -->
+								
+								<img class="img-responsive" src="${boardDto.boardFile}" alt="">
+								
+							</div>
+							<p>${boardDto.boardContent}</p>
+							<hr>
+							<a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
+							<p>
+								<a class="btn-u btn-u-small" href="blog_item_option1.html"><i
+									class="fa fa-plus-sign"></i> Read More</a>
 								<c:if test="${sessionScope.id==boardDto.totalId}">
 									<input type="button" value="수정하기"
-											onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}'">
-									<%-- <input type="button" value="삭제하기" onClick="location.href='boardDelete.do?boardNumber=${boardDto.boardNumber}'"> --%>
+										onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}'">
 									<input type="button" value="삭제하기" onClick="boardDelete()">
-									<input type="button" value="돌아가기"	onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+									<input type="button" value="돌아가기"
+										onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
 								</c:if>
 								<c:if test="${sessionScope.id==null || sessionScope.id!=boardDto.totalId}">
-									<input type="button" value="돌아가기" onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+									<input type="button" value="돌아가기"
+										onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
 								</c:if>
-								</td>
-							</tr>
-						</table>
-
+							</p>
+						</div>
 					</div>
 				</div>
-				<!-- End Table Search Panel v1 -->
 			</div>
 
 		</form>
 		<!-- End Content -->
+
 		<jsp:include page="footer.jsp" flush="false" />
+
 	</div>
 	<!--/wrapper-->
 
@@ -178,4 +168,5 @@
 	</script>
 
 </body>
+
 </html>

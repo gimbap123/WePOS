@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!--=== Footer Version 1 ===-->
-<div class="footer-v1">
+<div class="footer-v1" style="position:relative;bottom:0;width:100%">
 	<div class="copyright">
 		<div class="container">
 			<div class="row">

@@ -17,10 +17,16 @@
 	
 	<insert id="shopRegistration" parameterType="shopDto">
 		insert into shop values(shop_seq.nextval, #{shopTypeCode}, 
-			#{cityCode}, #{localCode}, #{shopName}, #{shopDesc}, #{shopAddress}, #{shopFile, jdbcType=VARCHAR})
+			#{cityCode}, #{localCode}, #{shopName}, #{shopDesc}, #{shopAddress}, #{shopFile, jdbcType=VARCHAR}, #{shopPhone})
 	</insert>
 	
 	
+	<insert id="insertMgr" parameterType="shopMgrDto">
+		insert into mgr values(#{mgrId}, #{shopCode}, #{mgrPassword}, #{mgrName}, #{mgrPhone})
+	</insert>
 	
+	<select id="searchShopCode" parameterType="int" resultType="shopDto">
+		select * from shop where shop_type_code=#{shopTypeCode}
+	</select>
 
 </mapper>
