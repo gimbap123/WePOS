@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -101,12 +103,15 @@ public class BoardController {
 	
 	// 글쓰기 기능 수행
 	@RequestMapping(value="/common/boardWrite.do", method=RequestMethod.POST)
-	public String boardWriteProcess(@ModelAttribute BoardDto boardDto) 
+	public String boardWriteProcess(HttpServletRequest request, @ModelAttribute BoardDto boardDto) 
 	{
 		//파일 첨부 유무를 따져야 합니다
 		try
 		{
 			String newName=""; //변경할 파일 이름을 저장하려고
+			String filePath=request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+			System.out.println("filePath=>"+filePath);
+			
 			//업로드된 파일이 존재한다면
 			if(!boardDto.getUpload().isEmpty())  //!를 주어서 isEmpty를 부정
 			{ 
@@ -114,11 +119,18 @@ public class BoardController {
 				//DTO의 객체 filename => 변경된 파일명 => 실제로 DB상의 filename				
 				boardDto.setBoardFile(newName);
 				
+				System.out.println("newName=>"+newName);
+				
 				//실제 업로드 기능 => 업로드된 변경된 파일 => 지정한 업로드 위치로 이동시키기(복사해서!)
-				File file=new File(FileUtil.UPLOAD_PATH+"/"+newName);
+//				File file=new File(FileUtil.UPLOAD_PATH+"/"+newName);
+				File file = new File(filePath + newName);
+//				boardDto.getUpload().transferTo(file);
+				System.out.println("file=>"+file);
+				
 				//전송시켜라!
 				boardDto.getUpload().transferTo(file); //~transferTo(전송할객체명)
 			}
+			System.out.println("확인합니다");
 			//DB저장
 			boardDao.boardInsert(boardDto); //입력받은값+게시물번호, 파일변경		
 		}
@@ -151,7 +163,8 @@ public class BoardController {
 	
 	// 글 수정 기능 수행
 	@RequestMapping(value="/common/boardRewrite.do", method=RequestMethod.POST)
-	public String boardRewriteProcess(@ModelAttribute BoardDto boardDto,@RequestParam(value="boardTypeCode") int boardTypeCode)
+	public String boardRewriteProcess(HttpServletRequest request,
+			@ModelAttribute BoardDto boardDto,@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{
 		
 		//업로드가 되어있지 않다면 상관이 없는데 만약 업로드가 되어있는 기존 파일을 수정하고 싶다면..
@@ -162,7 +175,11 @@ public class BoardController {
 		board=boardDao.selectBoard(boardDto);
 		
 		oldFileName=board.getBoardFile();
-					
+		
+		
+		String newName=""; //변경할 파일 이름을 저장하려고
+		String filePath=request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+
 		//업로드된 파일이 존재한다면
 		if(!boardDto.getUpload().isEmpty())
 		{ 
@@ -173,7 +190,7 @@ public class BoardController {
 				boardDto.setBoardFile(FileUtil.rename(boardDto.getUpload().getOriginalFilename()));
 				
 				//실제 업로드 기능 => 업로드된 변경된 파일 => 지정한 업로드 위치로 이동시키기(복사해서!)
-				File file=new File(FileUtil.UPLOAD_PATH+"/"+boardDto.getBoardFile());
+				File file=new File(filePath+boardDto.getBoardFile());
 				//전송시켜라!
 				boardDto.getUpload().transferTo(file); //~transferTo(전송할객체명)		
 				
@@ -206,17 +223,33 @@ public class BoardController {
 	
 	// 글 상세보기 페이지로 이동
 	@RequestMapping("/common/boardDetail.do")
-	public ModelAndView boardDetailView(@RequestParam("boardNumber") int boardNumber,	
-																	@RequestParam(value="boardTypeCode") int boardTypeCode)
+	public ModelAndView boardDetailView(HttpServletRequest request,
+			@RequestParam("boardNumber") int boardNumber,	
+			@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{		
+		
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.lastIndexOf("\\WePOS");
+		filePath = filePath.substring(index);
+		System.out.println("filePath=>"+filePath);
+				
     	//조회수를 증가시킵니다
     	boardDao.plusReadCnt(boardNumber);
     	
     	//1.위 seq값에 해당하는 값만 출력합니다
-    	BoardDto boardDto=new BoardDto();
+    	BoardDto boardDto=new BoardDto();		
     	boardDto.setBoardNumber(boardNumber);
     	boardDto.setBoardTypeCode(boardTypeCode);    	
     	boardDto=boardDao.selectBoard(boardDto);
+    	
+		if(boardDto.getBoardFile()!=null)
+		{
+			String fileName=boardDto.getBoardFile();
+			boardDto.setBoardFile(filePath + fileName);
+			System.out.println("fileName=>"+fileName);
+		}
+		System.out.println("boardDto.setBoardFile=>"+boardDto.getBoardFile());
+
     	
     	ModelAndView mav=new ModelAndView();
     	mav.addObject("boardTypeCode", boardTypeCode);
