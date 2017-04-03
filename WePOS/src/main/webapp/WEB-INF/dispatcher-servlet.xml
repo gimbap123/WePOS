@@ -26,13 +26,12 @@
 	</bean>   
 	
 	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
- 	 <bean class="com.wepos.common.controller.CommonController" />  	 
-  <bean class="com.wepos.common.controller.SearchShopController" />
-   <bean class="com.wepos.common.controller.BoardController" />
-     <bean class="com.wepos.admin.controller.AdminController" />
-   <bean class="com.wepos.pos.controller.PosMainController" />
-
-     <bean class="com.wepos.admin.controller.AdminMgrController" />
+ 	 <bean class="com.wepos.common.controller.CommonController" />
+ 	 <bean class="com.wepos.common.controller.SearchShopController" />
+ 	 <bean class="com.wepos.common.controller.BoardController" />
+ 	 <bean class="com.wepos.admin.controller.AdminController" />
+ 	 <bean class="com.wepos.pos.controller.PosMainController" />
+ 	 <bean class="com.wepos.admin.controller.AdminMgrController" />
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 

@@ -7,6 +7,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,7 +101,7 @@ public class SearchShopController {
 	  }
 	  
 	  List<ShopTypeDto> shopTypeList = adminDao.getShopType();
-		List<CityDto> cityList = adminDao.getCity();
+	  List<CityDto> cityList = adminDao.getCity();
 	  
 	  ModelAndView mav = new ModelAndView();
 	  mav.setViewName("common/searchShop");
@@ -104,4 +113,61 @@ public class SearchShopController {
 	  
 	  return mav;
   }
+  
+  	//매장 상세보기
+	@RequestMapping(value="/common/shopDetail.do")
+	public ModelAndView shopDetailView(HttpServletRequest request, 
+			@RequestParam("shopCode") String shopCode) throws Exception
+	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.indexOf("\\WePOS");
+		filePath = filePath.substring(index);
+		ShopDto shop = shopDao.getShopDetail(shopCode);
+		String trimAddress = shop.getShopAddress().replaceAll("\\p{Z}", "");
+		
+		// 파일 경로 설정
+		if(shop.getShopFile() != null)
+		{
+			String fileName = shop.getShopFile();		
+			shop.setShopFile(filePath + fileName);
+		}
+		else
+		{
+			shop.setShopFile("/WePOS/uploadFile/nullImg.jpg");
+		}
+		
+		// 주소를 통한 좌표 구하기
+		Map<String, String> coordinateMap = new HashMap<String, String>();	
+		String url = "http://maps.googleapis.com/maps/api/geocode/json?language=ko&sensor=false&address=" 
+				+ trimAddress;
+		
+		HttpClient httpClient = HttpClientBuilder.create().build();		
+		HttpResponse httpResponse = httpClient.execute(new HttpGet(url));
+		HttpEntity httpEntity = httpResponse.getEntity(); 
+		String content = EntityUtils.toString(httpEntity);
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject)jsonParser.parse(content);
+		JSONArray jsonArray = (JSONArray)jsonObject.get("results");
+		
+		for(int i = 0; i < jsonArray.size(); i++)
+		{
+			JSONObject tempObj = (JSONObject)jsonArray.get(i);
+			if(tempObj.get("geometry") != null)
+			{
+				JSONObject geometry = (JSONObject)tempObj.get("geometry");
+				JSONObject location = (JSONObject)geometry.get("location");
+				coordinateMap.put("x", (String)location.get("lat").toString());
+				coordinateMap.put("y", (String)location.get("lng").toString());				
+			}
+		}	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopDetail");
+		mav.addObject("shop", shop);
+		mav.addObject("coordinateMap", coordinateMap);		
+		
+		return mav;
+	}
+	
 }
