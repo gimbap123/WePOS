@@ -98,7 +98,7 @@
                     			<div class="cbp-l-caption-alignCenter">
                     				<div class="cbp-l-caption-body">
                     					<ul class="link-captions no-bottom-space">
-                    						<li><a href="#"><i class="rounded-x fa fa-link"></i></a></li>
+                    						<li><a href="../common/shopDetail.do"><i class="rounded-x fa fa-link"></i></a></li>
                                     		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="Design Object"><i class="rounded-x fa fa-search"></i></a></li>
                     					</ul>
                     				</div>
