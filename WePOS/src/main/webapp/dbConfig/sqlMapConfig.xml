@@ -20,6 +20,7 @@
 		<typeAlias alias="localDto" type="com.wepos.admin.dto.LocalDto"/>
 		<typeAlias alias="PosMainDto" type="com.wepos.pos.dto.PosMainDto"/>
 		<typeAlias alias="TablesDto" type="com.wepos.common.dto.TablesDto"/>
+		<typeAlias alias="ProductDto" type="com.wepos.common.dto.ProductDto"/>
 	</typeAliases>
 		
 	<mappers>	    

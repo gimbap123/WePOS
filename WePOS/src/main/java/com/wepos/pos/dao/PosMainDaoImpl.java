@@ -1,9 +1,11 @@
 package com.wepos.pos.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.TablesDto;
 
@@ -29,5 +31,15 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
   public List<TablesDto> getTables( int shopCode ) {
     // TODO Auto-generated method stub
     return getSqlSession().selectList( "getTables", shopCode );
+  }
+
+  public List<ProductDto> getProductList( int shopCode ) {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectList( "getProductList", shopCode );
+  }
+
+  public Map<String, Integer> getCategory( int categoryCode ) {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectMap( "getCategory", categoryCode, "CATEGORY_NAME" );
   }
 }

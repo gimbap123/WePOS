@@ -3,6 +3,7 @@ package com.wepos.pos.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.TablesDto;
 import com.wepos.pos.dao.PosMainDao;
@@ -31,11 +33,18 @@ public class PosMainController {
     List<TablesDto> tables = posMainDao.getTables( shopCode );
     // 매장 내 테이블 숫자 select
     int tableCount = posMainDao.getTableCount( shopCode );
+    // 매장 내 메뉴 select
+    List<ProductDto> productList = posMainDao.getProductList( shopCode );
+    // 카테고리 정보 select
+    Map<String, Integer> category = posMainDao.getCategory( 3 );
+    System.out.println( "PosMainController > category : " + category );
     
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shop", shop );
     mav.addObject( "tables", tables );
+    mav.addObject( "productList", productList );
     mav.addObject( "tableCount", tableCount );
+    mav.addObject( "category", category );
     
     return mav;
   }
