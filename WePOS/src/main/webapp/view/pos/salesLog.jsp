@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,40 +11,77 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet"
-	href="../assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-	
-	
+	href="../assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">	
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico">
+<!-- Web Fonts -->
+<link rel="stylesheet"
+	href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/bootstrap/css/bootstrap.min.css" />">
+<link rel="stylesheet" href="<c:url value="/assets/css/style.css" /> ">
+<!-- CSS Header and Footer -->
+<link rel="stylesheet"
+	href="<c:url value="/assets/css/headers/header-v7.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/css/footers/footer-v1.css" /> ">
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/animate.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/line-icons/line-icons.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
+<link rel="stylesheet"
+	href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
+<!-- CSS Customization -->
+<link rel="stylesheet"
+	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
+<link href="<c:url value="/assets/css/headers/header-v7.css"/>"
+	rel="stylesheet" type="text/css">
+
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script type="text/javascript"
-		src="../assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
 
 <script>
-	$(function() {
+		$(function() {
+			$("#calendar_begin").datepicker({
+					showMonthAfterYear : true,
+					yearSuffix : '년',
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ]
+			});
+			//옵션  : 매개변수값 2번째가 옵션의 타입이며 3번째 항목은 옵션에 대한 설정 값
+			$("#calendar_begin").datepicker("option", "dateFormat",
+					"yy년 mm월 dd일"); //데이터 포맷으로 날짜의 반환 타입을 지정
+			$("#calendar_begin").datepicker("option", "showAnim", "slideDown"); //달력의 표시 형태
 
-		$("#calendar_begin").datepicker({
-			showMonthAfterYear: true ,
-			yearSuffix: '년',
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-		});
-		//옵션  : 매개변수값 2번째가 옵션의 타입이며 3번째 항목은 옵션에 대한 설정 값
-		$("#calendar_begin").datepicker("option", "dateFormat", "yy년 mm월 dd일"); //데이터 포맷으로 날짜의 반환 타입을 지정
-		$("#calendar_begin").datepicker("option", "showAnim", "slideDown"); //달력의 표시 형태
-		
-		$("#calendar_end").datepicker({
-			showMonthAfterYear: true ,
-			yearSuffix: '년',
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-		});
-		$("#calendar_end").datepicker("option", "dateFormat", "yy년 mm월 dd일");
-		$("#calendar_end").datepicker("option", "showAnim", "slideDown");
+			$("#calendar_end").datepicker(
+					{
+						showMonthAfterYear : true,
+						yearSuffix : '년',
+						monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월',
+								'7월', '8월', '9월', '10월', '11월', '12월' ],
+						monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+								'7월', '8월', '9월', '10월', '11월', '12월' ],
+						dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ]
+					});
+			$("#calendar_end")
+					.datepicker("option", "dateFormat", "yy년 mm월 dd일");
+			$("#calendar_end").datepicker("option", "showAnim", "slideDown");
 
-	});
-</script>
+		});
+	</script>	
+
 <!-- <script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script> -->
 </head>
 <body>
@@ -64,7 +103,7 @@
 					<div class="panel panel-yellow margin-bottom-40">
 						<table class="table table-hover">
 							<div class="panel-heading">
-                                <h3 class="panel-title">매출 조회</h3>
+                                <h2 class="panel-title">매출 통계</h2>
                             </div>
 		                    <thead>
 		                        <tr style="background: #999;color:white">
@@ -157,6 +196,62 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
+
+	
+<%-- 		<script type="text/javascript"
+		src="<c:url value="/assets/plugins/jquery/jquery-migrate.min.js"/>"></script>
+	<!--/wrapper-->
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/jquery/jquery.min.js"/>"></script> --%>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
+	<!-- JS Implementing Plugins -->
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/back-to-top.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/jquery-appear.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/smoothScroll.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/jquery.parallax.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/counter/waypoints.min.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/counter/jquery.counterup.min.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.pack.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"/>"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript"
+		src="<c:url value="/assets/js/custom.js"/>"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="<c:url value="/assets/js/app.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/js/plugins/fancy-box.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/js/plugins/progress-bar.js"/>"></script>
+	<script type="text/javascript"
+		src="<c:url value="/assets/js/plugins/owl-carousel.js"/>"></script>
+		
+	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+		App.init();
+		App.initCounter();
+		App.initParallaxBg();
+		App.initScrollBar();
+		FancyBox.initFancybox();
+		App.initAnimateDropdown();
+		OwlCarousel.initOwlCarousel();
+		ProgressBar.initProgressBarHorizontal();
+	    });
+	</script>
+	
+
+
 </body>
 </html>
