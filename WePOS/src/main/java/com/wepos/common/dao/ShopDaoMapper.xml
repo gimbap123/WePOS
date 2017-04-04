@@ -66,4 +66,8 @@
   	where s.shop_code = #{shopCode}
   </select>
   
+  <select id="productList" parameterType="String" resultType="ProductDto">
+  	select * from product where shop_code = #{shopCode}
+  </select>
+  
 </mapper>

@@ -85,7 +85,7 @@
 				</div>
 				
 				<div class="input-group margin-bottom-10">
-					<span class="input-group-addon"><i class="icon-speedometer" ></i></span>
+					<span class="input-group-addon"><i class="icon-clock" ></i></span>
 					<div class="row">						
 						<div class="col-md-4">
 							<select class="form-control" id="startHourType" name="startHourType">
