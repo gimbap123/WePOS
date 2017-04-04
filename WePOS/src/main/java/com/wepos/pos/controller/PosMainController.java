@@ -51,4 +51,10 @@ public class PosMainController {
     mav.addObject( "shopCode", shopCode );
     return mav;
   }
+  
+  // 매출 통계 페이지
+  @RequestMapping("/pos/salesLog.do")
+  public String showSalesLog(){
+	  return "pos/salesLog";
+  }
 }
