@@ -21,12 +21,14 @@ public class PosMainController {
 
   @Autowired
   private PosMainDao posMainDao;
-  
-  // 포스 페이지로 이동
+   
+  // 포스 페이지 이동
   @RequestMapping( value = "/pos/posMain.do" )
-  public ModelAndView showPosMain(
-      @RequestParam( value = "shopCode" ) int shopCode ) {
-  
+  public ModelAndView getShopInfo(
+      @RequestParam( value = "mgrId" ) String mgrId ) {
+    
+    int shopCode = posMainDao.getShopCode( mgrId );
+    System.out.println( shopCode );
     // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
     // 매장 내 테이블 정보 select
@@ -45,19 +47,12 @@ public class PosMainController {
     mav.addObject( "productList", productList );
     mav.addObject( "tableCount", tableCount );
     mav.addObject( "category", category );
-    
     return mav;
   }
- 
-  // 매니저 아이디로 매장 정보 구함
-  @RequestMapping( value = "/pos/getShopInfo.do" )
-  public ModelAndView getShopInfo(
-      @RequestParam( value = "mgrId" ) String mgrId ) {
-    
-    int shopCode = posMainDao.getShopCode( mgrId );
-    System.out.println( shopCode );
-    ModelAndView mav = new ModelAndView( "pos/getShopInfo" );
-    mav.addObject( "shopCode", shopCode );
-    return mav;
+  
+  // 매출 통계 페이지
+  @RequestMapping("/pos/salesLog.do")
+  public String showSalesLog(){
+	  return "pos/salesLog";
   }
 }
