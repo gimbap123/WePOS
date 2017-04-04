@@ -39,19 +39,20 @@
 			</div>
 			<!-- End Logo -->
 		</div>
-		<a class="btn btn-success btn-lg btn-block" href="#">${shop.shopName}</a>
+		<a class="btn btn-success btn-lg btn-block" 
+				href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">${shop.shopName}</a>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-responsive-collapse">
 			<div class="menu-container">
 				<ul class="nav navbar-nav">
 					<!-- Home -->
-					<li><a href="<c:url value="/pos/getShopInfo.do?mgrId=${sessionScope.id}"/>">포스 메인</a>
+					<li><a href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">포스 메인</a>
 					<li class="dropdown"><a href="javascript:void(0);"
 						class="dropdown-toggle" data-toggle="dropdown">매장관리</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">메뉴 관리</a></li>
 							<li><a href="#">테이블 관리</a></li>
-							<li><a href="salesLog.do">매출 통계</a></li>
+							<li><a href="salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
 						</ul></li>
 					<!-- End Home -->
 					<!-- About Pages -->

@@ -103,7 +103,7 @@
 					<div class="panel panel-yellow margin-bottom-40">
 						<table class="table table-hover">
 							<div class="panel-heading">
-                                <h3 class="panel-title">매출 조회</h3>
+                                <h2 class="panel-title">매출 통계</h2>
                             </div>
 		                    <thead>
 		                        <tr style="background: #999;color:white">

@@ -52,7 +52,11 @@ public class PosMainController {
   
   // 매출 통계 페이지
   @RequestMapping("/pos/salesLog.do")
-  public String showSalesLog(){
-	  return "pos/salesLog";
+  public ModelAndView showSalesLog(@RequestParam( value = "mgrId" ) String mgrId ){
+	  int shopCode = posMainDao.getShopCode( mgrId );
+	  ShopDto shop = posMainDao.getShop( shopCode );
+	  ModelAndView mav = new ModelAndView( "pos/salesLog" );
+	  mav.addObject( "shop", shop );
+	  return mav;
   }
 }
