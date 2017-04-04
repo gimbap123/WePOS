@@ -28,6 +28,7 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dao.ShopDao;
+import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.PagingUtil;
 
@@ -46,7 +47,7 @@ public class SearchShopController {
 		  @ModelAttribute ShopDto shop)
   {
 	  String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
-	  int index = filePath.indexOf("\\WePOS");
+	  int index = filePath.lastIndexOf("\\WePOS");
 	  filePath = filePath.substring(index);
 	  
 	  if("".equals(shop.getShopName()))
@@ -167,6 +168,38 @@ public class SearchShopController {
 		mav.addObject("shop", shop);
 		mav.addObject("coordinateMap", coordinateMap);		
 		
+		return mav;
+	}
+	
+	// 상품 리스트
+	@RequestMapping(value="/common/productList.do")
+	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") String shopCode)
+	{	
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.indexOf("\\WePOS");
+		filePath = filePath.substring(index);
+		
+		List<ProductDto> productList = shopDao.productList(shopCode);
+		
+		if(productList.size() > 0)
+		{
+			for(ProductDto product : productList)
+			{
+				if(product.getProductFile() != null)
+				{
+					String fileName = product.getProductFile();
+					product.setProductFile(filePath + fileName);
+				}
+				else
+				{
+					product.setProductFile("/WePOS/uploadFile/nullImg.jpg");
+				}
+			}	 		  		  
+		  }  
+		
+		ModelAndView mav = new ModelAndView();	
+		mav.setViewName("common/productList");
+		mav.addObject("productList", productList);
 		return mav;
 	}
 	

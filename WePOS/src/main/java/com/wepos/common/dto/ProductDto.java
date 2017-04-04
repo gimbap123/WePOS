@@ -1,5 +1,7 @@
 package com.wepos.common.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductDto {
   private int productCode;
   private int shopCode;
@@ -8,6 +10,8 @@ public class ProductDto {
   private int productPrice;
   private int productStock;
   private String productDesc;
+  private String productFile;
+  private MultipartFile upload;
   
   public int getProductCode() {
     return productCode;
@@ -51,4 +55,17 @@ public class ProductDto {
   public void setProductDesc( String productDesc ) {
     this.productDesc = productDesc;
   }
+  public String getProductFile() {
+	return productFile;
+  }
+  public void setProductFile(String productFile) {
+	this.productFile = productFile;
+  }
+  public MultipartFile getUpload() {
+	return upload;
+  }
+  public void setUpload(MultipartFile upload) {
+	this.upload = upload;
+  }  
+  
 }

@@ -184,18 +184,37 @@
 							</c:if>
 
 							<c:if test="${sessionScope.id!=null}">
-								<button class="btn-u" type="button" style="margin: 0 5px 5px 0"
-									onclick="location.href='boardWrite.do?boardTypeCode=${boardTypeCode}'">
-									<i class="icon-pencil"></i>
-								</button>
-								<button class="btn-u" type="button"
-									onClick="location.href='main.do'" style="margin: 0 5px 5px 0">
-									<i class="icon-home"></i>
-								</button>
+								<c:if test="${sessionScope.id.equals('admin')}">
+									<button class="btn-u" type="button" style="margin: 0 5px 5px 0"
+										onclick="location.href='boardWrite.do?boardTypeCode=${boardTypeCode}'">
+										<i class="icon-pencil"></i>
+									</button>
+									<button class="btn-u" type="button"
+										onClick="location.href='main.do'" style="margin: 0 5px 5px 0">
+										<i class="icon-home"></i>
+									</button>
+								</c:if>
+							
+								<c:if test="${!sessionScope.id.equals('admin') && boardTypeCode==1}">
+									<button class="btn-u" type="button"
+										onClick="location.href='main.do'" style="margin: 0 5px 5px 0">
+										<i class="icon-home"></i>
+									</button>
+								</c:if>
+								
+								<c:if test="${!sessionScope.id.equals('admin') && boardTypeCode==2}">
+									<button class="btn-u" type="button" style="margin: 0 5px 5px 0"
+										onclick="location.href='boardWrite.do?boardTypeCode=${boardTypeCode}'">
+										<i class="icon-pencil"></i>
+									</button>
+									<button class="btn-u" type="button"
+										onClick="location.href='main.do'" style="margin: 0 5px 5px 0">
+										<i class="icon-home"></i>
+									</button>
+								</c:if>
 							</c:if>
+							
 						</div>
-
-
 					</div>
 				</div>
 				<!-- End Table Search Panel v1 -->

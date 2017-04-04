@@ -3,6 +3,7 @@ package com.wepos.common.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 
 public interface ShopDao {
@@ -15,6 +16,9 @@ public interface ShopDao {
   
   //매장 상세보기
   public ShopDto getShopDetail(String shopCode);
+  
+  // 상품 리스트보기
+  public List<ProductDto> productList(String shopCode);
   
 }
 
