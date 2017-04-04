@@ -2,6 +2,7 @@ package com.wepos.common.dao;
 
 import java.util.Map;
 
+import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrLoginDto;
 import com.wepos.user.dto.UserLoginDto;
@@ -46,5 +47,6 @@ public interface CommonDao {
 	public int deleteUserInfoFromUsers(String userId);
 	public int deleteUserInfoFromMgrLogin(String mgrId);
 	public int deleteUserInfoFromMgr(String mgrId);
-	public int deletedId(String userId);
+	public int deletedId(String userId);	
+	
 }

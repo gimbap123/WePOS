@@ -10,6 +10,7 @@ public class ShopDto {
   private String shopName;
   private String shopDesc;
   private String shopAddress;
+  private String shopPhone;
   private String shopFile;
   private MultipartFile upload;
   
@@ -55,6 +56,12 @@ public class ShopDto {
   public void setShopAddress( String shopAddress ) {
     this.shopAddress = shopAddress;
   }
+  public String getShopPhone() {
+		return shopPhone;
+	}
+  public void setShopPhone(String shopPhone) {
+	this.shopPhone = shopPhone;
+  }  
   public String getShopFile() {
 	return shopFile;
   }
@@ -66,6 +73,6 @@ public class ShopDto {
   }
   public void setUpload(MultipartFile upload) {
 	this.upload = upload;
-  }  
+  }
   
 }
