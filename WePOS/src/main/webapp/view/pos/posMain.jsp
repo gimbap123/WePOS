@@ -50,9 +50,12 @@
           <!-- End Toggle -->
           <!-- Logo -->
           <div class="test">
-            showName = ${shop.shopName} <br>
-            Product = ${productList} <br>
-            category = ${category} <br>
+            showName = ${shop.shopName}
+            <br>
+            Product = ${productList}
+            <br>
+            category = ${category}
+            <br>
           </div>
           <div class="logo">
             <a href="index.html"> <img id="logo-header" src="<c:url value="/image/common/logo.png"/>" alt="Logo" />
@@ -69,8 +72,7 @@
               <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> 메뉴1</a>
                 <ul class="dropdown-menu">
                   <li><a href="index.html">하위메뉴1</a></li>
-                </ul>
-              </li>
+                </ul></li>
               <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> 메뉴2</a>
                 <ul class="dropdown-menu">
                   <li><a href="page_about2.html">하위메뉴1</a></li>
@@ -106,8 +108,7 @@
         <div class="panel panel-success pos-table" data-toggle="modal" data-target="#orderModal">
           <div class="panel-heading">
             <h3 class="panel-title" id="panel-title">
-              <a role="button" class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon">${tables[i].tableName}</span></a>
-              <span class="badge">${tables[i].tableMax}인</span>
+              <a role="button" class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon">${tables[i].tableName}</span></a> <span class="badge">${tables[i].tableMax}인</span>
             </h3>
           </div>
           <div class="panel-body">Panel content</div>
@@ -124,7 +125,9 @@
             <tbody>
               <tr>
                 <td>날짜</td>
-                <td><span id="realTime"></span></td>
+                <td>
+                  <span id="realTime"></span>
+                </td>
               </tr>
               <tr>
                 <td>테이블</td>
@@ -183,9 +186,9 @@
     <!--=== End Header v7 Left ===-->
     <!--=== Content Side Left Right ===-->
     <!--=== End Content Side Left Right ===-->
-    
+
   </div>
-  
+
   <!-- Modal -->
   <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -197,87 +200,115 @@
           <h4 class="modal-title" id="orderModalLabel">메뉴 선택</h4>
         </div>
         <div class="modal-body">
-          <div role="tabpanel">
+          <!-- 메뉴 출력 부분 -->
+          <div class="row">
+            <div class="col-sm-9">
+              <div role="tabpanel">
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-pills" role="tablist">
-              <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
-              <li role="presentation"><a href="#food" aria-controls="food" role="tab" data-toggle="tab">식사</a></li>
-              <li role="presentation"><a href="#snack" aria-controls="snack" role="tab" data-toggle="tab">안주</a></li>
-              <li role="presentation"><a href="#alcohol" aria-controls="alcohol" role="tab" data-toggle="tab">주류</a></li>
-            </ul>
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills" role="tablist">
+                  <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
+                  <li role="presentation"><a href="#food" aria-controls="food" role="tab" data-toggle="tab">식사</a></li>
+                  <li role="presentation"><a href="#snack" aria-controls="snack" role="tab" data-toggle="tab">안주</a></li>
+                  <li role="presentation"><a href="#alcohol" aria-controls="alcohol" role="tab" data-toggle="tab">주류</a></li>
+                </ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="all">
-                <div class="container-fluid">
-                  <div class="row">
-                    <c:forEach var="product" items="${productList}" >
-                      <div class="col-sm-4">
-                        <!-- 메뉴 패널 -->
-                        <div class="panel panel-primary">
-                          <div class="panel-body">
-                            <h3>${product.productName} <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span></h3>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="all">
+                    <div class="row">
+                      <c:forEach var="product" items="${productList}">
+                        <div class="col-sm-4">
+                          <!-- 메뉴 패널 -->
+                          <div class="panel panel-primary">
+                            <div class="panel-body">
+                              <h5>${product.productName}
+                                <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span>
+                              </h5>
+                            </div>
                           </div>
+                          <!-- 메뉴 패널 종료 -->
                         </div>
-                        <!-- 메뉴 패널 종료 -->
-                      </div>
-                    </c:forEach>
+                      </c:forEach>
+                    </div>
+                  </div>
+                  <!-- 식사 탭 -->
+                  <div role="tabpanel" class="tab-pane" id="food">
+                    <div class="row">
+                      <c:forEach var="product" items="${productList}">
+                        <!-- 카테고리 코드1  (식사) -->
+                        <c:if test="${product.categoryCode == 1}">
+                          <div class="col-sm-4">
+                            <!-- 메뉴 패널 -->
+                            <div class="panel panel-primary">
+                              <div class="panel-body">
+                                <h5>${product.productName}
+                                  <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span>
+                                </h5>
+                              </div>
+                            </div>
+                            <!-- 메뉴 패널 종료 -->
+                          </div>
+                        </c:if>
+                      </c:forEach>
+                    </div>
+                    <!-- End Row -->
+                  </div>
+                  <!-- end tab -->
+                  <!-- 안주 탭 -->
+                  <div role="tabpanel" class="tab-pane" id="snack">
+                    <div class="row">
+                      <c:forEach var="product" items="${productList}">
+                        <!-- 카테고리 코드 2 (안주) -->
+                        <c:if test="${product.categoryCode == 2}">
+                          <div class="col-sm-4">
+                            <!-- 메뉴 패널 -->
+                            <div class="panel panel-primary">
+                              <div class="panel-body">
+                                <h5>${product.productName}
+                                  <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span>
+                                </h5>
+                              </div>
+                            </div>
+                            <!-- 메뉴 패널 종료 -->
+                          </div>
+                        </c:if>
+                      </c:forEach>
+                    </div>
+                  </div>
+                  <!-- 주류 탭 -->
+                  <div role="tabpanel" class="tab-pane" id="alcohol">
+                    <div class="row">
+                      <c:forEach var="product" items="${productList}">
+                        <!-- 카테고리 코드 3 (주류)-->
+                        <c:if test="${product.categoryCode == 3}">
+                          <div class="col-sm-4">
+                            <!-- 메뉴 패널 -->
+                            <div class="panel panel-primary">
+                              <div class="panel-body">
+                                <h5>${product.productName}
+                                  <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span>
+                                </h5>
+                              </div>
+                            </div>
+                            <!-- 메뉴 패널 종료 -->
+                          </div>
+                        </c:if>
+                      </c:forEach>
+                    </div>
+                    <!-- End row -->
                   </div>
                 </div>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="food">
-                <c:forEach var="product" items="${productList}" >
-                  <!-- 카테고리 코드1  (식사) -->
-                  <c:if test="${product.categoryCode == 1}">
-                    <div class="col-sm-4">
-                        <!-- 메뉴 패널 -->
-                        <div class="panel panel-primary">
-                          <div class="panel-body">
-                            <h3>${product.productName} <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span></h3>
-                          </div>
-                        </div>
-                        <!-- 메뉴 패널 종료 -->
-                    </div>
-                  </c:if>
-                </c:forEach>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="snack">
-                <c:forEach var="product" items="${productList}" >
-                  <!-- 카테고리 코드 2 (안주) -->
-                  <c:if test="${product.categoryCode == 2}">
-                    <div class="col-sm-4">
-                        <!-- 메뉴 패널 -->
-                        <div class="panel panel-primary">
-                          <div class="panel-body">
-                            <h3>${product.productName} <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span></h3>
-                          </div>
-                        </div>
-                        <!-- 메뉴 패널 종료 -->
-                    </div>
-                  </c:if>
-                </c:forEach>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="alcohol">
-                <c:forEach var="product" items="${productList}" >
-                  <!-- 카테고리 코드 3 (주류)-->
-                  <c:if test="${product.categoryCode == 3}">
-                    <div class="col-sm-4">
-                        <!-- 메뉴 패널 -->
-                        <div class="panel panel-primary">
-                          <div class="panel-body">
-                            <h3>${product.productName} <span class="label label-primary">${product.productPrice}원</span> <span class="badge">${product.productStock}</span></h3>
-                          </div>
-                        </div>
-                        <!-- 메뉴 패널 종료 -->
-                    </div>
-                  </c:if>
-                </c:forEach>
+
               </div>
             </div>
-
+            <!-- End 메뉴 출력 부분 -->
+            <!-- 메뉴 선택 리스트 추가 -->
+            <div class="col-sm-3">...</div>
           </div>
+          <!-- End row -->
         </div>
+        <!-- End Modal Body-->
         <br>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -324,24 +355,33 @@
 		OwlCarousel.initOwlCarousel();
 		ProgressBar.initProgressBarHorizontal();
 	    });
-	    
-	
 
-    setInterval("realTime()", 1000);
-    function realTime() {
-      var now = new Date();
-      hours = now.getHours();
-      minutes = now.getMinutes();
-      seconds = now.getSeconds();
+	    setInterval("realTime()", 1000);
+	    function realTime() {
+		var now = new Date();
+		hours = now.getHours();
+		minutes = now.getMinutes();
+		seconds = now.getSeconds();
 
-      if (hours > 12) { hours -= 12; ampm = "오후 "; } 
-      else { ampm = "오전 "; }
-      if (hours < 10) { hours = "0" + hours; }
-      if (minutes < 10) { minutes = "0" + minutes; }
-      if (seconds < 10) { seconds = "0" + seconds; }
-      
-      document.getElementById("realTime").innerHTML = ampm + hours + ":" + minutes + ":" + seconds;
-    }
+		if (hours > 12) {
+		    hours -= 12;
+		    ampm = "오후 ";
+		} else {
+		    ampm = "오전 ";
+		}
+		if (hours < 10) {
+		    hours = "0" + hours;
+		}
+		if (minutes < 10) {
+		    minutes = "0" + minutes;
+		}
+		if (seconds < 10) {
+		    seconds = "0" + seconds;
+		}
+
+		document.getElementById("realTime").innerHTML = ampm + hours
+			+ ":" + minutes + ":" + seconds;
+	    }
 	</script>
   <!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>
