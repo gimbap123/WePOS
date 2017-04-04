@@ -83,11 +83,72 @@
 					<span class="input-group-addon"><i class="icon-speech"></i></span>									
 					<input 	type="text" id="shopDesc" name="shopDesc" class="form-control" placeholder="매장 설명" >
 				</div>
+				
 				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class="icon-speedometer" ></i></span>
+					<div class="row">						
+						<div class="col-md-4">
+							<select class="form-control" id="startHourType" name="startHourType">
+								<option value="am">AM</option>
+								<option value="pm">PM</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" id="startHour" name="startHour">								
+								<c:forEach var="i" begin="1" end="12" step="1">
+									<c:if test="${i < 10}">
+										<c:set var="i" value="0${i}" />
+									</c:if>
+									<option value="${i}">${i}</option>							
+								</c:forEach>		
+							</select>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" id="startMinute" name="startMinute">
+								<c:forEach var="i" begin="0" end="59" step="1">
+									<c:if test="${i < 10}">
+										<c:set var="i" value="0${i}" />
+									</c:if>
+									<option value="${i}">${i}</option>							
+								</c:forEach>					
+							</select>
+						</div>				
+					</div>
+					<div class="row">						
+						<div class="col-md-4">
+							<select class="form-control" id="endHourType" name="endHourType">
+								<option value="am">AM</option>
+								<option value="pm">PM</option>	
+							</select>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" id="endHour" name="endHour">
+								<c:forEach var="i" begin="1" end="12" step="1">
+									<c:if test="${i < 10}">
+										<c:set var="i" value="0${i}" />
+									</c:if>
+									<option value="${i}">${i}</option>							
+								</c:forEach>				
+							</select>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" id="endMinute" name="endMinute">
+								<c:forEach var="i" begin="0" end="59" step="1">
+									<c:if test="${i < 10}">
+										<c:set var="i" value="0${i}" />
+									</c:if>
+									<option value="${i}">${i}</option>							
+								</c:forEach>				
+							</select>
+						</div>				
+					</div>
+				</div>
+								
+				<div class="input-group margin-bottom-30">
 					<span class="input-group-addon"><i class="icon-docs"></i></span>
 					<input type="file" class="form-control" name="upload">
 				</div>			
-				<hr>
+				
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 						<input type="button" id="ok" class="btn-u btn-block"  value="추가하기" onclick="checkShopRegistration()">

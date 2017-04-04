@@ -44,7 +44,7 @@
 	        <div class="row about-me">
 	            <div class="col-sm-5 shadow-wrapper md-margin-bottom-40">
 	                <div class="box-shadow shadow-effect-2">
-	                    <img class="img-responsive img-bordered full-width" src="${shop.shopFile}" alt="">
+	                    <img class="img-responsive img-bordered full-width" src="${shop.shopFile}" alt="" style="height: 305px;">
 	                </div>
 	            </div>
 	
@@ -55,27 +55,21 @@
 
                 	<hr>
                 	
-                	<h3>The Office</h3>
+                	<h3>매장 설명</h3>
 	                <ul class="list-unstyled who">
-	                    <li><a href="#"><i class="fa fa-home"></i>5B Streat, City 50987 New Town US</a></li>
-	                    <li><a href="#"><i class="fa fa-envelope"></i>info@example.com</a></li>
+	                    <li><a href="#"><i class="fa fa-home"></i>${shop.shopAddress}</a></li>
+	                    <!-- <li><a href="#"><i class="fa fa-envelope"></i>info@example.com</a></li> -->
 	                    <li><a href="#"><i class="fa fa-phone"></i>${shop.shopPhone}</a></li>
-	                    <li><a href="#"><i class="fa fa-globe"></i>http://www.example.com</a></li>
-	                    <li><a href="#"><i class="fa fa-calendar"></i>10am to 8pm</a></li>
-	                </ul>            	
+	                    <!-- <li><a href="#"><i class="fa fa-globe"></i>http://www.example.com</a></li> -->
+	                    <li><a href="#"><i class="fa fa-calendar"></i>${shop.shopStartTime} ~ ${shop.shopEndTime}</a></li>
+	                </ul>
 	                
 	            </div>
 	        </div>
 	        
-	        <div class="headline"><h2>매장 위치</h2></div> 
-	        <div class="col-md-12 mb-margin-bottom-30">
-                <!-- Google Map -->
-                <div id="map" class="map margin-bottom-50">
-                </div>
-                <!-- End Google Map -->
-            </div>
-            
-            <div class="headline"><h2>매장 정보</h2></div> 
+	        <div class="margin-bottom-50"></div>
+	                    
+            <div class="headline"><h2>매장 정보</h2></div>
             <!-- Tab v1 -->                
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
@@ -107,7 +101,15 @@
                     </div>
                 </div>
             </div>
-            <!-- End Tab v1 -->            
+            <!-- End Tab v1 -->     
+            
+            <div class="headline"><h2>매장 위치</h2></div> 
+	        <div class="col-md-12 mb-margin-bottom-30">
+                <!-- Google Map -->
+                <div id="map" class="map margin-bottom-50">
+                </div>
+                <!-- End Google Map -->
+            </div>       
       
   		</div>
   		<!-- End About Me Block -->  	

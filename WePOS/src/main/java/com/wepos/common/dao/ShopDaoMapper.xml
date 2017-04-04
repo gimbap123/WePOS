@@ -59,7 +59,7 @@
   
   <select id="getShopDetail" parameterType="String" resultType="shopDto">
   	select s.shop_code, s.shop_type_code, s.city_code, s.local_code, s.shop_name, s.shop_desc, s.shop_file, s.shop_phone,
-  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address
+  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address, s.shop_start_time, s.shop_end_time
   	from shop s
   	inner join city c on s.city_code = c.city_code
 	inner join local l on c.city_code = l.city_code and s.local_code = l.local_code
