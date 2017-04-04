@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -94,7 +96,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h2 align="right">
-						조회 조건을 설정해 주세요 ▶▶
+						검색 조건을 설정해 주세요 ▶▶
 					</h2>				
 				</section>
 
@@ -106,48 +108,41 @@
                                 <h2 class="panel-title">매출 통계</h2>
                             </div>
 		                    <thead>
-		                        <tr style="background: #999;color:white">
-		                            <th>일시</th>
-		                            <th>테이블 번호</th>
-		                            <th class="hidden-sm">메뉴</th>
-		                            <th>단가</th>
-		                            <th>수량</th>
-		                            <th>금액</th>
+		                        <tr style="background: #999;color:white;text-align:center">
+		                            <th style="text-align:center">일시</th>
+		                            <th style="text-align:center">테이블 번호</th>
+		                            <th style="text-align:center">메뉴</th>
+		                            <th style="text-align:center">단가</th>
+		                            <th style="text-align:center">수량</th>
+		                            <th style="text-align:center;color:blue">매출</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
+		                    <c:set var="total" value="0" />
+		                    	<c:forEach var="log" items="${log}">
+			                        <tr>
+			                            <td style="text-align:center">${log.orderDate}</td>
+			                            <td style="text-align:center">${log.tableCode}</td>
+			                            <td style="text-align:center">${log.productName}</td>
+			                            <td style="text-align:center">
+			                            	<fmt:formatNumber value="${log.productPrice}" type="number" /> 원
+			                            </td>
+			                            <td style="text-align:center">${log.orderAmount}</td>
+			                            <td style="text-align:center">
+			                            	<fmt:formatNumber value="${log.orderPrice}" type="number" /> 원
+			                            </td>			                                                     
+			                        </tr>
+			                        <c:set var="total" value="${total + log.orderPrice}" />			                        
+			                    </c:forEach>    
+			                    
 		                        <tr>
-		                            <td>1</td>
-		                            <td>Mark</td>
-		                            <td class="hidden-sm">Otto</td>
-		                            <td>@mdo</td>
-		                            <td>1</td>
-		                            <td><span class="label label-warning">Expiring</span></td>                          
+		                            <th colspan="6" style="text-align:center;">
+		                            	<h3>총 매출 &nbsp;&nbsp;:&nbsp;&nbsp;
+		                            		<fmt:formatNumber value="${total}" type="number" /> 원
+		                            	</h3>
+		                            </th>		                            
 		                        </tr>
-		                        <tr>
-		                            <td>2</td>
-		                            <td>Jacob</td>
-		                            <td class="hidden-sm">Thornton</td>
-		                            <td>@fat</td>
-		                            <td>1</td>
-		                            <td><span class="label label-success">Success</span></td>                           
-		                        </tr>
-		                        <tr>
-		                            <td>3</td>
-		                            <td>Larry</td>
-		                            <td class="hidden-sm">the Bird</td>
-		                            <td>@twitter</td>
-		                            <td>1</td>
-		                            <td><span class="label label-danger">Error!</span></td>                         
-		                        </tr>
-		                        <tr>
-		                            <td>4</td>
-		                            <td>htmlstream</td>
-		                            <td class="hidden-sm">Web Design</td>
-		                            <td>@htmlstream</td>
-		                            <td>1</td>
-		                            <td><span class="label label-info">Pending..</span></td>                            
-		                        </tr>
+		                        
 		                    </tbody>
                 		</table>
 					</div>
@@ -163,7 +158,7 @@
 				<div class="panel panel-success">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h2>조회 조건 설정</h2></div>
+					<div class="panel-heading" align="center"><h2>검색 조건 설정</h2></div>
 					<table class="table table-striped table-bordered">
 						<tbody>
 							<tr>
