@@ -37,7 +37,7 @@ public class SearchShopController {
 		  @ModelAttribute ShopDto shop)
   {
 	  String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
-	  int index = filePath.indexOf("\\WePOS");
+	  int index = filePath.lastIndexOf("\\WePOS");
 	  filePath = filePath.substring(index);
 	  
 	  if("".equals(shop.getShopName()))
