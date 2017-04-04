@@ -75,7 +75,6 @@
 				</div>
 			</c:forEach>
 		</div>
-
 		<div class="pos-right">
 			<div class="pos-status">
 				<div class="panel panel-default panel-warning">
@@ -142,11 +141,6 @@
 						<button type="button" class="btn btn-lg btn-primary">계산</button>
 					</div>
 				</div>
-				<!-- Modal Test Button -->
-				<br>
-				<button type="button" class="btn btn-primary btn-lg"
-					data-toggle="modal" data-target="#myModal">Launch demo
-					modal</button>
 			</div>
 			<!-- End Owl Clients v1 -->
 		</div>
@@ -175,7 +169,6 @@
 								<li role="presentation"><a href="#alcohol"
 									aria-controls="alcohol" role="tab" data-toggle="tab">주류</a></li>
 							</ul>
-
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="all">
@@ -322,22 +315,32 @@
 		ProgressBar.initProgressBarHorizontal();
 	    });    
 	
+	    setInterval("realTime()", 1000);
+	    function realTime() {
+		var now = new Date();
+		hours = now.getHours();
+		minutes = now.getMinutes();
+		seconds = now.getSeconds();
 
-    setInterval("realTime()", 1000);
-    function realTime() {
-      var now = new Date();
-      hours = now.getHours();
-      minutes = now.getMinutes();
-      seconds = now.getSeconds();
+		if (hours > 12) {
+		    hours -= 12;
+		    ampm = "오후 ";
+		} else {
+		    ampm = "오전 ";
+		}
+		if (hours < 10) {
+		    hours = "0" + hours;
+		}
+		if (minutes < 10) {
+		    minutes = "0" + minutes;
+		}
+		if (seconds < 10) {
+		    seconds = "0" + seconds;
+		}
 
-      if (hours > 12) { hours -= 12; ampm = "오후 "; } 
-      else { ampm = "오전 "; }
-      if (hours < 10) { hours = "0" + hours; }
-      if (minutes < 10) { minutes = "0" + minutes; }
-      if (seconds < 10) { seconds = "0" + seconds; }
-      
-      document.getElementById("realTime").innerHTML = ampm + hours + ":" + minutes + ":" + seconds;
-    }
+		document.getElementById("realTime").innerHTML = ampm + hours
+			+ ":" + minutes + ":" + seconds;
+	    }
 	</script>
 	<!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>
