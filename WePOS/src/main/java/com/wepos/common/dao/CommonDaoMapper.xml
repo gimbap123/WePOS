@@ -75,5 +75,6 @@
 	<insert id="deletedId" parameterType="String">
 		insert into deleted_id(user_id) values(#{userId})
 	</insert>
+	
 
 </mapper>

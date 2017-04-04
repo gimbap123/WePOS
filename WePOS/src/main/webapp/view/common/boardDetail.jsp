@@ -104,8 +104,11 @@
 							</div>
 							<hr>
 							<div class="blog-img">
-								<img class="img-responsive" src="../assets/img/bg/18.jpg" alt="">
-								<img class="img-responsive" src="../assets/img/bg/14.jpg" alt="">
+								<!-- <img class="img-responsive" src="../assets/img/bg/18.jpg" alt="">
+								<img class="img-responsive" src="../assets/img/bg/14.jpg" alt=""> -->
+								
+								<img class="img-responsive" src="${boardDto.boardFile}" alt="">
+								
 							</div>
 							<p>${boardDto.boardContent}</p>
 							<hr>

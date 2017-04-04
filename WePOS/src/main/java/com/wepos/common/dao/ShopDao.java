@@ -12,5 +12,9 @@ public interface ShopDao {
     
   // 매장 검색
   public List<ShopDto> searchShop(Map<String, Object> map);
+  
+  //매장 상세보기
+  public ShopDto getShopDetail(String shopCode);
+  
 }
 

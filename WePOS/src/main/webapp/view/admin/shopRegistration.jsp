@@ -76,9 +76,13 @@
 					<input 	type="text" id="shopAddress" name="shopAddress" class="form-control" placeholder="나머지 주소" >
 				</div>
 				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class="icon-screen-smartphone"></i></span>
+					<input type="text" id="shopPhone" name="shopPhone" class="form-control" placeholder="매장 전화번호 (- 생략)">
+				</div>
+				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-speech"></i></span>									
 					<input 	type="text" id="shopDesc" name="shopDesc" class="form-control" placeholder="매장 설명" >
-				</div>		
+				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-docs"></i></span>
 					<input type="file" class="form-control" name="upload">
