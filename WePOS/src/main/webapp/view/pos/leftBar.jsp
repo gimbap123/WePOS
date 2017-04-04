@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> --%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
 <head>
@@ -11,38 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
-<!-- Web Fonts -->
-<link rel="stylesheet"
-	href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/bootstrap/css/bootstrap.min.css" />">
-<link rel="stylesheet" href="<c:url value="/assets/css/style.css" /> ">
-<!-- CSS Header and Footer -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/headers/header-v7.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/footers/footer-v1.css" /> ">
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/animate.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/line-icons/line-icons.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
-<!-- CSS Customization -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
-<link href="<c:url value="/assets/css/headers/header-v7.css"/>"
-	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<!--=== Header v7 Left ===-->
@@ -113,59 +81,6 @@
 		<!-- End Navbar Collapse --> </nav>
 		
 	</div>
-<%-- 	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
-		<script type="text/javascript"
-		src="<c:url value="/assets/plugins/jquery/jquery-migrate.min.js"/>"></script>
-	<!--/wrapper-->
-	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/jquery/jquery.min.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
-	<!-- JS Implementing Plugins -->
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/back-to-top.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/jquery-appear.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/smoothScroll.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/jquery.parallax.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/counter/waypoints.min.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/counter/jquery.counterup.min.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.pack.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"/>"></script>
-	<!-- JS Customization -->
-	<script type="text/javascript"
-		src="<c:url value="/assets/js/custom.js"/>"></script>
-	<!-- JS Page Level -->
-	<script type="text/javascript" src="<c:url value="/assets/js/app.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/js/plugins/fancy-box.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/js/plugins/progress-bar.js"/>"></script>
-	<script type="text/javascript"
-		src="<c:url value="/assets/js/plugins/owl-carousel.js"/>"></script>
-	<script type="text/javascript">
-	    jQuery(document).ready(function() {
-		App.init();
-		App.initCounter();
-		App.initParallaxBg();
-		App.initScrollBar();
-		FancyBox.initFancybox();
-		App.initAnimateDropdown();
-		OwlCarousel.initOwlCarousel();
-		ProgressBar.initProgressBarHorizontal();
-	    });
-	</script> --%>
+
 </body>
 </html>
