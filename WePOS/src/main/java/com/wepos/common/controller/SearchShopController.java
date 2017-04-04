@@ -173,16 +173,24 @@ public class SearchShopController {
 	
 	// 상품 리스트
 	@RequestMapping(value="/common/productList.do")
-	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") String shopCode)
+	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") String shopCode,
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
 	{	
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
 		filePath = filePath.substring(index);
 		
-		List<ProductDto> productList = shopDao.productList(shopCode);
+		int productCount = shopDao.productCount(shopCode);
 		
-		if(productList.size() > 0)
+		String paramString = "?shopCode=" + shopCode;
+		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, "productList.do");
+		
+		
+		List<ProductDto> productList = null;
+		
+		if(productCount > 0)
 		{
+			productList = shopDao.productList(shopCode);
 			for(ProductDto product : productList)
 			{
 				if(product.getProductFile() != null)
@@ -195,11 +203,17 @@ public class SearchShopController {
 					product.setProductFile("/WePOS/uploadFile/nullImg.jpg");
 				}
 			}	 		  		  
-		  }  
+		 }
+		else
+		{
+			productList = Collections.emptyList();
+		}
 		
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("common/productList");
 		mav.addObject("productList", productList);
+		mav.addObject("pagingHtml", page.getPagingHtml()); 
+		
 		return mav;
 	}
 	
