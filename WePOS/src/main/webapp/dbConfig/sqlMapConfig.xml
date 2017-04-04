@@ -22,6 +22,7 @@
 		<typeAlias alias="TablesDto" type="com.wepos.common.dto.TablesDto"/>
 		<typeAlias alias="ProductDto" type="com.wepos.common.dto.ProductDto"/>
 		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.ShopMgrDto"/>
+		<typeAlias alias="PosLogDto" type="com.wepos.pos.dto.PosLogDto"/>
 	</typeAliases>
 		
 	<mappers>	    
@@ -30,6 +31,7 @@
 		<mapper resource="com/wepos/common/dao/ShopDaoMapper.xml"/>
 		<mapper resource="com/wepos/admin/dao/AdminDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosMainDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosLogDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>

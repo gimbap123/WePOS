@@ -1,7 +1,5 @@
 package com.wepos.pos.controller;
 
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +48,7 @@ public class PosMainController {
     return mav;
   }
   
-  // 매출 통계 페이지
+/*  // 매출 통계 페이지
   @RequestMapping("/pos/salesLog.do")
   public ModelAndView showSalesLog(@RequestParam( value = "mgrId" ) String mgrId ){
 	  int shopCode = posMainDao.getShopCode( mgrId );
@@ -58,5 +56,5 @@ public class PosMainController {
 	  ModelAndView mav = new ModelAndView( "pos/salesLog" );
 	  mav.addObject( "shop", shop );
 	  return mav;
-  }
+  }*/
 }
