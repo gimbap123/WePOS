@@ -9,6 +9,8 @@ public class PosLogDto {
 	private String productPrice;
 	private int orderAmount;
 	private int orderPrice;
+	private Date calendarBegin;
+	private Date calendarEnd;
 	
 	public Date getOrderDate() {
 		return orderDate;
@@ -40,11 +42,23 @@ public class PosLogDto {
 	public void setOrderAmount(int orderAmount) {
 		this.orderAmount = orderAmount;
 	}
-	public double getOrderPrice() {
+	public int getOrderPrice() {
 		return orderPrice;
 	}
 	public void setOrderPrice(int orderPrice) {
 		this.orderPrice = orderPrice;
+	}
+	public Date getCalendarBegin() {
+		return calendarBegin;
+	}
+	public void setCalendarBegin(Date calendarBegin) {
+		this.calendarBegin = calendarBegin;
+	}
+	public Date getCalendarEnd() {
+		return calendarEnd;
+	}
+	public void setCalendarEnd(Date calendarEnd) {
+		this.calendarEnd = calendarEnd;
 	}
 		
 }
