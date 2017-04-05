@@ -70,8 +70,18 @@ public class SearchShopController {
 	  }
 	  else
 	  {
-		  String paramString = "?shopName=" + shop.getShopName() + "&shopTypeCode=" + shop.getShopTypeCode() +
-				  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  String paramString = "";
+		  if(shop.getShopName() == null)
+		  {
+			  paramString = "?shopTypeCode=" + shop.getShopTypeCode() +
+					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  }
+		  else
+		  {
+			  paramString = "?shopName=" + shop.getShopName() + "&shopTypeCode=" + shop.getShopTypeCode() +
+					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  }
+		 
 		  page = new PagingUtil(paramString, currentPage, shopCount, 6, 5, "searchShop.do");
 	  }	  
 	  	  
