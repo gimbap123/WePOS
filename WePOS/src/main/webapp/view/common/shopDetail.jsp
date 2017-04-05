@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
+
 <title>We POS</title>
 </head>
 <body>
@@ -44,48 +46,36 @@
 	        <div class="row about-me">
 	            <div class="col-sm-5 shadow-wrapper md-margin-bottom-40">
 	                <div class="box-shadow shadow-effect-2">
-	                    <img class="img-responsive img-bordered full-width" src="${shop.shopFile}" alt="">
+	                    <img class="img-responsive img-bordered full-width" src="${shop.shopFile}" alt="" style="height: 305px;">
 	                </div>
-	            </div>
-	
-	            <div class="col-sm-7">
-	            
+	            </div>	
+	            <div class="col-sm-7">	            
 	            	<h3>${shop.shopName }</h3>
                 	<p>${shop.shopDesc}</p>
-
-                	<hr>
-                	
-                	<h3>The Office</h3>
+                	<hr>                	
+                	<h3>매장 설명</h3>
+                	<input type="hidden" id="shopCode" value="${shop.shopCode}">
 	                <ul class="list-unstyled who">
-	                    <li><a href="#"><i class="fa fa-home"></i>5B Streat, City 50987 New Town US</a></li>
-	                    <li><a href="#"><i class="fa fa-envelope"></i>info@example.com</a></li>
-	                    <li><a href="#"><i class="fa fa-phone"></i>${shop.shopPhone}</a></li>
-	                    <li><a href="#"><i class="fa fa-globe"></i>http://www.example.com</a></li>
-	                    <li><a href="#"><i class="fa fa-calendar"></i>10am to 8pm</a></li>
-	                </ul>            	
-	                
+	                    <li><i class="fa fa-home"></i>${shop.shopAddress}</li>	                    
+	                    <li><i class="fa fa-phone"></i>${shop.shopPhone}</li>	                    
+	                    <li><i class="fa fa-calendar"></i>${shop.shopStartTime} ~ ${shop.shopEndTime}</li>
+	                </ul>	                
 	            </div>
 	        </div>
 	        
-	        <div class="headline"><h2>매장 위치</h2></div> 
-	        <div class="col-md-12 mb-margin-bottom-30">
-                <!-- Google Map -->
-                <div id="map" class="map margin-bottom-50">
-                </div>
-                <!-- End Google Map -->
-            </div>
-            
-            <div class="headline"><h2>매장 정보</h2></div> 
+	        <div class="margin-bottom-50"></div>
+	                    
+            <div class="headline"><h2>매장 정보</h2></div>
             <!-- Tab v1 -->                
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#home" data-toggle="tab">공지사항</a></li>
-                    <li><a href="#profile" data-toggle="tab">메뉴</a></li>
-                    <li><a href="#messages" data-toggle="tab">테이블현황</a></li>
-                    <li><a href="#settings" data-toggle="tab">게시판</a></li>
+                    <li class="active"><a href="#board" data-toggle="tab" onclick="tabClick('boardTab')">공지사항</a></li>
+                    <li><a href="#productList" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
+                    <li><a href="#shopTableInfo" data-toggle="tab" onclick="tabClick('shopTableInfoTab')">테이블현황</a></li>
+                    <li><a href="#settings" data-toggle="tab" onclick="tabClick('tab2')">게시판</a></li>
                 </ul>                
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="home">
+                    <div class="tab-pane fade in active" id="board">
                         <div class="row">                            
                             <div class="col-md-12">
                                 <h4>Heading Sample 1</h4>
@@ -93,13 +83,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade in" id="profile">                                        
-                        <h4>Heading Sample 2</h4>
-                        <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                    <div class="tab-pane fade in" id="productList">
                     </div>
-                    <div class="tab-pane fade in" id="messages">
-                        <h4>Heading Sample 3</h4>
-                        <p><strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                    <div class="tab-pane fade in" id="shopTableInfo">                                                                 
                     </div>
                     <div class="tab-pane fade in" id="settings">
                         <h4>Heading Sample 4</h4>
@@ -107,14 +93,22 @@
                     </div>
                 </div>
             </div>
-            <!-- End Tab v1 -->            
+            <!-- End Tab v1 -->     
+            
+            <div class="headline"><h2>매장 위치</h2></div> 
+	        <div class="col-md-12 mb-margin-bottom-30">
+                <!-- Google Map -->
+                <div id="map" class="map margin-bottom-50">
+                </div>
+                <!-- End Google Map -->
+            </div>       
       
   		</div>
   		<!-- End About Me Block -->  	
 		
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>
-<!-- JS Global Compulsory -->           
+<!-- JS Global Compulsory -->
 <script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
@@ -123,6 +117,7 @@
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
+
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MH-LfB9ijazDzhwbfkceUzZAO0LiYsk&callback=initMap">
 </script>
@@ -164,8 +159,8 @@
 	}	
 	
     jQuery(document).ready(function() {
-    	App.init();         
-        });
+    	App.init();    	
+    });
 </script>	
 </body>
 </html>

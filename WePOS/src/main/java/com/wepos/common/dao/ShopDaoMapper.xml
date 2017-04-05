@@ -59,11 +59,40 @@
   
   <select id="getShopDetail" parameterType="String" resultType="shopDto">
   	select s.shop_code, s.shop_type_code, s.city_code, s.local_code, s.shop_name, s.shop_desc, s.shop_file, s.shop_phone,
-  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address
+  		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address, s.shop_start_time, s.shop_end_time
   	from shop s
   	inner join city c on s.city_code = c.city_code
 	inner join local l on c.city_code = l.city_code and s.local_code = l.local_code
   	where s.shop_code = #{shopCode}
+  </select>
+  
+  <select id="productList" parameterType="map" resultType="ProductDto">
+  	select p.product_name, p.product_price, p.product_desc, p.product_file
+  	from 
+  	(
+  		select rnumproduct.*, rownum as rnum
+  		from
+  		(
+  			select *
+  			from product
+  			where shop_code = #{shopCode}
+  			order by product_code
+  		) rnumproduct  		
+  	) p
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>
+  </select>
+  
+  <select id="productCount" parameterType="String" resultType="int">
+  	select count(product_code) from product where shop_code = #{shopCode}
+  </select>
+  
+  <select id="shopTableInfo" parameterType="String" resultType="map">
+  	select count(*) as totalTable, sum(decode(table_state, 0, 1, 0)) as emptyTable , 
+  		sum(decode(table_state, 1, 1, 0)) as useTable
+  	from tables
+  	where shop_code = #{shopCode}
   </select>
   
 </mapper>

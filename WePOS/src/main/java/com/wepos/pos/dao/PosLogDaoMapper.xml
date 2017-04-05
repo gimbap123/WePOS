@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.pos.dao.PosLogDao">
+  
+  <select id="mainLog" resultType="PosLogDto">
+    select o.order_date,o.table_code, p.product_name, p.product_price, od.order_amount, (p.product_price*od.order_amount) as order_price
+	from orders o
+	inner join orders_detail od on o.order_code = od.order_code
+	inner join product p on od.product_code = p.product_code
+  </select>
+  
+  <select id="searchLog" parameterType="PosLogDto" resultType="PosLogDto">
+    select o.order_date,o.table_code, p.product_name, p.product_price, od.order_amount, (p.product_price*od.order_amount) as order_price
+	from orders o
+	inner join orders_detail od on o.order_code = od.order_code
+	inner join product p on od.product_code = p.product_code
+	where o.order_date between #{calendarBegin} and #{calendarEnd}+1
+	<!-- where o.order_date between to_timestamp(to_char(#{calendarBegin}),'YYYY-MM-DD') and to_timestamp(to_char(#{calendarEnd})|| ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS') -->
+	
+  </select>
+  
+
+</mapper>

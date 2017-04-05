@@ -19,6 +19,7 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
+import com.wepos.common.dto.BusinessHoursDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.FileUtil;
 
@@ -63,10 +64,17 @@ public class AdminController {
 	
 	// 매장 추가 기능 수행
 	@RequestMapping(value = "/admin/shopRegistration.do", method = RequestMethod.POST)
-	public String shopRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopDto shop) throws IOException, Exception
+	public String shopRegistrationProcess(HttpServletRequest request, 
+			@ModelAttribute ShopDto shop, @ModelAttribute BusinessHoursDto businessHours) throws IOException, Exception
 	{
 		String newFileName = "";
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		String startTime = businessHours.getStartHour() + ":" + businessHours.getStartMinute() + businessHours.getStartHourType();
+		String endTime = businessHours.getEndHour() + ":" + businessHours.getEndMinute() + businessHours.getEndHourType();
+		
+		shop.setShopStartTime(startTime);
+		shop.setShopEndTime(endTime);
 		
 		if(!shop.getUpload().isEmpty())
 		{

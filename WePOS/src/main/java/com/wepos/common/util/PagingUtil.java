@@ -64,13 +64,20 @@ public class PagingUtil {
 			pagingHtml.append("<li>");
 			
 			
-			if(paramString==null)
+			if(pageUrl == null)
 			{
-				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + addKey +">");
+				pagingHtml.append("<a href='"+paramString + "(" + (startPage - 1) + ")'>");
 			}
 			else
 			{
-				pagingHtml.append("<a href="+pageUrl+paramString+"&pageNum="+ (startPage - 1) + addKey +">");
+				if(paramString==null)
+				{
+					pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + addKey +">");
+				}
+				else
+				{	
+					pagingHtml.append("<a href="+pageUrl+paramString+"&pageNum="+ (startPage - 1) + addKey +">");								
+				}			
 			}						
 								
 			pagingHtml.append("이전");
@@ -92,20 +99,28 @@ public class PagingUtil {
 			} 
 			else 
 			{
-				pagingHtml.append("<li>");
+				pagingHtml.append("<li>");				
 				
-				
-				if(paramString==null)
+				if(pageUrl == null)
 				{
-					pagingHtml.append("<a href='"+pageUrl+"?pageNum=");
+					pagingHtml.append("<a href='"+paramString+"(");
+					pagingHtml.append(i);
+					pagingHtml.append(")'>");
 				}
 				else
 				{
-					pagingHtml.append("<a href='"+pageUrl+paramString+"&pageNum=");
+					if(paramString==null)
+					{
+						pagingHtml.append("<a href='"+pageUrl+"?pageNum=");
+					}
+					else
+					{					
+						pagingHtml.append("<a href='"+pageUrl+paramString+"&pageNum=");										
+					}
+					
+					pagingHtml.append(i);
+					pagingHtml.append(addKey+"'>");					
 				}
-				
-				pagingHtml.append(i);
-				pagingHtml.append(addKey+"'>");
 				pagingHtml.append(i);
 				pagingHtml.append("</a></li>");
 			}			
@@ -116,14 +131,21 @@ public class PagingUtil {
 		{
 			pagingHtml.append("<li>");
 			
-			if(paramString==null)
+			if(pageUrl == null)
 			{
-				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + addKey +">");
+				pagingHtml.append("<a href='"+paramString+"("+ (endPage + 1) + ")'>");
 			}
 			else
 			{
-				pagingHtml.append("<a href="+pageUrl+paramString+"&pageNum="+ (endPage + 1) + addKey +">");
-			}		
+				if(paramString==null)
+				{
+					pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + addKey +">");
+				}
+				else
+				{
+					pagingHtml.append("<a href="+pageUrl+paramString+"&pageNum="+ (endPage + 1) + addKey +">");
+				}		
+			}	
 						
 			pagingHtml.append("다음");
 			pagingHtml.append("</a></li>");

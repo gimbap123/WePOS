@@ -28,6 +28,7 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dao.ShopDao;
+import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.PagingUtil;
 
@@ -69,8 +70,18 @@ public class SearchShopController {
 	  }
 	  else
 	  {
-		  String paramString = "?shopName=" + shop.getShopName() + "&shopTypeCode=" + shop.getShopTypeCode() +
-				  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  String paramString = "";
+		  if(shop.getShopName() == null)
+		  {
+			  paramString = "?shopTypeCode=" + shop.getShopTypeCode() +
+					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  }
+		  else
+		  {
+			  paramString = "?shopName=" + shop.getShopName() + "&shopTypeCode=" + shop.getShopTypeCode() +
+					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
+		  }
+		 
 		  page = new PagingUtil(paramString, currentPage, shopCount, 6, 5, "searchShop.do");
 	  }	  
 	  	  
@@ -166,6 +177,70 @@ public class SearchShopController {
 		mav.setViewName("common/shopDetail");
 		mav.addObject("shop", shop);
 		mav.addObject("coordinateMap", coordinateMap);		
+		
+		return mav;
+	}
+	
+	// 상품 리스트
+	@RequestMapping(value="/common/productList.do")
+	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") String shopCode,
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
+	{	
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.indexOf("\\WePOS");
+		filePath = filePath.substring(index);
+		
+		int productCount = shopDao.productCount(shopCode);
+		
+		/*String paramString = "?shopCode=" + shopCode;*/
+		String paramString = "javascript:productListPaging";
+		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, null);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("shopCode", shopCode);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<ProductDto> productList = null;
+		
+		if(productCount > 0)
+		{
+			productList = shopDao.productList(map);
+			for(ProductDto product : productList)
+			{
+				if(product.getProductFile() != null)
+				{
+					String fileName = product.getProductFile();
+					product.setProductFile(filePath + fileName);
+				}
+				else
+				{
+					product.setProductFile("/WePOS/uploadFile/nullImg.jpg");
+				}
+			}	 		  		  
+		 }
+		else
+		{
+			productList = Collections.emptyList();
+		}
+		
+		ModelAndView mav = new ModelAndView();	
+		mav.setViewName("common/productList");
+		mav.addObject("productList", productList);
+		mav.addObject("pagingHtml", page.getPagingHtml()); 
+		
+		return mav;
+	}
+	
+	// 매장 테이블 현황
+	@RequestMapping(value="/common/shopTableInfo.do")
+	public ModelAndView shopTableInfoView(@RequestParam("shopCode") String shopCode)
+	{
+		Map<String, Object> tableInfoMap = shopDao.shopTableInfo(shopCode);
+		
+		ModelAndView mav = new ModelAndView();		
+		mav.setViewName("common/shopTableInfo");
+		mav.addObject("tableInfoMap", tableInfoMap);
 		
 		return mav;
 	}

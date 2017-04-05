@@ -17,7 +17,8 @@
 	
 	<insert id="shopRegistration" parameterType="shopDto">
 		insert into shop values(shop_seq.nextval, #{shopTypeCode}, 
-			#{cityCode}, #{localCode}, #{shopName}, #{shopDesc}, #{shopAddress}, #{shopFile, jdbcType=VARCHAR}, #{shopPhone})
+			#{cityCode}, #{localCode}, #{shopName}, #{shopDesc}, #{shopAddress}, #{shopFile, jdbcType=VARCHAR}, #{shopPhone},
+			#{shopStartTime}, #{shopEndTime})
 	</insert>
 	
 	

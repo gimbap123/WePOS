@@ -13,6 +13,8 @@ public class ShopDto {
   private String shopPhone;
   private String shopFile;
   private MultipartFile upload;
+  private String shopStartTime;
+  private String shopEndTime;
   
   public int getShopCode() {
     return shopCode;
@@ -74,5 +76,17 @@ public class ShopDto {
   public void setUpload(MultipartFile upload) {
 	this.upload = upload;
   }
+  public String getShopStartTime() {
+	return shopStartTime;
+  }
+  public void setShopStartTime(String shopStartTime) {
+	this.shopStartTime = shopStartTime;
+  }
+  public String getShopEndTime() {
+	return shopEndTime;
+  }
+  public void setShopEndTime(String shopEndTime) {
+	this.shopEndTime = shopEndTime;
+  } 
   
 }
