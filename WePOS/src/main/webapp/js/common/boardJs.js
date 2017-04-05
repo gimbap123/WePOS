@@ -1,3 +1,14 @@
+//댓글
+function replyCheck(){
+	if($('#replyContent').val()==null || $('#replyContent').val()=="") {
+		alert("내용을 입력해 주세요.");
+		$('#replyContent').focus();
+		return false;
+	}
+	
+	document.boardReply.submit();
+}
+
 //글 삭제하기
 function boardDelete(){
 	var del = confirm("이 글을 정말 삭제할까요?");

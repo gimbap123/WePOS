@@ -1,6 +1,6 @@
 package com.wepos.mgr.dto;
 
-public class ShopMgrDto {
+public class MgrDto {
 
 	private String mgrId;
 	private int shopCode;

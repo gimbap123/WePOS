@@ -93,11 +93,27 @@
 
 	<update id="updateBoard" parameterType="int">
 		update board set board_title=#{boardTitle}, board_content=#{boardContent}, board_file=#{boardFile, jdbcType=VARCHAR}
-		where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
+		where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}select * from reply where board_number=#{boardNumber}
 	</update>
 	
 	<delete id="boardDelete" parameterType="int">
 		delete from board where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</delete>
+	
+	
+	
+	
+	<select id="getReplyCount" resultType="int">
+		select count(*) from reply		
+	</select>
+	
+	<select id="selectReplyList" parameterType="int" resultType="replyDto">
+		select * from reply where board_number=#{boardNumber} order by reply_number desc
+	</select>
+	
+	<insert id="insertReply" parameterType="replyDto">
+		insert into reply values(reply_seq.nextval, #{boardNumber, jdbcType=INTEGER}, #{totalId, jdbcType=VARCHAR}, #{replyContent, jdbcType=VARCHAR}, sysdate)
+	</insert>
+	
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wepos.common.dto.BoardDto;
+import com.wepos.common.dto.ReplyDto;
 
 public interface BoardDao {
 
@@ -30,5 +31,17 @@ public interface BoardDao {
 	
 	//글 삭제하기
 	public void boardDelete(BoardDto boardDto);
+	
+	
+	
+
+	//댓글 갯수
+	public int getReplyCount();
+	
+	//댓글 목록
+	public List<ReplyDto> replyList(int boardNumber);
+	
+	//댓글 달기
+	public void insertReply(ReplyDto replyDto);
 	
 }

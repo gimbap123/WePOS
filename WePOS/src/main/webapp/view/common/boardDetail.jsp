@@ -5,6 +5,7 @@
 
 <%@ page
 	import="java.util.*, com.wepos.common.*, com.wepos.common.dto.BoardDto"%>
+<%@ page import="com.wepos.common.dto.ReplyDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
@@ -58,13 +59,14 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 
 </head>
 <body>
 
 	<%
 		BoardDto boardDto = new BoardDto();
+		ReplyDto replyDto = new ReplyDto();
 	%>
 
 	<div class="wrapper">
@@ -89,18 +91,18 @@
 				<div class="row blog-page">
 					<div class="col-md-12">
 						<div class="blog margin-bottom-40">
-							<h2>${boardDto.boardTitle}</h2>
+							<h2 style="color:green; ">${boardDto.boardTitle}</h2>
 							<div class="blog-post-tags">
 								<ul class="list-unstyled list-inline blog-info">
 									<li><i class="fa fa-calendar"></i> ${boardDto.boardDate}</li>
 									<li><i class="fa fa-pencil"></i> ${boardDto.totalId}</li>
-									<li><i class="fa fa-comments"></i> <a href="#">10개의 댓글</a></li>
+									<li><i class="fa fa-comments"></i> 10개의 댓글</li>
 								</ul>
-								<ul class="list-unstyled list-inline blog-tags">
+								<!-- <ul class="list-unstyled list-inline blog-tags">
 									<li><i class="fa fa-tags"></i> <a href="#">Technology</a>
 										<a href="#">Education</a> <a href="#">Internet</a> <a href="#">Media</a>
 									</li>
-								</ul>
+								</ul> -->
 							</div>
 							<hr>
 							<div class="blog-img">
@@ -112,28 +114,70 @@
 							</div>
 							<p>${boardDto.boardContent}</p>
 							<hr>
-							<a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
-							<p>
-								<a class="btn-u btn-u-small" href="blog_item_option1.html"><i
-									class="fa fa-plus-sign"></i> Read More</a>
-								<c:if test="${sessionScope.id==boardDto.totalId}">
-									<input type="button" value="수정하기"
-										onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}'">
-									<input type="button" value="삭제하기" onClick="boardDelete()">
-									<input type="button" value="돌아가기"
-										onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+							<b>첨부파일:</b> <a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
+							<c:if test="${boardDto.boardFile==null}">
+								파일이 존재하지 않습니다.
+							</c:if>
+
+								<c:if test="${sessionScope.id==boardDto.totalId}">	
+								<a class="btn-u btn-u-small" onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'" style="float: right;"><i
+									class="fa fa-plus-sign"></i> 돌아가기</a>
+								<a class="btn-u btn-u-small" onClick="boardDelete()" style="float: right;"><i
+									class="fa fa-plus-sign"></i> 삭제하기</a>
+								<a class="btn-u btn-u-small" onClick="location.href='boardRewrite.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}'" style="float: right;"><i
+									class="fa fa-plus-sign"></i> 수정하기</a>
 								</c:if>
 								<c:if test="${sessionScope.id==null || sessionScope.id!=boardDto.totalId}">
-									<input type="button" value="돌아가기"
-										onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'">
+								<a class="btn-u btn-u-small" onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'" style="float: right;"><i
+									class="fa fa-plus-sign"></i> 돌아가기</a>
 								</c:if>
-							</p>
+							
+					</form>
+
+							<div style="height: 20px"></div>
+							<div class="headline" ><h3>Comment</h3></div>
+							
+					<form name="boardReply" method="post" action="boardReply.do?boardNumber=${boardDto.boardNumber}">		
+							
+							<c:if test="${sessionScope.id==null}">
+								<div class="input-group margin-bottom-20">
+									<textarea rows="3" cols="100%" style="resize: none; width: 100%" name="replyContent" placeholder="먼저 로그인을 해주세요!" onClick="location.href='login.do'"></textarea>
+									<span class="input-group-addon"><b>등록</b></span>
+								</div>
+							</c:if>
+							<c:if test="${sessionScope.id!=null}">
+								<div class="input-group margin-bottom-20">
+									<textarea rows="3" cols="100%" style="resize: none; width: 100%" name="replyContent" id="replyContent" placeholder="내용을 작성하세요." maxlength="100"></textarea>
+									<span class="input-group-addon"><a href="javascript:replyCheck()"><b>등록</b></a></span>
+								</div>
+							</c:if>
+							
+							<input type="hidden" name="totalId" value="${sessionScope.id}">
+							<input type="hidden" name="replyContent" value="${reply.replyContent }">
+							
+							<hr style="margin: 0 0 20px 0">
+							
+							<c:forEach var="reply" items="${replyList}">
+							<table>
+								<tr>
+									<b><td><font style="color: blue;font-weight: bold;">${reply.totalId }</font>
+									<font style="color: gray;">${reply.replyDate }</font></td></b>
+								</tr>
+		
+								<tr>
+									<td>&nbsp;${reply.replyContent }</td>
+								</tr>
+							</table>
+							<hr style="margin: 20px 0 20px 0">
+							</c:forEach>
+					
+					</form>
+					
 						</div>
 					</div>
 				</div>
 			</div>
 
-		</form>
 		<!-- End Content -->
 
 		<jsp:include page="footer.jsp" flush="false" />

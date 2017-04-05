@@ -110,8 +110,7 @@
 							<tr>
 								<td width="10%" align="center">내 용</td>
 								<td>
-									<textarea rows="20" cols="80%" style="resize: none" name="boardContent" placeholder="내용을 입력하세요." >
-									</textarea>
+									<textarea rows="20" cols="80%" style="resize: none" name="boardContent" placeholder="내용을 입력하세요." ></textarea>
 								</td>
 							</tr>
 

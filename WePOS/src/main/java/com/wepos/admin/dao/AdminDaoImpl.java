@@ -9,7 +9,7 @@ import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.UsersDto;
-import com.wepos.mgr.dto.ShopMgrDto;
+import com.wepos.mgr.dto.MgrDto;
 
 public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 
@@ -33,8 +33,8 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 	}
 
 	//매장 관리자 추가
-	public void insertMgr(ShopMgrDto shopMgrDto) {
-		getSqlSession().insert("insertMgr", shopMgrDto);
+	public void insertMgr(MgrDto mgrDto) {
+		getSqlSession().insert("insertMgr", mgrDto);
 	}
 	
 	//세부 매장 불러오기

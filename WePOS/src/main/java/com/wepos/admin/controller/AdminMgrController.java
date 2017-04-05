@@ -18,7 +18,7 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
-import com.wepos.mgr.dto.ShopMgrDto;
+import com.wepos.mgr.dto.MgrDto;
 
 @Controller
 public class AdminMgrController {
@@ -66,32 +66,32 @@ public class AdminMgrController {
 	
 	// 관리자 추가 기능 수행
 	@RequestMapping(value = "/admin/shopMgrRegistration.do", method = RequestMethod.POST)
-	public String shopMgrRegistrationProcess(HttpServletRequest request, @ModelAttribute ShopMgrDto shopMgrDto) throws IOException, Exception
+	public String shopMgrRegistrationProcess(HttpServletRequest request, @ModelAttribute MgrDto mgrDto) throws IOException, Exception
 	{
 		
 		String shopTypeCode=request.getParameter("shopTypeCode");
 		System.out.println("shopTypeCode="+shopTypeCode);
 		
 		if(shopTypeCode.equals(1)){
-			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+			mgrDto.setShopCode(Integer.parseInt(shopTypeCode));
 		}
 		if(shopTypeCode.equals(2)){
-			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+			mgrDto.setShopCode(Integer.parseInt(shopTypeCode));
 		}
 		if(shopTypeCode.equals(3)){
-			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+			mgrDto.setShopCode(Integer.parseInt(shopTypeCode));
 		}
 		if(shopTypeCode.equals(4)){
-			shopMgrDto.setShopCode(Integer.parseInt(shopTypeCode));
+			mgrDto.setShopCode(Integer.parseInt(shopTypeCode));
 		}
 		
-		System.out.println("mgrId="+shopMgrDto.getMgrId());
-		System.out.println("shopCode="+shopMgrDto.getShopCode());
-		System.out.println("mgrPassword="+shopMgrDto.getMgrPassword());
-		System.out.println("mgrName="+shopMgrDto.getMgrName());
-		System.out.println("mgrPhone="+shopMgrDto.getMgrPhone());
+		System.out.println("mgrId="+mgrDto.getMgrId());
+		System.out.println("shopCode="+mgrDto.getShopCode());
+		System.out.println("mgrPassword="+mgrDto.getMgrPassword());
+		System.out.println("mgrName="+mgrDto.getMgrName());
+		System.out.println("mgrPhone="+mgrDto.getMgrPhone());
 		
-		adminDao.insertMgr(shopMgrDto);
+		adminDao.insertMgr(mgrDto);
 		
 		return "redirect:/common/main.do";
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dao.BoardDao;
 import com.wepos.common.dto.BoardDto;
+import com.wepos.common.dto.ReplyDto;
 import com.wepos.common.util.FileUtil;
 import com.wepos.common.util.PagingUtil;
 
@@ -231,7 +232,7 @@ public class BoardController {
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.lastIndexOf("\\WePOS");
 		filePath = filePath.substring(index);
-		System.out.println("filePath=>"+filePath);
+		//System.out.println("filePath=>"+filePath);
 				
     	//조회수를 증가시킵니다
     	boardDao.plusReadCnt(boardNumber);
@@ -246,17 +247,44 @@ public class BoardController {
 		{
 			String fileName=boardDto.getBoardFile();
 			boardDto.setBoardFile(filePath + fileName);
-			System.out.println("fileName=>"+fileName);
+			//System.out.println("fileName=>"+fileName);
 		}
-		System.out.println("boardDto.setBoardFile=>"+boardDto.getBoardFile());
+		//System.out.println("boardDto.setBoardFile=>"+boardDto.getBoardFile());
 
+		
+		//★해당 글에 댓글을 불러옵니다
+		ReplyDto replyDto=new ReplyDto();
+		List<ReplyDto> replyList=null;
+		
+		int repCount = boardDao.getReplyCount();
+		System.out.println("repCount="+repCount);
+		System.out.println("Reply의 boardNumber="+boardNumber);
+		
+		if(repCount > 0){
+			replyList = boardDao.replyList(boardNumber);
+		}
     	
     	ModelAndView mav=new ModelAndView();
     	mav.addObject("boardTypeCode", boardTypeCode);
     	mav.addObject("boardDto",boardDto);
+    	mav.addObject("replyList",replyList);
     	mav.setViewName("/common/boardDetail");
     	
     	return mav;		
+	}
+	
+	//댓글 달기 기능
+	@RequestMapping(value="/common/boardReply.do", method=RequestMethod.POST)
+	public String boardInsertReply(@RequestParam("boardNumber") int boardNumber,
+			@ModelAttribute ReplyDto replyDto){
+		System.out.println("댓글 달기 기능 확인 여부1");
+		System.out.println("replyDto.getTotalId=>"+replyDto.getTotalId());
+		System.out.println("replyDto.getReplyContent()=>"+replyDto.getReplyContent());
+		
+		boardDao.insertReply(replyDto);
+		System.out.println("댓글 달기 기능 확인 여부2");
+		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
+		return "redirect:/common/showBoard.do";
 	}
 	
 	// 파일 다운로드

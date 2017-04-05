@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.BoardDto;
+import com.wepos.common.dto.ReplyDto;
 
 public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 
@@ -47,6 +48,21 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 	public void boardDelete(BoardDto boardDto) {
 		// TODO Auto-generated method stub
 		getSqlSession().delete("boardDelete", boardDto);
+	}
+	
+	
+	
+	
+	public int getReplyCount() {
+		return getSqlSession().selectOne("getReplyCount");
+	}
+	
+	public List<ReplyDto> replyList(int boardNumber) {
+		return getSqlSession().selectList("selectReplyList", boardNumber);
+	}
+	
+	public void insertReply(ReplyDto replyDto) {
+		getSqlSession().insert("insertReply", replyDto);
 	}
 	
 }
