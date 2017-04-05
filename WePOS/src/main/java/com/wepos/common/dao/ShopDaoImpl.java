@@ -26,14 +26,20 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		return getSqlSession().selectOne("getShopDetail", shopCode);
 	}
   
-  public List<ProductDto> productList(String shopCode) {
-	  	List<ProductDto> productList = getSqlSession().selectList("productList", shopCode);
+  public List<ProductDto> productList(Map<String, Object> map) {
+	  	List<ProductDto> productList = getSqlSession().selectList("productList", map);
 		return productList;
 	}
   
   public int productCount(String shopCode) {		
 		return getSqlSession().selectOne("productCount", shopCode);
 	}
+  
+  public Map<String, Object> shopTableInfo(String shopCode)
+  {
+	  Map<String, Object> tableInfoMap = getSqlSession().selectOne("shopTableInfo", shopCode);
+	  return tableInfoMap;
+  }
   
 }
 

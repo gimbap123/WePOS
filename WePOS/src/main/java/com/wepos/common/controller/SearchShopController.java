@@ -192,15 +192,20 @@ public class SearchShopController {
 		
 		int productCount = shopDao.productCount(shopCode);
 		
-		String paramString = "?shopCode=" + shopCode;
-		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, "productList.do");
+		/*String paramString = "?shopCode=" + shopCode;*/
+		String paramString = "javascript:productListPaging";
+		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, null);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("shopCode", shopCode);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
 		
 		List<ProductDto> productList = null;
 		
 		if(productCount > 0)
 		{
-			productList = shopDao.productList(shopCode);
+			productList = shopDao.productList(map);
 			for(ProductDto product : productList)
 			{
 				if(product.getProductFile() != null)
@@ -223,6 +228,19 @@ public class SearchShopController {
 		mav.setViewName("common/productList");
 		mav.addObject("productList", productList);
 		mav.addObject("pagingHtml", page.getPagingHtml()); 
+		
+		return mav;
+	}
+	
+	// 매장 테이블 현황
+	@RequestMapping(value="/common/shopTableInfo.do")
+	public ModelAndView shopTableInfoView(@RequestParam("shopCode") String shopCode)
+	{
+		Map<String, Object> tableInfoMap = shopDao.shopTableInfo(shopCode);
+		
+		ModelAndView mav = new ModelAndView();		
+		mav.setViewName("common/shopTableInfo");
+		mav.addObject("tableInfoMap", tableInfoMap);
 		
 		return mav;
 	}

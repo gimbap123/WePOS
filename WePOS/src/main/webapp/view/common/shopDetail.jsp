@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
 
 <title>We POS</title>
 </head>
@@ -56,9 +56,9 @@
                 	<h3>매장 설명</h3>
                 	<input type="hidden" id="shopCode" value="${shop.shopCode}">
 	                <ul class="list-unstyled who">
-	                    <li><a href="#"><i class="fa fa-home"></i>${shop.shopAddress}</a></li>	                    
-	                    <li><a href="#"><i class="fa fa-phone"></i>${shop.shopPhone}</a></li>	                    
-	                    <li><a href="#"><i class="fa fa-calendar"></i>${shop.shopStartTime} ~ ${shop.shopEndTime}</a></li>
+	                    <li><i class="fa fa-home"></i>${shop.shopAddress}</li>	                    
+	                    <li><i class="fa fa-phone"></i>${shop.shopPhone}</li>	                    
+	                    <li><i class="fa fa-calendar"></i>${shop.shopStartTime} ~ ${shop.shopEndTime}</li>
 	                </ul>	                
 	            </div>
 	        </div>
@@ -71,7 +71,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#board" data-toggle="tab" onclick="tabClick('boardTab')">공지사항</a></li>
                     <li><a href="#productList" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
-                    <li><a href="#messages" data-toggle="tab" onclick="tabClick('tab1')">테이블현황</a></li>
+                    <li><a href="#shopTableInfo" data-toggle="tab" onclick="tabClick('shopTableInfoTab')">테이블현황</a></li>
                     <li><a href="#settings" data-toggle="tab" onclick="tabClick('tab2')">게시판</a></li>
                 </ul>                
                 <div class="tab-content">
@@ -83,10 +83,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade in" id="productList"></div>
-                    <div class="tab-pane fade in" id="messages">
-                        <h4>Heading Sample 3</h4>
-                        <p><strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                    <div class="tab-pane fade in" id="productList">
+                    </div>
+                    <div class="tab-pane fade in" id="shopTableInfo">                                                                 
                     </div>
                     <div class="tab-pane fade in" id="settings">
                         <h4>Heading Sample 4</h4>
@@ -118,6 +117,7 @@
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
+
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MH-LfB9ijazDzhwbfkceUzZAO0LiYsk&callback=initMap">
 </script>
@@ -159,8 +159,8 @@
 	}	
 	
     jQuery(document).ready(function() {
-    	App.init();         
-        });
+    	App.init();    	
+    });
 </script>	
 </body>
 </html>

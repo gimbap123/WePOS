@@ -18,10 +18,13 @@ public interface ShopDao {
   public ShopDto getShopDetail(String shopCode);
   
   // 상품 리스트보기
-  public List<ProductDto> productList(String shopCode);
+  public List<ProductDto> productList(Map<String, Object> map);
   
   // 상품 갯수
   public int productCount(String shopCode);
+  
+  // 매장 테이블 현황
+  public Map<String, Object> shopTableInfo(String shopCode);
   
 }
 
