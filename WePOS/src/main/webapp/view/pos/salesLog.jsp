@@ -51,7 +51,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-<script language="JavaScript" src="../js/pos/salesLog.js?ver=1"></script>
+<script language="JavaScript" src="../js/pos/salesLog.js?ver=3"></script>
 
 <script>
 	$(function() {
@@ -111,7 +111,12 @@
 						<div class="panel panel-yellow margin-bottom-40">
 							<table class="table table-hover">
 								<div class="panel-heading">
-									<h2 class="panel-title">매출 통계</h2>
+									<c:if test="${flag==0}">
+										<h2 class="panel-title">총 매출 통계</h2>
+									</c:if>
+									<c:if test="${flag==1}">
+										<h2 class="panel-title">매출 통계 (${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd})</h2>
+									</c:if>
 								</div>
 								<thead>
 									<tr style="background: #999; color: white; text-align: center">
@@ -125,22 +130,31 @@
 								</thead>
 								
 								<tbody>
-									<c:set var="total" value="0" />
-									<c:forEach var="resultLog" items="${resultLog}">
+									<c:if test="${data==1}">
+										<c:set var="total" value="0" />
+										<c:forEach var="resultLog" items="${resultLog}">
+											<tr>
+												<td style="text-align: center">${resultLog.orderDate}</td>
+												<td style="text-align: center">${resultLog.tableCode}</td>
+												<td style="text-align: center">${resultLog.productName}</td>
+												<td style="text-align: center">
+													<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
+												</td>
+												<td style="text-align: center">${resultLog.orderAmount}</td>
+												<td style="text-align: center">
+													<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
+												</td>
+											</tr>
+											<c:set var="total" value="${total + resultLog.orderPrice}" />
+										</c:forEach>
+									</c:if>
+									<c:if test="${data==0}">
 										<tr>
-											<td style="text-align: center">${resultLog.orderDate}</td>
-											<td style="text-align: center">${resultLog.tableCode}</td>
-											<td style="text-align: center">${resultLog.productName}</td>
-											<td style="text-align: center">
-												<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
-											</td>
-											<td style="text-align: center">${resultLog.orderAmount}</td>
-											<td style="text-align: center">
-												<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
-											</td>
+											<th colspan="6" style="text-align: center;">
+												<h3>검색된 데이터가 없습니다.</h3>
+											</th>
 										</tr>
-										<c:set var="total" value="${total + resultLog.orderPrice}" />
-									</c:forEach>
+									</c:if>	
 		
 									<tr>
 										<th colspan="6" style="text-align: center;">
@@ -171,18 +185,34 @@
 						method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>
-								<tr>
-									<td style="text-align: center;vertical-align: middle;">시작일</td>
-									<td style="text-align: center">
-										<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택">
-									</td>
-								</tr>
-								<tr>
-									<td style="text-align: center;vertical-align: middle;">종료일</td>
-									<td style="text-align: center;vertical-align: middle;">
-										<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택">
-									</td>
-								</tr>
+								<c:if test="${flag==0}">
+									<tr>
+										<td style="text-align: center;vertical-align: middle;">시작일</td>
+										<td style="text-align: center">
+											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택">
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center;vertical-align: middle;">종료일</td>
+										<td style="text-align: center;vertical-align: middle;">
+											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택">
+										</td>
+									</tr>
+								</c:if>
+								<c:if test="${flag==1}">
+									<tr>
+										<td style="text-align: center;vertical-align: middle;">시작일</td>
+										<td style="text-align: center">
+											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="${posLogDto.calendarBegin}">
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center;vertical-align: middle;">종료일</td>
+										<td style="text-align: center;vertical-align: middle;">
+											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="${posLogDto.calendarEnd}">
+										</td>
+									</tr>
+								</c:if>
 								<tr>
 									<td style="text-align: center;vertical-align: middle;">메뉴</td>
 									<td style="text-align: center">

@@ -1,6 +1,5 @@
 package com.wepos.pos.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,33 +31,43 @@ public class PosLogController {
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);
 		List<PosLogDto> mainLog=posLogDao.mainLog();
+		int flag=0;
+		int data=0;
 		ModelAndView mav = new ModelAndView("pos/salesLog");
+		if(mainLog.isEmpty()==true)
+			data=0;
+		else
+			data=1;
 		mav.addObject("shop", shop);
 		mav.addObject("resultLog",mainLog);
 		mav.addObject("product",product);
+		mav.addObject("flag", flag);
+		mav.addObject("data",data);
 		return mav;
 	}
 	
 	// 검색 후 통계 페이지
 	@RequestMapping(value="/pos/searchLog.do", method=RequestMethod.POST)
 	public ModelAndView searchLog(@ModelAttribute PosLogDto posLogDto,
-	//public ModelAndView searchLog(@RequestParam(value="calendarBegin") Date calendarBegin,
-														//@RequestParam(value="calendarEnd") Date calendarEnd,
 														@RequestParam(value = "mgrId") String mgrId){
-		System.out.println("calendarBegin="+posLogDto.getCalendarBegin());
-		//PosLogDto posLogDto=new PosLogDto();
-		//posLogDto.setCalendarBegin(calendarBegin);
-		//posLogDto.setCalendarEnd(calendarEnd);
 		int shopCode = posMainDao.getShopCode(mgrId);
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);
 		List<PosLogDto> searchLog=posLogDao.searchLog(posLogDto);
-		System.out.println("searchLog="+searchLog);
-		System.out.println("calendarBegin="+posLogDto.getCalendarBegin());
+		int flag=1;
+		int data=0;		
 		ModelAndView mav = new ModelAndView("pos/salesLog");
+		if(searchLog.isEmpty()==true)
+			data=0;
+		else
+			data=1;
+			
 		mav.addObject("shop", shop);
 		mav.addObject("resultLog",searchLog);
 		mav.addObject("product",product);
+		mav.addObject("flag",flag);
+		mav.addObject("data",data);
+		mav.addObject("posLogDto",posLogDto);
 		return mav;
 	}
 }
