@@ -31,5 +31,9 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		return productList;
 	}
   
+  public int productCount(String shopCode) {		
+		return getSqlSession().selectOne("productCount", shopCode);
+	}
+  
 }
 

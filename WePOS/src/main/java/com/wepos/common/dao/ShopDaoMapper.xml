@@ -70,4 +70,8 @@
   	select * from product where shop_code = #{shopCode}
   </select>
   
+  <select id="productCount" parameterType="String" resultType="int">
+  	select count(product_code) from product where shop_code = #{shopCode}
+  </select>
+  
 </mapper>

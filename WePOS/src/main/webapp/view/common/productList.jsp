@@ -29,6 +29,7 @@
         	</c:if>           
            
 		</div><!--/col-md-9-->        	
-	</div><!--/row-->        
+	</div><!--/row-->
+	${pagingHtml}     
 </div><!--/container-->		
 <!--=== End Content Part ===-->

@@ -20,5 +20,8 @@ public interface ShopDao {
   // 상품 리스트보기
   public List<ProductDto> productList(String shopCode);
   
+  // 상품 갯수
+  public int productCount(String shopCode);
+  
 }
 

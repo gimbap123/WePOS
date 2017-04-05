@@ -2,20 +2,20 @@
  * shopDetail.jsp의 자바스크립트
  */
 
-function tabClick()
+function tabClick(tabType)
 {	
 	var shopCode = $("#shopCode").val()
 	
-	if($("#productList").html() != "")
-	{	
-		return;
-	}
-	else
+	if(tabType == "productListTab")
 	{
 		$.get("productList.do", {shopCode : shopCode}, function(result)
 		{			
-			$("#productList").append(result);
-		})
-	}		
+			$("#productList").html(result);
+		})		
+	}
+	else
+	{
+		alert(tabType);
+	}
 }
 

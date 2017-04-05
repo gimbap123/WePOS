@@ -68,11 +68,11 @@
             <div class="headline"><h2>매장 정보</h2></div>
             <!-- Tab v1 -->                
             <div class="tab-v1">
-                <ul class="nav nav-tabs" onclick="tabClick()">
-                    <li class="active"><a href="#board" data-toggle="tab">공지사항</a></li>
-                    <li><a href="#productList" data-toggle="tab">상품 리스트</a></li>
-                    <li><a href="#messages" data-toggle="tab">테이블현황</a></li>
-                    <li><a href="#settings" data-toggle="tab">게시판</a></li>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#board" data-toggle="tab" onclick="tabClick('boardTab')">공지사항</a></li>
+                    <li><a href="#productList" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
+                    <li><a href="#messages" data-toggle="tab" onclick="tabClick('tab1')">테이블현황</a></li>
+                    <li><a href="#settings" data-toggle="tab" onclick="tabClick('tab2')">게시판</a></li>
                 </ul>                
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="board">
