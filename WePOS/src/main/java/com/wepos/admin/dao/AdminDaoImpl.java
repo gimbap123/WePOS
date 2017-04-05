@@ -8,7 +8,6 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
-import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrDto;
 
 public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
@@ -41,6 +40,13 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 	public List<ShopDto> searchShopCode(int shopTypeCode) {
 		List<ShopDto> shopList =  getSqlSession().selectList("searchShopCode", shopTypeCode);
 		return shopList;
+	}
+	// 관리자 정보 수정
+	public MgrDto showMgrInfo(String mgrId){
+		return getSqlSession().selectOne("showMgrInfo",mgrId);
+	}
+	public int updateMgrInfo(MgrDto mgrDto){
+		return getSqlSession().update("updateMgrInfo",mgrDto);
 	}
 	
 }

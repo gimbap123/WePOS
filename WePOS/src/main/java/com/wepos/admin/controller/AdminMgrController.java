@@ -18,6 +18,7 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrDto;
 
 @Controller
@@ -96,4 +97,31 @@ public class AdminMgrController {
 		return "redirect:/common/main.do";
 	}
 	
+	
+	// 관리자 정보 수정
+	@RequestMapping(value = "/admin/showMgrInfo.do")
+	public ModelAndView showUserInfoView(@RequestParam("mgrId") String mgrId) {
+		ModelAndView mav = new ModelAndView();
+		MgrDto mgrInfo = adminDao.showMgrInfo(mgrId);
+		mav.addObject("mgrInfo", mgrInfo);
+		mav.setViewName("admin/updateMgrInfo");
+		return mav;
+	}
+
+	@RequestMapping(value = "/admin/updateMgrInfo.do")
+	public ModelAndView updateUserInfoProcess(@ModelAttribute MgrDto mgrDto) {
+		ModelAndView mav = new ModelAndView();
+		int result = adminDao.updateMgrInfo(mgrDto);
+		System.out.println("수정결과 = " + result);
+		mav.addObject("result", result);
+
+		if (result == 1) {
+			mav.setViewName("common/main");
+		}
+
+		if (result == 0) {
+			mav.setViewName("admin/updateMgrInfo");
+		}
+		return mav;
+	}
 }

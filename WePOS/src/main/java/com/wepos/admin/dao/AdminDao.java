@@ -6,6 +6,7 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrDto;
 
 public interface AdminDao {
@@ -32,4 +33,7 @@ public interface AdminDao {
 	//세부 매장 가져오기
 	public List<ShopDto> searchShopCode(int shopTypeCode);
 	
+	// 회원정보 수정
+	public MgrDto showMgrInfo(String mgrId);
+	public int updateMgrInfo(MgrDto mgrDto);	
 }

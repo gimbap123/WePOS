@@ -19,8 +19,13 @@
 					<li><a href="../common/login.do">로그인</a></li>
 				</c:if>
 				<c:if test="${sessionScope.id != null}">
-					<li><a href="../common/showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
-					<li class="topbar-devider"></li>
+					<c:if test="${sessionScope.userType== 1 || sessionScope.userType== 3}">
+						<li><a href="../common/showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
+					</c:if>
+					<c:if test="${sessionScope.userType== 2}">
+						<li><a href="../admin/showMgrInfo.do?mgrId=${sessionScope.id}">관리자 정보</a></li>
+					</c:if>	
+					<li class="topbar-devider"></li>				
 					<li><a href="../common/logout.do">로그아웃</a></li>
 				</c:if>
 			</ul>

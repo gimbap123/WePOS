@@ -29,5 +29,13 @@
 	<select id="searchShopCode" parameterType="int" resultType="shopDto">
 		select * from shop where shop_type_code=#{shopTypeCode}
 	</select>
+	
+	<select id="showMgrInfo" parameterType="String" resultType="shopMgrDto">
+		select * from mgr where mgr_id=#{mgrId}
+	</select>
+	
+	<update id="updateMgrInfo" parameterType="shopMgrDto">
+		update mgr set mgr_password=#{mgrPassword},mgr_phone=#{mgrPhone},mgr_name=#{mgrName} where mgr_id=#{mgrId}
+	</update>
 
 </mapper>
