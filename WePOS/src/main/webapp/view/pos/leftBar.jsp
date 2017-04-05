@@ -16,7 +16,7 @@
 	<!--=== Header v7 Left ===-->
 	<div class="header-v7 header-left-v7">
 		<nav class="navbar navbar-default mCustomScrollbar" role="navigation"
-			data-mcs-theme="minimal-dark"> <!-- Brand and toggle get grouped for better mobile display -->
+			data-mcs-theme="minimal-dark" style="padding-top:0"> <!-- Brand and toggle get grouped for better mobile display -->
 		<div class="menu-container">
 			<!-- Toggle get grouped for better mobile display -->
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
