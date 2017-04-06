@@ -3,8 +3,9 @@ package com.wepos.pos.dto;
 import java.sql.Date;
 
 public class PosLogDto {
-	private Date orderDate;
+	private String orderDate;
 	private int tableCode;
+	private int productCode;
 	private String productName;
 	private String productPrice;
 	private int orderAmount;
@@ -12,10 +13,10 @@ public class PosLogDto {
 	private Date calendarBegin;
 	private Date calendarEnd;
 	
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public int getTableCode() {
@@ -23,6 +24,12 @@ public class PosLogDto {
 	}
 	public void setTableCode(int tableCode) {
 		this.tableCode = tableCode;
+	}
+	public int getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(int productCode) {
+		this.productCode = productCode;
 	}
 	public String getProductName() {
 		return productName;

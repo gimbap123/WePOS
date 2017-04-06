@@ -16,9 +16,20 @@
 	from orders o
 	inner join orders_detail od on o.order_code = od.order_code
 	inner join product p on od.product_code = p.product_code
-	where o.order_date between #{calendarBegin} and #{calendarEnd}+1
-	<!-- where o.order_date between to_timestamp(to_char(#{calendarBegin}),'YYYY-MM-DD') and to_timestamp(to_char(#{calendarEnd})|| ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS') -->
+	<where>
+		<if test="productCode==000">
+			and o.order_date between #{calendarBegin} and #{calendarEnd}+1
+		</if>			
+		<if test="productCode!=000">
+			and od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1
+		</if>
+	</where>
+	<!-- where od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1 -->
 	
+  </select>
+  
+  <select id="productName" parameterType="int" resultType="String">
+  	select product_name from product where product_code=#{productCode}
   </select>
   
 

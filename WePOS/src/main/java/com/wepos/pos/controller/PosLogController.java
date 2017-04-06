@@ -50,10 +50,18 @@ public class PosLogController {
 	@RequestMapping(value="/pos/searchLog.do", method=RequestMethod.POST)
 	public ModelAndView searchLog(@ModelAttribute PosLogDto posLogDto,
 														@RequestParam(value = "mgrId") String mgrId){
+		System.out.println("productCode="+posLogDto.getProductCode());
+		if(posLogDto.getProductCode()==0)
+			posLogDto.setProductName("전체 메뉴");
+		else{
+			String productName=posLogDao.productName(posLogDto.getProductCode());
+			posLogDto.setProductName(productName);
+		}		
 		int shopCode = posMainDao.getShopCode(mgrId);
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);
 		List<PosLogDto> searchLog=posLogDao.searchLog(posLogDto);
+		System.out.println("posLogDto="+searchLog.get(0).getOrderDate());
 		int flag=1;
 		int data=0;		
 		ModelAndView mav = new ModelAndView("pos/salesLog");

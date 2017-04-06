@@ -51,7 +51,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-<script language="JavaScript" src="../js/pos/salesLog.js?ver=3"></script>
+<script language="JavaScript" src="../js/pos/salesLog.js?ver=1"></script>
 
 <script>
 	$(function() {
@@ -112,16 +112,20 @@
 							<table class="table table-hover">
 								<div class="panel-heading">
 									<c:if test="${flag==0}">
-										<h2 class="panel-title">총 매출 통계</h2>
+										<h2 class="panel-title" style="margin-left:20px;font-size:20px">총 매출 통계</h2>
 									</c:if>
-									<c:if test="${flag==1}">
-										<h2 class="panel-title">매출 통계 (${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd})</h2>
+									<c:if test="${flag==1}">	
+										<span style="float:right;margin-right:20px">
+											<h2 class="panel-title" style="font-size:20px">★ ${posLogDto.productName} ★</h2>
+										</span>
+										<h2 class="panel-title" style="margin-left:20px;font-size:20px">
+											매출 통계 ( ${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd} )
+										</h2>
 									</c:if>
 								</div>
 								<thead>
 									<tr style="background: #999; color: white; text-align: center">
-										<th style="text-align: center">일시</th>
-										<th style="text-align: center">테이블 번호</th>
+										<th style="text-align: center">일시</th>										
 										<th style="text-align: center">메뉴</th>
 										<th style="text-align: center">단가</th>
 										<th style="text-align: center">수량</th>
@@ -134,8 +138,10 @@
 										<c:set var="total" value="0" />
 										<c:forEach var="resultLog" items="${resultLog}">
 											<tr>
-												<td style="text-align: center">${resultLog.orderDate}</td>
-												<td style="text-align: center">${resultLog.tableCode}</td>
+												<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}
+													<%-- <fmt:formatDate value="${resultLog.orderDate}" pattern="yyyy-MM-dd HH:mm" /> --%>
+													<%-- <fmt:formatDate value="${resultLog.orderDate}" type="both" /> --%>
+												</td>
 												<td style="text-align: center">${resultLog.productName}</td>
 												<td style="text-align: center">
 													<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
@@ -189,13 +195,13 @@
 									<tr>
 										<td style="text-align: center;vertical-align: middle;">시작일</td>
 										<td style="text-align: center">
-											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택">
+											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">
 										</td>
 									</tr>
 									<tr>
 										<td style="text-align: center;vertical-align: middle;">종료일</td>
 										<td style="text-align: center;vertical-align: middle;">
-											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택">
+											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
 										</td>
 									</tr>
 								</c:if>
@@ -216,11 +222,23 @@
 								<tr>
 									<td style="text-align: center;vertical-align: middle;">메뉴</td>
 									<td style="text-align: center">
-										<select class="form-control" id="shopTypeCode" name="shopTypeCode">
-											<option value="0">모든 메뉴</option>
+										<select class="form-control" id="productCode" name="productCode">
+											<option value="999">-- 선택하세요 --</option>
+											<option value="000">모든 메뉴</option>
 											<c:forEach items="${product}" var="product">
 												<option value="${product.productCode}">${product.productName}</option>
 											</c:forEach>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align: center;vertical-align: middle;">정렬</td>
+									<td style="text-align: center">
+										<select class="form-control" id="searchType" name="searchType">
+											<option value="999">-- 선택하세요 --</option>
+											<option value="1">시간별 조회</option>
+											<option value="2">일별 조회</option>
+											<option value="3">월별 조회</option>											
 										</select>
 									</td>
 								</tr>
