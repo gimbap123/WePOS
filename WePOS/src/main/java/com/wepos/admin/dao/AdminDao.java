@@ -35,5 +35,6 @@ public interface AdminDao {
 	
 	// 회원정보 수정
 	public MgrDto showMgrInfo(String mgrId);
+	public String showShopInfo(int shopCode);
 	public int updateMgrInfo(MgrDto mgrDto);	
 }

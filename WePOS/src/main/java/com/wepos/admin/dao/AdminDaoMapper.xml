@@ -34,6 +34,10 @@
 		select * from mgr where mgr_id=#{mgrId}
 	</select>
 	
+	<select id="showShopInfo" parameterType="int" resultType="String">
+		select shop_name from shop where shop_code=#{shopCode}
+	</select>
+	
 	<update id="updateMgrInfo" parameterType="shopMgrDto">
 		update mgr set mgr_password=#{mgrPassword},mgr_phone=#{mgrPhone},mgr_name=#{mgrName} where mgr_id=#{mgrId}
 	</update>

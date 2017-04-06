@@ -103,7 +103,9 @@ public class AdminMgrController {
 	public ModelAndView showUserInfoView(@RequestParam("mgrId") String mgrId) {
 		ModelAndView mav = new ModelAndView();
 		MgrDto mgrInfo = adminDao.showMgrInfo(mgrId);
+		String shopName=adminDao.showShopInfo(mgrInfo.getShopCode());
 		mav.addObject("mgrInfo", mgrInfo);
+		mav.addObject("shopName", shopName);
 		mav.setViewName("admin/updateMgrInfo");
 		return mav;
 	}

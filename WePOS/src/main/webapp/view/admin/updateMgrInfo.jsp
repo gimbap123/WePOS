@@ -32,7 +32,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_log_reg_v2.css">
 
-<script language="JavaScript" src="../js/admin/updateMgrInfoJs.js?v=3"></script>
+<script language="JavaScript" src="../js/admin/updateMgrInfoJs.js?v=1"></script>
 
 </head>
 
@@ -44,22 +44,13 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>매장 관리자 추가</h2>				
+				<h2>관리자 정보 수정</h2>				
 			</div>			
-			<form name="updateMgrRegForm" action="shopMgrRegistration.do" method="post">
-			
+			<form name="updateMgrRegForm" action="updateMgrInfo.do" method="post">			
 			
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-star"></i></span>		
-					<select class="form-control" id="shopTypeCode" name="shopTypeCode" onchange="searchShopCode()">
-						<option value="0">매장 종류를 선택하세요.</option>
-						<c:forEach items="${shopTypeList}" var="shopType">
-							<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
-						</c:forEach>
-					</select>
-					<select class="form-control" id="shopCode" name="shopCode" >
-						<option value="0">해당 매장을 선택하세요</option>
-					</select>
+					<input type="text" id="shopName" name="shopName" class="form-control" value="${shopName}" readonly>
 				</div>
 				
 				
@@ -80,7 +71,7 @@
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-user"></i></span>					
-					<input 	type="text" id="mgrName" name="mgrName" class="form-control" value="${mgrInfo.mgrName}" >
+					<input 	type="text" id="mgrName" name="mgrName" class="form-control" value="${mgrInfo.mgrName}" readonly>
 				</div>
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-call-end "></i></span>									

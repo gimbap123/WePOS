@@ -23,20 +23,6 @@ function searchShopCode()
 
 function checkNull()
 {
-	if($("#shopTypeCode").val() == 0)
-	{
-		alert("매장 종류를 선택하세요.");
-		$("#shopTypeCode").focus();
-		return;
-	}
-
-	if($("#mgrId").val() == "" || $("#mgrId").val() == null)
-	{
-		alert("관리자 아이디를 입력하세요.");
-		$("#mgrId").focus();
-		return;
-	}
-
 	if($('#mgrPassword').val()=="" || $('#mgrPassword').val()==null)
 	{
 		alert("비밀번호를 입력하세요");
@@ -49,13 +35,6 @@ function checkNull()
 		alert("비밀번호를 한 번 더 입력하세요");
 		$('#mgrPassword1').focus();
 		return false;
-	}
-	
-	if($("#mgrName").val() == "" || $("#mgrName").val() == null)
-	{
-		alert("관리자 이름을 입력하세요.");
-		$("#mgrName").focus();
-		return;
 	}
 	
 	if($("#mgrPhone").val() == "" || $("#mgrPhone").val() == null)
@@ -122,9 +101,8 @@ function checkPwd()
 	}
 	
 	if(pwd==pwd1){
-		alert("성공적으로 관리자 가입이 완료되었습니다!");
-		document.updateMgrRegForm.submit();
-		
+		alert("수정이 완료되었습니다");
+		document.updateMgrRegForm.submit();		
 	}
 		
 	else

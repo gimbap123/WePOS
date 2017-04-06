@@ -41,9 +41,13 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements AdminDao {
 		List<ShopDto> shopList =  getSqlSession().selectList("searchShopCode", shopTypeCode);
 		return shopList;
 	}
+	
 	// 관리자 정보 수정
 	public MgrDto showMgrInfo(String mgrId){
 		return getSqlSession().selectOne("showMgrInfo",mgrId);
+	}
+	public String showShopInfo(int shopCode){
+		return getSqlSession().selectOne("showShopInfo",shopCode);
 	}
 	public int updateMgrInfo(MgrDto mgrDto){
 		return getSqlSession().update("updateMgrInfo",mgrDto);
