@@ -123,33 +123,48 @@
 										</h2>
 									</c:if>
 								</div>
-								<thead>
-									<tr style="background: #999; color: white; text-align: center">
-										<th style="text-align: center">일시</th>										
-										<th style="text-align: center">메뉴</th>
-										<th style="text-align: center">단가</th>
-										<th style="text-align: center">수량</th>
-										<th style="text-align: center; color: blue">매출</th>
-									</tr>
-								</thead>
+								<c:if test="${flag==0}">
+									<thead>
+										<tr style="background: #999; color: white; text-align: center">
+											<th style="text-align: center">일시</th>										
+											<th style="text-align: center">메뉴</th>
+											<th style="text-align: center">단가</th>
+											<th style="text-align: center">수량</th>
+											<th style="text-align: center; color: blue">매출</th>
+										</tr>
+									</thead>
+								</c:if>
+								<c:if test="${flag==1}">
+									<thead>
+										<tr style="background: #999; color: white; text-align: center">
+											<th style="text-align: center">일시</th>
+											<th style="text-align: center; color: blue">매출</th>
+										</tr>
+									</thead>
+								</c:if>
 								
 								<tbody>
 									<c:if test="${data==1}">
 										<c:set var="total" value="0" />
 										<c:forEach var="resultLog" items="${resultLog}">
 											<tr>
-												<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}
-													<%-- <fmt:formatDate value="${resultLog.orderDate}" pattern="yyyy-MM-dd HH:mm" /> --%>
-													<%-- <fmt:formatDate value="${resultLog.orderDate}" type="both" /> --%>
-												</td>
-												<td style="text-align: center">${resultLog.productName}</td>
-												<td style="text-align: center">
-													<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
-												</td>
-												<td style="text-align: center">${resultLog.orderAmount}</td>
-												<td style="text-align: center">
-													<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
-												</td>
+												<c:if test="${flag==0}">
+													<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
+													<td style="text-align: center">${resultLog.productName}</td>
+													<td style="text-align: center">
+														<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
+													</td>
+													<td style="text-align: center">${resultLog.orderAmount}</td>
+													<td style="text-align: center">
+														<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
+													</td>
+												</c:if>	
+												<c:if test="${flag==1}">
+													<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
+													<td style="text-align: center">
+														<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
+													</td>
+												</c:if>	
 											</tr>
 											<c:set var="total" value="${total + resultLog.orderPrice}" />
 										</c:forEach>
