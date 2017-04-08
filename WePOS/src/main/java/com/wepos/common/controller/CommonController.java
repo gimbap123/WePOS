@@ -171,8 +171,10 @@ public class CommonController {
 			userLoginDto.setUserLoginState('1');
 			commonDao.userLoginLog(userLoginDto);
 			
+			int userGradeCode = commonDao.userGradeCode(id);
 			session.setAttribute("id", id);
-			if("admin".equals(id))
+						
+			if(userGradeCode == 0)
 			{
 				session.setAttribute("userType", 3);
 			}

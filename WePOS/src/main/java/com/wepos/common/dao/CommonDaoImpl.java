@@ -82,5 +82,9 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 	public int deletedId(String userId) {
 		return getSqlSession().insert("deletedId", userId);
 	}
+	
+	public int userGradeCode(String userId) {
+		return getSqlSession().selectOne("userGradeCode", userId);
+	}
 
 }

@@ -76,5 +76,9 @@
 		insert into deleted_id(user_id) values(#{userId})
 	</insert>
 	
+	<select id="userGradeCode" parameterType="String" resultType="int">
+		select grade_code from users where user_id = #{userId}
+	</select>
+	
 
 </mapper>
