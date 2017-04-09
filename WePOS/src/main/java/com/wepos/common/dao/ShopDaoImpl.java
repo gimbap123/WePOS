@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.mgr.dto.CategoryDto;
 
 public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 
@@ -22,7 +23,7 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		return shopList;
 	}
   
-  public ShopDto getShopDetail(String shopCode) {		
+  public ShopDto getShopDetail(int shopCode) {		
 		return getSqlSession().selectOne("getShopDetail", shopCode);
 	}
   
@@ -31,15 +32,20 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		return productList;
 	}
   
-  public int productCount(String shopCode) {		
-		return getSqlSession().selectOne("productCount", shopCode);
+  public int productCount(Map<String, Object> map) {		
+		return getSqlSession().selectOne("productCount", map);
 	}
   
-  public Map<String, Object> shopTableInfo(String shopCode)
-  {
+  public Map<String, Object> shopTableInfo(int shopCode)  {
 	  Map<String, Object> tableInfoMap = getSqlSession().selectOne("shopTableInfo", shopCode);
 	  return tableInfoMap;
   }
+  
+  public List<CategoryDto> categoryList(int shopCode) {
+		List<CategoryDto> categoryList = getSqlSession().selectList("categoryList", shopCode);
+		return categoryList;
+	}
+  
   
 }
 

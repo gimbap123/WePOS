@@ -29,8 +29,9 @@ function tabClick(tabType)
 function productListPaging(pageNum)
 {
 	var shopCode = $("#shopCode").val()
+	var categoryCode = $("#categoryCode").val()
 	
-	$.get("productList.do", {shopCode : shopCode, pageNum : pageNum}, function(result)
+	$.get("productList.do", {shopCode : shopCode, pageNum : pageNum, categoryCode : categoryCode}, function(result)
 	{			
 		$("#productList").html(result);
 	})	

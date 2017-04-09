@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
 
 <title>We POS</title>
 </head>

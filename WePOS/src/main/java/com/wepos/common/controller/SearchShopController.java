@@ -26,11 +26,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
+import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.PagingUtil;
+import com.wepos.mgr.dto.CategoryDto;
 
 @Controller
 public class SearchShopController {
@@ -41,6 +43,7 @@ public class SearchShopController {
   @Autowired
   private AdminDao adminDao;
     
+  // 매장 검색
   @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
   public ModelAndView searchShopView(HttpServletRequest request, 
 		  @RequestParam(value="pageNum", defaultValue="1") int currentPage, 
@@ -114,13 +117,26 @@ public class SearchShopController {
 	  List<ShopTypeDto> shopTypeList = adminDao.getShopType();
 	  List<CityDto> cityList = adminDao.getCity();
 	  
+	  List<LocalDto> localList = null;
+	  
+	  if(shop.getCityCode() != 0)
+	  {
+		  localList = adminDao.searchLocal(shop.getCityCode());
+	  }
+	  
 	  ModelAndView mav = new ModelAndView();
 	  mav.setViewName("common/searchShop");
 	  mav.addObject("shopList", shopList);
 	  mav.addObject("shopCount", shopCount);
 	  mav.addObject("shopTypeList", shopTypeList);
 	  mav.addObject("cityList", cityList);
-	  mav.addObject("pagingHtml", page.getPagingHtml()); 
+	  mav.addObject("localList", localList);
+	  mav.addObject("pagingHtml", page.getPagingHtml());
+	  
+	  mav.addObject("shopTypeCode", shop.getShopTypeCode());
+	  mav.addObject("cityCode", shop.getCityCode());
+	  mav.addObject("localCode", shop.getLocalCode());
+	  mav.addObject("shopName", shop.getShopName());
 	  
 	  return mav;
   }
@@ -128,7 +144,7 @@ public class SearchShopController {
   	//매장 상세보기
 	@RequestMapping(value="/common/shopDetail.do")
 	public ModelAndView shopDetailView(HttpServletRequest request, 
-			@RequestParam("shopCode") String shopCode) throws Exception
+			@RequestParam("shopCode") int shopCode) throws Exception
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
@@ -183,21 +199,26 @@ public class SearchShopController {
 	
 	// 상품 리스트
 	@RequestMapping(value="/common/productList.do")
-	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") String shopCode,
-			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
+	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") int shopCode,
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(value="categoryCode", defaultValue="0") int categoryCode)
 	{	
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
 		filePath = filePath.substring(index);
 		
-		int productCount = shopDao.productCount(shopCode);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("shopCode", shopCode);
+		map.put("categoryCode", categoryCode);
 		
-		/*String paramString = "?shopCode=" + shopCode;*/
+		List<CategoryDto> categoryList = shopDao.categoryList(shopCode);		
+		
+		int productCount = shopDao.productCount(map);
+				
 		String paramString = "javascript:productListPaging";
 		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, null);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("shopCode", shopCode);
+		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 		
@@ -227,6 +248,8 @@ public class SearchShopController {
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("common/productList");
 		mav.addObject("productList", productList);
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("categoryCode", categoryCode);
 		mav.addObject("pagingHtml", page.getPagingHtml()); 
 		
 		return mav;
@@ -234,7 +257,7 @@ public class SearchShopController {
 	
 	// 매장 테이블 현황
 	@RequestMapping(value="/common/shopTableInfo.do")
-	public ModelAndView shopTableInfoView(@RequestParam("shopCode") String shopCode)
+	public ModelAndView shopTableInfoView(@RequestParam("shopCode") int shopCode)
 	{
 		Map<String, Object> tableInfoMap = shopDao.shopTableInfo(shopCode);
 		

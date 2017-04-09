@@ -16,7 +16,7 @@ public interface AdminDao {
 	
 	// 지역 정보 가져오기
 	public List<CityDto> getCity();
-	
+		
 	// 시, 군 정보 가져오기
 	public List<LocalDto> searchLocal(int cityCode);
 	

@@ -57,7 +57,7 @@
 	]]>  
   </select>
   
-  <select id="getShopDetail" parameterType="String" resultType="shopDto">
+  <select id="getShopDetail" parameterType="int" resultType="shopDto">
   	select s.shop_code, s.shop_type_code, s.city_code, s.local_code, s.shop_name, s.shop_desc, s.shop_file, s.shop_phone,
   		c.city_name || ' ' || l.local_name || ' ' || s.shop_address as shop_address, s.shop_start_time, s.shop_end_time
   	from shop s
@@ -75,7 +75,14 @@
   		(
   			select *
   			from product
-  			where shop_code = #{shopCode}
+  			<where>
+  				<if test="shopCode != null">
+  					and shop_code = #{shopCode}
+  				</if>  				
+  				<if test="categoryCode != 0">
+  					and category_code = #{categoryCode}
+  				</if>
+  			</where>  			
   			order by product_code
   		) rnumproduct  		
   	) p
@@ -84,14 +91,30 @@
 	]]>
   </select>
   
-  <select id="productCount" parameterType="String" resultType="int">
-  	select count(product_code) from product where shop_code = #{shopCode}
+  <select id="productCount" parameterType="map" resultType="int">  	
+  	select count(product_code)
+  	from product p
+  	inner join category c on p.shop_code = c.shop_code and p.category_code = c.category_code
+  	<where>
+  		<if test="shopCode != null">
+  			p.shop_code = #{shopCode}
+  		</if>  		
+  		<if test="categoryCode != 0">
+  			and p.category_code = #{categoryCode}
+  		</if>
+  	</where>
   </select>
   
-  <select id="shopTableInfo" parameterType="String" resultType="map">
+  <select id="shopTableInfo" parameterType="int" resultType="map">
   	select count(*) as totalTable, sum(decode(table_state, 0, 1, 0)) as emptyTable , 
   		sum(decode(table_state, 1, 1, 0)) as useTable
   	from tables
+  	where shop_code = #{shopCode}
+  </select>
+  
+  <select id="categoryList" parameterType="int" resultType="categoryDto">
+  	select shop_code, category_code, category_name
+  	from category
   	where shop_code = #{shopCode}
   </select>
   

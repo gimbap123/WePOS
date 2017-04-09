@@ -24,6 +24,7 @@
 		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.MgrDto"/>
 		<typeAlias alias="replyDto" type="com.wepos.common.dto.ReplyDto" />
 		<typeAlias alias="PosLogDto" type="com.wepos.pos.dto.PosLogDto"/>
+		<typeAlias alias="categoryDto" type="com.wepos.mgr.dto.CategoryDto"/>
 	</typeAliases>
 		
 	<mappers>	    

@@ -47,9 +47,14 @@
 						<div class="row">
 							<div class="col-md-4">
 								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
-									<option value="0">매장 종류</option>		
+									<option value="0">매장 종류</option>									
 									<c:forEach items="${shopTypeList}" var="shopType">
-										<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>						
+										<c:if test="${shopTypeCode == shopType.shopTypeCode}">
+											<option value="${shopType.shopTypeCode}" selected="selected">${shopType.shopTypeName}</option>
+										</c:if>
+										<c:if test="${shopTypeCode != shopType.shopTypeCode}">
+											<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>		
+										</c:if>
 									</c:forEach>
 								</select>	
 							</div>
@@ -57,21 +62,36 @@
 								<select class="form-control" id="cityCode" name="cityCode" onchange="searchLocal()">
 									<option value="0">지역</option>	
 									<c:forEach items="${cityList}" var="city">
-										<option value="${city.cityCode}">${city.cityName}</option>
+										<c:if test="${cityCode == city.cityCode}">
+											<option value="${city.cityCode}" selected="selected">${city.cityName}</option>
+										</c:if>
+										<c:if test="${cityCode != city.cityCode}">
+											<option value="${city.cityCode}">${city.cityName}</option>
+										</c:if>										
 									</c:forEach>
 								</select>
 							</div>
 							<div class="col-md-4">
 								<select class="form-control" id="localCode" name="localCode">
-									<option value="0">시, 군</option>		
-								</select>																						
+									<option value="0">시, 군</option>
+									<c:if test="${localList != null}">
+										<c:forEach items="${localList}" var="local">
+											<c:if test="${localCode == local.localCode}">
+												<option value="${local.localCode}" selected="selected">${local.localName}</option>
+											</c:if>
+											<c:if test="${localCode != local.localCode}">
+												<option value="${local.localCode}">${local.localName}</option>
+											</c:if>
+										</c:forEach>
+									</c:if>	
+								</select>																				
 							</div>											
 						</div>
 					</div>									
 									
 					<div class="col-md-6 col-md-offset-3">							
 						<div class="input-group">	
-							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요">
+							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요" value="${shopName}">
 							<span class="input-group-btn">
 								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
@@ -98,7 +118,7 @@
                     			<div class="cbp-l-caption-alignCenter">
                     				<div class="cbp-l-caption-body">
                     					<ul class="link-captions no-bottom-space">
-                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-link"></i></a></li>
+                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-info-circle"></i></a></li>
                                     		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="Design Object"><i class="rounded-x fa fa-search"></i></a></li>
                     					</ul>
                     				</div>

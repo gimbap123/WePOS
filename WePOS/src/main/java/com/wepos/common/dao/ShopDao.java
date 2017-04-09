@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.mgr.dto.CategoryDto;
 
 public interface ShopDao {
   
@@ -15,16 +16,19 @@ public interface ShopDao {
   public List<ShopDto> searchShop(Map<String, Object> map);
   
   //매장 상세보기
-  public ShopDto getShopDetail(String shopCode);
+  public ShopDto getShopDetail(int shopCode);
   
   // 상품 리스트보기
   public List<ProductDto> productList(Map<String, Object> map);
   
   // 상품 갯수
-  public int productCount(String shopCode);
+  public int productCount(Map<String, Object> map);
   
   // 매장 테이블 현황
-  public Map<String, Object> shopTableInfo(String shopCode);
+  public Map<String, Object> shopTableInfo(int shopCode);
+  
+  // 매장별 카테고리
+  public List<CategoryDto> categoryList(int shopCode);
   
 }
 
