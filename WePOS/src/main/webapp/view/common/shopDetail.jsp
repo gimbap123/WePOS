@@ -70,8 +70,8 @@
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#board" data-toggle="tab" onclick="tabClick('boardTab')">공지사항</a></li>
-                    <li><a href="#productList" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
-                    <li><a href="#shopTableInfo" data-toggle="tab" onclick="tabClick('shopTableInfoTab')">테이블현황</a></li>
+                    <li><a href="#productListTab" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
+                    <li><a href="#shopTableInfoTab" data-toggle="tab" onclick="tabClick('shopTableInfoTab')">테이블현황</a></li>
                     <li><a href="#settings" data-toggle="tab" onclick="tabClick('tab2')">게시판</a></li>
                 </ul>                
                 <div class="tab-content">
@@ -83,9 +83,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade in" id="productList">
+                    <div class="tab-pane fade in" id="productListTab">
                     </div>
-                    <div class="tab-pane fade in" id="shopTableInfo">                                                                 
+                    <div class="tab-pane fade in" id="shopTableInfoTab">                                                 
                     </div>
                     <div class="tab-pane fade in" id="settings">
                         <h4>Heading Sample 4</h4>

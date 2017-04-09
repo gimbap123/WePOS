@@ -10,14 +10,14 @@ function tabClick(tabType)
 	{
 		$.get("productList.do", {shopCode : shopCode}, function(result)
 		{			
-			$("#productList").html(result);
+			$("#productListTab").html(result);
 		})		
 	}
 	else if(tabType == "shopTableInfoTab")
 	{
 		$.get("shopTableInfo.do", {shopCode : shopCode}, function(result)
 		{			
-			$("#shopTableInfo").html(result);
+			$("#shopTableInfoTab").html(result);
 		})	
 	}
 	else
@@ -33,7 +33,7 @@ function productListPaging(pageNum)
 	
 	$.get("productList.do", {shopCode : shopCode, pageNum : pageNum, categoryCode : categoryCode}, function(result)
 	{			
-		$("#productList").html(result);
+		$("#productListTab").html(result);
 	})	
 }
 

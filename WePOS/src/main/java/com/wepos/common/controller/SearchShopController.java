@@ -246,7 +246,7 @@ public class SearchShopController {
 		}
 		
 		ModelAndView mav = new ModelAndView();	
-		mav.setViewName("common/productList");
+		mav.setViewName("common/productListTab");
 		mav.addObject("productList", productList);
 		mav.addObject("categoryList", categoryList);
 		mav.addObject("categoryCode", categoryCode);
@@ -262,7 +262,7 @@ public class SearchShopController {
 		Map<String, Object> tableInfoMap = shopDao.shopTableInfo(shopCode);
 		
 		ModelAndView mav = new ModelAndView();		
-		mav.setViewName("common/shopTableInfo");
+		mav.setViewName("common/shopTableInfoTab");
 		mav.addObject("tableInfoMap", tableInfoMap);
 		
 		return mav;
