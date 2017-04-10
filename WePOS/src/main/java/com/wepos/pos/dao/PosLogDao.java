@@ -8,8 +8,17 @@ public interface PosLogDao {
   // 전체 매출통계
   public List<PosLogDto> mainLog();
   
-  // 날짜 지정 매출통계
-  public List<PosLogDto> searchLog(PosLogDto posLogDto);
+  // 총 매출통계
+ public List<PosLogDto> searchTotalLog(PosLogDto posLogDto);
+  
+  // 일별 매출통계
+  public List<PosLogDto> searchDayLog(PosLogDto posLogDto);
+  
+ /* // 주별 매출통계
+  public List<PosLogDto> searchWeekLog(PosLogDto posLogDto);
+  
+  // 월별 매출통계
+  public List<PosLogDto> searchMonthLog(PosLogDto posLogDto);*/
   
   // 메뉴명 조회
   public String productName(int productCode);
