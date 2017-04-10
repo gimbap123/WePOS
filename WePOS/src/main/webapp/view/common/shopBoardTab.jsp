@@ -3,7 +3,7 @@
 
 <div class="table-search-v1 panel panel-u margin-bottom-30" style="margin-top: 20px;'">
 	<div class="panel-heading">
-		<h3 class="panel-title"><i class="icon-note"></i> 공지사항 (총 ${shopNoticeCount}개의 공지사항이 있습니다.)</h3>	
+		<h3 class="panel-title"><i class="icon-note"></i> 공지사항 (총 ${shopBoardCount}개의 게시물이 있습니다.)</h3>	
 	</div>	
 	
 	<div class="table-responsive">
@@ -18,19 +18,19 @@
 				</tr>
 			</thead>
 			
-			<c:if test="${shopNoticeCount == 0}">
+			<c:if test="${shopBoardCount == 0}">
 				<tr>
-					<td colspan="5" style="text-align:center">등록된 공지사항이 없습니다.</td>
+					<td colspan="5" style="text-align:center">등록된 게시물이 없습니다.</td>
 				</tr>
 			</c:if>
-			<c:if test="${shopNoticeCount != 0}">
-				<c:forEach items="${shopNoticeList}" var="shopNotice">
+			<c:if test="${shopBoardCount != 0}">
+				<c:forEach items="${shopBoardList}" var="shopBoard">
 					<tr>
-						<td>${shopNotice.noticeNumber}</td>
-						<td><a href="shopNoticeDetail.do?noticeNumber=${shopNotice.noticeNumber}">${shopNotice.noticeTitle}</a></td>
-						<td>${shopNotice.mgrId}</td>
-						<td>${shopNotice.noticeDate}</td>
-						<td>${shopNotice.noticeReadCnt}</td>
+						<td>${shopBoard.boardNumber}</td>
+						<td><a href="shopBoardDetail.do?boardNumber=${shopBoard.boardNumber}">${shopBoard.boardTitle}</a></td>
+						<td>${shopBoard.totalId}</td>
+						<td>${shopBoard.boardDate}</td>
+						<td>${shopBoard.boardReadCnt}</td>
 					</tr>
 				</c:forEach>
 			</c:if>			
@@ -41,12 +41,12 @@
 	
 	<div class="row" style="margin-top: 5px; margin-bottom: 10px;">
 		<div class="col-md-2 col-md-offset-4">			
-			<select class="form-control" name="searchNoticeType" id="searchNoticeType">
-				<c:forEach items="${searchNoticeTypeList}" var="data">
-					<c:if test="${searchNoticeType eq data.key}">
+			<select class="form-control" name="searchBoardType" id="searchBoardType">
+				<c:forEach items="${searchBoardTypeList}" var="data">
+					<c:if test="${searchBoardType eq data.key}">
 						<option value="${data.key}" selected="selected">${data.value}</option>					
 					</c:if>	
-					<c:if test="${searchNoticeType ne data.key}">
+					<c:if test="${searchBoardType ne data.key}">
 						<option value="${data.key}">${data.value}</option>					
 					</c:if>				
 				</c:forEach>				
@@ -54,9 +54,9 @@
 		</div>
 		<div class="col-md-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="searchNoticeText" id="searchNoticeText" value="${searchNoticeText}">
+				<input type="text" class="form-control" name="searchBoardText" id="searchBoardText" value="${searchBoardText}">
 				<span class="input-group-btn">
-					<button class="btn-u" type="button" style="height: 34px" onclick="searchShopNotice()">							
+					<button class="btn-u" type="button" style="height: 34px" onclick="searchShopBoard()">							
 						<i class="fa fa-search"></i>
 					</button>
 				</span>	
