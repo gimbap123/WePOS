@@ -6,7 +6,14 @@ function tabClick(tabType)
 {	
 	var shopCode = $("#shopCode").val()
 	
-	if(tabType == "productListTab")
+	if(tabType == "shopNoticeTab")
+	{
+		$.get("shopNotice.do", {shopCode : shopCode}, function(result)
+		{			
+			$("#shopNoticeTab").html(result);
+		})
+	}
+	else if(tabType == "productListTab")
 	{
 		$.get("productList.do", {shopCode : shopCode}, function(result)
 		{			
@@ -37,3 +44,15 @@ function productListPaging(pageNum)
 	})	
 }
 
+
+function searchShopNotice(pageNum)
+{
+	var shopCode = $("#shopCode").val()
+	var searchType = $("#searchType").val()
+	var searchText = $("#searchText").val()
+	
+	$.get("shopNotice.do", {shopCode : shopCode, searchType : searchType, searchText : searchText, pageNum : pageNum}, function(result)
+	{			
+		$("#shopNoticeTab").html(result);
+	})
+}

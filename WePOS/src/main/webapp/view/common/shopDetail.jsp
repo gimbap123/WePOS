@@ -69,19 +69,13 @@
             <!-- Tab v1 -->                
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#board" data-toggle="tab" onclick="tabClick('boardTab')">공지사항</a></li>
+                    <li class="active"><a href="#shopNoticeTab" data-toggle="tab" onclick="tabClick('shopNoticeTab')">공지사항</a></li>
                     <li><a href="#productListTab" data-toggle="tab" onclick="tabClick('productListTab')">상품 리스트</a></li>
                     <li><a href="#shopTableInfoTab" data-toggle="tab" onclick="tabClick('shopTableInfoTab')">테이블현황</a></li>
                     <li><a href="#settings" data-toggle="tab" onclick="tabClick('tab2')">게시판</a></li>
                 </ul>                
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="board">
-                        <div class="row">                            
-                            <div class="col-md-12">
-                                <h4>Heading Sample 1</h4>
-                                <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum <strong>ivamus imperdiet</strong> condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque <strong>fermentum vivamus</strong> imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac felis consectetur id. Donec eget orci metusvivamus imperdiet.</p>                        
-                            </div>
-                        </div>
+                    <div class="tab-pane fade in active" id="shopNoticeTab">                  
                     </div>
                     <div class="tab-pane fade in" id="productListTab">
                     </div>
@@ -160,6 +154,7 @@
 	
     jQuery(document).ready(function() {
     	App.init();    	
+    	tabClick('shopNoticeTab')
     });
 </script>	
 </body>

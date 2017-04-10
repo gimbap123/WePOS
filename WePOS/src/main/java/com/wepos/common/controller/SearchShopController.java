@@ -33,6 +33,7 @@ import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.mgr.dto.ShopNoticeDto;
 
 @Controller
 public class SearchShopController {
@@ -217,8 +218,7 @@ public class SearchShopController {
 				
 		String paramString = "javascript:productListPaging";
 		PagingUtil page = new PagingUtil(paramString, currentPage, productCount, 3, 5, null);
-		
-		
+				
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 		
@@ -264,6 +264,72 @@ public class SearchShopController {
 		ModelAndView mav = new ModelAndView();		
 		mav.setViewName("common/shopTableInfoTab");
 		mav.addObject("tableInfoMap", tableInfoMap);
+		
+		return mav;
+	}
+		
+	// 매장 공지사항
+	@RequestMapping(value="/common/shopNotice.do")
+	public ModelAndView shopNodticeView(HttpServletRequest request, @RequestParam("shopCode") int shopCode,
+			@RequestParam(value="searchType", defaultValue="all") String searchType, 
+			@RequestParam(value="searchText", defaultValue="") String searchText,
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
+	{		
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.indexOf("\\WePOS");
+		filePath = filePath.substring(index);
+				
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("shopCode", shopCode);
+		map.put("searchType", searchType);
+		map.put("searchText", searchText);
+		
+		int shopNoticeCount = shopDao.shopNoticeCount(map);	
+		
+		String paramString = "javascript:searchShopNotice";
+		PagingUtil page = new PagingUtil(paramString, currentPage, shopNoticeCount, 5, 5, null);
+				
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<ShopNoticeDto> shopNoticeList = null;
+		
+		if(shopNoticeCount > 0)
+		{
+			shopNoticeList = shopDao.shopNoticeList(map);
+			for(ShopNoticeDto shopNotice : shopNoticeList)
+			{
+				if(shopNotice.getNoticeFile() != null)
+				{
+					String fileName = shopNotice.getNoticeFile();
+					shopNotice.setNoticeFile(filePath + fileName);
+				}
+				else
+				{
+					shopNotice.setNoticeFile("/WePOS/uploadFile/nullImg.jpg");
+				}
+			}	 		  		  
+		 }
+		else
+		{
+			shopNoticeList = Collections.emptyList();
+		}
+		
+		Map<String, Object> searchTypeList = new HashMap<String, Object>();
+		searchTypeList.put("all", "전체");
+		searchTypeList.put("mgr_id", "작성자");
+		searchTypeList.put("notice_title", "제목");
+		searchTypeList.put("notice_content", "내용");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeTab");
+		mav.addObject("shopNoticeList", shopNoticeList);
+		mav.addObject("shopNoticeCount", shopNoticeCount);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		
+		mav.addObject("searchType", searchType);
+		mav.addObject("searchText", searchText);
+		mav.addObject("searchTypeList", searchTypeList);
 		
 		return mav;
 	}

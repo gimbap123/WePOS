@@ -6,6 +6,7 @@ import java.util.Map;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.mgr.dto.ShopNoticeDto;
 
 public interface ShopDao {
   
@@ -29,6 +30,12 @@ public interface ShopDao {
   
   // 매장별 카테고리
   public List<CategoryDto> categoryList(int shopCode);
+  
+  // 매장 공지사항 갯수
+  public int shopNoticeCount(Map<String, Object> map);
+  
+  // 매장 공지사항
+  public List<ShopNoticeDto> shopNoticeList(Map<String, Object> map);
   
 }
 

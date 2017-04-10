@@ -118,4 +118,52 @@
   	where shop_code = #{shopCode}
   </select>
   
+  <select id="shopNoticeCount" parameterType="map" resultType="int">
+  	select count(notice_number)
+  	from shop_notice
+  	<where>
+  		<if test="shopCode != null">
+  			and shop_code = #{shopCode}  		
+  		</if>
+  		<if test="searchType != 'all' and searchText != ''">
+  			and ${searchType} like '%' || #{searchText} || '%'
+  		</if>
+  		<if test="searchType == 'all' and searchText != ''">
+  			and (mgr_id like '%' || #{searchText} || '%' or 
+  			notice_title like '%' || #{searchText} || '%' or
+  			notice_content like '%' || #{searchText} || '%')
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="shopNoticeList" parameterType="map" resultType="shopNoticeDto">  	
+  	select sn.notice_number, sn.mgr_id, sn.notice_title, sn.notice_content, sn.notice_date, sn.notice_read_cnt, sn.notice_file
+  	from
+  	(  	
+  		select rnumsn. *, rownum as rnum
+  		from
+  		(
+  			select *
+  			from shop_notice
+		  	<where>
+		  		<if test="shopCode != null">
+		  			and shop_code = #{shopCode}  		
+		  		</if>
+		  		<if test="searchType != 'all' and searchText != ''">
+		  			and ${searchType} like '%' || #{searchText} || '%'
+		  		</if>
+		  		<if test="searchType == 'all' and searchText != ''">
+		  			and (mgr_id like '%' || #{searchText} || '%' or 
+		  			notice_title like '%' || #{searchText} || '%' or
+		  			notice_content like '%' || #{searchText} || '%')
+		  		</if>
+		  	</where>
+  			order by notice_number
+  		) rnumsn
+  	) sn
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>  	
+  </select>
+  
 </mapper>
