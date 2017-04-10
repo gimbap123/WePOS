@@ -14,11 +14,8 @@ public interface PosLogDao {
   // 일별 매출통계
   public List<PosLogDto> searchDayLog(PosLogDto posLogDto);
   
- /* // 주별 매출통계
-  public List<PosLogDto> searchWeekLog(PosLogDto posLogDto);
-  
   // 월별 매출통계
-  public List<PosLogDto> searchMonthLog(PosLogDto posLogDto);*/
+  public List<PosLogDto> searchMonthLog(PosLogDto posLogDto);
   
   // 메뉴명 조회
   public String productName(int productCode);

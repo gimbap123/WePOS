@@ -56,6 +56,7 @@ public class PosLogController {
 		List<PosLogDto> searchLog=null;
 		System.out.println("productCode="+posLogDto.getProductCode());
 		System.out.println("searchType="+posLogDto.getSearchType());
+		System.out.println("searchType="+posLogDto.getMonthBegin());
 		if(posLogDto.getProductCode()==0)
 			posLogDto.setProductName("전체 메뉴");
 		else{
@@ -70,6 +71,8 @@ public class PosLogController {
 			searchLog=posLogDao.searchTotalLog(posLogDto);
 		else if(posLogDto.getSearchType()==2)
 			searchLog=posLogDao.searchDayLog(posLogDto);
+		else if(posLogDto.getSearchType()==3)
+			searchLog=posLogDao.searchMonthLog(posLogDto);
 		
 		ModelAndView mav = new ModelAndView("pos/salesLog");
 		if(searchLog.isEmpty()==true)

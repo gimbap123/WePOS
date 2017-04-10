@@ -13,6 +13,8 @@ public class PosLogDto {
 	private Date calendarBegin;
 	private Date calendarEnd;
 	private int searchType;
+	private Date monthBegin;
+	private Date monthEnd;
 	
 	public String getOrderDate() {
 		return orderDate;
@@ -73,6 +75,18 @@ public class PosLogDto {
 	}
 	public void setSearchType(int searchType) {
 		this.searchType = searchType;
+	}
+	public Date getMonthBegin() {
+		return monthBegin;
+	}
+	public void setMonthBegin(Date monthBegin) {
+		this.monthBegin = monthBegin;
+	}
+	public Date getMonthEnd() {
+		return monthEnd;
+	}
+	public void setMonthEnd(Date monthEnd) {
+		this.monthEnd = monthEnd;
 	}
 		
 }

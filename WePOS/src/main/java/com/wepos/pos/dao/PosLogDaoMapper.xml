@@ -51,6 +51,27 @@
 			to_char(o.order_date,'yy-mm-dd'),p.product_name,p.product_price
 		order by to_char(o.order_date,'yy-mm-dd') desc
 	</select>
+	
+	<select id="searchMonthLog" parameterType="PosLogDto" resultType="PosLogDto">
+		select to_char(o.order_date,'yy-mm') "order_date"
+			,p.product_name,p.product_price, sum(od.order_amount)
+			"order_amount",sum(od.order_price) "order_price"
+		from orders o
+		inner join orders_detail od on o.order_code = od.order_code
+		inner join product p on od.product_code = p.product_code
+		<where>
+			<if test="productCode==000">
+				and o.order_date between #{monthBegin} and #{monthEnd}+1
+			</if>
+			<if test="productCode!=000">
+				and od.product_code=#{productCode} and o.order_date between
+				#{monthBegin} and #{monthEnd}+1
+			</if>
+		</where>
+		group by
+			to_char(o.order_date,'yy-mm'),p.product_name,p.product_price
+		order by to_char(o.order_date,'yy-mm') desc
+	</select>
 
 	<select id="productName" parameterType="int" resultType="String">
 		select product_name from product where product_code=#{productCode}

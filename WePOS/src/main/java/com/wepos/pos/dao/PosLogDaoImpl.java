@@ -20,6 +20,10 @@ public class PosLogDaoImpl extends SqlSessionDaoSupport implements PosLogDao {
 		return getSqlSession().selectList( "searchDayLog" , posLogDto);
 	}
 	
+	public List<PosLogDto> searchMonthLog(PosLogDto posLogDto) {
+		return getSqlSession().selectList( "searchMonthLog" , posLogDto);
+	}
+	
 	public String productName(int productCode){
 		return getSqlSession().selectOne("productName",productCode);
 	}
