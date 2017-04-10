@@ -6,7 +6,14 @@ function tabClick(tabType)
 {	
 	var shopCode = $("#shopCode").val()
 	
-	if(tabType == "productListTab")
+	if(tabType == "shopNoticeTab")
+	{
+		$.get("shopNotice.do", {shopCode : shopCode}, function(result)
+		{			
+			$("#shopNoticeTab").html(result);
+		})
+	}
+	else if(tabType == "productListTab")
 	{
 		$.get("productList.do", {shopCode : shopCode}, function(result)
 		{			
@@ -20,9 +27,12 @@ function tabClick(tabType)
 			$("#shopTableInfoTab").html(result);
 		})	
 	}
-	else
+	else if(tabType == "shopBoardTab")
 	{
-		alert(tabType);
+		$.get("shopBoard.do", {shopCode : shopCode}, function(result)
+		{
+			$("#shopBoardTab").html(result);
+		})
 	}
 }
 
@@ -35,5 +45,30 @@ function productListPaging(pageNum)
 	{			
 		$("#productListTab").html(result);
 	})	
+}
+
+
+function searchShopNotice(pageNum)
+{
+	var shopCode = $("#shopCode").val()
+	var searchNoticeType = $("#searchNoticeType").val()
+	var searchNoticeText = $("#searchNoticeText").val()
+	
+	$.get("shopNotice.do", {shopCode : shopCode, searchNoticeType : searchNoticeType, searchNoticeText : searchNoticeText, pageNum : pageNum}, function(result)
+	{			
+		$("#shopNoticeTab").html(result);
+	})
+}
+
+function searchShopBoard(pageNum)
+{
+	var shopCode = $("#shopCode").val()
+	var searchBoardType = $("#searchBoardType").val()
+	var searchBoardText = $("#searchBoardText").val()
+	
+	$.get("shopBoard.do", {shopCode : shopCode, searchBoardType : searchBoardType, searchBoardText : searchBoardText, pageNum : pageNum}, function(result)
+	{			
+		$("#shopBoardTab").html(result);
+	})
 }
 

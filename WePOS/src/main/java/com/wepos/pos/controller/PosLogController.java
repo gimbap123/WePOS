@@ -27,12 +27,13 @@ public class PosLogController {
 	// 매출 통계 메인 페이지
 	@RequestMapping("/pos/salesLog.do")
 	public ModelAndView showSalesLog(@RequestParam(value = "mgrId") String mgrId) {
+		int flag=0;
+		int data=0;
 		int shopCode = posMainDao.getShopCode(mgrId);
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);
 		List<PosLogDto> mainLog=posLogDao.mainLog();
-		int flag=0;
-		int data=0;
+		
 		ModelAndView mav = new ModelAndView("pos/salesLog");
 		if(mainLog.isEmpty()==true)
 			data=0;
@@ -50,20 +51,26 @@ public class PosLogController {
 	@RequestMapping(value="/pos/searchLog.do", method=RequestMethod.POST)
 	public ModelAndView searchLog(@ModelAttribute PosLogDto posLogDto,
 														@RequestParam(value = "mgrId") String mgrId){
+		int flag=1;
+		int data=0;
+		List<PosLogDto> searchLog=null;
 		System.out.println("productCode="+posLogDto.getProductCode());
+		System.out.println("searchType="+posLogDto.getSearchType());
 		if(posLogDto.getProductCode()==0)
 			posLogDto.setProductName("전체 메뉴");
 		else{
 			String productName=posLogDao.productName(posLogDto.getProductCode());
 			posLogDto.setProductName(productName);
-		}		
+		}
 		int shopCode = posMainDao.getShopCode(mgrId);
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);
-		List<PosLogDto> searchLog=posLogDao.searchLog(posLogDto);
-		System.out.println("posLogDto="+searchLog.get(0).getOrderDate());
-		int flag=1;
-		int data=0;		
+		
+		if(posLogDto.getSearchType()==1)
+			searchLog=posLogDao.searchTotalLog(posLogDto);
+		else if(posLogDto.getSearchType()==2)
+			searchLog=posLogDao.searchDayLog(posLogDto);
+		
 		ModelAndView mav = new ModelAndView("pos/salesLog");
 		if(searchLog.isEmpty()==true)
 			data=0;

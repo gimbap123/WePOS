@@ -302,9 +302,13 @@ public class BoardController {
 	
 	// 파일 다운로드
     @RequestMapping("/common/file.do")
-    public ModelAndView download(@RequestParam("boardFile") String boardFile)
+    public ModelAndView download(HttpServletRequest request, @RequestParam("boardFile") String boardFile)
     {
-    	File downloadFile=new File(FileUtil.UPLOAD_PATH+"/"+boardFile);
+    	//File downloadFile=new File(FileUtil.UPLOAD_PATH+"/"+boardFile);
+    	String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+			
+		File downloadFile=new File(filePath + boardFile);
+		
     	//기존의 방식은 ModelAndView("이동할페이지명(View객체명)", "키명", Value(저장할값)값);
     	// =>Model(키, 저장할값) =>request.setAttribute(키, 저장할값)
     	return new ModelAndView("downloadView", "downloadFile", downloadFile);

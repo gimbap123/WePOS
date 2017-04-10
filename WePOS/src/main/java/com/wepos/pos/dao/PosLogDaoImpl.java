@@ -1,6 +1,5 @@
 package com.wepos.pos.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -13,8 +12,12 @@ public class PosLogDaoImpl extends SqlSessionDaoSupport implements PosLogDao {
 		return getSqlSession().selectList( "mainLog" );
 	}
 	
-	public List<PosLogDto> searchLog(PosLogDto posLogDto) {
-		return getSqlSession().selectList( "searchLog" , posLogDto);
+	public List<PosLogDto> searchTotalLog(PosLogDto posLogDto) {
+		return getSqlSession().selectList( "searchTotalLog" , posLogDto);
+	}
+	
+	public List<PosLogDto> searchDayLog(PosLogDto posLogDto) {
+		return getSqlSession().selectList( "searchDayLog" , posLogDto);
 	}
 	
 	public String productName(int productCode){

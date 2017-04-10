@@ -118,4 +118,120 @@
   	where shop_code = #{shopCode}
   </select>
   
+  <select id="shopNoticeCount" parameterType="map" resultType="int">
+  	select count(notice_number)
+  	from shop_notice
+  	<where>
+  		<if test="shopCode != null">
+  			and shop_code = #{shopCode}  		
+  		</if>
+  		<if test="searchType != 'all' and searchText != ''">
+  			and ${searchType} like '%' || #{searchText} || '%'
+  		</if>
+  		<if test="searchType == 'all' and searchText != ''">
+  			and (mgr_id like '%' || #{searchText} || '%' or 
+  			notice_title like '%' || #{searchText} || '%' or
+  			notice_content like '%' || #{searchText} || '%')
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="shopNoticeList" parameterType="map" resultType="shopNoticeDto">  	
+  	select sn.notice_number, sn.mgr_id, sn.notice_title, sn.notice_content, sn.notice_date, sn.notice_read_cnt, sn.notice_file
+  	from
+  	(  	
+  		select rnumsn. *, rownum as rnum
+  		from
+  		(
+  			select *
+  			from shop_notice
+		  	<where>
+		  		<if test="shopCode != null">
+		  			and shop_code = #{shopCode}  		
+		  		</if>
+		  		<if test="searchType != 'all' and searchText != ''">
+		  			and ${searchType} like '%' || #{searchText} || '%'
+		  		</if>
+		  		<if test="searchType == 'all' and searchText != ''">
+		  			and (mgr_id like '%' || #{searchText} || '%' or 
+		  			notice_title like '%' || #{searchText} || '%' or
+		  			notice_content like '%' || #{searchText} || '%')
+		  		</if>
+		  	</where>
+  			order by notice_number desc
+  		) rnumsn
+  	) sn
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>  	
+  </select>
+  
+  <select id="shopNoticeDetail" parameterType="int" resultType="shopNoticeDto">
+  	select *
+  	from shop_notice
+  	where notice_number = #{notice_number}
+  </select>
+  
+  <update id="addNoticeReadCnt" parameterType="int">
+  	update shop_notice set notice_read_cnt = notice_read_cnt + 1 where notice_number = #{noticeNumber}
+  </update>
+  
+  <select id="shopBoardCount" parameterType="map" resultType="int">
+  	select count(board_number)
+  	from shop_board
+  	<where>
+  		<if test="shopCode != null">
+  			and shop_code = #{shopCode}  		
+  		</if>
+  		<if test="searchType != 'all' and searchText != ''">
+  			and ${searchType} like '%' || #{searchText} || '%'
+  		</if>
+  		<if test="searchType == 'all' and searchText != ''">
+  			and (total_id like '%' || #{searchText} || '%' or 
+  			board_title like '%' || #{searchText} || '%' or
+  			board_content like '%' || #{searchText} || '%')
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="shopBoardList" parameterType="map" resultType="shopBoardDto">
+  	select sb.board_number, sb.total_id, sb.board_title, sb.board_content, sb.board_date, sb.board_read_cnt, sb.board_file
+  	from
+  	(  	
+  		select rnumsb. *, rownum as rnum
+  		from
+  		(
+  			select *
+  			from shop_board
+		  	<where>
+		  		<if test="shopCode != null">
+		  			and shop_code = #{shopCode}  		
+		  		</if>
+		  		<if test="searchType != 'all' and searchText != ''">
+		  			and ${searchType} like '%' || #{searchText} || '%'
+		  		</if>
+		  		<if test="searchType == 'all' and searchText != ''">
+		  			and (total_id like '%' || #{searchText} || '%' or 
+		  			board_title like '%' || #{searchText} || '%' or
+		  			board_content like '%' || #{searchText} || '%')
+		  		</if>
+		  	</where>
+  			order by board_number desc
+  		) rnumsb
+  	) sb
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>
+  </select>
+  
+  <update id="addBoardReadCnt" parameterType="int">
+  	update shop_board set board_read_cnt = board_read_cnt + 1 where board_number = #{boardNumber}
+  </update>
+  
+  <select id="shopBoardDetail" parameterType="int" resultType="shopBoardDto">
+  	select *
+  	from shop_board
+  	where board_number = #{board_number}
+  </select>
+  
 </mapper>
