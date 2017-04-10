@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ProductDto;
+import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -62,6 +63,23 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
   
   public void addNoticeReadCnt(int noticeNumber) {
 		getSqlSession().update("addNoticeReadCnt", noticeNumber);
+	}
+  
+  public int shopBoardCount(Map<String, Object> map) {
+		return getSqlSession().selectOne("shopBoardCount", map);
+	}
+  
+  public List<ShopBoardDto> shopBoardList(Map<String, Object> map) {
+		List<ShopBoardDto> shopBoardList = getSqlSession().selectList("shopBoardList", map);
+		return shopBoardList;
+	}
+  
+  public void addBoardReadCnt(int boardNumber) {
+	  getSqlSession().update("addBoardReadCnt", boardNumber);
+	}
+  
+  public ShopBoardDto shopBoardDetail(int boardNumber) {
+		return getSqlSession().selectOne("shopBoardDetail", boardNumber);
 	}
 }
 

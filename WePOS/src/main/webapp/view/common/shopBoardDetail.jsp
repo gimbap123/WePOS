@@ -46,29 +46,29 @@
 			<div class="blog-page">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="blog margin-bottom-40">
-						<h2>${shopNotice.noticeTitle}</h2>
+						<h2>${shopBoard.boardTitle}</h2>
 						<div class="blog-post-tags">
 							<ul class="list-unstyled list-inline blog-info">
-	                            <li><i class="fa fa-calendar"></i> ${shopNotice.noticeDate}</li>
-	                            <li><i class="fa fa-pencil"></i> ${shopNotice.mgrId}</li>
-	                            <li><i class="fa fa-comments"></i> ${shopNotice.noticeReadCnt}회 조회</li>
+	                            <li><i class="fa fa-calendar"></i> ${shopBoard.boardDate}</li>
+	                            <li><i class="fa fa-pencil"></i> ${shopBoard.totalId}</li>
+	                            <li><i class="fa fa-comments"></i> ${shopBoard.boardReadCnt}회 조회</li>
                         	</ul>
 						</div>
-						<c:if test="${shopNotice.noticeFile != null}">
+						<c:if test="${shopBoard.boardFile != null}">
 							<div class="blog-img">
-								<img class="img-responsive" src="${shopNotice.noticeFile}" alt="" style="width: 80%;">
+								<img class="img-responsive" src="${shopBoard.boardFile}" alt="" style="width: 80%;">
 							</div>
 						</c:if>	
-						<p>${shopNotice.noticeContent}</p>
+						<p>${shopBoard.boardContent}</p>
 						<hr>
 						<b>첨부파일 : </b>
-						<c:if test="${shopNotice.noticeFile == null}">
+						<c:if test="${shopBoard.boardFile == null}">
 							첨부된 파일이 없습니다.	
 						</c:if>	
-						<c:if test="${shopNotice.noticeFile != null}">							
+						<c:if test="${shopBoard.boardFile != null}">							
 							<a href="file.do?boardFile=${fileName}">${fileName}</a>
 						</c:if>
-						<a class="btn-u btn-u-small" style="float: right;" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">
+						<a class="btn-u btn-u-small" style="float: right;" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">
 							<i class="fa fa-plus-sign"></i> 목록으로
 						</a>
 					</div>					

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wepos.common.dto.ProductDto;
+import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -42,6 +43,19 @@ public interface ShopDao {
   
   // 매장 공지사항 조회수 증가
   public void addNoticeReadCnt(int noticeNumber);
+  
+  // 매장 자유 게시판 게시물 갯수
+  public int shopBoardCount(Map<String, Object> map);
+  
+  // 매장 자유 게시판
+  public List<ShopBoardDto> shopBoardList(Map<String, Object> map);
+  
+  // 매장 자유 게시판 게시물 조회수 증가
+  public void addBoardReadCnt(int boardNumber);
+  
+  // 매장 자유 게시판 게시물 상세보기
+  public ShopBoardDto shopBoardDetail(int boardNumber);
+  
   
 }
 
