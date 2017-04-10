@@ -51,47 +51,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-<script language="JavaScript" src="../js/pos/salesLog.js?ver=1"></script>
-
-<script>
-	$(function() {
-		$("#calendarBegin").datepicker(
-				{
-					showMonthAfterYear : true,
-					maxDate : '-0',
-					yearSuffix : '년',
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
-					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
-							'7월', '8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					onClose: function( selectedDate ) {
-					   $( "#calendarEnd" ).datepicker( "option", "minDate", selectedDate );
-					}
-				});
-		//옵션  : 매개변수값 2번째가 옵션의 타입이며 3번째 항목은 옵션에 대한 설정 값
-		$("#calendarBegin").datepicker("option", "dateFormat", "yy-mm-dd"); //데이터 포맷으로 날짜의 반환 타입을 지정
-		$("#calendarBegin").datepicker("option", "showAnim", "slideDown"); //달력의 표시 형태
-
-		$("#calendarEnd").datepicker(
-				{
-					showMonthAfterYear : true,
-					maxDate : '-0',
-					yearSuffix : '년',
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
-					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
-							'7월', '8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					onClose: function( selectedDate ) {
-						$( "#calendarBegin" ).datepicker( "option", "maxDate", selectedDate );
-					}
-				});
-		$("#calendarEnd").datepicker("option", "dateFormat", "yy-mm-dd");
-		$("#calendarEnd").datepicker("option", "showAnim", "slideDown");
-
-	});
-</script>
+<script language="JavaScript" src="../js/pos/salesLog.js?ver=18"></script>
 
 <!-- <script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script> -->
 </head>
@@ -103,9 +63,9 @@
 				style="margin-right: 270px; padding: 20px">
 				<nav class="navbar mCustomScrollbar" role="navigation"
 					data-mcs-theme="minimal-dark"> <!-- Content Header (Page header) -->
-					<section class="content-header">
+					<!-- <section class="content-header">
 					<h2 align="right">검색 조건을 설정해 주세요 ▶▶</h2>
-					</section> <!-- Main content --> 
+					</section> Main content  -->
 					
 					<section class="content">
 						<div class="panel panel-yellow margin-bottom-40">
@@ -187,27 +147,16 @@
 						action="searchLog.do?mgrId=${sessionScope.id}"
 						method="post">
 						<table class="table table-striped table-bordered">
-							<tbody>								
+							<tbody>
 								<tr>
-									<td style="text-align: center;vertical-align: middle;">시작일</td>
+									<td style="text-align: center;vertical-align: middle;">정렬</td>
 									<td style="text-align: center">
-										<c:if test="${flag==0}">
-											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">
-										</c:if>
-										<c:if test="${flag==1}">	
-											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="${posLogDto.calendarBegin}">
-										</c:if>
-									</td>
-								</tr>
-								<tr>
-									<td style="text-align: center;vertical-align: middle;">종료일</td>
-									<td style="text-align: center;vertical-align: middle;">
-										<c:if test="${flag==0}">
-											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
-										</c:if>
-										<c:if test="${flag==1}">	
-											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="${posLogDto.calendarEnd}">
-										</c:if>
+										<select class="form-control" id="searchType" name="searchType">
+											<option value="999">-- 선택하세요 --</option>
+											<option value="1">상세 조회</option>
+											<option value="2">일별 조회</option>
+											<option value="3">월별 조회</option>											
+										</select>
 									</td>
 								</tr>
 								<tr>
@@ -222,18 +171,12 @@
 										</select>
 									</td>
 								</tr>
-								<tr>
-									<td style="text-align: center;vertical-align: middle;">정렬</td>
-									<td style="text-align: center">
-										<select class="form-control" id="searchType" name="searchType">
-											<option value="999">-- 선택하세요 --</option>
-											<option value="1">상세 조회</option>
-											<option value="2">일별 조회</option>
-											<option value="3">주별 조회</option>
-											<option value="4">월별 조회</option>											
-										</select>
-									</td>
+								<tr id="newStart">
 								</tr>
+								<tr id="newEnd">
+								</tr>
+								<tr id="month">
+								</tr>								
 							</tbody>
 						</table>
 						<div role="group" class="btn-group btn-group-justified">
@@ -297,6 +240,7 @@
 			ProgressBar.initProgressBarHorizontal();
 		});
 	</script>
+
 
 
 </body>
