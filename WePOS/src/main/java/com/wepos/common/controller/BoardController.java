@@ -256,7 +256,7 @@ public class BoardController {
 		ReplyDto replyDto=new ReplyDto();
 		List<ReplyDto> replyList=null;
 		
-		int repCount = boardDao.getReplyCount();
+		int repCount = boardDao.getReplyCount(boardNumber);
 		System.out.println("repCount="+repCount);
 		System.out.println("Reply의 boardNumber="+boardNumber);
 		
@@ -268,6 +268,7 @@ public class BoardController {
     	mav.addObject("boardTypeCode", boardTypeCode);
     	mav.addObject("boardDto",boardDto);
     	mav.addObject("replyList",replyList);
+    	mav.addObject("repCount", repCount);
     	mav.setViewName("/common/boardDetail");
     	
     	return mav;		
@@ -276,15 +277,27 @@ public class BoardController {
 	//댓글 달기 기능
 	@RequestMapping(value="/common/boardReply.do", method=RequestMethod.POST)
 	public String boardInsertReply(@RequestParam("boardNumber") int boardNumber,
-			@ModelAttribute ReplyDto replyDto){
-		System.out.println("댓글 달기 기능 확인 여부1");
-		System.out.println("replyDto.getTotalId=>"+replyDto.getTotalId());
-		System.out.println("replyDto.getReplyContent()=>"+replyDto.getReplyContent());
-		
+			@ModelAttribute ReplyDto replyDto, @RequestParam(value="boardTypeCode") int boardTypeCode){
+		//System.out.println("댓글 달기 기능 확인 여부1");
+		//System.out.println("replyDto.getTotalId=>"+replyDto.getTotalId());
+		//System.out.println("replyDto.getReplyContent()=>"+replyDto.getReplyContent());
 		boardDao.insertReply(replyDto);
-		System.out.println("댓글 달기 기능 확인 여부2");
+		
+		//System.out.println("댓글 달기 기능 확인 여부2");
 		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
-		return "redirect:/common/showBoard.do";
+		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
+	}
+	
+	//댓글 수정 기능
+	@RequestMapping(value="/common/boardReplys.do", method=RequestMethod.POST)
+	public String updateReply(@RequestParam("boardNumber") int boardNumber,
+			@RequestParam("repNum") int replyNumber, @RequestParam(value="boardTypeCode") int boardTypeCode){
+		System.out.println(("★replyNumber=>"+replyNumber));
+		System.out.println("★boardNumber=>"+boardNumber);
+		System.out.println("★boardTypeCode=>"+boardTypeCode);
+		boardDao.updateReply(replyNumber);
+		
+		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
 	}
 	
 	// 파일 다운로드

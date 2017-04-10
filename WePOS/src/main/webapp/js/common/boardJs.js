@@ -1,3 +1,36 @@
+//댓글 수정 확인
+function replyChecks(){
+	if($('#replyContents').val()==null || $('#replyContents').val()=="") {
+		alert("내용을 입력해 주세요.");
+		$('#replyContents').focus();
+		return false;
+	}
+	
+	document.boardReplys.submit();
+}
+
+//댓글 아이디 확인
+function checkRepId(totalId){
+	//alert(totalId); =>댓글작성자
+	//alert($('#totalId').val()); =>접속한계정
+	
+	if($('#totalId').val()==totalId){
+		$(document).on('mouseover', '.dropdown', function() {
+			$(this).find('.dropdown-content').show();
+		});
+		
+		$(document).on('mouseout', '.dropdown', function() {
+			$(this).find('.dropdown-content').hide();
+		});
+	}
+	else{
+		$(document).on('mouseover', '.dropdown', function() {
+			$(this).find('.dropdown-content').hide();
+		});
+	}
+	return false;
+}
+	
 //댓글
 function replyCheck(){
 	if($('#replyContent').val()==null || $('#replyContent').val()=="") {
