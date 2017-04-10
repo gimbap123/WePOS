@@ -123,48 +123,30 @@
 										</h2>
 									</c:if>
 								</div>
-								<c:if test="${flag==0}">
-									<thead>
-										<tr style="background: #999; color: white; text-align: center">
-											<th style="text-align: center">일시</th>										
-											<th style="text-align: center">메뉴</th>
-											<th style="text-align: center">단가</th>
-											<th style="text-align: center">수량</th>
-											<th style="text-align: center; color: blue">매출</th>
-										</tr>
-									</thead>
-								</c:if>
-								<c:if test="${flag==1}">
-									<thead>
-										<tr style="background: #999; color: white; text-align: center">
-											<th style="text-align: center">일시</th>
-											<th style="text-align: center; color: blue">매출</th>
-										</tr>
-									</thead>
-								</c:if>
+								<thead>
+									<tr style="background: #999; color: white; text-align: center">
+										<th style="text-align: center">일시</th>										
+										<th style="text-align: center">메뉴</th>
+										<th style="text-align: center">단가</th>
+										<th style="text-align: center">수량</th>
+										<th style="text-align: center; color: blue">매출</th>
+									</tr>
+								</thead>				
 								
 								<tbody>
 									<c:if test="${data==1}">
 										<c:set var="total" value="0" />
 										<c:forEach var="resultLog" items="${resultLog}">
 											<tr>
-												<c:if test="${flag==0}">
-													<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
-													<td style="text-align: center">${resultLog.productName}</td>
-													<td style="text-align: center">
-														<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
-													</td>
-													<td style="text-align: center">${resultLog.orderAmount}</td>
-													<td style="text-align: center">
-														<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
-													</td>
-												</c:if>	
-												<c:if test="${flag==1}">
-													<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
-													<td style="text-align: center">
-														<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
-													</td>
-												</c:if>	
+												<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
+												<td style="text-align: center">${resultLog.productName}</td>
+												<td style="text-align: center">
+													<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
+												</td>
+												<td style="text-align: center">${resultLog.orderAmount}</td>
+												<td style="text-align: center">
+													<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
+												</td>
 											</tr>
 											<c:set var="total" value="${total + resultLog.orderPrice}" />
 										</c:forEach>
@@ -205,41 +187,35 @@
 						action="searchLog.do?mgrId=${sessionScope.id}"
 						method="post">
 						<table class="table table-striped table-bordered">
-							<tbody>
-								<c:if test="${flag==0}">
-									<tr>
-										<td style="text-align: center;vertical-align: middle;">시작일</td>
-										<td style="text-align: center">
+							<tbody>								
+								<tr>
+									<td style="text-align: center;vertical-align: middle;">시작일</td>
+									<td style="text-align: center">
+										<c:if test="${flag==0}">
 											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">
-										</td>
-									</tr>
-									<tr>
-										<td style="text-align: center;vertical-align: middle;">종료일</td>
-										<td style="text-align: center;vertical-align: middle;">
-											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
-										</td>
-									</tr>
-								</c:if>
-								<c:if test="${flag==1}">
-									<tr>
-										<td style="text-align: center;vertical-align: middle;">시작일</td>
-										<td style="text-align: center">
+										</c:if>
+										<c:if test="${flag==1}">	
 											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="${posLogDto.calendarBegin}">
-										</td>
-									</tr>
-									<tr>
-										<td style="text-align: center;vertical-align: middle;">종료일</td>
-										<td style="text-align: center;vertical-align: middle;">
+										</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align: center;vertical-align: middle;">종료일</td>
+									<td style="text-align: center;vertical-align: middle;">
+										<c:if test="${flag==0}">
+											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
+										</c:if>
+										<c:if test="${flag==1}">	
 											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="${posLogDto.calendarEnd}">
-										</td>
-									</tr>
-								</c:if>
+										</c:if>
+									</td>
+								</tr>
 								<tr>
 									<td style="text-align: center;vertical-align: middle;">메뉴</td>
 									<td style="text-align: center">
 										<select class="form-control" id="productCode" name="productCode">
 											<option value="999">-- 선택하세요 --</option>
-											<option value="000">모든 메뉴</option>
+											<option value="000">전체 메뉴</option>
 											<c:forEach items="${product}" var="product">
 												<option value="${product.productCode}">${product.productName}</option>
 											</c:forEach>
@@ -251,9 +227,10 @@
 									<td style="text-align: center">
 										<select class="form-control" id="searchType" name="searchType">
 											<option value="999">-- 선택하세요 --</option>
-											<option value="1">시간별 조회</option>
+											<option value="1">상세 조회</option>
 											<option value="2">일별 조회</option>
-											<option value="3">월별 조회</option>											
+											<option value="3">주별 조회</option>
+											<option value="4">월별 조회</option>											
 										</select>
 									</td>
 								</tr>

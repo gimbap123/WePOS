@@ -51,12 +51,13 @@ public class PosLogController {
 	public ModelAndView searchLog(@ModelAttribute PosLogDto posLogDto,
 														@RequestParam(value = "mgrId") String mgrId){
 		System.out.println("productCode="+posLogDto.getProductCode());
+		System.out.println("searchType="+posLogDto.getSearchType());
 		if(posLogDto.getProductCode()==0)
 			posLogDto.setProductName("전체 메뉴");
 		else{
 			String productName=posLogDao.productName(posLogDto.getProductCode());
 			posLogDto.setProductName(productName);
-		}		
+		}
 		int shopCode = posMainDao.getShopCode(mgrId);
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<ProductDto> product=posMainDao.getProductList(shopCode);

@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+
 <mapper namespace="com.wepos.pos.dao.PosLogDao">
-  
-  <select id="mainLog" resultType="PosLogDto">
-    select o.order_date,o.table_code, p.product_name, p.product_price, od.order_amount, (p.product_price*od.order_amount) as order_price
-	from orders o
-	inner join orders_detail od on o.order_code = od.order_code
-	inner join product p on od.product_code = p.product_code
-  </select>
-  
-<!--   <select id="searchLog" parameterType="PosLogDto" resultType="PosLogDto">
-    select o.order_date,o.table_code, p.product_name, p.product_price, od.order_amount, (p.product_price*od.order_amount) as order_price
-	from orders o
-	inner join orders_detail od on o.order_code = od.order_code
-	inner join product p on od.product_code = p.product_code
-	<where>
-		<if test="productCode==000">
-			and o.order_date between #{calendarBegin} and #{calendarEnd}+1
-		</if>			
-		<if test="productCode!=000">
-			and od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1
+
+	<select id="mainLog" resultType="PosLogDto">
+		select o.order_date,p.product_name, p.product_price, od.order_amount,
+			(p.product_price*od.order_amount) "order_price"
+		from orders o
+		inner join orders_detail od on o.order_code = od.order_code
+		inner join product p on od.product_code = p.product_code
+		order by o.order_date desc
+	</select>
+
+	<select id="searchLog" parameterType="PosLogDto" resultType="PosLogDto">
+		<if test="searchType==1">
+			select o.order_date,p.product_name, p.product_price, od.order_amount,
+				(p.product_price*od.order_amount) "order_price"
 		</if>
-	</where>
-	where od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1
-	
-  </select> -->
-  
-    <select id="searchLog" parameterType="PosLogDto" resultType="PosLogDto">
-    select to_char(o.order_date,'yy-mm-dd') "order_date" ,sum(od.order_price) as order_price
-	from orders o
-	inner join orders_detail od on o.order_code = od.order_code
-	inner join product p on od.product_code = p.product_code
-	<where>
-		<if test="productCode==000">
-			and o.order_date between #{calendarBegin} and #{calendarEnd}+1
-		</if>			
-		<if test="productCode!=000">
-			and od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1
+		<if test="searchType!=1">
+			select to_char(o.order_date,'yy-mm-dd') "order_date"
+				,p.product_name,p.product_price, sum(od.order_amount)
+				"order_amount",sum(od.order_price) "order_price"
 		</if>
-	</where>
-	<!-- where od.product_code=#{productCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1 -->
-	group by to_char(o.order_date,'yy-mm-dd')
-  </select>
-  
-  <select id="productName" parameterType="int" resultType="String">
-  	select product_name from product where product_code=#{productCode}
-  </select>
-  
+		from orders o
+		inner join orders_detail od on o.order_code = od.order_code
+		inner join product p on od.product_code = p.product_code
+		<where>
+			<if test="productCode==000">
+				and o.order_date between #{calendarBegin} and #{calendarEnd}+1
+			</if>
+			<if test="productCode!=000">
+				and od.product_code=#{productCode} and o.order_date between
+				#{calendarBegin} and #{calendarEnd}+1
+			</if>
+		</where>
+		<if test="searchType!=1">
+			group by
+				to_char(o.order_date,'yy-mm-dd'),p.product_name,p.product_price
+			order by to_char(o.order_date,'yy-mm-dd') desc
+		</if>	
+	</select>
+
+	<select id="productName" parameterType="int" resultType="String">
+		select product_name from product where product_code=#{productCode}
+	</select>
+
 
 </mapper>
