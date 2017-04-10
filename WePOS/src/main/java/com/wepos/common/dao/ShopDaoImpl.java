@@ -56,5 +56,12 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		return shopNoticeList;
 	}
   
+  public ShopNoticeDto shopNoticeDetail(int noticeNumber) {
+		return getSqlSession().selectOne("shopNoticeDetail", noticeNumber);
+	}
+  
+  public void addNoticeReadCnt(int noticeNumber) {
+		getSqlSession().update("addNoticeReadCnt", noticeNumber);
+	}
 }
 

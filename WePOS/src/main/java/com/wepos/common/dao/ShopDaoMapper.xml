@@ -158,12 +158,22 @@
 		  			notice_content like '%' || #{searchText} || '%')
 		  		</if>
 		  	</where>
-  			order by notice_number
+  			order by notice_number desc
   		) rnumsn
   	) sn
   	<![CDATA[
 		where rnum >= #{start} and rnum <= #{end}
 	]]>  	
   </select>
+  
+  <select id="shopNoticeDetail" parameterType="int" resultType="shopNoticeDto">
+  	select *
+  	from shop_notice
+  	where notice_number = #{notice_number}
+  </select>
+  
+  <update id="addNoticeReadCnt" parameterType="int">
+  	update shop_notice set notice_read_cnt = notice_read_cnt + 1 where notice_number = #{noticeNumber}
+  </update>
   
 </mapper>

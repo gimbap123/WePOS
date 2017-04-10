@@ -37,5 +37,11 @@ public interface ShopDao {
   // 매장 공지사항
   public List<ShopNoticeDto> shopNoticeList(Map<String, Object> map);
   
+  // 매장 공지사항 상세보기
+  public ShopNoticeDto shopNoticeDetail(int noticeNumber);
+  
+  // 매장 공지사항 조회수 증가
+  public void addNoticeReadCnt(int noticeNumber);
+  
 }
 

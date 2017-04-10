@@ -3,7 +3,7 @@
 
 <div class="table-search-v1 panel panel-u margin-bottom-30" style="margin-top: 20px;'">
 	<div class="panel-heading">
-		<h3 class="panel-title"><i class="icon-note"></i>공지사항</h3>	
+		<h3 class="panel-title"><i class="icon-note"></i> 공지사항 (총 ${shopNoticeCount}개의 게시물이 있습니다.)</h3>	
 	</div>	
 	
 	<div class="table-responsive">
@@ -27,7 +27,7 @@
 				<c:forEach items="${shopNoticeList}" var="shopNotice">
 					<tr>
 						<td>${shopNotice.noticeNumber}</td>
-						<td><a href="#">${shopNotice.noticeTitle}</a></td>
+						<td><a href="shopNoticeDetail.do?noticeNumber=${shopNotice.noticeNumber}">${shopNotice.noticeTitle}</a></td>
 						<td>${shopNotice.mgrId}</td>
 						<td>${shopNotice.noticeDate}</td>
 						<td>${shopNotice.noticeReadCnt}</td>

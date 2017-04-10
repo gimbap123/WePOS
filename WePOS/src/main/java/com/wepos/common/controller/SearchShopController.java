@@ -334,4 +334,35 @@ public class SearchShopController {
 		return mav;
 	}
 	
+	// 매장 공지사항 상세보기
+	@RequestMapping(value="/common/shopNoticeDetail.do")
+	public ModelAndView shopNodticeDetailView(HttpServletRequest request, @RequestParam("noticeNumber") int noticeNumber)
+	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
+		int index = filePath.indexOf("\\WePOS");
+		filePath = filePath.substring(index);
+		
+		shopDao.addNoticeReadCnt(noticeNumber);
+		ShopNoticeDto shopNotice = shopDao.shopNoticeDetail(noticeNumber);		
+		
+		String fileName = null;
+		
+		if(shopNotice.getNoticeFile() != null)
+		{
+			fileName = shopNotice.getNoticeFile();
+			shopNotice.setNoticeFile(filePath + fileName);
+		}
+		else
+		{
+			shopNotice.setNoticeFile(null);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeDetail");
+		mav.addObject("shopNotice", shopNotice);
+		mav.addObject("fileName", fileName);
+		
+		return mav;
+	}
+	
 }
