@@ -38,8 +38,8 @@
 		<if test="searchType!=1">
 			group by
 				to_char(o.order_date,'yy-mm-dd'),p.product_name,p.product_price
-			order by to_char(o.order_date,'yy-mm-dd') desc
-		</if>	
+		</if>
+		order by o.order_date desc
 	</select>
 
 	<select id="productName" parameterType="int" resultType="String">
