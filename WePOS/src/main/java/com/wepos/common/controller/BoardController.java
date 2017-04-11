@@ -289,10 +289,11 @@ public class BoardController {
 	}
 	
 	//댓글 수정 기능
-	@RequestMapping(value="/common/boardReplys.do", method=RequestMethod.POST)
+	//@RequestMapping(value="/common/boardReplys.do", method=RequestMethod.POST)
+	@RequestMapping(value="/common/boardReplys.do")
 	public String updateReply(@RequestParam("boardNumber") int boardNumber,
-			@RequestParam("repNum") int replyNumber, @RequestParam(value="boardTypeCode") int boardTypeCode){
-		System.out.println(("★replyNumber=>"+replyNumber));
+			@RequestParam("replyNumber") int replyNumber, @RequestParam(value="boardTypeCode") int boardTypeCode){
+		System.out.println("★replyNumber=>"+replyNumber);
 		System.out.println("★boardNumber=>"+boardNumber);
 		System.out.println("★boardTypeCode=>"+boardTypeCode);
 		boardDao.updateReply(replyNumber);

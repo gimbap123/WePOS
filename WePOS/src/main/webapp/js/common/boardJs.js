@@ -5,7 +5,6 @@ function replyChecks(){
 		$('#replyContents').focus();
 		return false;
 	}
-	
 	document.boardReplys.submit();
 }
 
