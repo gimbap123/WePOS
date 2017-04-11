@@ -3,6 +3,8 @@ package com.wepos.pos.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.wepos.common.dto.OrdersDetailDto;
+import com.wepos.common.dto.OrdersDto;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.TablesDto;
@@ -26,5 +28,20 @@ public interface PosMainDao {
   
   // 카테고리 정보 select
   public Map<String, Integer> getCategory( int categoryCode );
+  
+  // 주문 기본 정보 insert
+  public void insertOrders( OrdersDto orders );
+ 
+  // 주문 코드 select
+  public int getOrderCode();
+  
+  // 주문 상세 정보 insert
+  public void insertOrdersDetail( OrdersDetailDto odt );
+  
+  // 결제 전 주문 정보 select
+  public List<OrdersDto> getOrderBeforePayment();
+  
+  // 결제 전 테이블의 주문 상세 내역 select
+  public List<OrdersDetailDto> getOrdersDetailBeforePayment();
 }
 

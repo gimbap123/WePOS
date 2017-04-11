@@ -72,3 +72,66 @@ function searchShopBoard(pageNum)
 	})
 }
 
+function replyListPaging(pageNum)
+{
+	var boardNumber = $("#boardNumber").val()
+	
+	$.get("shopBoardReply.do", {pageNum : pageNum, boardNumber : boardNumber}, function(result)
+	{			
+		$("#replyDiv").html(result);
+	})
+}
+
+function updateReply(replyNumber, replyContent)
+{
+	var contentDiv = $("#contentDiv" + replyNumber);
+	var functionUl = $("#functionUl" + replyNumber);
+	
+	contentDiv.html('<div class="input-group" style="margin-bottom: 20px;"><textarea class="form-control" rows="3" style="resize: none;" id="updateReply' +replyNumber + '">' 
+			+ replyContent + '</textarea><span class="input-group-btn"><button class="btn-u" type="button" style="height: 74px;" onclick="shopBoardReplyUpdate(' + replyNumber + ')">수정</button>' 
+			+ '</span></div>');
+	functionUl.html('<li><a href="javascript:updateCancelReply(' + "'" + replyNumber + "', '" + replyContent + "'" 
+			+ ')"><i class="expand-list rounded-x fa fa-pencil"></i> 취소</a></li>');
+}
+
+function updateCancelReply(replyNumber, replyContent)
+{
+	var contentDiv = $("#contentDiv" + replyNumber);
+	var functionUl = $("#functionUl" + replyNumber);
+	
+	contentDiv.html('<p>' + replyContent + '</p>');
+	functionUl.html('<li><a href="javascript:updateReply(' + "'" + replyNumber + "', '" + replyContent + "'" 
+			+ ')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li><li><a href="#"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>');
+}
+
+function shopBoardReplyUpdate(replyNumber)
+{
+	var replyContent = $("#updateReply" + replyNumber).val();
+	var pageNum = $("#pageNum").val();
+	var boardNumber = $("#boardNumber").val()
+	$.get("shopBoardReplyUpdate.do", {replyNumber : replyNumber, replyContent : replyContent, boardNumber : boardNumber, pageNum : pageNum}, function(result)
+	{		
+		alert("수정되었습니다.");
+		$("#replyDiv").html(result);
+	})
+}
+
+function deleteReply(replyNumber)
+{
+	var flag = confirm("댓글을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		var boardNumber = $("#boardNumber").val()
+		$.get("shopBoardReplyDelete.do", {replyNumber : replyNumber, boardNumber : boardNumber}, function(result)
+		{
+			alert("삭제되었습니다.");
+			$("#replyDiv").html(result);
+		})
+	}
+	else
+	{
+		return false;
+	}
+}
+
