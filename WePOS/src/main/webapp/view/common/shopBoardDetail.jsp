@@ -30,11 +30,12 @@
 <link rel="stylesheet" href="../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
 <link rel="stylesheet" href="../assets/css/pages/blog.css">
 <link rel="stylesheet" href="../assets/css/pages/blog_magazine.css">
+<link rel="stylesheet" href="../assets/css/pages/profile.css">
 
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=3"></script>
 
 <title>We POS</title>
 </head>
@@ -53,7 +54,7 @@
 	                            <li><i class="fa fa-pencil"></i> ${shopBoard.totalId}</li>
 	                            <li><i class="fa fa-comments"></i> ${shopBoard.boardReadCnt}회 조회</li>
                         	</ul>
-						</div>
+						</div>						
 						<c:if test="${shopBoard.boardFile != null}">
 							<div class="blog-img">
 								<img class="img-responsive" src="${shopBoard.boardFile}" alt="" style="width: 80%;">
@@ -71,10 +72,20 @@
 						<a class="btn-u btn-u-small" style="float: right;" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">
 							<i class="fa fa-plus-sign"></i> 목록으로
 						</a>
-					</div>					
+					</div>
+					<div class="headline" ><h3>댓글</h3></div>					
+					<input type="hidden" id="boardNumber" name="boardNumber" value="${shopBoard.boardNumber}">
+					<div class="input-group">
+						<textarea class="form-control" rows="3" id="replyContent" name="replyContent" placeholder="댓글은 로그인 후 이용 가능합니다." style="resize: none;"></textarea>
+						<span class="input-group-btn">
+							<button class="btn-u" type="button" style="height: 74px;" onclick="shopBoardReplyWrite()">등록</button>			
+						</span>
+					</div>	
+					<div id="replyDiv">						
+					</div>		
 				</div>
-			</div>					
-		</div>		
+			</div>				
+		</div>
 				
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>
@@ -92,7 +103,27 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        replyListPaging(1);
         });
+    
+    function shopBoardReplyWrite()
+    {
+    	if(${sessionScope.id == null})
+    	{
+    		alert("댓글은 로그인 후 사용 가능합니다.");
+    	}	
+    	else
+    	{    		
+    		var boardNumber = $("#boardNumber").val();
+    		var replyContent = $("#replyContent").val();
+    		$("#replyContent").val("");
+    		$.get("shopBoardReplyWrite.do", {boardNumber : boardNumber, replyContent : replyContent}, function(result)
+    		{			
+    			$("#replyDiv").html(result);
+    		})    		
+    	}    	
+    }
+    
 </script>
 </body>
 </html>

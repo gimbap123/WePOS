@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopBoardDto;
+import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -55,6 +56,21 @@ public interface ShopDao {
   
   // 매장 자유 게시판 게시물 상세보기
   public ShopBoardDto shopBoardDetail(int boardNumber);
+  
+  // 매장 자유 게시판 게시물 댓글 갯수
+  public int shopBoardReplyCount(int boardNumber);
+  
+  // 매장 자유 게시판 게시물 댓글
+  public List<ShopBoardReplyDto> shopBoardReplyList(Map<String, Object> map);
+  
+  // 매장 자유 게시판 게시물 댓글 쓰기
+  public void shopBoardReplyWrite(ShopBoardReplyDto shopBoardReply);
+  
+  // 매장 자유 게시판 게시물 댓글 수정
+  public void shopBoardReplyUpdate(ShopBoardReplyDto shopBoardReply);
+  
+  // 매장 자유 게시판 게시물 댓글 삭제
+  public void shopBoardReplyDelete(int replyNumber);
   
   
 }
