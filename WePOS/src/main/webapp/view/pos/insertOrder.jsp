@@ -1,14 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-  ${orders} <br>
-  ${ordersDetailList}<br>
-  ${od} <br>
-  ${oddList} <br>
-</body>
-</html>
+<%  
+  response.sendRedirect(request.getContextPath() + "/common/main.do?mgrId="+session.getId());
+%>

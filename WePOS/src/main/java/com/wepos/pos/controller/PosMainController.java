@@ -43,6 +43,12 @@ public class PosMainController {
         .getProductList( shopCode );
     // 카테고리 정보 select
     // Map<String, Integer> category = posMainDao.getCategory( 3 );
+    
+    // 현재 테이블 주문 정보 select ( order_state == 0 인 (결제 전 주문) 항목들만 )
+    List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
+    
+    // 결제 전 테이블의 주문 상세 내역 select
+    // List<OrdersDetailDto> ordersDetailList = 
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -65,33 +71,30 @@ public class PosMainController {
 
     od.setShopCode( Integer.parseInt( (String)orders.get( 0 ) ) );
     od.setTableCode( Integer.parseInt( (String)orders.get( 1 ) ) );
+    // 입력하지 않아도 되는 컬럼
     // od.setUserId( userId );
     // od.setPaymentCode( paymentCode );
     // od.setOrderDate( orderDate );
     // od.setOrderState( orderState );
 
-    posMainDao.insertOrders( od );
-    int lastOrderCode = posMainDao.getOrderCode();
+    // 개발 시 db 입력 잠시 보류
+    //posMainDao.insertOrders( od );
+    //int lastOrderCode = posMainDao.getOrderCode();
     
-    System.out.println( "Last Order Code : " + lastOrderCode );
-
     for ( int i = 0; i < ordersDetailList.size(); i=i+3 ) {
       OrdersDetailDto odd = new OrdersDetailDto();
-      odd.setOrderCode( lastOrderCode );
+      //odd.setOrderCode( lastOrderCode );
       odd.setProductCode( Integer.parseInt( (String)ordersDetailList.get( i ) ) );
       odd.setOrderAmount( Integer.parseInt( (String)ordersDetailList.get( i + 1 ) ) );
       odd.setOrderPrice( Integer.parseInt( (String)ordersDetailList.get( i + 2 ) ) );
       
-      posMainDao.insertOrdersDetail( odd );
+      // 개발시 db 입력 잠시 보류
+      //posMainDao.insertOrdersDetail( odd );
       
       oddList.add(odd);
     }
 
     ModelAndView mav = new ModelAndView( "pos/insertOrder" );
-    mav.addObject( "orders", orders );
-    mav.addObject( "ordersDetailList", ordersDetailList );
-    mav.addObject( "od", od );
-    mav.addObject( "oddList", oddList );
     return mav;
   }
 
