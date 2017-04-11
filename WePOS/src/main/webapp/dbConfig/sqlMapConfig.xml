@@ -27,7 +27,6 @@
 		<typeAlias alias="categoryDto" type="com.wepos.mgr.dto.CategoryDto"/>
 		<typeAlias alias="shopNoticeDto" type="com.wepos.mgr.dto.ShopNoticeDto"/>
 		<typeAlias alias="shopBoardDto" type="com.wepos.common.dto.ShopBoardDto"/>
-		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.ShopMgrDto"/>
 		<typeAlias alias="OrdersDto" type="com.wepos.common.dto.OrdersDto"/>
 		<typeAlias alias="OrdersDetailDto" type="com.wepos.common.dto.OrdersDetailDto"/>
 	</typeAliases>
