@@ -58,12 +58,18 @@
 	<div class="wrapper">
 		<jsp:include page="../pos/leftBar.jsp" flush="false" />
 		<div class="content-side-right">
-			<div class="content-wrapper"
-				style="margin-right: 270px; padding: 20px">
+			<div class="content-wrapper" style="margin-right: 270px; padding: 20px;padding-top:0">
 				<nav class="navbar mCustomScrollbar" role="navigation"
-					data-mcs-theme="minimal-dark"> 
-					
-					<section class="content">
+					data-mcs-theme="minimal-dark">
+				<div class="breadcrumbs-v3 img-v1" style="background: url(../image/common/posLog.jpg); 
+																					background-size: cover; background-position: center center;height: 30px">
+					<div class="container text-center" style="width: 100%">
+						<h1>매출 통계</h1>
+					</div>
+					<!--/end container-->
+				</div>
+				<hr>
+				<section class="content" style="padding-top:0">
 						<div class="panel panel-yellow margin-bottom-40">
 							<table class="table table-hover">
 								<div class="panel-heading">

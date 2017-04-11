@@ -23,8 +23,20 @@ function checkNull(){
 		return false;
 	}else if($('#tableMax').val()>6)
 		alert("정원은 2~6 사이입니다.");
-	else
-		$('#updateTableForm').submit();
+	else{
+		if($('#tableCode').val()!='')
+			$('#updateTableForm').submit();
+		//if($('#tableCode').val()=='')
+			
+	}
+		
+}
+
+function create(){
+	$('#tableCode').val(0);
+	$('#tableName').val('');
+	$('#tableDesc').val('');
+	$('#tableMax').val('');
 }
 
 

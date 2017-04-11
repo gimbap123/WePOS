@@ -3,6 +3,11 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
+
+	<insert id="createTable" parameterType="TablesDto">
+		insert into tables values(tables_seq.nextval,#{shopCode},#{tableName},#{tableDesc},0,#{tableMax})
+	</insert>
+
 	<update id="updateTable" parameterType="TablesDto">
 		update tables set table_name=#{tableName},table_desc=#{tableDesc},table_max=#{tableMax}
 		where table_code=#{tableCode}

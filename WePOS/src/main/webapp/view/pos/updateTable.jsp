@@ -58,14 +58,17 @@
 		<jsp:include page="../pos/leftBar.jsp" flush="false" />
 
 		<div class="content-side-right pos-main">
-			<div class="breadcrumbs-v3 img-v1" style="background:url(../image/common/img3.jpg);background-size: cover;
+			<div class="breadcrumbs-v3 img-v1" style="background:url(../image/common/updateTable.jpg);background-size: cover;
   																				background-position: center center;margin-right:20px;height:30px">
 				<div class="container text-center" style="width:100%">
 					<h1>테이블 관리</h1>
 				</div>
 				<!--/end container-->
 			</div>
-			<br>
+			<hr>
+			<span style="float:right;margin-right:20px">
+				<button class="btn btn-success" type="button" onclick="create()">테이블 추가</button>
+			</span>
 			<button class="btn btn-primary" type="button">
 				총 테이블 <span class="badge">${tableCount}</span>
 			</button>
@@ -97,7 +100,7 @@
 				<div class="panel panel-default panel-warning">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h3>매장 현황</h3></div>
+					<div class="panel-heading" align="center"><h3>테이블 정보</h3></div>					
 					<form id="updateTableForm" name="updateTableForm" action="updateTable.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>

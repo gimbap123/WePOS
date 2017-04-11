@@ -54,19 +54,27 @@ public class PosTableController {
 
 		System.out.println("테이블 번호="+tablesDto.getTableCode());
 		System.out.println("테이블 이름="+tablesDto.getTableName());
-
 		int shopCode = posMainDao.getShopCode(mgrId);
-		System.out.println(shopCode);
+		tablesDto.setShopCode(shopCode);
+		int createTable=0;
+		int updateTable=0;
+		if(tablesDto.getTableCode()==0){
+			createTable=posTableDao.createTable(tablesDto);
+			System.out.println("등록 성공여부 = "+createTable);
+		}else{
+			updateTable=posTableDao.updateTable(tablesDto);			
+			System.out.println("수정 성공여부 = "+updateTable);
+		}
 		// 매장 코드 번호로 매장 정보 Select
 		ShopDto shop = posMainDao.getShop(shopCode);		
 		// 매장 내 테이블 숫자 select
 		int tableCount = posMainDao.getTableCount(shopCode);
 		// 매장 내 메뉴 select
 		List<ProductDto> productList = posMainDao.getProductList(shopCode);
-		int updateTable=posTableDao.updateTable(tablesDto);
+		
 		// 매장 내 테이블 정보 select
 		List<TablesDto> tables = posMainDao.getTables(shopCode);
-		System.out.println("수정 성공여부 = "+updateTable);
+		
 		ModelAndView mav = new ModelAndView("pos/updateTable");
 		mav.addObject("shopCode", shopCode);
 		mav.addObject("shop", shop);
