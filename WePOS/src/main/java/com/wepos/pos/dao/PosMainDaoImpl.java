@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.wepos.common.dto.OrdersDetailDto;
+import com.wepos.common.dto.OrdersDto;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.TablesDto;
@@ -42,4 +44,20 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
     // TODO Auto-generated method stub
     return getSqlSession().selectMap( "getCategory", categoryCode, "CATEGORY_NAME" );
   }
+
+  public void insertOrders( OrdersDto orders ) {
+    // TODO Auto-generated method stub
+    getSqlSession().insert( "insertOrders", orders );
+  }
+
+  public void insertOrdersDetail( OrdersDetailDto odt ) {
+    // TODO Auto-generated method stub
+    getSqlSession().insert( "insertOrdersDetail", odt );
+  }
+
+  public int getOrderCode() {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectOne( "getOrderCode" );
+  }
+
 }
