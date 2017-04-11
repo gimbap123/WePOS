@@ -5,70 +5,75 @@
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
   
   <select id="getTableCount" parameterType="int" resultType="int">
-    select count(table_code)
-    from shop s, tables t
-    where s.shop_code = t.shop_code
-    and s.shop_code = #{shopCode}
+    SELECT COUNT(table_code)
+    FROM shop s, tables t
+    WHERE s.shop_code = t.shop_code
+    AND s.shop_code = #{shopCode}
   </select>
   
   <!-- 매니저 아이디로 매장 코드 구함 -->
   <select id="getShopCode" parameterType="String" resultType="int">
-    select shop_code
-    from shop
-    where shop_code = ( select shop_code from mgr where mgr_id = #{mgrId} )
+    SELECT shop_code
+    FROM shop
+    WHERE shop_code = ( select shop_code from mgr where mgr_id = #{mgrId} )
   </select>
   
   <!-- 매장 코드로 매장 정보 구함 -->
   <select id="getShop" parameterType="int" resultType="shopDto" >
-    select *
-    from shop
-    where shop_code = #{shopCode}
+    SELECT *
+    FROM shop
+    WHERE shop_code = #{shopCode}
   </select>
   
   <!-- 매장 코드로 매장 테이블 정보 select -->
   <select id="getTables" parameterType="int" resultType="TablesDto">
-    select * 
-    from tables 
-    where shop_code= #{shopCode}
+    SELECT * 
+    FROM tables 
+    WHERE shop_code= #{shopCode}
   </select>
   
   <!-- 매장 코드로 매장 메뉴 정보 select -->
   <select id="getProductList" parameterType="int" resultType="ProductDto">
-    select *
-    from product
-    where shop_code = #{shopCode}
+    SELECT *
+    FROM product
+    WHERE shop_code = #{shopCode}
   </select>
   
   <!-- 카테고리 이름 select -->
   <select id="getCategory" parameterType="int" resultType="java.util.HashMap">
-    select c.category_code, c.category_name
-    from category c, product p
-    where c.category_code = p.category_code
-    and c.category_code = #{categoryCode}
+    SELECT c.category_code, c.category_name
+    FROM category c, product p
+    WHERE c.category_code = p.category_code
+    AND c.category_code = #{categoryCode}
   </select>
   
   <insert id="insertOrders" parameterType="OrdersDto">
-    insert into orders 
-    values( orders_seq.nextval, #{shopCode}, #{tableCode}, null, #{paymentCode}, sysdate, '0')
+    INSERT INTO orders 
+    VALUES( orders_seq.nextval, #{shopCode}, #{tableCode}, null, #{paymentCode}, sysdate, '0')
   </insert>
   
   <insert id="insertOrdersDetail" parameterType="OrdersDetailDto">
-    insert into orders_detail
-    values( #{orderCode}, #{productCode}, #{orderAmount}, #{orderPrice} )
+    INSERT INTO orders_detail
+    VALUES( #{orderCode}, #{productCode}, #{orderAmount}, #{orderPrice} )
   </insert>
   
   <select id="getOrderCode" resultType="int">
-    select max(order_code)
-    from orders
+    SELECT max(order_code)
+    FROM orders
   </select>
   
   <select id="getOrderBeforePayment" resultType="OrdersDto">
-    select * from orders
-    where order_state = 0;
+    SELECT * FROM orders
+    WHERE order_state = '0'
   </select>
   
   <select id="getOrdersDetailBeforePayment" resultType="OrdersDetailDto">
-    
+    SELECT od.*, o.table_code, p.product_name 
+    FROM orders_detail od, orders o, product p
+    WHERE od.order_code = o.order_code
+    And od.product_code = p.product_code
+    AND od.order_code IN ( SELECT order_code FROM orders WHERE order_state = 0 )
+    ORDER by o.table_code
   </select>
   
 </mapper>

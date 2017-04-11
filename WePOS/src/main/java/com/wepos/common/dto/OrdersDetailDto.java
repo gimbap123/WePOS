@@ -3,8 +3,10 @@ package com.wepos.common.dto;
 public class OrdersDetailDto {
   private int orderCode;
   private int productCode;
+  private String productName;
   private int orderAmount;
   private int orderPrice;
+  private int tableCode;
   
   public int getOrderCode() {
     return orderCode;
@@ -30,14 +32,29 @@ public class OrdersDetailDto {
   public void setOrderPrice( int orderPrice ) {
     this.orderPrice = orderPrice;
   }
+  public int getTableCode() {
+    return tableCode;
+  }
+  public void setTableCode( int tableCode ) {
+    this.tableCode = tableCode;
+  } 
   
+  public String getProductName() {
+    return productName;
+  }
+  public void setProductName( String productName ) {
+    this.productName = productName;
+  }
   @Override
   public String toString() {
-    return "OrdersDetail Dto ["
+    return "OrdersDetail Dto [ "
         + " orderCode = " + orderCode + ","
         + " productCode = " + productCode + ","
+        + " productName = " + productName + ","
         + " orderAmount = " + orderAmount + ","
-        + " orderPrice = " + orderPrice
-        + "]";
+        + " orderPrice = " + orderPrice + ","
+        + " tableCode = " + tableCode 
+        + " ]";
   }
+
 }

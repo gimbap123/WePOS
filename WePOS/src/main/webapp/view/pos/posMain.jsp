@@ -61,12 +61,21 @@
           </div>
           <div class="panel-body">
             <ul>
-              <li class="list-unstyled">메뉴이름 <span class="badge pull-right">1</span></li>
+              <c:forEach var="ordersDetail" items="${ordersDetailList}">
+                <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
+                  <li class="list-unstyled">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.orderAmount}</span></li>
+                </c:if>
+              </c:forEach>
             </ul>
           </div>
           <div class="panel-footer">
-            <p class="text-right">5000원
-            <p>
+            <c:set var="sumOrderPrice" value="0" />
+            <c:forEach var="od" items="${ordersDetailList}">
+              <c:if test="${tables[i].tableCode == od.tableCode}">
+              <c:set var="sumOrderPrice" value="${sumOrderPrice+od.orderPrice}" />
+              </c:if>
+            </c:forEach>
+            <p class="text-right">￦ ${sumOrderPrice} 
           </div>
         </div>
       </c:forEach>

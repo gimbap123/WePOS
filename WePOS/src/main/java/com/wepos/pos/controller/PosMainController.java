@@ -45,10 +45,10 @@ public class PosMainController {
     // Map<String, Integer> category = posMainDao.getCategory( 3 );
     
     // 현재 테이블 주문 정보 select ( order_state == 0 인 (결제 전 주문) 항목들만 )
-    // List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
+    List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
     
     // 결제 전 테이블의 주문 상세 내역 select
-    // List<OrdersDetailDto> ordersDetailList = 
+    List<OrdersDetailDto> ordersDetailList = posMainDao.getOrdersDetailBeforePayment();
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -57,6 +57,8 @@ public class PosMainController {
     mav.addObject( "productList", productList );
     mav.addObject( "tableCount", tableCount );
     // mav.addObject( "category", category );
+    mav.addObject( "orderList", orderList );
+    mav.addObject( "ordersDetailList", ordersDetailList );
     return mav;
   }
 
