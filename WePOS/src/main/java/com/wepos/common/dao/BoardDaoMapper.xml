@@ -102,9 +102,8 @@
 	
 	
 	
-	
-	<select id="getReplyCount" resultType="int">
-		select count(*) from reply		
+	<select id="getReplyCount" parameterType="int" resultType="int">
+		select count(*) from reply where board_number=#{boardNumber}
 	</select>
 	
 	<select id="selectReplyList" parameterType="int" resultType="replyDto">
@@ -114,6 +113,10 @@
 	<insert id="insertReply" parameterType="replyDto">
 		insert into reply values(reply_seq.nextval, #{boardNumber, jdbcType=INTEGER}, #{totalId, jdbcType=VARCHAR}, #{replyContent, jdbcType=VARCHAR}, sysdate)
 	</insert>
+	
+	<update id="updateReply" parameterType="int">
+		update reply set reply_content=#{replyContents} where reply_number=#{replyNumber}
+	</update>
 	
 
 </mapper>

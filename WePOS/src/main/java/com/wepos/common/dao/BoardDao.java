@@ -36,12 +36,15 @@ public interface BoardDao {
 	
 
 	//댓글 갯수
-	public int getReplyCount();
+	public int getReplyCount(int boardNumber);
 	
 	//댓글 목록
 	public List<ReplyDto> replyList(int boardNumber);
 	
 	//댓글 달기
 	public void insertReply(ReplyDto replyDto);
+	
+	//댓글 수정
+	public void updateReply(int replyNumber);
 	
 }

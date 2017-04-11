@@ -12,6 +12,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>We POS</title>
 
@@ -61,6 +62,48 @@
 
 <script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 
+
+<style>
+.dropbtn {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: white;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    width: 60px;
+    position: absolute;
+    background-color: #f9f9f9;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+</style>
+
+
 </head>
 <body>
 
@@ -82,8 +125,6 @@
 			</div>
 		</div>
 		<!--/container-->
-		<form name="boardDetail" enctype="multipart/form-data" method="post"
-			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
 
 			<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
 
@@ -91,24 +132,21 @@
 				<div class="row blog-page">
 					<div class="col-md-12">
 						<div class="blog margin-bottom-40">
+						
+		<form name="boardDetail" enctype="multipart/form-data" method="post"
+			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
+			
 							<h2 style="color:green; ">${boardDto.boardTitle}</h2>
 							<div class="blog-post-tags">
 								<ul class="list-unstyled list-inline blog-info">
 									<li><i class="fa fa-calendar"></i> ${boardDto.boardDate}</li>
 									<li><i class="fa fa-pencil"></i> ${boardDto.totalId}</li>
-									<li><i class="fa fa-comments"></i> 10개의 댓글</li>
+									<li><i class="fa fa-comments"></i> ${repCount}개의 댓글</li>
 								</ul>
-								<!-- <ul class="list-unstyled list-inline blog-tags">
-									<li><i class="fa fa-tags"></i> <a href="#">Technology</a>
-										<a href="#">Education</a> <a href="#">Internet</a> <a href="#">Media</a>
-									</li>
-								</ul> -->
 							</div>
 							<hr>
 							<div class="blog-img">
-								<!-- <img class="img-responsive" src="../assets/img/bg/18.jpg" alt="">
-								<img class="img-responsive" src="../assets/img/bg/14.jpg" alt=""> -->
-								
+
 								<img class="img-responsive" src="${boardDto.boardFile}" alt="">
 								
 							</div>
@@ -146,37 +184,59 @@
 								</div>
 							</c:if>
 							<c:if test="${sessionScope.id!=null}">
-								<div class="input-group margin-bottom-20">
+								<div class="input-group margin-bottom-20" name="repContent">
 									<textarea rows="3" cols="100%" style="resize: none; width: 100%" name="replyContent" id="replyContent" placeholder="내용을 작성하세요." maxlength="100"></textarea>
 									<span class="input-group-addon"><a href="javascript:replyCheck()"><b>등록</b></a></span>
 								</div>
 							</c:if>
 							
-							<input type="hidden" name="totalId" value="${sessionScope.id}">
+							<input type="hidden" name="totalId" class="totalId" id="totalId" value="${sessionScope.id}">
 							<input type="hidden" name="replyContent" value="${reply.replyContent }">
+							<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
 							
+					</form>
+					
+					<form name="boardReplys" method="post" action="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
+					
+					<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
+					<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
+					
 							<hr style="margin: 0 0 20px 0">
-							
+
+							<c:set var="cnt" value="1" />
 							<c:forEach var="reply" items="${replyList}">
 							<table>
 								<tr>
-									<b><td><font style="color: blue;font-weight: bold;">${reply.totalId }</font>
-									<font style="color: gray;">${reply.replyDate }</font></td></b>
+								<td>
+								<div class="dropdown">
+									<%-- <a href="javascript:checkRepId('${reply.totalId}')" class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;">${reply.totalId }</a> --%>
+									<a class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;" onmouseover="javascript:checkRepId('${reply.totalId}')">${reply.totalId }</a>
+								  	<div class="dropdown-content">
+								    	<a href="javascript:repEdit('${reply.replyContent}', '${reply.replyNumber}', '${cnt}')" class="repEdit">수정</a>
+								    	<a href="#">삭제</a>
+										<%-- <input type="hidden" name="repNum" class="repNum" value="${reply.replyNumber}" > --%>
+								 	 </div>
+								</div>
+									<font style="color: gray;">${reply.replyDate }</font>
+								</td>
 								</tr>
-		
+
 								<tr>
-									<td>&nbsp;${reply.replyContent }</td>
+									<td name="repContents${cnt}" class="repContents${cnt}">${reply.replyContent }</td>
 								</tr>
+
 							</table>
 							<hr style="margin: 20px 0 20px 0">
+								<c:set var="cnt" value="${cnt+1}"  />
 							</c:forEach>
 					
-					</form>
+					</form>					
 					
 						</div>
 					</div>
 				</div>
 			</div>
+			
 
 		<!-- End Content -->
 
@@ -209,8 +269,15 @@
 			App.init();
 			ParallaxSlider.initParallaxSlider();
 		});
+
+		function repEdit(repCont, repNumb, cnts){
+			$(function(){
+				alert("repNumb=>"+repNumb)
+				//alert("cnts=>"+cnts)
+				$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='replyContents' id='replyContents' maxlength='100'>"+repCont+"</textarea> <a href='javascript:replyChecks()' style='float: right;'>등록</a>");
+				});
+		}
 	</script>
-
+	
 </body>
-
 </html>

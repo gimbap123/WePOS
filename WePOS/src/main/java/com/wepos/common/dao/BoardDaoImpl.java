@@ -53,8 +53,8 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 	
 	
 	
-	public int getReplyCount() {
-		return getSqlSession().selectOne("getReplyCount");
+	public int getReplyCount(int boardNumber) {
+		return getSqlSession().selectOne("getReplyCount", boardNumber);
 	}
 	
 	public List<ReplyDto> replyList(int boardNumber) {
@@ -63,6 +63,10 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 	
 	public void insertReply(ReplyDto replyDto) {
 		getSqlSession().insert("insertReply", replyDto);
+	}
+	
+	public void updateReply(int replyNumber) {
+		getSqlSession().update("updateReply", replyNumber);
 	}
 	
 }
