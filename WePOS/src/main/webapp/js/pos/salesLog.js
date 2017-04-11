@@ -1,15 +1,18 @@
 function checkForm(){
 	if($('#calendarBegin').val()==''){
-		alert("시작일을 확인해주세요");
+		alert("시작일을 선택해주세요");
 		return false;
 	}else if($('#calendarEnd').val()==''){
-		alert("종료일을 확인해주세요");
+		alert("종료일을 선택해주세요");
 		return false;
 	}else if($('#productCode').val()==999){
 		alert("메뉴를 선택해주세요");
 		return false;
 	}else if($('#searchType').val()==999){
 		alert("정렬방식을 선택해주세요");
+		return false;
+	}else if($('#monthBegin').val()==999 || $('#monthEnd').val()==999){
+		alert("조회하실 월을 선택해주세요");
 		return false;
 	}else{
 		$('#searchForm').submit();
@@ -20,16 +23,17 @@ $(function(){
 	$('#searchType').change(function(){
 		var searchType=this.value;
 		if(searchType==1 || searchType==2){
-			$('#week *').remove();
+			$('#month *').remove();
 			var add='';
 			var add1='';
-			add+='<td style="text-align: center;vertical-align: middle;">시작일</td><td style="text-align: center">'
-			add+='<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center" max=sysdate>'
-			add+='</td>'
-			add1+='<td style="text-align: center;vertical-align: middle;">종료일</td>'
-			add1+='<td style="text-align: center;vertical-align: middle;">'
-			add1+='<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">'
-			add1+='</td>'
+			add+='<td style="text-align: center;vertical-align: middle;">시작일</td>'+
+						'<td style="text-align: center">'+
+							'<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">'+
+						'</td>'
+			add1+='<td style="text-align: center;vertical-align: middle;">종료일</td>'+
+						'<td style="text-align: center;vertical-align: middle;">'+
+							'<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">'+
+						'</td>'
 			$('#newStart').html(add);
 			$('#newEnd').html(add1);
 			
@@ -75,38 +79,24 @@ $(function(){
 			$('#newStart *').remove();
 		    $('#newEnd *').remove(); 
 			var month='';
-			month+='<td style="text-align: center;vertical-align: middle;">월</td><td style="text-align: center">'
-			month+='<select class="form-control" id="monthBegin" name="monthBegin" style="width:45%;display:inline">'
-			month+='<option value="999">선택</option>'
-			month+='<option value="2017-01-01">1월</option>'
-			month+='<option value="2017-02-01">2월</option>'
-			month+='<option value="2017-03-01">3월</option>'
-			month+='<option value="2017-04-01">4월</option>'
-			month+='<option value="2017-05-01">5월</option>'
-			month+='<option value="2017-06-01">6월</option>'
-			month+='<option value="2017-07-01">7월</option>'
-			month+='<option value="2017-08-01">8월</option>'
-			month+='<option value="2017-09-01">9월</option>'
-			month+='<option value="2017-10-01">10월</option>'
-			month+='<option value="2017-11-01">11월</option>'
-			month+='<option value="2017-12-01">12월</option>'
-			month+='</select>~'
-			month+='<select class="form-control" id="monthEnd" name="monthEnd" style="width:45%;display:inline">'
-			month+='<option value="999">선택</option>'
-			month+='<option value="2017-02-01">1월</option>'
-			month+='<option value="2017-03-01">2월</option>'
-			month+='<option value="2017-04-01">3월</option>'
-			month+='<option value="2017-05-01">4월</option>'
-			month+='<option value="2017-06-01">5월</option>'
-			month+='<option value="2017-07-01">6월</option>'
-			month+='<option value="2017-08-01">7월</option>'
-			month+='<option value="2017-09-01">8월</option>'
-			month+='<option value="2017-10-01">9월</option>'
-			month+='<option value="2017-11-01">10월</option>'
-			month+='<option value="2017-12-01">11월</option>'
-			month+='<option value="2018-01-01">12월</option>'
-			month+='</select>'
-			month+='</td>'
+			month+='<td style="text-align: center;vertical-align: middle;">월</td><td style="text-align: center">'+
+								'<select class="form-control" id="monthBegin" name="monthBegin" style="width:45%;display:inline">'+
+									'<option value="999">선택</option>'
+										for(var i=1;i<=12;i++){
+											month+='<option value="2017-0'+i+'-01">'+i+'월</option>'
+										}
+			month+='</select> ~ '+
+							'<select class="form-control" id="monthEnd" name="monthEnd" style="width:45%;display:inline">'+
+								'<option value="999">선택</option>'
+									for(var i=1;i<=12;i++){
+										if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12)
+											month+='<option value="2017-0'+i+'-31">'+i+'월</option>'
+										else if(i==2)
+											month+='<option value="2017-0'+i+'-28">'+i+'월</option>'
+										else
+											month+='<option value="2017-0'+i+'-30">'+i+'월</option>'										
+									}
+			month+='</select></td>'
 			$('#month').html(month);
 		}
 	});
