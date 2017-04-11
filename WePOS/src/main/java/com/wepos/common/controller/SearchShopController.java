@@ -514,4 +514,11 @@ public class SearchShopController {
 		shopDao.shopBoardReplyUpdate(shopBoardReply);
 		return "redirect:/common/shopBoardReply.do?pageNum=" + currentPage + "&boardNumber=" +shopBoardReply.getBoardNumber();
 	}
+	
+	@RequestMapping(value="/common/shopBoardReplyDelete.do")
+	public String shopBoardReplyDeleteProcess(@ModelAttribute ShopBoardReplyDto shopBoardReply)
+	{
+		shopDao.shopBoardReplyDelete(shopBoardReply.getReplyNumber());
+		return "redirect:/common/shopBoardReply.do?boardNumber=" + shopBoardReply.getBoardNumber();
+	}
 }

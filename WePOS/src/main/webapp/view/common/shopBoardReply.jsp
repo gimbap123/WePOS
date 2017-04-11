@@ -17,7 +17,7 @@
 				<c:if test="${sessionScope.id eq shopBoardReply.totalId}">
 					<ul id="functionUl${shopBoardReply.replyNumber}" class="list-inline pull-right">
 						<li><a href="javascript:updateReply('${shopBoardReply.replyNumber}', '${shopBoardReply.replyContent}')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li>
-                        <li><a href="#"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>
+                        <li><a href="javascript:deleteReply('${shopBoardReply.replyNumber}')"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>
 					</ul>
 				</c:if>
 			</div>

@@ -266,4 +266,8 @@
   	update shop_board_reply set reply_content = #{replyContent} where reply_number = #{replyNumber}
   </update>
   
+  <delete id="shopBoardReplyDelete" parameterType="int">
+  	delete from shop_board_reply where reply_number = #{replyNumber}
+  </delete>
+  
 </mapper>

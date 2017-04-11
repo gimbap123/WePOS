@@ -99,5 +99,9 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
   public void shopBoardReplyUpdate(ShopBoardReplyDto shopBoardReply) {
 		getSqlSession().update("shopBoardReplyUpdate", shopBoardReply);
 	}
+  
+  public void shopBoardReplyDelete(int replyNumber) {
+		getSqlSession().delete("shopBoardReplyDelete", replyNumber);		
+	}
 }
 

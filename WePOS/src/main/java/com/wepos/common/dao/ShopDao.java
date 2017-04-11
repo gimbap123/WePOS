@@ -69,6 +69,9 @@ public interface ShopDao {
   // 매장 자유 게시판 게시물 댓글 수정
   public void shopBoardReplyUpdate(ShopBoardReplyDto shopBoardReply);
   
+  // 매장 자유 게시판 게시물 댓글 삭제
+  public void shopBoardReplyDelete(int replyNumber);
+  
   
 }
 

@@ -110,8 +110,28 @@ function shopBoardReplyUpdate(replyNumber)
 	var pageNum = $("#pageNum").val();
 	var boardNumber = $("#boardNumber").val()
 	$.get("shopBoardReplyUpdate.do", {replyNumber : replyNumber, replyContent : replyContent, boardNumber : boardNumber, pageNum : pageNum}, function(result)
-	{			
+	{		
+		alert("수정되었습니다.");
 		$("#replyDiv").html(result);
 	})
+}
+
+function deleteReply(replyNumber)
+{
+	var flag = confirm("댓글을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		var boardNumber = $("#boardNumber").val()
+		$.get("shopBoardReplyDelete.do", {replyNumber : replyNumber, boardNumber : boardNumber}, function(result)
+		{
+			alert("삭제되었습니다.");
+			$("#replyDiv").html(result);
+		})
+	}
+	else
+	{
+		return false;
+	}
 }
 
