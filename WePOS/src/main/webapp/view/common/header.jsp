@@ -58,8 +58,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">매장 영업</a></li>
 						<li><a href="#">메뉴 관리</a></li>
-						<li><a href="#">테이블 관리</a></li>
-						<li><a href="#">매출 통계</a></li>
+						<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
+						<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
 					</ul></li>
 				</c:if>			
 				<!-- End 매장 관리(관리자 기능) -->

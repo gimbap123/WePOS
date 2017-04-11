@@ -3,7 +3,7 @@
 
 <div class="table-search-v1 panel panel-u margin-bottom-30" style="margin-top: 20px;'">
 	<div class="panel-heading">
-		<h3 class="panel-title"><i class="icon-note"></i> 공지사항 (총 ${shopBoardCount}개의 게시물이 있습니다.)</h3>	
+		<h3 class="panel-title"><i class="icon-note"></i> 자유 게시판 (총 ${shopBoardCount}개의 게시물이 있습니다.)</h3>	
 	</div>	
 	
 	<div class="table-responsive">
@@ -62,6 +62,11 @@
 				</span>	
 			</div>
 		</div>
+		<c:if test="${sessionScope.id != null}">
+			<div class="col-md-3">
+				<button class="btn-u" type="button" onclick="location.href='shopBoardWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>
+			</div>					
+		</c:if>
 	</div>	
 	
 </div>
