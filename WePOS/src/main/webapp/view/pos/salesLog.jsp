@@ -7,53 +7,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>매출 통계</title>
+	
+	
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet"
+		href="../assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- Web Fonts -->
+	<link rel="stylesheet"
+		href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/bootstrap/css/bootstrap.min.css" />">
+	<link rel="stylesheet" href="<c:url value="/assets/css/style.css" /> ">
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet"
+		href="<c:url value="/assets/css/headers/header-v7.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/css/footers/footer-v1.css" /> ">
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/animate.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/line-icons/line-icons.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
+	<link rel="stylesheet"
+		href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
+	<!-- CSS Customization -->
+	<link rel="stylesheet"
+		href="<c:url value="/assets/css/custom.css?ver=1" /> ">
+	<link rel="stylesheet" type="text/css"
+		href="<c:url value="/assets/css/headers/header-v7.css"/>">
+		
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+	<script language="JavaScript" src="../js/pos/salesLog.js?ver=1"></script>
 
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet"
-	href="../assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
-<!-- Web Fonts -->
-<link rel="stylesheet"
-	href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/bootstrap/css/bootstrap.min.css" />">
-<link rel="stylesheet" href="<c:url value="/assets/css/style.css" /> ">
-<!-- CSS Header and Footer -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/headers/header-v7.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/footers/footer-v1.css" /> ">
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/animate.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/line-icons/line-icons.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
-<link rel="stylesheet"
-	href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
-<!-- CSS Customization -->
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
-<link href="<c:url value="/assets/css/headers/header-v7.css"/>"
-	rel="stylesheet" type="text/css">
-
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-<script language="JavaScript" src="../js/pos/salesLog.js?ver=18"></script>
-
-<!-- <script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script> -->
 </head>
 <body>
 	<div class="wrapper">
@@ -74,12 +73,20 @@
 									<c:if test="${flag==0}">
 										<h2 class="panel-title" style="margin-left:20px;font-size:20px">총 매출 통계</h2>
 									</c:if>
-									<c:if test="${flag==1}">	
+									<c:if test="${flag==1}">											
 										<span style="float:right;margin-right:20px">
-											<h2 class="panel-title" style="font-size:20px">★ ${posLogDto.productName} ★</h2>
-										</span>
+											<h2 class="panel-title" style="font-size:20px">메뉴 - ${posLogDto.productName}</h2>
+										</span>										
 										<h2 class="panel-title" style="margin-left:20px;font-size:20px">
-											매출 통계 ( ${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd} )
+											<c:if test="${posLogDto.searchType==1}">
+												상세 통계 ( ${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd} )
+											</c:if>
+											<c:if test="${posLogDto.searchType==2}">
+												일별 통계 ( ${posLogDto.calendarBegin} ~ ${posLogDto.calendarEnd} )
+											</c:if>
+											<c:if test="${posLogDto.searchType==3}">
+												월별 통계 ( ${posLogDto.monthBegin} ~ ${posLogDto.monthEnd} )
+											</c:if>	
 										</h2>
 									</c:if>
 								</div>
@@ -149,7 +156,7 @@
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
-									<td style="text-align: center;vertical-align: middle;">정렬</td>
+									<td style="text-align: center;vertical-align: middle;">조회</td>
 									<td style="text-align: center">
 										<select class="form-control" id="searchType" name="searchType">
 											<option value="999">-- 선택하세요 --</option>
@@ -192,8 +199,7 @@
 				</div>				
 			</div>			
 		</div>
-	</div>
-	
+	</div>	
 	
 	<script type="text/javascript"
 		src="<c:url value="/assets/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
@@ -240,8 +246,6 @@
 			ProgressBar.initProgressBarHorizontal();
 		});
 	</script>
-
-
 
 </body>
 </html>

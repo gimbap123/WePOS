@@ -28,6 +28,8 @@
 		<typeAlias alias="shopNoticeDto" type="com.wepos.mgr.dto.ShopNoticeDto"/>
 		<typeAlias alias="shopBoardDto" type="com.wepos.common.dto.ShopBoardDto"/>
 		<typeAlias alias="shopBoardReplyDto" type="com.wepos.common.dto.ShopBoardReplyDto"/>
+		<typeAlias alias="OrdersDto" type="com.wepos.common.dto.OrdersDto"/>
+		<typeAlias alias="OrdersDetailDto" type="com.wepos.common.dto.OrdersDetailDto"/>
 	</typeAliases>
 		
 	<mappers>	    

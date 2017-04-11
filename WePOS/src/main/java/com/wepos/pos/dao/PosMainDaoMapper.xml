@@ -46,4 +46,29 @@
     where c.category_code = p.category_code
     and c.category_code = #{categoryCode}
   </select>
+  
+  <insert id="insertOrders" parameterType="OrdersDto">
+    insert into orders 
+    values( orders_seq.nextval, #{shopCode}, #{tableCode}, null, #{paymentCode}, sysdate, '0')
+  </insert>
+  
+  <insert id="insertOrdersDetail" parameterType="OrdersDetailDto">
+    insert into orders_detail
+    values( #{orderCode}, #{productCode}, #{orderAmount}, #{orderPrice} )
+  </insert>
+  
+  <select id="getOrderCode" resultType="int">
+    select max(order_code)
+    from orders
+  </select>
+  
+  <select id="getOrderBeforePayment" resultType="OrdersDto">
+    select * from orders
+    where order_state = 0;
+  </select>
+  
+  <select id="getOrdersDetailBeforePayment" resultType="OrdersDetailDto">
+    
+  </select>
+  
 </mapper>
