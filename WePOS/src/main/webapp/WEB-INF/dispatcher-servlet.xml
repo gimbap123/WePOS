@@ -33,6 +33,8 @@
  	 <bean class="com.wepos.pos.controller.PosMainController" />
  	 <bean class="com.wepos.admin.controller.AdminMgrController" />
  	 <bean class="com.wepos.pos.controller.PosLogController" />
+ 	 <bean class="com.wepos.pos.controller.PosIntroduceController" />
+ 	 
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
      <bean class="com.wepos.common.dao.BoardDaoImpl" /> 

@@ -60,7 +60,7 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
 
 
 <style>
@@ -134,7 +134,8 @@
 						<div class="blog margin-bottom-40">
 						
 		<form name="boardDetail" enctype="multipart/form-data" method="post"
-			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
+			action="boardDelete.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
+			<input type="hidden" name="boardNumber=${boardDto.boardNumber }">
 			
 							<h2 style="color:green; ">${boardDto.boardTitle}</h2>
 							<div class="blog-post-tags">
@@ -196,29 +197,22 @@
 							
 					</form>
 					
-					<form name="boardReplys" method="post" action="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}&replyNumber=${replyNumbers}">
+					<form name="boardReplys" method="post" action="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
 					
 					<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
 					<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
-					<input type="hidden" name="replyNumbers" class="replyNumbers" value="replyNumbers">
 					
 							<hr style="margin: 0 0 20px 0">
 
 							<c:set var="cnt" value="1" />
-							<c:set var="replyNumber" />
 							<c:forEach var="reply" items="${replyList}">
 							<table>
 								<tr>
 								<td>
 								<div class="dropdown">
 									<a class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;" onmouseover="javascript:checkRepId('${reply.totalId}')">${reply.totalId }</a>
-								  	<div class="dropdown-content">
-								    	<c:set var="replyNumber" value="${reply.replyNumber}" />
-								    	<input type="hidden" name="replyNumber" value="${reply.replyNumber}">
-								    	<!-- <script>alert(${repCnts})</script> -->
+								  	<div class="dropdown-content" id="dropdown-content">
 								    	<a href="javascript:repEdit('${reply.replyContent}', '${reply.replyNumber}', '${cnt}')" class="repEdit">수정</a>
-								    	<%-- <a href="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}&replyNumber=${reply.replyNumber}">
-								    		onclick="javascript:repEdit('${reply.replyContent}', '${reply.replyNumber}', '${cnt}')" class="repEdit"수정</a> --%>
 								    	<a href="#">삭제</a>
 								 	 </div>
 								</div>
@@ -227,7 +221,7 @@
 								</tr>
 
 								<tr>
-									<td name="repContents${cnt}" class="repContents${cnt}">${reply.replyContent }</td>
+									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents">${reply.replyContent }</td>
 								</tr>
 
 							</table>
@@ -275,15 +269,6 @@
 			ParallaxSlider.initParallaxSlider();
 		});
 
-		function repEdit(repCont, repNumb, cnts){
-			$(function(){
-				alert("repNumb=>"+repNumb)
-				//$("form[name=boardReplys]").replaceWith("<form name='boardReplys' method='post' action='boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}&replyNumber="+repNumb+">");
-				//$("form[action^='boardReplys']").html("action='boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}&replyNumber=${reply.replyNumber}'>");
-				$(this).find('.replyNumbers[value=replyNumbers]').replaceWith(repNumb);
-				$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='replyContents' id='replyContents' maxlength='100'>"+repCont+"</textarea> <a href='javascript:replyChecks()' style='float: right;'>수정</a>");
-			});
-		}
 	</script>
 	
 </body>
