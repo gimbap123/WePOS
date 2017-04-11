@@ -22,6 +22,8 @@
 		<typeAlias alias="TablesDto" type="com.wepos.common.dto.TablesDto"/>
 		<typeAlias alias="ProductDto" type="com.wepos.common.dto.ProductDto"/>
 		<typeAlias alias="shopMgrDto" type="com.wepos.mgr.dto.ShopMgrDto"/>
+		<typeAlias alias="OrdersDto" type="com.wepos.common.dto.OrdersDto"/>
+		<typeAlias alias="OrdersDetailDto" type="com.wepos.common.dto.OrdersDetailDto"/>
 	</typeAliases>
 		
 	<mappers>	    
