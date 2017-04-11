@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,6 +32,7 @@ import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopBoardDto;
+import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
@@ -282,8 +284,8 @@ public class SearchShopController {
 				
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
-		map.put("searchType", searchNoticeType);
-		map.put("searchText", searchNoticeText);
+		map.put("searchNoticeType", searchNoticeType);
+		map.put("searchNoticeText", searchNoticeText);
 		
 		int shopNoticeCount = shopDao.shopNoticeCount(map);	
 		
@@ -379,8 +381,8 @@ public class SearchShopController {
 				
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
-		map.put("searchType", searchBoardType);
-		map.put("searchText", searchBoardText);
+		map.put("searchBoardType", searchBoardType);
+		map.put("searchBoardText", searchBoardText);
 		
 		int shopBoardCount = shopDao.shopBoardCount(map);	
 		
@@ -452,7 +454,7 @@ public class SearchShopController {
 		else
 		{
 			shopBoard.setBoardFile(null);
-		}
+		}	
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopBoardDetail");
@@ -460,5 +462,56 @@ public class SearchShopController {
 		mav.addObject("fileName", fileName);
 				
 		return mav;
+	}
+	
+	// 매장 자유 게시판 게시물 댓글
+	@RequestMapping(value="/common/shopBoardReply.do")
+	public ModelAndView shopBoardReplyView(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
+			@RequestParam("boardNumber") int boardNumber)
+	{
+		int shopBoardReplyCount = shopDao.shopBoardReplyCount(boardNumber);
+		
+		String paramString = "javascript:replyListPaging";
+		PagingUtil page = new PagingUtil(paramString, currentPage, shopBoardReplyCount, 5, 5, null);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNumber", boardNumber);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<ShopBoardReplyDto> shopBoardReplyList = null;
+		if(shopBoardReplyCount > 0)
+		{
+			shopBoardReplyList = shopDao.shopBoardReplyList(map);
+		}
+		else
+		{
+			shopBoardReplyList = Collections.emptyList();
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopBoardReply");
+		mav.addObject("shopBoardReplyList", shopBoardReplyList);
+		mav.addObject("shopBoardReplyCount", shopBoardReplyCount);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		mav.addObject("pageNum", currentPage);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/common/shopBoardReplyWrite.do")
+	public String shopBoardReplyWriteProcess(HttpSession session, @ModelAttribute ShopBoardReplyDto shopBoardReply)
+	{
+		shopBoardReply.setTotalId((String)session.getAttribute("id"));
+		shopDao.shopBoardReplyWrite(shopBoardReply);
+		return "redirect:/common/shopBoardReply.do?boardNumber=" + shopBoardReply.getBoardNumber();
+	}
+	
+	@RequestMapping(value="/common/shopBoardReplyUpdate.do")
+	public String shopBoardReplyUpdateProcess(@ModelAttribute ShopBoardReplyDto shopBoardReply,
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
+	{		
+		shopDao.shopBoardReplyUpdate(shopBoardReply);
+		return "redirect:/common/shopBoardReply.do?pageNum=" + currentPage + "&boardNumber=" +shopBoardReply.getBoardNumber();
 	}
 }

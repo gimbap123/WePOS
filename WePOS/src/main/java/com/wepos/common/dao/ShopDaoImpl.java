@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopBoardDto;
+import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -80,6 +81,23 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
   
   public ShopBoardDto shopBoardDetail(int boardNumber) {
 		return getSqlSession().selectOne("shopBoardDetail", boardNumber);
+	}
+  
+  public int shopBoardReplyCount(int boardNumber) {
+		return getSqlSession().selectOne("shopBoardReplyCount", boardNumber);
+	}
+  
+  public List<ShopBoardReplyDto> shopBoardReplyList(Map<String, Object> map) {
+		List<ShopBoardReplyDto> shopBoardReplyList = getSqlSession().selectList("shopBoardReplyList", map);
+		return shopBoardReplyList;
+	}
+  
+  public void shopBoardReplyWrite(ShopBoardReplyDto shopBoardReply) {
+		getSqlSession().insert("shopBoardReplyWrite", shopBoardReply);
+	}
+  
+  public void shopBoardReplyUpdate(ShopBoardReplyDto shopBoardReply) {
+		getSqlSession().update("shopBoardReplyUpdate", shopBoardReply);
 	}
 }
 

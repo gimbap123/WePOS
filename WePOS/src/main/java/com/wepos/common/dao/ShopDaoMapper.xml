@@ -125,13 +125,13 @@
   		<if test="shopCode != null">
   			and shop_code = #{shopCode}  		
   		</if>
-  		<if test="searchType != 'all' and searchText != ''">
-  			and ${searchType} like '%' || #{searchText} || '%'
+  		<if test="searchNoticeType != 'all' and searchNoticeText != ''">
+  			and ${searchNoticeType} like '%' || #{searchNoticeText} || '%'
   		</if>
-  		<if test="searchType == 'all' and searchText != ''">
-  			and (mgr_id like '%' || #{searchText} || '%' or 
-  			notice_title like '%' || #{searchText} || '%' or
-  			notice_content like '%' || #{searchText} || '%')
+  		<if test="searchNoticeType == 'all' and searchNoticeText != ''">
+  			and (mgr_id like '%' || #{searchNoticeText} || '%' or 
+  			notice_title like '%' || #{searchNoticeText} || '%' or
+  			notice_content like '%' || #{searchNoticeText} || '%')
   		</if>
   	</where>
   </select>
@@ -149,13 +149,13 @@
 		  		<if test="shopCode != null">
 		  			and shop_code = #{shopCode}  		
 		  		</if>
-		  		<if test="searchType != 'all' and searchText != ''">
-		  			and ${searchType} like '%' || #{searchText} || '%'
+		  		<if test="searchNoticeType != 'all' and searchNoticeText != ''">
+		  			and ${searchNoticeType} like '%' || #{searchNoticeText} || '%'
 		  		</if>
-		  		<if test="searchType == 'all' and searchText != ''">
-		  			and (mgr_id like '%' || #{searchText} || '%' or 
-		  			notice_title like '%' || #{searchText} || '%' or
-		  			notice_content like '%' || #{searchText} || '%')
+		  		<if test="searchNoticeType == 'all' and searchNoticeText != ''">
+		  			and (mgr_id like '%' || #{searchNoticeText} || '%' or 
+		  			notice_title like '%' || #{searchNoticeText} || '%' or
+		  			notice_content like '%' || #{searchNoticeText} || '%')
 		  		</if>
 		  	</where>
   			order by notice_number desc
@@ -169,7 +169,7 @@
   <select id="shopNoticeDetail" parameterType="int" resultType="shopNoticeDto">
   	select *
   	from shop_notice
-  	where notice_number = #{notice_number}
+  	where notice_number = #{noticeNumber}
   </select>
   
   <update id="addNoticeReadCnt" parameterType="int">
@@ -183,13 +183,13 @@
   		<if test="shopCode != null">
   			and shop_code = #{shopCode}  		
   		</if>
-  		<if test="searchType != 'all' and searchText != ''">
-  			and ${searchType} like '%' || #{searchText} || '%'
+  		<if test="searchBoardType != 'all' and searchBoardText != ''">
+  			and ${searchBoardType} like '%' || #{searchBoardText} || '%'
   		</if>
-  		<if test="searchType == 'all' and searchText != ''">
-  			and (total_id like '%' || #{searchText} || '%' or 
-  			board_title like '%' || #{searchText} || '%' or
-  			board_content like '%' || #{searchText} || '%')
+  		<if test="searchBoardType == 'all' and searchBoardText != ''">
+  			and (total_id like '%' || #{searchBoardText} || '%' or 
+  			board_title like '%' || #{searchBoardText} || '%' or
+  			board_content like '%' || #{searchBoardText} || '%')
   		</if>
   	</where>
   </select>
@@ -207,13 +207,13 @@
 		  		<if test="shopCode != null">
 		  			and shop_code = #{shopCode}  		
 		  		</if>
-		  		<if test="searchType != 'all' and searchText != ''">
-		  			and ${searchType} like '%' || #{searchText} || '%'
+		  		<if test="searchBoardType != 'all' and searchBoardText != ''">
+		  			and ${searchBoardType} like '%' || #{searchBoardText} || '%'
 		  		</if>
-		  		<if test="searchType == 'all' and searchText != ''">
-		  			and (total_id like '%' || #{searchText} || '%' or 
-		  			board_title like '%' || #{searchText} || '%' or
-		  			board_content like '%' || #{searchText} || '%')
+		  		<if test="searchBoardType == 'all' and searchBoardText != ''">
+		  			and (total_id like '%' || #{searchBoardText} || '%' or 
+		  			board_title like '%' || #{searchBoardText} || '%' or
+		  			board_content like '%' || #{searchBoardText} || '%')
 		  		</if>
 		  	</where>
   			order by board_number desc
@@ -231,7 +231,39 @@
   <select id="shopBoardDetail" parameterType="int" resultType="shopBoardDto">
   	select *
   	from shop_board
-  	where board_number = #{board_number}
+  	where board_number = #{boardNumber}
   </select>
+  
+  <select id="shopBoardReplyCount" parameterType="int" resultType="int">
+  	select count(reply_number)
+  	from shop_board_reply
+  	where board_number = #{boardNumber}
+  </select>
+  
+  <select id="shopBoardReplyList" parameterType="map" resultType="shopBoardReplyDto">  	
+  	select rnumsbr.reply_number, rnumsbr.board_number, rnumsbr.total_id, rnumsbr.reply_content, rnumsbr.reply_date
+  	from
+  	(  	
+  		select sbr.*, rownum as rnum
+  		from
+  		(
+  			select *
+  			from shop_board_reply
+  			where board_number = #{boardNumber}
+  			order by reply_number desc
+  		) sbr
+  	) rnumsbr
+  	<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>
+  </select>
+  
+  <insert id="shopBoardReplyWrite" parameterType="shopBoardReplyDto">
+  	insert into shop_board_reply values(shop_board_reply_SEQ.nextval, #{boardNumber}, #{totalId}, #{replyContent}, sysdate)
+  </insert>
+  
+  <update id="shopBoardReplyUpdate" parameterType="shopBoardReplyDto">
+  	update shop_board_reply set reply_content = #{replyContent} where reply_number = #{replyNumber}
+  </update>
   
 </mapper>
