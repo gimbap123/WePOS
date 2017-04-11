@@ -37,5 +37,11 @@ public interface PosMainDao {
   
   // 주문 상세 정보 insert
   public void insertOrdersDetail( OrdersDetailDto odt );
+  
+  // 결제 전 주문 정보 select
+  public List<OrdersDto> getOrderBeforePayment();
+  
+  // 결제 전 테이블의 주문 상세 내역 select
+  public List<OrdersDetailDto> getOrdersDetailBeforePayment();
 }
 

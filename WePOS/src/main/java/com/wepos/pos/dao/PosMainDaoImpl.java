@@ -60,4 +60,14 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
     return getSqlSession().selectOne( "getOrderCode" );
   }
 
+  public List<OrdersDto> getOrderBeforePayment() {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectList( "getOrderBeforePayment" );
+  }
+
+  public List<OrdersDetailDto> getOrdersDetailBeforePayment() {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectList( "getOrdersDetailBeforePayment" );
+  }
+
 }
