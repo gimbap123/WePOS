@@ -135,3 +135,16 @@ function deleteReply(replyNumber)
 	}
 }
 
+function shopBoardWrite()
+{
+	if($("#boardTitle").val() == "" || $("#boardTitle").val() == null)
+	{
+		alert("제목을 입력해주세요.")
+		return false;
+	}
+	else
+	{
+		document.writeForm.submit();
+	}
+}	
+

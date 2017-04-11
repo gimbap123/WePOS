@@ -1,5 +1,7 @@
 package com.wepos.common.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,7 @@ import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.util.FileUtil;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -430,6 +433,7 @@ public class SearchShopController {
 		mav.addObject("searchBoardType", searchBoardType);
 		mav.addObject("searchBoardText", searchBoardText);
 		mav.addObject("searchBoardTypeList", searchBoardTypeList);
+		mav.addObject("shopCode", shopCode);
 		return mav;
 	}
 	
@@ -499,6 +503,7 @@ public class SearchShopController {
 		return mav;
 	}
 	
+	// 매장 자유 게시판 댓글 쓰기
 	@RequestMapping(value="/common/shopBoardReplyWrite.do")
 	public String shopBoardReplyWriteProcess(HttpSession session, @ModelAttribute ShopBoardReplyDto shopBoardReply)
 	{
@@ -507,6 +512,7 @@ public class SearchShopController {
 		return "redirect:/common/shopBoardReply.do?boardNumber=" + shopBoardReply.getBoardNumber();
 	}
 	
+	// 매장 자유 게시판 댓글 수정
 	@RequestMapping(value="/common/shopBoardReplyUpdate.do")
 	public String shopBoardReplyUpdateProcess(@ModelAttribute ShopBoardReplyDto shopBoardReply,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
@@ -515,10 +521,61 @@ public class SearchShopController {
 		return "redirect:/common/shopBoardReply.do?pageNum=" + currentPage + "&boardNumber=" +shopBoardReply.getBoardNumber();
 	}
 	
+	// 매장 자유 게시판 댓글 삭제
 	@RequestMapping(value="/common/shopBoardReplyDelete.do")
 	public String shopBoardReplyDeleteProcess(@ModelAttribute ShopBoardReplyDto shopBoardReply)
 	{
 		shopDao.shopBoardReplyDelete(shopBoardReply.getReplyNumber());
 		return "redirect:/common/shopBoardReply.do?boardNumber=" + shopBoardReply.getBoardNumber();
+	}
+	
+	// 매장 자유 게시판 글쓰기
+	@RequestMapping(value="/common/shopBoardWrite.do")
+	public ModelAndView shopBoardWriteView(@RequestParam("shopCode") int shopCode)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopBoardWrite");
+		mav.addObject("shopCode", shopCode);
+		
+		return mav;
+	}
+	
+	// 매장 자유 게시판 글쓰기 기능 수행
+	@RequestMapping(value="/common/shopBoardWriteProc.do")
+	public String shopBoardWriteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard) throws IOException, Exception
+	{		
+		String newFileName = "";
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		/*if(!shopBoard.getUpload().isEmpty())
+		{
+			newFileName = FileUtil.rename(shopBoard.getUpload().getOriginalFilename());
+			shopBoard.setBoardFile(newFileName);
+			File file = new File(filePath + newFileName);
+			shopBoard.getUpload().transferTo(file);
+		}*/
+		
+		shopDao.shopBoardWrite(shopBoard);		
+		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
+	}
+	
+	// 매장 자유 게시판 글수정
+	@RequestMapping(value="/common/shopBoardUpdate.do", method=RequestMethod.GET)
+	public ModelAndView shopBoardUpdateView(@RequestParam("boardNumber") int boardNumber)
+	{
+		ShopBoardDto shopBoard = shopDao.shopBoardDetail(boardNumber);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopBoardUpdate");
+		mav.addObject("shopBoard", shopBoard);
+		
+		return mav;		
+	}
+	
+	// 매장 자유 게시판 글수정 기능 수행
+	@RequestMapping(value="/common/shopBoardUpdate.do", method=RequestMethod.POST)
+	public String shopBoardUpdateProcess(@ModelAttribute ShopBoardDto shopBoard)
+	{
+		shopDao.shopBoardUpdate(shopBoard);
+		return "redirect:/common/shopBoardDetail.do?boardNumber=" + shopBoard.getBoardNumber();
 	}
 }

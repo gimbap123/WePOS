@@ -270,4 +270,14 @@
   	delete from shop_board_reply where reply_number = #{replyNumber}
   </delete>
   
+  <insert id="shopBoardWrite" parameterType="shopBoardDto">
+  	insert into shop_board values(shop_board_SEQ.nextval, #{shopCode}, #{totalId}, #{boardTitle}, 
+  		#{boardContent}, sysdate, 0, #{boardFile, jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="shopBoardUpdate" parameterType="shopBoardDto">
+  	update shop_board set board_title = #{boardTitle}, board_content = #{boardContent}, board_file = #{boardFile, jdbcType=VARCHAR}
+  	where board_number = #{boardNumber}
+  </update>
+  
 </mapper>

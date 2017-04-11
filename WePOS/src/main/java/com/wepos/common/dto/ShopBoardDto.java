@@ -14,8 +14,8 @@ public class ShopBoardDto {
 	private Date boardDate;
 	private int boardReadCnt;
 	private String boardFile;
-	private MultipartFile upload;
-	
+	private MultipartFile upload;	
+		
 	public int getBoardNumber() {
 		return boardNumber;
 	}
@@ -70,5 +70,5 @@ public class ShopBoardDto {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
-
+	
 }
