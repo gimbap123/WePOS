@@ -45,7 +45,7 @@ public class PosMainController {
     // Map<String, Integer> category = posMainDao.getCategory( 3 );
     
     // 현재 테이블 주문 정보 select ( order_state == 0 인 (결제 전 주문) 항목들만 )
-    List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
+    // List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
     
     // 결제 전 테이블의 주문 상세 내역 select
     // List<OrdersDetailDto> ordersDetailList = 
@@ -98,9 +98,4 @@ public class PosMainController {
     return mav;
   }
 
-  // 매출 통계 페이지
-  @RequestMapping( "/pos/salesLog.do" )
-  public String showSalesLog() {
-    return "pos/salesLog";
-  }
 }
