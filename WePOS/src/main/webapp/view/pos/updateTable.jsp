@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	response.setHeader("pragma","No-cache");
+	response.setHeader("Cache-Control","no-cache");
+	response.addHeader("Cache-Control","No-store");
+	response.setDateHeader("Expires",0);
+%>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -48,7 +54,7 @@
 	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
-<script language="JavaScript" src="../js/pos/updateTable.js?ver=1"></script>
+<script language="JavaScript" src="../js/pos/updateTable.js?ver=2"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -89,7 +95,7 @@
 								onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">수정</a>
 						</span>
 						<span>
-						<a class="color-green" href="">삭제</a>
+						<a class="color-green" href="#" onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">삭제</a>
 						</span>
 					</div>
 				</div>
@@ -100,41 +106,40 @@
 				<div class="panel panel-default panel-warning">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h3>테이블 정보</h3></div>					
+					<div class="panel-heading" align="center"><h3 id="tableInfoTag">테이블 정보</h3></div>					
 					<form id="updateTableForm" name="updateTableForm" action="updateTable.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">날짜</th>
-									<th style="text-align:center;vertical-align:middle"><span id="realTime"></span></th>
+									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">테이블 번호</th>
 									<th>
-										<input type="text" id="tableCode" name="tableCode" value="" size="15px" 
-												style="text-align:center;color:blue;border:0;" readonly>
+										<input type="text" id="tableCode" name="tableCode" value="" size="15px" style="border:0" readonly>
 									</th>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">테이블 이름</th>
-									<th>
+									<td>
 										<input type="text" id="tableName" name="tableName" value="" size="15px" style="text-align:center">
-									</th>
+									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">테이블 설명</th>
-									<th>
+									<td>
 										<input type="text" id="tableDesc" name="tableDesc" value="" size="15px" style="text-align:center">
-									</th>
+									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">정원</th>
-									<th>
+									<td>
 										<input type="text" id="tableMax" name="tableMax" value="" size="15px" style="text-align:center">
-									</th>
+									</td>
 								</tr>
 							</tbody>
-						</table>
+						</table>						
 					</form>	
 				</div>
 										
@@ -145,7 +150,8 @@
 						<button type="button" class="btn btn-lg btn-danger" onclick="checkNull()">완료</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-lg btn-primary">취소</button>
+						<button type="button" class="btn btn-lg btn-primary" 
+									onclick="location.href='updateTableView.do?mgrId=${sessionScope.id}'">취소</button>
 					</div>
 				</div>
 			</div>

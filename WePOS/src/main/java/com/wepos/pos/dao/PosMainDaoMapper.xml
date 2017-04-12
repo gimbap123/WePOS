@@ -30,6 +30,7 @@
     select * 
     from tables 
     where shop_code= #{shopCode}
+    order by table_code asc
   </select>
   
   <!-- 매장 코드로 매장 메뉴 정보 select -->

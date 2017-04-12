@@ -12,4 +12,8 @@
 		update tables set table_name=#{tableName},table_desc=#{tableDesc},table_max=#{tableMax}
 		where table_code=#{tableCode}
 	</update>
+	
+	<delete id="deleteTable" parameterType="int">
+		delete from tables where table_code=#{tableCode}
+	</delete>
 </mapper>
