@@ -142,17 +142,63 @@ function shopBoardWrite()
 	{
 		alert("제목을 입력해주세요.")
 		return false;
-	}	
-}	
+	}
+	document.shopBoardWriteForm.submit();
+}
 
-function shopBoardDelete(boardNumber, shopCode)
+function shopBoardUpdate()
+{
+	if($("#boardTitle").val() == "" || $("#boardTitle").val() == null)
+	{
+		alert("제목을 입력해주세요.")
+		return false;
+	}
+	document.shopBoardUpdateForm.submit();
+}
+
+function shopBoardDelete(boardNumber, shopCode, fileName)
 {
 	var flag = confirm("글을 삭제하시겠습니까?");
 	
 	if(flag)
 	{
 		alert("삭제되었습니다.");
-		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode
+		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode + '&boardFile=' + fileName;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function shopNoticeWrite()
+{
+	if($("#noticeTitle").val() == "" || $("#noticeTitle").val() == null)
+	{
+		alert("제목을 입력해주세요.")
+		return false;
+	}	
+	document.shopNoticeWriteForm.submit();
+}	
+
+function shopNoticeUpdate()
+{
+	if($("#noticeTitle").val() == "" || $("#noticeTitle").val() == null)
+	{
+		alert("제목을 입력해주세요.")
+		return false;
+	}
+	document.shopNoticeUpdateForm.submit();
+}
+
+function shopNoticeDelete(noticeNumber, shopCode, fileName)
+{
+	var flag = confirm("글을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		alert("삭제되었습니다.");
+		location.href = 'shopNoticeDelete.do?noticeNumber=' + noticeNumber + '&shopCode=' + shopCode + '&noticeFile=' + fileName;
 	}
 	else
 	{

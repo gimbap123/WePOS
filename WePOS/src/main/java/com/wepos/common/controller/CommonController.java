@@ -158,8 +158,10 @@ public class CommonController {
 				mgrLoginDto.setMgrLoginState('1');
 				commonDao.mgrLoginLog(mgrLoginDto);
 				
+				int shopCode = commonDao.mgrShopCode(id);
 				session.setAttribute("id", id);
-				session.setAttribute("userType", 2);				
+				session.setAttribute("userType", 2);
+				session.setAttribute("shopCode", shopCode);
 				
 				result = "/common/main";	
 			}
@@ -210,10 +212,8 @@ public class CommonController {
 			mgrLoginDto.setMgrLoginState('0');
 			commonDao.mgrLoginLog(mgrLoginDto);
 		}
-				
-		session.removeAttribute("id");
-		session.removeAttribute("userType");
-		/*session.invalidate();*/
+			
+		session.invalidate();
 		
 		return  "/common/main";
 	}
@@ -291,6 +291,7 @@ public class CommonController {
 						System.out.println("삭제 아이디 등록성공");
 					session.removeAttribute("id");
 					session.removeAttribute("userType");
+					session.removeAttribute("shopCode");
 					mav.setViewName("common/main");
 				}
 			}else{

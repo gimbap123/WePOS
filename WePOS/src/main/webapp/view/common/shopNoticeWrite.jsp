@@ -49,23 +49,23 @@
 				</div>				
 			</div>			
 				<div class="table-responsive">		
-					<form action="shopBoardWrite.do" name="shopBoardWriteForm" enctype="multipart/form-data" method="post">
+					<form action="shopNoticeWrite.do" name="shopNoticeWriteForm" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="shopCode" value="${shopCode}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">제 목</td>
 								<td>
-									<input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요.">
+									<input type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요.">
 								</td>
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">작성자</td>
-								<td><input type="text" class="form-control" id="totalId" name="totalId" value="${sessionScope.id}" readonly="readonly"></td>
+								<td><input type="text" class="form-control" id="mgrId" name="mgrId" value="${sessionScope.id}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">내 용</td>
 								<td>
-									<textarea class="form-control" rows="15" id="boardContent" name="boardContent" placeholder="내용을 입력하세요." style="resize: none;"></textarea>
+									<textarea class="form-control" rows="15" id="noticeContent" name="noticeContent" placeholder="내용을 입력하세요." style="resize: none;"></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -74,11 +74,11 @@
 							</tr>
 							<tr>
 								<td colspan="2" style="vertical-align: middle;" align="right">							
-									<button class="btn-u" type="button" onclick="shopBoardWrite()">등록</button>
+									<button class="btn-u" type="button" onclick="shopNoticeWrite()">등록</button>
 									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="location.href='shopDetail.do?shopCode=${shopCode}'">목록으로</button>										
 								</td>
 							</tr>
-						</table>
+						</table>	
 					</form>			
 				</div>			
 		</div>	

@@ -52,4 +52,7 @@ public interface CommonDao {
 	// 회원 등급 확인
 	public int userGradeCode(String userId);
 	
+	// 관리자에 해당하는 매장 코드 가져오기
+	public int mgrShopCode(String id);
+	
 }

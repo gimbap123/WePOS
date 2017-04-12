@@ -47,6 +47,12 @@ public class FileUtil {
 		File file=new File(UPLOAD_PATH, boardFile); //파일의 경로, 파일명
 		if(file.exists()) file.delete(); //존재하면 삭제하라!
 	}
+	
+	public static void removeFile(String fileName, String path)
+	{
+		File file = new File(path, fileName);
+		if(file.exists()) file.delete();
+	}
 
 	
 }

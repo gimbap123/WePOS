@@ -33,7 +33,8 @@ public class PosMainController {
       @RequestParam( value = "mgrId" ) String mgrId ) {
 
     int shopCode = posMainDao.getShopCode( mgrId );
-    System.out.println( shopCode );
+    System.out.println( "PosMainController > getShopCode > shopCode : " + shopCode );
+    
     // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
     // 매장 내 테이블 정보 select
@@ -65,7 +66,8 @@ public class PosMainController {
 
   // 주문 내역 DB 저장
   @RequestMapping( "/pos/insertOrder.do" )
-  public ModelAndView insertOrder(
+  public String insertOrder(
+      @RequestParam( value = "mgrId" ) String mgrId,
       @RequestParam( value = "orders" ) List<?> orders,
       @RequestParam( value = "ordersDetailList" ) List<?> ordersDetailList ) {
 
@@ -97,8 +99,11 @@ public class PosMainController {
       oddList.add(odd);
     }
 
-    ModelAndView mav = new ModelAndView( "pos/insertOrder" );
-    return mav;
+    //ModelAndView mav = new ModelAndView( "pos/posMain" );
+    //mav.addObject( "od", od );
+    //mav.addObject( "oddList", oddList );
+    System.out.println( "PosMainController > insertOrder() > mgrId : " + mgrId  );
+    return "redirect:posMain.do?mgrId="+mgrId;
   }
 
 }

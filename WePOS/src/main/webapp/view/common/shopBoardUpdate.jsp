@@ -49,7 +49,7 @@
 				</div>				
 			</div>			
 				<div class="table-responsive">		
-					<form action="shopBoardUpdate.do" name="updateForm" enctype="multipart/form-data" method="post">
+					<form action="shopBoardUpdate.do" name="shopBoardUpdateForm" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="boardNumber" value="${shopBoard.boardNumber}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
@@ -75,13 +75,17 @@
 										첨부된 파일이 없습니다.
 									</c:if>
 									<c:if test="${shopBoard.boardFile != null}">
-										${shopBoard.boardFile}
+										<input type="text" class="form-control" id="boardFile" name="boardFile" value="${shopBoard.boardFile}" readonly="readonly">
 									</c:if>
 								</td>
 							</tr>
 							<tr>
+								<td style="vertical-align: middle; text-align: center;">첨부 파일</td>
+								<td><input type="file" class="form-control" name="upload"></td>
+							</tr>
+							<tr>
 								<td colspan="2" style="vertical-align: middle;" align="right">							
-									<button class="btn-u" type="submit">수정</button>
+									<button class="btn-u" type="button" onclick="shopBoardUpdate()">수정</button>
 									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="history.back()">취소</button>										
 								</td>
 							</tr>

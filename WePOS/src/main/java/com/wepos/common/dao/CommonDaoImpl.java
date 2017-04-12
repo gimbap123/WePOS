@@ -86,5 +86,9 @@ public class CommonDaoImpl extends SqlSessionDaoSupport implements CommonDao {
 	public int userGradeCode(String userId) {
 		return getSqlSession().selectOne("userGradeCode", userId);
 	}
-
+	
+	 public int mgrShopCode(String id) {		
+		return getSqlSession().selectOne("mgrShopCode", id);
+	}
+	 
 }

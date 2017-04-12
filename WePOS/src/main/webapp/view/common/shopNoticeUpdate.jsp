@@ -32,7 +32,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
 
 <title>We POS</title>
 </head>
@@ -44,44 +44,55 @@
 			<div class="table-search-v1 panel panel-u margin-bottom-20">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bubble "></i> 글쓰기
+						<i class="icon-bubble "></i> 글수정
 					</h3>
 				</div>				
 			</div>			
 				<div class="table-responsive">		
-					<form action="shopBoardWrite.do" name="shopBoardWriteForm" enctype="multipart/form-data" method="post">
-						<input type="hidden" name="shopCode" value="${shopCode}">
+					<form action="shopNoticeUpdate.do" name="shopNoticeUpdateForm" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="noticeNumber" value="${shopNotice.noticeNumber}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">제 목</td>
 								<td>
-									<input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요.">
+									<input type="text" class="form-control" id="noticeTitle" name="noticeTitle" value="${shopNotice.noticeTitle}">
 								</td>
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">작성자</td>
-								<td><input type="text" class="form-control" id="totalId" name="totalId" value="${sessionScope.id}" readonly="readonly"></td>
+								<td><input type="text" class="form-control" id="mgrId" name="mgrId" value="${shopNotice.mgrId}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">내 용</td>
 								<td>
-									<textarea class="form-control" rows="15" id="boardContent" name="boardContent" placeholder="내용을 입력하세요." style="resize: none;"></textarea>
+									<textarea class="form-control" rows="15" id="noticeContent" name="noticeContent" style="resize: none;">${shopNotice.noticeContent}</textarea>
 								</td>
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">첨부 파일</td>
-								<td><input type="file" class="form-control" name="upload"></td>					
+								<td>
+									<c:if test="${shopNotice.noticeFile == null}">
+										첨부된 파일이 없습니다.
+									</c:if>
+									<c:if test="${shopNotice.noticeFile != null}">
+										<input type="text" class="form-control" id="noticeFile" name="noticeFile" value="${shopNotice.noticeFile}" readonly="readonly">
+									</c:if>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle; text-align: center;">첨부 파일</td>
+								<td><input type="file" class="form-control" name="upload"></td>
 							</tr>
 							<tr>
 								<td colspan="2" style="vertical-align: middle;" align="right">							
-									<button class="btn-u" type="button" onclick="shopBoardWrite()">등록</button>
-									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="location.href='shopDetail.do?shopCode=${shopCode}'">목록으로</button>										
+									<button class="btn-u" type="button" onclick="shopNoticeUpdate()">수정</button>
+									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="history.back()">취소</button>										
 								</td>
 							</tr>
-						</table>
+						</table>	
 					</form>			
 				</div>			
-		</div>	
+		</div>
 					
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>

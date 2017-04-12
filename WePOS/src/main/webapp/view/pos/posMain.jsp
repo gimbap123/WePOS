@@ -2,7 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%
+  response.setHeader("pragma","No-cache");
+  response.setHeader("Cache-Control","no-cache");
+  response.addHeader("Cache-Control","No-store");
+  response.setDateHeader("Expires",0);
+%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -50,7 +55,7 @@
     <div class="content-side-right pos-main">
       <br>
       <button class="btn btn-primary" type="button">
-        총 테이블 <span class="badge">${tableCount}</span>
+        총 테이블 <span class="badge pull-right" style="margin-top:4px">${tableCount}</span>
       </button>
       <br>
       <div class="row">
@@ -58,11 +63,11 @@
         <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
           <div class="panel-heading">
             <h3 class="panel-title" id="panel-title">
-              <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge"> ${tables[i].tableMax}인</span></a>
+              <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right" style="margin-top:4px"> ${tables[i].tableMax}인</span></a>
               <input type="hidden" value="${tables[i].tableCode}">
             </h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body tableOrderList">
             <ul>
               <c:forEach var="ordersDetail" items="${ordersDetailList}">
                 <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
@@ -80,7 +85,7 @@
                 <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
               </c:if>
             </c:forEach>
-            <p class="text-right">￦ ${tableOrderPrice}
+            <p class="text-right totalOrderPrice">${tableOrderPrice}
           </div>
         </div>
       </c:forEach>
@@ -229,7 +234,7 @@
                 <!-- 주문 선택내역 -->
                 <div class="panel panel-primary">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">주문 선택 내역</div>
+                  <div class="panel-heading">기존 주문 내역</div>
                   <!-- List group -->
                     <table class="table table-condensed" id="oldOrderList">
                       <thead>
@@ -244,7 +249,7 @@
                       <tfoot>
                         <tr class="info">
                           <td colspan="2">합계</td>
-                          <td></td>
+                          <td id="sumOldOrderPrice"></td>
                         </tr>
                       </tfoot>
                     </table>
@@ -254,7 +259,7 @@
                   <!-- Default panel contents -->
                   <div class="panel-heading">주문 선택 내역</div>
                   <!-- List group -->
-                  <form id="orderForm" action="insertOrder.do" method="post">
+                  <form id="orderForm" action="insertOrder.do?mgrId=${sessionScope.id}" method="post">
                     <table class="table table-condensed" id="newOrderList">
                       <thead>
                         <tr>
