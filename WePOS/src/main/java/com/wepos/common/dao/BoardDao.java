@@ -50,4 +50,7 @@ public interface BoardDao {
 	//댓글 수정
 	public void updateReply(ReplyDto replyDto);
 	
+	//댓글 삭제
+	public void deleteReply(int replyNumber);
+	
 }
