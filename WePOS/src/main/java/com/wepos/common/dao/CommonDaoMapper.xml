@@ -80,5 +80,8 @@
 		select grade_code from users where user_id = #{userId}
 	</select>
 	
+	<select id="mgrShopCode" parameterType="String" resultType="int">
+		select shop_code from mgr where mgr_id = #{id}
+	</select>	
 
 </mapper>

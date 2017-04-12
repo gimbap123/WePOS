@@ -1,6 +1,5 @@
 package com.wepos.common.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.admin.dao.AdminDao;
@@ -37,7 +35,6 @@ import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
-import com.wepos.common.util.FileUtil;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
@@ -337,6 +334,7 @@ public class SearchShopController {
 		mav.addObject("searchNoticeType", searchNoticeType);
 		mav.addObject("searchNoticeText", searchNoticeText);
 		mav.addObject("searchNoticeTypeList", searchNoticeTypeList);
+		mav.addObject("shopCode", shopCode);
 		
 		return mav;
 	}
@@ -586,5 +584,63 @@ public class SearchShopController {
 	{
 		shopDao.shopBoardDelete(shopBoard.getBoardNumber());
 		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
+	}
+	
+	// 매장 공지사항 글쓰기
+	@RequestMapping(value="/common/shopNoticeWrite.do", method=RequestMethod.GET)
+	public ModelAndView shopNoticeWriteView(@RequestParam("shopCode") int shopCode)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeWrite");
+		mav.addObject("shopCode", shopCode);
+		
+		return mav;
+	}
+	
+	// 매장 공지사항 글쓰기 기능 수행
+	@RequestMapping(value="/common/shopNoticeWrite.do", method=RequestMethod.POST)
+	public String shopNoticeWriteProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice) throws IOException, Exception
+	{		
+		String newFileName = "";
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		/*if(!shopBoard.getUpload().isEmpty())
+		{
+			newFileName = FileUtil.rename(shopBoard.getUpload().getOriginalFilename());
+			shopBoard.setBoardFile(newFileName);
+			File file = new File(filePath + newFileName);
+			shopBoard.getUpload().transferTo(file);
+		}*/
+		
+		shopDao.shopNoticeWrite(shopNotice);
+		return "redirect:/common/shopDetail.do?shopCode=" + shopNotice.getShopCode();
+	}
+	
+	// 매장 공지사항 글수정
+	@RequestMapping(value="/common/shopNoticeUpdate.do", method=RequestMethod.GET)
+	public ModelAndView shopNoticeUpdateView(@RequestParam("noticeNumber") int noticeNumber)
+	{
+		ShopNoticeDto shopNotice = shopDao.shopNoticeDetail(noticeNumber);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeUpdate");
+		mav.addObject("shopNotice", shopNotice);
+		
+		return mav;
+	}
+	
+	// 매장 자유 게시판 글수정 기능 수행
+	@RequestMapping(value="/common/shopNoticeUpdate.do", method=RequestMethod.POST)
+	public String shopNoticeUpdateProcess(@ModelAttribute ShopNoticeDto shopNotice)
+	{
+		shopDao.shopNoticeUpdate(shopNotice);
+		return "redirect:/common/shopNoticeDetail.do?noticeNumber=" + shopNotice.getNoticeNumber();
+	}
+	
+	// 매장 공지사항 글삭제
+	@RequestMapping(value="/common/shopNoticeDelete.do")
+	public String shopNoticeDeleteProcess(@ModelAttribute ShopNoticeDto shopNotice)
+	{
+		shopDao.shopNoticeDelete(shopNotice.getNoticeNumber());
+		return "redirect:/common/shopDetail.do?shopCode=" + shopNotice.getShopCode();
 	}
 }

@@ -284,4 +284,18 @@
   	delete from shop_board where board_number = #{boardNumber}
   </delete>
   
+  <insert id="shopNoticeWrite" parameterType="shopNoticeDto">
+  	insert into shop_notice values(shop_notice_SEQ.nextval, #{shopCode}, #{mgrId}, #{noticeTitle}, 
+  		#{noticeContent}, sysdate, 0, #{noticeFile, jdbcType=VARCHAR})  	
+  </insert>
+  
+  <update id="shopNoticeUpdate" parameterType="shopNoticeDto">
+  	update shop_notice set notice_title = #{noticeTitle}, notice_content = #{noticeContent}, notice_file = #{noticeFile, jdbcType=VARCHAR}
+  	where notice_number = #{noticeNumber}
+  </update>
+  
+  <delete id="shopNoticeDelete" parameterType="int">
+  	delete from shop_notice where notice_number = #{noticeNumber}
+  </delete>
+  
 </mapper>

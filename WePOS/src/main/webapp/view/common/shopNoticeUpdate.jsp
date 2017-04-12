@@ -28,8 +28,6 @@
 <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="../assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">    
 <link rel="stylesheet" href="../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
-<link rel="stylesheet" href="../assets/css/pages/blog.css">
-<link rel="stylesheet" href="../assets/css/pages/blog_magazine.css">
 
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
@@ -42,44 +40,56 @@
 	<div class="wrapper">
 		<jsp:include page="header.jsp" flush="false" />
 		
-		<div class="container content" style="min-height: 700px;">			
-			<div class="blog-page">
-				<div class="col-md-10 col-md-offset-1">
-					<div class="blog margin-bottom-40">
-						<h2>${shopNotice.noticeTitle}</h2>
-						<div class="blog-post-tags">
-							<ul class="list-unstyled list-inline blog-info">
-	                            <li><i class="fa fa-calendar"></i> ${shopNotice.noticeDate}</li>
-	                            <li><i class="fa fa-pencil"></i> ${shopNotice.mgrId}</li>
-	                            <li><i class="fa fa-comments"></i> ${shopNotice.noticeReadCnt}회 조회</li>
-                        	</ul>
-						</div>
-						<c:if test="${shopNotice.noticeFile != null}">
-							<div class="blog-img">
-								<img class="img-responsive" src="${shopNotice.noticeFile}" alt="" style="width: 80%;">
-							</div>
-						</c:if>	
-						<p>${shopNotice.noticeContent}</p>
-						<hr>
-						<b>첨부파일 : </b>
-						<c:if test="${shopNotice.noticeFile == null}">
-							첨부된 파일이 없습니다.	
-						</c:if>	
-						<c:if test="${shopNotice.noticeFile != null}">
-							<a href="file.do?boardFile=${fileName}">${fileName}</a>
-						</c:if>						
-						<div align="right">						
-							<c:if test="${sessionScope.shopCode == shopNotice.shopCode}">
-								<button class="btn-u" type="button" onclick="location.href='shopNoticeUpdate.do?noticeNumber=${shopNotice.noticeNumber}'">수정</button>																		
-								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode})">삭제</button>
-							</c:if>
-							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">목록으로</button>							
-						</div>
-					</div>
-				</div>
-			</div>					
-		</div>		
-				
+		<div class="container content-sm">
+			<div class="table-search-v1 panel panel-u margin-bottom-20">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-bubble "></i> 글수정
+					</h3>
+				</div>				
+			</div>			
+				<div class="table-responsive">		
+					<form action="shopNoticeUpdate.do" name="shopNoticeUpdateForm" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="noticeNumber" value="${shopNotice.noticeNumber}">
+						<table class="table table-bordered table-striped table-hover tablesorter">
+							<tr>
+								<td style="vertical-align: middle; text-align: center;">제 목</td>
+								<td>
+									<input type="text" class="form-control" id="noticeTitle" name="noticeTitle" value="${shopNotice.noticeTitle}">
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle; text-align: center;">작성자</td>
+								<td><input type="text" class="form-control" id="mgrId" name="mgrId" value="${shopNotice.mgrId}" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle; text-align: center;">내 용</td>
+								<td>
+									<textarea class="form-control" rows="15" id="noticeContent" name="noticeContent" style="resize: none;">${shopNotice.noticeContent}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: middle; text-align: center;">첨부 파일</td>
+								<td>
+									<c:if test="${shopNotice.noticeFile == null}">
+										첨부된 파일이 없습니다.
+									</c:if>
+									<c:if test="${shopNotice.noticeFile != null}">
+										${shopNotice.noticeFile}
+									</c:if>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="vertical-align: middle;" align="right">							
+									<button class="btn-u" type="button" onclick="shopNoticeUpdate()">수정</button>
+									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="history.back()">취소</button>										
+								</td>
+							</tr>
+						</table>	
+					</form>			
+				</div>			
+		</div>
+					
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>
 <!-- JS Global Compulsory -->           
@@ -95,7 +105,7 @@
 <script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-        App.init();
+        App.init();        
         });
 </script>
 </body>

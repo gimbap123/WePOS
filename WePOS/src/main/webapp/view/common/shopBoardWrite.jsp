@@ -49,7 +49,7 @@
 				</div>				
 			</div>			
 				<div class="table-responsive">		
-					<form action="shopBoardWriteProc.do" name="writeForm" enctype="multipart/form-data">
+					<form action="shopBoardWriteProc.do" name="shopBoardWriteForm" enctype="multipart/form-data">
 						<input type="hidden" name="shopCode" value="${shopCode}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
@@ -65,7 +65,7 @@
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">내 용</td>
 								<td>
-									<textarea class="form-control" rows="15" id="boardContent" name="boardContent" placeholder="댓글은 로그인 후 이용 가능합니다." style="resize: none;"></textarea>
+									<textarea class="form-control" rows="15" id="boardContent" name="boardContent" placeholder="내용을 입력하세요." style="resize: none;"></textarea>
 								</td>
 							</tr>
 							<tr>

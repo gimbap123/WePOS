@@ -81,5 +81,14 @@ public interface ShopDao {
   // 매장 자유 게시판 글삭제
   public void shopBoardDelete(int boardNumber);
   
+  // 매장 공지사항 글쓰기
+  public void shopNoticeWrite(ShopNoticeDto shopNotice); 
+  
+  // 매장 공지사항 글수정
+  public void shopNoticeUpdate(ShopNoticeDto shopNotice);
+  
+  // 매장 공지사항 글삭제
+  public void shopNoticeDelete(int noticeNumber);
+  
 }
 

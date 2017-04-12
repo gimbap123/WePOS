@@ -115,5 +115,17 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
 		getSqlSession().delete("shopBoardDelete", boardNumber);		
 	}
   
+  public void shopNoticeWrite(ShopNoticeDto shopNotice) {
+	  	getSqlSession().insert("shopNoticeWrite", shopNotice);
+	}
+  
+  public void shopNoticeUpdate(ShopNoticeDto shopNotice) {
+	  getSqlSession().update("shopNoticeUpdate", shopNotice);
+	}
+  
+  public void shopNoticeDelete(int noticeNumber) {
+	  getSqlSession().delete("shopNoticeDelete", noticeNumber);		
+	}
+  
 }
 
