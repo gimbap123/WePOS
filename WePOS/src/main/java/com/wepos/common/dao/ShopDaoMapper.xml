@@ -280,4 +280,8 @@
   	where board_number = #{boardNumber}
   </update>
   
+  <delete id="shopBoardDelete" parameterType="int">
+  	delete from shop_board where board_number = #{boardNumber}
+  </delete>
+  
 </mapper>

@@ -56,6 +56,11 @@
         min-width: 240px;
         margin-top: 20px;
     }
+    
+    .panel-body
+    {
+        min-height: 130px;
+    }
 }
 
 form#searchShop {
