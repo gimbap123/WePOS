@@ -41,6 +41,7 @@
 		<mapper resource="com/wepos/pos/dao/PosMainDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosLogDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosTableDaoMapper.xml"/>
+		<mapper resource="com/wepos/common/dao/ProductDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>

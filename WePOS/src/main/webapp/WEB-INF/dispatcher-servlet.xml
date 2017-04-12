@@ -23,7 +23,7 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">		
 		<property name="prefix" value="/view/" />
 		<property name="suffix" value=".jsp" />
-	</bean>   
+	</bean>
 	
 	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
  	 <bean class="com.wepos.common.controller.CommonController" />
@@ -35,6 +35,7 @@
  	 <bean class="com.wepos.pos.controller.PosLogController" />
  	 <bean class="com.wepos.pos.controller.PosIntroduceController" />
  	 <bean class="com.wepos.pos.controller.PosTableController" />
+ 	 <bean class="com.wepos.common.controller.SearchProductController" />
 
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
@@ -45,6 +46,7 @@
      <bean class="com.wepos.pos.dao.PosMainDaoImpl" />
      <bean class="com.wepos.pos.dao.PosLogDaoImpl" />
      <bean class="com.wepos.pos.dao.PosTableDaoImpl" />
+     <bean class="com.wepos.common.dao.ProductDaoImpl" />
           
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
 	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />
