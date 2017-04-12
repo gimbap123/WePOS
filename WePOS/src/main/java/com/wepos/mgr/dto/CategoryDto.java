@@ -25,4 +25,12 @@ public class CategoryDto {
 		this.categoryName = categoryName;
 	}
 
+  @Override
+  public String toString(){
+    return "CategoryDto [" +
+        " shopCode : " + shopCode +
+        " categoryCode : " + categoryCode +
+        " categoryName : " + categoryName +
+        " ]";
+  }
 }

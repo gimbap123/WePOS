@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=1" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=2" /> ">
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>" rel="stylesheet" type="text/css">
@@ -44,13 +44,16 @@
   <div class="wrapper">
     <!--=== Header v7 Left ===-->
     <jsp:include page="../pos/leftBar.jsp" flush="false" />
-
+    <c:forEach var="odl" items="${orderDetailList}">
+    ${odl.tableCode} <br>
+    </c:forEach>
     <div class="content-side-right pos-main">
       <br>
       <button class="btn btn-primary" type="button">
         총 테이블 <span class="badge">${tableCount}</span>
       </button>
       <br>
+      <div class="row">
       <c:forEach var="i" begin="0" end="${tableCount-1}">
         <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
           <div class="panel-heading">
@@ -63,22 +66,25 @@
             <ul>
               <c:forEach var="ordersDetail" items="${ordersDetailList}">
                 <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
-                  <li class="list-unstyled">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.orderAmount}</span></li>
+                    <li class="list-unstyled productName">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.sumOrderAmount}</span>
+                    <input type="hidden" class="productPrice" value="${ordersDetail.sumOrderPrice}" />
+                    </li>
                 </c:if>
               </c:forEach>
             </ul>
           </div>
           <div class="panel-footer">
-            <c:set var="sumOrderPrice" value="0" />
+            <c:set var="tableOrderPrice" value="0" />
             <c:forEach var="od" items="${ordersDetailList}">
               <c:if test="${tables[i].tableCode == od.tableCode}">
-              <c:set var="sumOrderPrice" value="${sumOrderPrice+od.orderPrice}" />
+                <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
               </c:if>
             </c:forEach>
-            <p class="text-right">￦ ${sumOrderPrice} 
+            <p class="text-right">￦ ${tableOrderPrice}
           </div>
         </div>
       </c:forEach>
+      </div>
     </div>
     <div class="pos-right">
       <div class="pos-status">
@@ -166,12 +172,13 @@
                   <!-- Nav tabs -->
                   <ul class="nav nav-pills" role="tablist">
                     <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
-                    <li role="presentation"><a href="#food" aria-controls="food" role="tab" data-toggle="tab">식사</a></li>
-                    <li role="presentation"><a href="#snack" aria-controls="snack" role="tab" data-toggle="tab">안주</a></li>
-                    <li role="presentation"><a href="#alcohol" aria-controls="alcohol" role="tab" data-toggle="tab">주류</a></li>
+                    <c:forEach var="c" items="${category}">
+                      <li role="presentation"><a href="#category${c.categoryCode}" aria-controls="category${c.categoryCode}" role="tab" data-toggle="tab">${c.categoryName}</a></li>
+                    </c:forEach>
                   </ul>
                   <!-- Tab panes -->
                   <div class="tab-content">
+                    <!-- 모든 카테고리 출력 -->
                     <div role="tabpanel" class="tab-pane active" id="all">
                       <div class="row">
                         <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
@@ -180,7 +187,7 @@
                             <div class="panel panel-primary">
                               <c:set var="price" value="${productList[i].productPrice}" />
                               <c:set var="stock" value="${productList[i].productStock}" />
-                              <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
+                              <div class="panel-body orderList" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
                                 <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
                                 <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
                               </div>
@@ -190,63 +197,30 @@
                         </c:forEach>
                       </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="food">
-                      <div class="row">
-                        <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-                          <!-- 카테고리 코드1  (식사) -->
-                          <c:if test="${productList[i].categoryCode == 1}">
-                            <div class="col-sm-4">
-                              <!-- 메뉴 패널 -->
-                              <div class="panel panel-primary">
-                                <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
-                                  <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                  <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                    <!-- 매장의 카테고리 메뉴별 출력 -->
+                    <c:forEach var="c" items="${category}">
+                      <div role="tabpanel" class="tab-pane" id="category${c.categoryCode}">
+                        <div class="row">
+                          <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+                            <!-- 카테고리 코드1  (식사) -->
+                            <c:if test="${productList[i].categoryCode == c.categoryCode}">
+                              <div class="col-sm-4">
+                                <!-- 메뉴 패널 -->
+                                <div class="panel panel-primary">
+                                  <c:set var="price" value="${productList[i].productPrice}" />
+                                  <c:set var="stock" value="${productList[i].productStock}" />
+                                  <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
+                                    <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
+                                    <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                                  </div>
                                 </div>
+                                <!-- 메뉴 패널 종료 -->
                               </div>
-                              <!-- 메뉴 패널 종료 -->
-                            </div>
-                          </c:if>
-                        </c:forEach>
+                            </c:if>
+                          </c:forEach>
+                        </div>
                       </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="snack">
-                      <div class="row">
-                        <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-                          <!-- 카테고리 코드1 -->
-                          <c:if test="${productList[i].categoryCode == 2}">
-                            <div class="col-sm-4">
-                              <!-- 메뉴 패널 -->
-                              <div class="panel panel-primary">
-                                <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
-                                  <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                  <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
-                                </div>
-                              </div>
-                              <!-- 메뉴 패널 종료 -->
-                            </div>
-                          </c:if>
-                        </c:forEach>
-                      </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="alcohol">
-                      <div class="row">
-                        <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-                          <!-- 카테고리 코드3 -->
-                          <c:if test="${productList[i].categoryCode == 3}">
-                            <div class="col-sm-4">
-                              <!-- 메뉴 패널 -->
-                              <div class="panel panel-primary">
-                                <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
-                                  <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                  <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
-                                </div>
-                              </div>
-                              <!-- 메뉴 패널 종료 -->
-                            </div>
-                          </c:if>
-                        </c:forEach>
-                      </div>
-                    </div>
+                    </c:forEach> <!-- 매장의 카테고리 메뉴별 출력 종료 -->
                   </div>
                   <!-- End tab content-->
                 </div>
@@ -257,8 +231,31 @@
                   <!-- Default panel contents -->
                   <div class="panel-heading">주문 선택 내역</div>
                   <!-- List group -->
+                    <table class="table table-condensed" id="oldOrderList">
+                      <thead>
+                        <tr>
+                          <th>이름</th>
+                          <th>수량</th>
+                          <th>가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                      <tfoot>
+                        <tr class="info">
+                          <td colspan="2">합계</td>
+                          <td></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                </div>
+                
+                <div class="panel panel-primary">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">주문 선택 내역</div>
+                  <!-- List group -->
                   <form id="orderForm" action="insertOrder.do" method="post">
-                    <table class="table table-condensed" id="order-list">
+                    <table class="table table-condensed" id="newOrderList">
                       <thead>
                         <tr>
                           <th>이름</th>
@@ -279,6 +276,9 @@
                     <input type="hidden" name="ordersDetailList" value="" />
                   </form>
                 </div>
+                
+                
+                
               </div>
             </div>
             <!-- End row -->

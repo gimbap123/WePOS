@@ -30,6 +30,7 @@
     SELECT * 
     FROM tables 
     WHERE shop_code= #{shopCode}
+    order by table_code
   </select>
   
   <!-- 매장 코드로 매장 메뉴 정보 select -->
@@ -40,12 +41,19 @@
   </select>
   
   <!-- 카테고리 이름 select -->
-  <select id="getCategory" parameterType="int" resultType="java.util.HashMap">
+<!--   <select id="getCategory" parameterType="int" resultType="java.util.HashMap">
     SELECT c.category_code, c.category_name
     FROM category c, product p
     WHERE c.category_code = p.category_code
     AND c.category_code = #{categoryCode}
+  </select> -->
+  
+  <select id="getCategory" parameterType="int" resultType="CategoryDto">
+    select *
+    from category
+    where shop_code = #{shopCode}
   </select>
+  
   
   <insert id="insertOrders" parameterType="OrdersDto">
     INSERT INTO orders 
@@ -67,13 +75,14 @@
     WHERE order_state = '0'
   </select>
   
-  <select id="getOrdersDetailBeforePayment" resultType="OrdersDetailDto">
-    SELECT od.*, o.table_code, p.product_name 
-    FROM orders_detail od, orders o, product p
-    WHERE od.order_code = o.order_code
-    And od.product_code = p.product_code
-    AND od.order_code IN ( SELECT order_code FROM orders WHERE order_state = 0 )
-    ORDER by o.table_code
+  <select id="getOrdersDetailBeforePayment" resultType="SumOrdersDetailDto">
+   SELECT od.product_code, sum(od.order_amount) "sum_order_amount", sum(od.order_price) "sum_order_price", o.table_code, p.product_name
+   FROM orders_detail od, orders o, product p
+   WHERE od.order_code = o.order_code
+   and od.product_code = p.product_code
+   AND od.order_code IN ( SELECT order_code FROM orders WHERE order_state = 0 )
+   group by o.table_code, od.product_code, p.product_name
+   order by o.table_code, product_code
   </select>
   
 </mapper>
