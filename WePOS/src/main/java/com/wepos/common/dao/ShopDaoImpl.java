@@ -19,7 +19,6 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
     // TODO Auto-generated method stub
     return getSqlSession().selectOne("searchShopCount", map);
   }
-
   
   public List<ShopDto> searchShop(Map<String, Object> map) {
 		List<ShopDto> shopList = getSqlSession().selectList("searchShop", map);
@@ -110,6 +109,10 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements ShopDao {
   
   public void shopBoardUpdate(ShopBoardDto shopBoard) {
 		getSqlSession().update("shopBoardUpdate", shopBoard);
+	}
+  
+  public void shopBoardDelete(int boardNumber) {
+		getSqlSession().delete("shopBoardDelete", boardNumber);		
 	}
   
 }

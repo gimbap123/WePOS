@@ -101,7 +101,8 @@ function updateCancelReply(replyNumber, replyContent)
 	
 	contentDiv.html('<p>' + replyContent + '</p>');
 	functionUl.html('<li><a href="javascript:updateReply(' + "'" + replyNumber + "', '" + replyContent + "'" 
-			+ ')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li><li><a href="#"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>');
+			+ ')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li><li><a href="javascript:deleteReply(' 
+			+"'" + replyNumber + "'" + ')"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>');
 }
 
 function shopBoardReplyUpdate(replyNumber)
@@ -141,10 +142,21 @@ function shopBoardWrite()
 	{
 		alert("제목을 입력해주세요.")
 		return false;
+	}	
+}	
+
+function shopBoardDelete(boardNumber, shopCode)
+{
+	var flag = confirm("글을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		alert("삭제되었습니다.");
+		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode
 	}
 	else
 	{
-		document.writeForm.submit();
+		return false;
 	}
-}	
+}
 

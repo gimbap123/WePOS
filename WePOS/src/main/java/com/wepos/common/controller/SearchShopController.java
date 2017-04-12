@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.admin.dao.AdminDao;
@@ -555,7 +556,7 @@ public class SearchShopController {
 			shopBoard.getUpload().transferTo(file);
 		}*/
 		
-		shopDao.shopBoardWrite(shopBoard);		
+		shopDao.shopBoardWrite(shopBoard);
 		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
 	}
 	
@@ -577,5 +578,13 @@ public class SearchShopController {
 	{
 		shopDao.shopBoardUpdate(shopBoard);
 		return "redirect:/common/shopBoardDetail.do?boardNumber=" + shopBoard.getBoardNumber();
+	}
+	
+	// 매장 자유 게시판 글삭제
+	@RequestMapping(value="/common/shopBoardDelete.do")
+	public String shopBoardDeleteProcess(@ModelAttribute ShopBoardDto shopBoard)
+	{
+		shopDao.shopBoardDelete(shopBoard.getBoardNumber());
+		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
 	}
 }
