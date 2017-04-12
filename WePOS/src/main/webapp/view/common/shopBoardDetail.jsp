@@ -92,7 +92,7 @@ function shopBoardReplyWrite()
 						<div align="right">						
 							<c:if test="${sessionScope.id eq shopBoard.totalId}">
 								<button class="btn-u" type="button" onclick="location.href='shopBoardUpdate.do?boardNumber=${shopBoard.boardNumber}'">수정</button>																		
-								<button class="btn-u" type="button" onclick="shopBoardDelete(${shopBoard.boardNumber}, ${shopBoard.shopCode})">삭제</button>
+								<button class="btn-u" type="button" onclick="shopBoardDelete(${shopBoard.boardNumber}, ${shopBoard.shopCode}, '${fileName}')">삭제</button>
 							</c:if>
 							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">목록으로</button>							
 						</div>

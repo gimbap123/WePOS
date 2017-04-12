@@ -71,7 +71,7 @@
 						<div align="right">						
 							<c:if test="${sessionScope.shopCode == shopNotice.shopCode}">
 								<button class="btn-u" type="button" onclick="location.href='shopNoticeUpdate.do?noticeNumber=${shopNotice.noticeNumber}'">수정</button>																		
-								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode})">삭제</button>
+								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode}, '${fileName}')">삭제</button>
 							</c:if>
 							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">목록으로</button>							
 						</div>

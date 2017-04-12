@@ -156,14 +156,14 @@ function shopBoardUpdate()
 	document.shopBoardUpdateForm.submit();
 }
 
-function shopBoardDelete(boardNumber, shopCode)
+function shopBoardDelete(boardNumber, shopCode, fileName)
 {
 	var flag = confirm("글을 삭제하시겠습니까?");
 	
 	if(flag)
 	{
 		alert("삭제되었습니다.");
-		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode
+		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode + '&boardFile=' + fileName;
 	}
 	else
 	{
@@ -191,14 +191,14 @@ function shopNoticeUpdate()
 	document.shopNoticeUpdateForm.submit();
 }
 
-function shopNoticeDelete(noticeNumber, shopCode)
+function shopNoticeDelete(noticeNumber, shopCode, fileName)
 {
 	var flag = confirm("글을 삭제하시겠습니까?");
 	
 	if(flag)
 	{
 		alert("삭제되었습니다.");
-		location.href = 'shopBoardDelete.do?noticeNumber=' + noticeNumber + '&shopCode=' + shopCode
+		location.href = 'shopNoticeDelete.do?noticeNumber=' + noticeNumber + '&shopCode=' + shopCode + '&noticeFile=' + fileName;
 	}
 	else
 	{

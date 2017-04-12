@@ -32,7 +32,7 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
 
 <title>We POS</title>
 </head>
@@ -49,7 +49,7 @@
 				</div>				
 			</div>			
 				<div class="table-responsive">		
-					<form action="shopBoardWriteProc.do" name="shopBoardWriteForm" enctype="multipart/form-data">
+					<form action="shopBoardWrite.do" name="shopBoardWriteForm" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="shopCode" value="${shopCode}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
@@ -70,7 +70,7 @@
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">첨부 파일</td>
-								<td><input type="file" class="form-control"></td>					
+								<td><input type="file" class="form-control" name="upload"></td>					
 							</tr>
 							<tr>
 								<td colspan="2" style="vertical-align: middle;" align="right">							
@@ -78,7 +78,7 @@
 									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="location.href='shopDetail.do?shopCode=${shopCode}'">목록으로</button>										
 								</td>
 							</tr>
-						</table>	
+						</table>
 					</form>			
 				</div>			
 		</div>	
