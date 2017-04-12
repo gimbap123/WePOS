@@ -197,10 +197,12 @@
 							
 					</form>
 					
+					<div id="boardReplys">
 					<form name="boardReplys" method="post" action="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
+					</div>
 					
-					<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
-					<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
+					<input type="hidden" id="boardNumber" name="boardNumber" value="${boardDto.boardNumber}">
+					<input type="hidden" id="boardTypeCode" name="boardTypeCode" value="${boardTypeCode}">
 					
 							<hr style="margin: 0 0 20px 0">
 
@@ -237,7 +239,7 @@
 							<hr style="margin: 20px 0 20px 0">
 								<c:set var="cnt" value="${cnt+1}"  />
 							</c:forEach>
-					
+
 					</form>				
 					
 						</div>

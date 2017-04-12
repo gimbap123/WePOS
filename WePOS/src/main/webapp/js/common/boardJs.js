@@ -3,7 +3,7 @@ function repEdit(replyContent, replyNumber, cnts){
 	$(function(){
 		var replyContent = $("#repContents"+replyNumber).text();
 		//alert("수정 버튼 작동=>"+replyContent)
-		$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='updateContents' id='updateContents'"+replyNumber+" maxlength='100'>"+replyContent+"</textarea> <li style='list-style: none;'>"
+		$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='updateContents' id='updateContents"+replyNumber+"'>"+replyContent+"</textarea> <li style='list-style: none;'>"
 				+"<a href='javascript:replyCancelUpdate("+'"'+replyNumber+'", "'+replyContent+'", "'+cnts+'"'+")' style='float: right;'><i class='expand-list rounded-x fa fa-pencil'></i>취소</a></li>"
 				+"<li style='list-style: none;'><a href='javascript:replyChecks("+replyNumber+")' style='float: right;'><i class='expand-list rounded-x fa fa-pencil'></i>수정</a></li>");
 	});
@@ -11,12 +11,30 @@ function repEdit(replyContent, replyNumber, cnts){
 
 //댓글 수정 확인
 function replyChecks(replyNumber){
-	if($('#updateContents').val()==null || $('#updateContents').val()=="") {
+	if($('#updateContents'+replyNumber).val()==null || $('#updateContents'+replyNumber).val()=="") {
 		alert("내용을 입력해 주세요.");
-		$('#updateContents').focus();
+		$('#updateContents'+replyNumber).focus();
 		return false;
 	}
+	alert("댓글 수정 확인 호출 작동")
+	var replyContent = $("#updateContents" + replyNumber).val();	
+	var pageNum = $("#pageNum").val();
+	var boardNumber = $("#boardNumber").val();
+	var boardTypeCode = $("#boardTypeCode").val();
+	
+	var boardReplys = $("#boardReplys");
+	//alert("boardReplys=>"+boardReplys)
+	//alert("boardNumber=>"+boardNumber)
+	//alert("pageNum=>"+pageNum)
+	//alert("boardTypeCode=>"+boardTypeCode)
+	//alert("replyNumber=>"+replyNumber)
+	alert("replyContent=>"+replyContent)
+	boardReplys.html("<form name='boardReplys' method='post' action='boardReplys.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode
+			+"&replyNumber="+replyNumber+"&replyContent="+replyContent+"'>");
+
+	
 	document.boardReplys.submit();
+	alert("여기까지 호출됨")
 }
 
 //댓글 수정 취소
