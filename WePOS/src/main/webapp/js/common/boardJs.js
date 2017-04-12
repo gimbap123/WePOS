@@ -1,18 +1,30 @@
 //수정 버튼을 눌렀을때
 function repEdit(replyContent, replyNumber, cnts){
 	$(function(){
-		$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='replyContents' id='replyContents' maxlength='100'>"+replyContent+"</textarea> <a href='javascript:replyChecks(+"+replyNumber+")' style='float: right;'>수정</a>");
+		var replyContent = $("#repContents"+replyNumber).text();
+		//alert("수정 버튼 작동=>"+replyContent)
+		$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='updateContents' id='updateContents'"+replyNumber+" maxlength='100'>"+replyContent+"</textarea> <li style='list-style: none;'>"
+				+"<a href='javascript:replyCancelUpdate("+'"'+replyNumber+'", "'+replyContent+'", "'+cnts+'"'+")' style='float: right;'><i class='expand-list rounded-x fa fa-pencil'></i>취소</a></li>"
+				+"<li style='list-style: none;'><a href='javascript:replyChecks("+replyNumber+")' style='float: right;'><i class='expand-list rounded-x fa fa-pencil'></i>수정</a></li>");
 	});
 }
 
 //댓글 수정 확인
 function replyChecks(replyNumber){
-	if($('#replyContents').val()==null || $('#replyContents').val()=="") {
+	if($('#updateContents').val()==null || $('#updateContents').val()=="") {
 		alert("내용을 입력해 주세요.");
-		$('#replyContents').focus();
+		$('#updateContents').focus();
 		return false;
 	}
 	document.boardReplys.submit();
+}
+
+//댓글 수정 취소
+function replyCancelUpdate(replyNumber, replyContents, cnts){
+	var replyContent = $("#repContents"+replyNumber);
+	var dropdownContent = $("#dropdown-content");
+	replyContent.html("<td name='repContents"+cnts+"' class='repContents"+cnts+"' id='repContents"+replyNumber+"'>"+replyContents+"</td>");
+	dropdownContent.html("<a href='javascript:repEdit("+'"'+replyContent+'", "'+replyNumber+'", "'+cnts+'"'+")' class='repEdit'>수정</a><a href='#'>삭제</a>");
 }
 
 //댓글 아이디 확인
