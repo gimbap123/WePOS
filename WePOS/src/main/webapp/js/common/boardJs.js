@@ -28,13 +28,12 @@ function replyChecks(replyNumber){
 	//alert("pageNum=>"+pageNum)
 	//alert("boardTypeCode=>"+boardTypeCode)
 	//alert("replyNumber=>"+replyNumber)
-	alert("replyContent=>"+replyContent)
+	//alert("replyContent=>"+replyContent)
 	boardReplys.html("<form name='boardReplys' method='post' action='boardReplys.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode
 			+"&replyNumber="+replyNumber+"&replyContent="+replyContent+"'>");
 
-	
 	document.boardReplys.submit();
-	alert("여기까지 호출됨")
+	//alert("여기까지 호출됨")
 }
 
 //댓글 수정 취소
@@ -42,7 +41,38 @@ function replyCancelUpdate(replyNumber, replyContents, cnts){
 	var replyContent = $("#repContents"+replyNumber);
 	var dropdownContent = $("#dropdown-content");
 	replyContent.html("<td name='repContents"+cnts+"' class='repContents"+cnts+"' id='repContents"+replyNumber+"'>"+replyContents+"</td>");
-	dropdownContent.html("<a href='javascript:repEdit("+'"'+replyContent+'", "'+replyNumber+'", "'+cnts+'"'+")' class='repEdit'>수정</a><a href='#'>삭제</a>");
+	dropdownContent.html("<a href='javascript:repEdit("+'"'+replyContent+'", "'+replyNumber+'", "'+cnts+'"'+")' class='repEdit'>수정</a><a href='javascript:repDelete("+replyNumber+")'>삭제</a>");
+}
+
+//댓글 삭제
+function repDelete(replyNumber)
+{
+	var check = confirm("댓글을 삭제하시겠습니까?")
+	if(check==false)
+		{
+			return false;
+		}
+	else
+		{
+	var boardNumber = $("#boardNumber").val()
+	var boardTypeCode = $("#boardTypeCode").val();
+	//alert("replyNumber=>"+replyNumber)
+	//alert("boardNumber=>"+boardNumber)
+	//alert("boardTypeCode=>"+boardTypeCode)
+	
+	/*var boardReplys = $("#boardReplys");
+	boardReplys.html("<form name='boardReplyDelete' method='post' action='boardReplyDelete.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode+"&replyNumber="+replyNumber+">");
+
+	alert("여기까지 호출됨")
+	document.boardReplyDelete.submit();*/
+	
+	$.post("boardReplyDelete.do", {boardNumber:boardNumber, boardTypeCode:boardTypeCode, replyNumber:replyNumber}, function(ar){
+		alert("성공적으로 삭제하였습니다")
+		$("#wrapper").html(ar);
+		
+	})
+	
+		}
 }
 
 //댓글 아이디 확인
