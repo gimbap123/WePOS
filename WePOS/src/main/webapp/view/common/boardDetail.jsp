@@ -60,7 +60,7 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
 
 
 <style>
@@ -221,8 +221,17 @@
 								</tr>
 
 								<tr>
-									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents">${reply.replyContent }</td>
+									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents${reply.replyNumber}">${reply.replyContent }</td>
 								</tr>
+								
+							<%-- <div>
+								<c:if test="${sessionScope.id eq reply.totalId}">
+									<ul id="functionUl${reply.replyNumber}" class="list-inline pull-right">
+										<li><a href="javascript:updateReply('${reply.replyNumber}', '${reply.replyContent}')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li>
+				                        <li><a href="javascript:deleteReply('${reply.replyNumber}')"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>
+									</ul>
+								</c:if>
+							</div> --%>
 
 							</table>
 							<hr style="margin: 20px 0 20px 0">

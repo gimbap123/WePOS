@@ -184,8 +184,8 @@
     <!--=== Team v4 ===-->
     <div class="bg-color-light">
         <div class="headline-center margin-bottom-60">
-            <h2>MEET EVENT SHOP</h2>
-            <p>이벤트를 진행하고 있는 매장의 정보를 여러분에게 제공합니다<br>
+            <h2>MEET WEPOS TEAM</h2>
+            <p>WEPOS를 운영하고 있는 개발자들을 소개합니다<br>
 	        </div>
 
         <div class="row team-v4">
@@ -224,7 +224,7 @@
             </div>
             <div class="col-md-3 col-sm-6">
                 <img class="img-responsive" src="assets/img/team/img2-md.jpg" alt="">
-                <span>Alice Williams</span>
+                <span>Jang Su Yong</span>
                 <small>- Customer Support -</small>
                 <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed a nulla non</p>
                 <ul class="list-inline team-social-v4">
@@ -242,8 +242,7 @@
         <div class="container content-sm">
             <div class="headline-center margin-bottom-60">
                 <h2>WHAT PEOPLE SAY</h2>
-                <p>Phasellus vitae ipsum ex. Etiam eu vestibulum ante. <br>
-                Lorem ipsum <strong>dolor</strong> sit amet, consectetur adipiscing elit. Morbi libero libero, imperdiet fringilla </p>                
+                <p>이번달에 선정된 고객 여러분의 후기를 소개합니다<br>
             </div>
 
             <div class="row">
@@ -336,12 +335,12 @@
 <script type="text/javascript" src="assets/js/plugins/progress-bar.js"></script>
 <script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        App.init();
-        FancyBox.initFancybox();
-        OwlCarousel.initOwlCarousel();
-        ProgressBar.initProgressBarHorizontal();
-    });
+	jQuery(document).ready(function() {
+	    App.init();
+	    FancyBox.initFancybox();
+	    OwlCarousel.initOwlCarousel();
+	    ProgressBar.initProgressBarHorizontal();
+	});
 </script>
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
