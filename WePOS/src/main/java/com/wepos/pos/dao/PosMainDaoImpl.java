@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.common.dto.OrdersDetailDto;
 import com.wepos.common.dto.OrdersDto;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.SumOrdersDetailDto;
 import com.wepos.common.dto.TablesDto;
 
 public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
@@ -40,9 +42,13 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
     return getSqlSession().selectList( "getProductList", shopCode );
   }
 
-  public Map<String, Integer> getCategory( int categoryCode ) {
+  /*public Map<String, Integer> getCategory( int categoryCode ) {
     // TODO Auto-generated method stub
     return getSqlSession().selectMap( "getCategory", categoryCode, "CATEGORY_NAME" );
+  }*/
+  
+  public List<CategoryDto> getCategory( int shopCode ) {
+    return getSqlSession().selectList( "getCategory", shopCode );
   }
 
   public void insertOrders( OrdersDto orders ) {
@@ -65,7 +71,7 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
     return getSqlSession().selectList( "getOrderBeforePayment" );
   }
 
-  public List<OrdersDetailDto> getOrdersDetailBeforePayment() {
+  public List<SumOrdersDetailDto> getOrdersDetailBeforePayment() {
     // TODO Auto-generated method stub
     return getSqlSession().selectList( "getOrdersDetailBeforePayment" );
   }
