@@ -44,16 +44,25 @@ function realTime() {
 // 테이블 클릭 시 주문 모달창 호출
 $('.pos-table').on('click', function( event ) {
     var selectedTable = $(this).find('.tableName').html();
+    var sumOrderPrice = 0;
+    // 모달 창 호출
     $('#orderModal').modal();
+    
+    // 선택한 테이블 이름 출력 
     $('#selectTableName').text( selectedTable );
 
+    // 주문 메뉴 하나당 주문 현황에 추가
     $(this).find('.productName').each( function(){
       var productName = $(this).contents().get(0).nodeValue;
       var productStock = $(this).children('span').text();
       var productPrice = $(this).children('.productPrice').val();
      
       $("#oldOrderList").children("tbody").append('<tr class="selectMenuList"></td><td class="menuName">'+productName+'</td><td class="menuCount">'+productStock+'</td><td class="menuPrice">'+productPrice+'</td></tr>');
+      sumOrderPrice = sumOrderPrice + Number( productPrice );
     });
+    
+    $("#oldOrderList").find('#sumOldOrderPrice').text( sumOrderPrice );
+    
     
 })
 
@@ -78,12 +87,14 @@ $('#orderModal').on('hide.bs.modal', function() {
    calcPrice();
 });
 
+// 주문 버튼 클릭
 $(document).on('click','#orderSubmitButton', function(){
     var orders = new Array();
     var ordersDetailList = new Array(); 
    
-    var shopCode = ${shopCode}; 
+    var shopCode = ${shopCode};
     var tableCode;
+    
     var productCode;
     var orderAmount; 
     var orderPrice;
@@ -93,11 +104,13 @@ $(document).on('click','#orderSubmitButton', function(){
         tableCode = $(this).attr('id');
       }
     });
-    
+   
+    // Orders 테이블에 insert 하기 위한 정보 
     orders.push( shopCode );
     orders.push( tableCode );
-    
-    $('.selectMenuList').each( function() {
+   
+    // orders_detail 테이블에 insert 하기 위한 정보  
+    $('#newOrderList').find('.selectMenuList').each( function() {
         var ordersDetail = new Array();
         
         var menuName = $(this).children('.menuName').text();
