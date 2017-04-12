@@ -72,6 +72,11 @@ public interface ShopDao {
   // 매장 자유 게시판 게시물 댓글 삭제
   public void shopBoardReplyDelete(int replyNumber);
   
+  // 매장 자유 게시판 글쓰기
+  public void shopBoardWrite(ShopBoardDto shopBoard);
+  
+  // 매장 자유 게시판 글수정
+  public void shopBoardUpdate(ShopBoardDto shopBoard);  
   
 }
 

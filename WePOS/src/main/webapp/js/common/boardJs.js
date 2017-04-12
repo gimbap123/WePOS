@@ -1,11 +1,17 @@
+//수정 버튼을 눌렀을때
+function repEdit(replyContent, replyNumber, cnts){
+	$(function(){
+		$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='replyContents' id='replyContents' maxlength='100'>"+replyContent+"</textarea> <a href='javascript:replyChecks(+"+replyNumber+")' style='float: right;'>수정</a>");
+	});
+}
+
 //댓글 수정 확인
-function replyChecks(){
+function replyChecks(replyNumber){
 	if($('#replyContents').val()==null || $('#replyContents').val()=="") {
 		alert("내용을 입력해 주세요.");
 		$('#replyContents').focus();
 		return false;
 	}
-	
 	document.boardReplys.submit();
 }
 

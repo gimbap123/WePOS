@@ -288,17 +288,6 @@ public class BoardController {
 		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
 	}
 	
-	//댓글 수정 기능
-	@RequestMapping(value="/common/boardReplys.do", method=RequestMethod.POST)
-	public String updateReply(@RequestParam("boardNumber") int boardNumber,
-			@RequestParam("repNum") int replyNumber, @RequestParam(value="boardTypeCode") int boardTypeCode){
-		System.out.println(("★replyNumber=>"+replyNumber));
-		System.out.println("★boardNumber=>"+boardNumber);
-		System.out.println("★boardTypeCode=>"+boardTypeCode);
-		boardDao.updateReply(replyNumber);
-		
-		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
-	}
 	
 	// 파일 다운로드
     @RequestMapping("/common/file.do")
@@ -321,7 +310,9 @@ public class BoardController {
     {
 		//boardDao.boardDelete(boardNumber);		
 		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
+    	ReplyDto replyDto=new ReplyDto();
 		BoardDto boardDto=new BoardDto();
+		boardDao.boardReplyDelete(boardNumber);
     	boardDto.setBoardNumber(boardNumber);
     	boardDto.setBoardTypeCode(boardTypeCode);    	
     	boardDao.boardDelete(boardDto);

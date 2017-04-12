@@ -50,6 +50,10 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		getSqlSession().delete("boardDelete", boardDto);
 	}
 	
+	public void boardReplyDelete(int boardNumber) {
+		getSqlSession().delete("boardReplyDelete", boardNumber);
+	}
+	
 	
 	
 	

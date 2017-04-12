@@ -93,12 +93,17 @@
 
 	<update id="updateBoard" parameterType="int">
 		update board set board_title=#{boardTitle}, board_content=#{boardContent}, board_file=#{boardFile, jdbcType=VARCHAR}
-		where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}select * from reply where board_number=#{boardNumber}
+		where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</update>
 	
 	<delete id="boardDelete" parameterType="int">
 		delete from board where board_number=#{boardNumber} and board_type_code=#{boardTypeCode}
 	</delete>
+	
+	<delete id="boardReplyDelete" parameterType="int">
+		delete from reply where board_number=#{boardNumber}
+	</delete>
+	
 	
 	
 	

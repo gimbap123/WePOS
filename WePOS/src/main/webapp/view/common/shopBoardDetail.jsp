@@ -37,6 +37,26 @@
 
 <script language="JavaScript" src="../js/common/shopDetailJs.js?v=3"></script>
 
+<script type="text/javascript">
+function shopBoardReplyWrite()
+{
+	if(${sessionScope.id == null})
+	{
+		alert("댓글은 로그인 후 사용 가능합니다.");
+	}	
+	else
+	{    		
+		var boardNumber = $("#boardNumber").val();
+		var replyContent = $("#replyContent").val();
+		$("#replyContent").val("");
+		$.get("shopBoardReplyWrite.do", {boardNumber : boardNumber, replyContent : replyContent}, function(result)
+		{			
+			$("#replyDiv").html(result);
+		})    		
+	}    	
+}
+</script>
+
 <title>We POS</title>
 </head>
 <body>
@@ -69,9 +89,12 @@
 						<c:if test="${shopBoard.boardFile != null}">							
 							<a href="file.do?boardFile=${fileName}">${fileName}</a>
 						</c:if>
-						<a class="btn-u btn-u-small" style="float: right;" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">
-							<i class="fa fa-plus-sign"></i> 목록으로
-						</a>
+						<div align="right">						
+							<c:if test="${sessionScope.id eq shopBoard.totalId}">
+								<button class="btn-u" type="button" onclick="location.href='shopBoardUpdate.do?boardNumber=${shopBoard.boardNumber}'">수정</button>																		
+							</c:if>
+							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">목록으로</button>							
+						</div>
 					</div>
 					<div class="headline" ><h3>댓글</h3></div>					
 					<input type="hidden" id="boardNumber" name="boardNumber" value="${shopBoard.boardNumber}">
@@ -104,26 +127,7 @@
     jQuery(document).ready(function() {
         App.init();
         replyListPaging(1);
-        });
-    
-    function shopBoardReplyWrite()
-    {
-    	if(${sessionScope.id == null})
-    	{
-    		alert("댓글은 로그인 후 사용 가능합니다.");
-    	}	
-    	else
-    	{    		
-    		var boardNumber = $("#boardNumber").val();
-    		var replyContent = $("#replyContent").val();
-    		$("#replyContent").val("");
-    		$.get("shopBoardReplyWrite.do", {boardNumber : boardNumber, replyContent : replyContent}, function(result)
-    		{			
-    			$("#replyDiv").html(result);
-    		})    		
-    	}    	
-    }
-    
+        });    
 </script>
 </body>
 </html>

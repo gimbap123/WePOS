@@ -60,7 +60,7 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
 
 
 <style>
@@ -134,7 +134,8 @@
 						<div class="blog margin-bottom-40">
 						
 		<form name="boardDetail" enctype="multipart/form-data" method="post"
-			action="boardDelete.do?boardTypeCode=${boardTypeCode}">
+			action="boardDelete.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
+			<input type="hidden" name="boardNumber=${boardDto.boardNumber }">
 			
 							<h2 style="color:green; ">${boardDto.boardTitle}</h2>
 							<div class="blog-post-tags">
@@ -209,12 +210,10 @@
 								<tr>
 								<td>
 								<div class="dropdown">
-									<%-- <a href="javascript:checkRepId('${reply.totalId}')" class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;">${reply.totalId }</a> --%>
 									<a class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;" onmouseover="javascript:checkRepId('${reply.totalId}')">${reply.totalId }</a>
-								  	<div class="dropdown-content">
+								  	<div class="dropdown-content" id="dropdown-content">
 								    	<a href="javascript:repEdit('${reply.replyContent}', '${reply.replyNumber}', '${cnt}')" class="repEdit">수정</a>
 								    	<a href="#">삭제</a>
-										<%-- <input type="hidden" name="repNum" class="repNum" value="${reply.replyNumber}" > --%>
 								 	 </div>
 								</div>
 									<font style="color: gray;">${reply.replyDate }</font>
@@ -222,7 +221,7 @@
 								</tr>
 
 								<tr>
-									<td name="repContents${cnt}" class="repContents${cnt}">${reply.replyContent }</td>
+									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents">${reply.replyContent }</td>
 								</tr>
 
 							</table>
@@ -230,7 +229,7 @@
 								<c:set var="cnt" value="${cnt+1}"  />
 							</c:forEach>
 					
-					</form>					
+					</form>				
 					
 						</div>
 					</div>
@@ -270,13 +269,6 @@
 			ParallaxSlider.initParallaxSlider();
 		});
 
-		function repEdit(repCont, repNumb, cnts){
-			$(function(){
-				alert("repNumb=>"+repNumb)
-				//alert("cnts=>"+cnts)
-				$(this).find('.repContents'+cnts).html("<textarea rows='1' cols='100%' style='resize: none; width: 100%' name='replyContents' id='replyContents' maxlength='100'>"+repCont+"</textarea> <a href='javascript:replyChecks()' style='float: right;'>등록</a>");
-				});
-		}
 	</script>
 	
 </body>

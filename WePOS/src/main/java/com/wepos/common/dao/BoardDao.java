@@ -32,6 +32,9 @@ public interface BoardDao {
 	//글 삭제하기
 	public void boardDelete(BoardDto boardDto);
 	
+	//글에 해당하는 댓글 전부 삭제하기
+	public void boardReplyDelete(int boardNumber);
+	
 	
 	
 
