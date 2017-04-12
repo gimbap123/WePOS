@@ -16,7 +16,9 @@ import com.wepos.common.dto.OrdersDetailDto;
 import com.wepos.common.dto.OrdersDto;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.dto.SumOrdersDetailDto;
 import com.wepos.common.dto.TablesDto;
+import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.pos.dao.PosMainDao;
 
 @Controller
@@ -39,16 +41,15 @@ public class PosMainController {
     // 매장 내 테이블 숫자 select
     int tableCount = posMainDao.getTableCount( shopCode );
     // 매장 내 메뉴 select
-    List<ProductDto> productList = posMainDao
-        .getProductList( shopCode );
+    List<ProductDto> productList = posMainDao.getProductList( shopCode );
     // 카테고리 정보 select
-    // Map<String, Integer> category = posMainDao.getCategory( 3 );
+    List<CategoryDto> category = posMainDao.getCategory( shopCode );
     
     // 현재 테이블 주문 정보 select ( order_state == 0 인 (결제 전 주문) 항목들만 )
-    // List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
+    List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
     
     // 결제 전 테이블의 주문 상세 내역 select
-    // List<OrdersDetailDto> ordersDetailList = 
+    List<SumOrdersDetailDto> ordersDetailList = posMainDao.getOrdersDetailBeforePayment();
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -56,7 +57,9 @@ public class PosMainController {
     mav.addObject( "tables", tables );
     mav.addObject( "productList", productList );
     mav.addObject( "tableCount", tableCount );
-    // mav.addObject( "category", category );
+    mav.addObject( "category", category );
+    mav.addObject( "orderList", orderList );
+    mav.addObject( "ordersDetailList", ordersDetailList );
     return mav;
   }
 
@@ -78,18 +81,18 @@ public class PosMainController {
     // od.setOrderState( orderState );
 
     // 개발 시 db 입력 잠시 보류
-    //posMainDao.insertOrders( od );
-    //int lastOrderCode = posMainDao.getOrderCode();
+    posMainDao.insertOrders( od );
+    int lastOrderCode = posMainDao.getOrderCode();
     
     for ( int i = 0; i < ordersDetailList.size(); i=i+3 ) {
       OrdersDetailDto odd = new OrdersDetailDto();
-      //odd.setOrderCode( lastOrderCode );
+      odd.setOrderCode( lastOrderCode );
       odd.setProductCode( Integer.parseInt( (String)ordersDetailList.get( i ) ) );
       odd.setOrderAmount( Integer.parseInt( (String)ordersDetailList.get( i + 1 ) ) );
       odd.setOrderPrice( Integer.parseInt( (String)ordersDetailList.get( i + 2 ) ) );
       
       // 개발시 db 입력 잠시 보류
-      //posMainDao.insertOrdersDetail( odd );
+      posMainDao.insertOrdersDetail( odd );
       
       oddList.add(odd);
     }

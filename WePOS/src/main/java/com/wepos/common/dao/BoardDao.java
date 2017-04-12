@@ -48,6 +48,6 @@ public interface BoardDao {
 	public void insertReply(ReplyDto replyDto);
 	
 	//댓글 수정
-	public void updateReply(int replyNumber);
+	public void updateReply(ReplyDto replyDto);
 	
 }

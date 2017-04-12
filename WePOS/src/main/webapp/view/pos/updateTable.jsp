@@ -84,18 +84,18 @@
 					data-target="#orderModal">
 					<div class="panel-heading">
 						<h3 class="panel-title" id="panel-title">
-							<a role="button" class="anchorjs-link" href="#panel-title"><span
-								class="anchorjs-icon">${tables[i].tableName}</span></a> <span
-								class="badge">${tables[i].tableMax}인</span>
+							<a role="button" class="anchorjs-link" href="#panel-title">
+								<span class="anchorjs-icon">${tables[i].tableName}</span>
+							</a>
+								<span class="badge pull-right" style="margin-top:4px">${tables[i].tableMax}인</span>
 						</h3>
 					</div>
 					<div class="panel-body" align="center">
-						<span style="width:30px">
-							<a class="color-green"	href="#"
-								onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">수정</a>
-						</span>
-						<span>
-						<a class="color-green" href="#" onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">삭제</a>
+						<span style="float:right">
+							<input type="button" class="btn btn-success" value="수정"
+								onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">						
+							<input type="button" class="btn btn-danger" value="삭제"
+								onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">
 						</span>
 					</div>
 				</div>
@@ -115,7 +115,7 @@
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">테이블 번호</th>
+									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">고유번호</th>
 									<th>
 										<input type="text" id="tableCode" name="tableCode" value="" size="15px" style="border:0" readonly>
 									</th>

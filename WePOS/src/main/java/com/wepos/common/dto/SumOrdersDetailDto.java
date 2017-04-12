@@ -1,11 +1,11 @@
 package com.wepos.common.dto;
 
-public class OrdersDetailDto {
+public class SumOrdersDetailDto {
   private int orderCode;
   private int productCode;
   private String productName;
-  private int orderAmount;
-  private int orderPrice;
+  private int sumOrderAmount;
+  private int sumOrderPrice;
   private int tableCode;
   
   public int getOrderCode() {
@@ -20,17 +20,17 @@ public class OrdersDetailDto {
   public void setProductCode( int productCode ) {
     this.productCode = productCode;
   }
-  public int getOrderAmount() {
-    return orderAmount;
+  public int getSumOrderAmount() {
+    return sumOrderAmount;
   }
-  public void setOrderAmount( int orderAmount ) {
-    this.orderAmount = orderAmount;
+  public void setSumOrderAmount( int sumOrderAmount ) {
+    this.sumOrderAmount = sumOrderAmount;
   }
-  public int getOrderPrice() {
-    return orderPrice;
+  public int getSumOrderPrice() {
+    return sumOrderPrice;
   }
-  public void setOrderPrice( int orderPrice ) {
-    this.orderPrice = orderPrice;
+  public void setSumOrderPrice( int sumOrderPrice ) {
+    this.sumOrderPrice = sumOrderPrice;
   }
   public int getTableCode() {
     return tableCode;
@@ -51,8 +51,8 @@ public class OrdersDetailDto {
         + " orderCode = " + orderCode + ","
         + " productCode = " + productCode + ","
         + " productName = " + productName + ","
-        + " orderAmount = " + orderAmount + ","
-        + " orderPrice = " + orderPrice + ","
+        + " sumOrderAmount = " + sumOrderAmount + ","
+        + " sumOrderPrice = " + sumOrderPrice + ","
         + " tableCode = " + tableCode 
         + " ]";
   }
