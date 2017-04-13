@@ -31,6 +31,7 @@
 		<typeAlias alias="OrdersDto" type="com.wepos.common.dto.OrdersDto"/>
 		<typeAlias alias="OrdersDetailDto" type="com.wepos.common.dto.OrdersDetailDto"/>
 		<typeAlias alias="SumOrdersDetailDto" type="com.wepos.common.dto.SumOrdersDetailDto"/>
+		<typeAlias alias="chartStatsDto" type="com.wepos.pos.dto.ChartStatsDto"/>
 	</typeAliases>
 		
 	<mappers>	    
@@ -43,6 +44,7 @@
 		<mapper resource="com/wepos/pos/dao/PosTableDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/ProductDaoMapper.xml"/>
 		<mapper resource="com/wepos/mgr/dao/MgrDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosChartStatsDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>

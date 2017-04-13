@@ -13,7 +13,9 @@ var Datepicker = function () {
 	        
 	        // Date range
 	        $('#start').datepicker({
-	            dateFormat: 'dd.mm.yy',
+	            // dateFormat 수정
+	        	/*dateFormat: 'dd.mm.yy',*/
+	        	dateFormat: 'yy-mm-dd',
 	            prevText: '<i class="fa fa-angle-left"></i>',
 	            nextText: '<i class="fa fa-angle-right"></i>',
 	            onSelect: function( selectedDate )
@@ -22,7 +24,9 @@ var Datepicker = function () {
 	            }
 	        });
 	        $('#finish').datepicker({
-	            dateFormat: 'dd.mm.yy',
+	        	// dateFormat 수정
+	        	/*dateFormat: 'dd.mm.yy',*/
+	            dateFormat: 'yy-mm-dd',
 	            prevText: '<i class="fa fa-angle-left"></i>',
 	            nextText: '<i class="fa fa-angle-right"></i>',
 	            onSelect: function( selectedDate )

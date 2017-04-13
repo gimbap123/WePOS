@@ -45,7 +45,7 @@
 		<jsp:include page="../pos/leftBar.jsp" flush="false" />
 				
 		<div class="content-side-right">
-			<div class="content" style="padding: 0px 20px;">
+			<div class="content" style="padding: 0px 20px; margin-right: 270px;">
 				<div class="breadcrumbs-v3 img-v1" style="background: url(../image/common/posLog.jpg); 	background-size: cover; background-position: center center;height: 30px">
 					<div class="container text-center" style="width: 100%">
 						<h1>매장 정보</h1>
