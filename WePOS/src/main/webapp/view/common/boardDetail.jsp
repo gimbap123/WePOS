@@ -60,7 +60,7 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=2"></script>
 
 
 <style>
@@ -112,7 +112,7 @@
 		ReplyDto replyDto = new ReplyDto();
 	%>
 
-	<div class="wrapper">
+	<div class="wrapper" id="wrapper">
 		<!--=== Header ===-->
 		<jsp:include page="header.jsp" flush="false" />
 
@@ -192,15 +192,17 @@
 							</c:if>
 							
 							<input type="hidden" name="totalId" class="totalId" id="totalId" value="${sessionScope.id}">
-							<input type="hidden" name="replyContent" value="${reply.replyContent }">
+							<input type="hidden" name="replyContent" value="${reply.replyContent}">
 							<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
 							
 					</form>
 					
+					<div id="boardReplys">
 					<form name="boardReplys" method="post" action="boardReplys.do?boardNumber=${boardDto.boardNumber}&boardTypeCode=${boardTypeCode}">
+				
 					
-					<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
-					<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
+					<input type="hidden" id="boardNumber" name="boardNumber" value="${boardDto.boardNumber}">
+					<input type="hidden" id="boardTypeCode" name="boardTypeCode" value="${boardTypeCode}">
 					
 							<hr style="margin: 0 0 20px 0">
 
@@ -213,7 +215,7 @@
 									<a class="dropbtn" id="replyTotalId" style="color: blue;font-weight: bolder; font-size: 15px; text-decoration: none;" onmouseover="javascript:checkRepId('${reply.totalId}')">${reply.totalId }</a>
 								  	<div class="dropdown-content" id="dropdown-content">
 								    	<a href="javascript:repEdit('${reply.replyContent}', '${reply.replyNumber}', '${cnt}')" class="repEdit">수정</a>
-								    	<a href="#">삭제</a>
+								    	<a href="javascript:repDelete('${reply.replyNumber}')">삭제</a>
 								 	 </div>
 								</div>
 									<font style="color: gray;">${reply.replyDate }</font>
@@ -222,23 +224,17 @@
 
 								<tr>
 									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents${reply.replyNumber}">${reply.replyContent }</td>
+									${pagingHtml}
 								</tr>
-								
-							<%-- <div>
-								<c:if test="${sessionScope.id eq reply.totalId}">
-									<ul id="functionUl${reply.replyNumber}" class="list-inline pull-right">
-										<li><a href="javascript:updateReply('${reply.replyNumber}', '${reply.replyContent}')"><i class="expand-list rounded-x fa fa-pencil"></i> 수정</a></li>
-				                        <li><a href="javascript:deleteReply('${reply.replyNumber}')"><i class="expand-list rounded-x fa fa-times"></i> 삭제</a></li>
-									</ul>
-								</c:if>
-							</div> --%>
+
 
 							</table>
 							<hr style="margin: 20px 0 20px 0">
 								<c:set var="cnt" value="${cnt+1}"  />
 							</c:forEach>
-					
+
 					</form>				
+					</div>
 					
 						</div>
 					</div>

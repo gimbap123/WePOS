@@ -59,19 +59,23 @@
 								<img class="img-responsive" src="${shopNotice.noticeFile}" alt="" style="width: 80%;">
 							</div>
 						</c:if>	
-						<p>${shopNotice.noticeContent}</p>
+						<p style="font-size: 20px;">${shopNotice.noticeContent}</p>
 						<hr>
 						<b>첨부파일 : </b>
 						<c:if test="${shopNotice.noticeFile == null}">
 							첨부된 파일이 없습니다.	
 						</c:if>	
-						<c:if test="${shopNotice.noticeFile != null}">							
+						<c:if test="${shopNotice.noticeFile != null}">
 							<a href="file.do?boardFile=${fileName}">${fileName}</a>
-						</c:if>
-						<a class="btn-u btn-u-small" style="float: right;" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">
-							<i class="fa fa-plus-sign"></i> 목록으로
-						</a>
-					</div>					
+						</c:if>						
+						<div align="right">						
+							<c:if test="${sessionScope.shopCode == shopNotice.shopCode}">
+								<button class="btn-u" type="button" onclick="location.href='shopNoticeUpdate.do?noticeNumber=${shopNotice.noticeNumber}'">수정</button>																		
+								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode}, '${fileName}')">삭제</button>
+							</c:if>
+							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">목록으로</button>							
+						</div>
+					</div>
 				</div>
 			</div>					
 		</div>		

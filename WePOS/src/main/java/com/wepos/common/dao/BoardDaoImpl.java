@@ -69,8 +69,12 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		getSqlSession().insert("insertReply", replyDto);
 	}
 	
-	public void updateReply(int replyNumber) {
-		getSqlSession().update("updateReply", replyNumber);
+	public void updateReply(ReplyDto replyDto) {
+		getSqlSession().update("updateReply", replyDto);
+	}
+	
+	public void deleteReply(int replyNumber) {
+		getSqlSession().delete("deleteReply", replyNumber);
 	}
 	
 }

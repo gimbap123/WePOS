@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.admin.dao.AdminDao;
@@ -337,6 +336,7 @@ public class SearchShopController {
 		mav.addObject("searchNoticeType", searchNoticeType);
 		mav.addObject("searchNoticeText", searchNoticeText);
 		mav.addObject("searchNoticeTypeList", searchNoticeTypeList);
+		mav.addObject("shopCode", shopCode);
 		
 		return mav;
 	}
@@ -531,7 +531,7 @@ public class SearchShopController {
 	}
 	
 	// 매장 자유 게시판 글쓰기
-	@RequestMapping(value="/common/shopBoardWrite.do")
+	@RequestMapping(value="/common/shopBoardWrite.do", method=RequestMethod.GET)
 	public ModelAndView shopBoardWriteView(@RequestParam("shopCode") int shopCode)
 	{
 		ModelAndView mav = new ModelAndView();
@@ -542,19 +542,19 @@ public class SearchShopController {
 	}
 	
 	// 매장 자유 게시판 글쓰기 기능 수행
-	@RequestMapping(value="/common/shopBoardWriteProc.do")
+	@RequestMapping(value="/common/shopBoardWrite.do", method=RequestMethod.POST)
 	public String shopBoardWriteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard) throws IOException, Exception
 	{		
 		String newFileName = "";
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
 		
-		/*if(!shopBoard.getUpload().isEmpty())
+		if(!shopBoard.getUpload().isEmpty())
 		{
 			newFileName = FileUtil.rename(shopBoard.getUpload().getOriginalFilename());
 			shopBoard.setBoardFile(newFileName);
 			File file = new File(filePath + newFileName);
 			shopBoard.getUpload().transferTo(file);
-		}*/
+		}
 		
 		shopDao.shopBoardWrite(shopBoard);
 		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
@@ -574,17 +574,124 @@ public class SearchShopController {
 	
 	// 매장 자유 게시판 글수정 기능 수행
 	@RequestMapping(value="/common/shopBoardUpdate.do", method=RequestMethod.POST)
-	public String shopBoardUpdateProcess(@ModelAttribute ShopBoardDto shopBoard)
+	public String shopBoardUpdateProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard) throws IOException, Exception
 	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		String oldFileName = shopBoard.getBoardFile();
+		
+		if(!shopBoard.getUpload().isEmpty())
+		{
+			shopBoard.setBoardFile(FileUtil.rename(shopBoard.getUpload().getOriginalFilename()));
+			File file = new File(filePath + shopBoard.getBoardFile());
+			shopBoard.getUpload().transferTo(file);
+			if(oldFileName != null)
+			{
+				FileUtil.removeFile(oldFileName, filePath);
+			}
+		}
+		else
+		{
+			shopBoard.setBoardFile(oldFileName);
+		}
+		
 		shopDao.shopBoardUpdate(shopBoard);
 		return "redirect:/common/shopBoardDetail.do?boardNumber=" + shopBoard.getBoardNumber();
 	}
 	
 	// 매장 자유 게시판 글삭제
 	@RequestMapping(value="/common/shopBoardDelete.do")
-	public String shopBoardDeleteProcess(@ModelAttribute ShopBoardDto shopBoard)
+	public String shopBoardDeleteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard)
 	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		if(shopBoard.getBoardFile() != null)
+		{
+			FileUtil.removeFile(shopBoard.getBoardFile(), filePath);
+		}
+		
 		shopDao.shopBoardDelete(shopBoard.getBoardNumber());
 		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
+	}
+	
+	// 매장 공지사항 글쓰기
+	@RequestMapping(value="/common/shopNoticeWrite.do", method=RequestMethod.GET)
+	public ModelAndView shopNoticeWriteView(@RequestParam("shopCode") int shopCode)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeWrite");
+		mav.addObject("shopCode", shopCode);
+		
+		return mav;
+	}
+	
+	// 매장 공지사항 글쓰기 기능 수행
+	@RequestMapping(value="/common/shopNoticeWrite.do", method=RequestMethod.POST)
+	public String shopNoticeWriteProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice) throws IOException, Exception
+	{		
+		String newFileName = "";
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		if(!shopNotice.getUpload().isEmpty())
+		{
+			newFileName = FileUtil.rename(shopNotice.getUpload().getOriginalFilename());
+			shopNotice.setNoticeFile(newFileName);
+			File file = new File(filePath + newFileName);
+			shopNotice.getUpload().transferTo(file);
+		}
+		
+		shopDao.shopNoticeWrite(shopNotice);
+		return "redirect:/common/shopDetail.do?shopCode=" + shopNotice.getShopCode();
+	}
+	
+	// 매장 공지사항 글수정
+	@RequestMapping(value="/common/shopNoticeUpdate.do", method=RequestMethod.GET)
+	public ModelAndView shopNoticeUpdateView(@RequestParam("noticeNumber") int noticeNumber)
+	{
+		ShopNoticeDto shopNotice = shopDao.shopNoticeDetail(noticeNumber);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopNoticeUpdate");
+		mav.addObject("shopNotice", shopNotice);
+		
+		return mav;
+	}
+	
+	// 매장 공지사항 글수정 기능 수행
+	@RequestMapping(value="/common/shopNoticeUpdate.do", method=RequestMethod.POST)
+	public String shopNoticeUpdateProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice) throws IOException, Exception
+	{	
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		String oldFileName = shopNotice.getNoticeFile();
+		
+		if(!shopNotice.getUpload().isEmpty())
+		{
+			shopNotice.setNoticeFile(FileUtil.rename(shopNotice.getUpload().getOriginalFilename()));
+			File file = new File(filePath + shopNotice.getNoticeFile());
+			shopNotice.getUpload().transferTo(file);
+			if(oldFileName != null)
+			{
+				FileUtil.removeFile(oldFileName, filePath);
+			}
+		}
+		else
+		{
+			shopNotice.setNoticeFile(oldFileName);
+		}		
+		
+		shopDao.shopNoticeUpdate(shopNotice);
+		return "redirect:/common/shopNoticeDetail.do?noticeNumber=" + shopNotice.getNoticeNumber();
+	}
+	
+	// 매장 공지사항 글삭제
+	@RequestMapping(value="/common/shopNoticeDelete.do")
+	public String shopNoticeDeleteProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice)
+	{		
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		if(shopNotice.getNoticeFile() != null)
+		{
+			FileUtil.removeFile(shopNotice.getNoticeFile(), filePath);
+		}
+		shopDao.shopNoticeDelete(shopNotice.getNoticeNumber());
+		return "redirect:/common/shopDetail.do?shopCode=" + shopNotice.getShopCode();
 	}
 }

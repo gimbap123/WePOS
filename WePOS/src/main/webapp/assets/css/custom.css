@@ -56,6 +56,12 @@
         min-width: 240px;
         margin-top: 20px;
     }
+    
+    .tableOrderList
+    {
+        min-height: 130px;
+    }
+    
     .panel-updateTable
     {
         min-height: 50px;

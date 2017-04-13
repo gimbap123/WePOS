@@ -62,6 +62,11 @@
 				</span>	
 			</div>
 		</div>
+		<c:if test="${sessionScope.shopCode == shopCode}">
+			<div class="col-md-3">
+				<button class="btn-u" type="button" onclick="location.href='shopNoticeWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>
+			</div>					
+		</c:if>
 	</div>	
 	
 </div>

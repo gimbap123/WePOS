@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="../assets/css/pages/page_clients.css">
 
 <!--=== Content Part ===-->
@@ -42,7 +42,7 @@
                     	<div class="col-md-8">
                     		<h3>${product.productName}</h3>
                     		<ul class="list-inline">
-	                           <li><i class="fa fa-krw"></i> ${product.productPrice}</li>	                          
+	                           <li><i class="fa fa-krw"></i> <fmt:formatNumber value="${product.productPrice}" type="number" />원</li>	                          
 	                       </ul>
 	                       <p>${product.productDesc}</p>
                     	</div>

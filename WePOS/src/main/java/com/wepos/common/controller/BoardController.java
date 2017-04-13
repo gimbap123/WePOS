@@ -278,16 +278,26 @@ public class BoardController {
 	@RequestMapping(value="/common/boardReply.do", method=RequestMethod.POST)
 	public String boardInsertReply(@RequestParam("boardNumber") int boardNumber,
 			@ModelAttribute ReplyDto replyDto, @RequestParam(value="boardTypeCode") int boardTypeCode){
-		//System.out.println("댓글 달기 기능 확인 여부1");
-		//System.out.println("replyDto.getTotalId=>"+replyDto.getTotalId());
-		//System.out.println("replyDto.getReplyContent()=>"+replyDto.getReplyContent());
 		boardDao.insertReply(replyDto);
-		
-		//System.out.println("댓글 달기 기능 확인 여부2");
-		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
 		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
 	}
 	
+	//댓글 수정 기능  
+	@RequestMapping(value="/common/boardReplys.do", method=RequestMethod.POST)  
+	public String updateReply(@RequestParam("boardNumber") int boardNumber,  
+		@RequestParam("replyNumber") int replyNumber, @RequestParam(value="boardTypeCode") int boardTypeCode,
+		@RequestParam("replyContent") String replyContent, @ModelAttribute ReplyDto replyDto){  
+			boardDao.updateReply(replyDto);  
+		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;  
+	}  
+
+	//댓글 삭제 기능
+	@RequestMapping(value="/common/boardReplyDelete.do", method=RequestMethod.POST)
+	public String deleteReply(@ModelAttribute ReplyDto replyDto, @RequestParam("replyNumber") int replyNumber,
+		@RequestParam(value="boardTypeCode") int boardTypeCode, @RequestParam("boardNumber") int boardNumber){
+			boardDao.deleteReply(replyDto.getReplyNumber());
+		return "redirect:/common/boardDetail.do?boardNumber="+boardNumber+"&boardTypeCode="+boardTypeCode;
+	}
 	
 	// 파일 다운로드
     @RequestMapping("/common/file.do")

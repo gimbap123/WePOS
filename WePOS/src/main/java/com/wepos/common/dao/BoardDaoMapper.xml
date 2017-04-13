@@ -119,9 +119,13 @@
 		insert into reply values(reply_seq.nextval, #{boardNumber, jdbcType=INTEGER}, #{totalId, jdbcType=VARCHAR}, #{replyContent, jdbcType=VARCHAR}, sysdate)
 	</insert>
 	
-	<update id="updateReply" parameterType="int">
-		update reply set reply_content=#{replyContents} where reply_number=#{replyNumber}
+	<update id="updateReply" parameterType="replyDto">
+		update reply set reply_content=#{replyContent} where reply_number=#{replyNumber}
 	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from reply where reply_number=#{replyNumber}
+	</delete>
 	
 
 </mapper>

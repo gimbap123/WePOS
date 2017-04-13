@@ -80,7 +80,7 @@ function shopBoardReplyWrite()
 								<img class="img-responsive" src="${shopBoard.boardFile}" alt="" style="width: 80%;">
 							</div>
 						</c:if>	
-						<p>${shopBoard.boardContent}</p>
+						<p style="font-size: 20px;">${shopBoard.boardContent}</p>
 						<hr>
 						<b>첨부파일 : </b>
 						<c:if test="${shopBoard.boardFile == null}">
@@ -92,7 +92,7 @@ function shopBoardReplyWrite()
 						<div align="right">						
 							<c:if test="${sessionScope.id eq shopBoard.totalId}">
 								<button class="btn-u" type="button" onclick="location.href='shopBoardUpdate.do?boardNumber=${shopBoard.boardNumber}'">수정</button>																		
-								<button class="btn-u" type="button" onclick="shopBoardDelete(${shopBoard.boardNumber}, ${shopBoard.shopCode})">삭제</button>
+								<button class="btn-u" type="button" onclick="shopBoardDelete(${shopBoard.boardNumber}, ${shopBoard.shopCode}, '${fileName}')">삭제</button>
 							</c:if>
 							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopBoard.shopCode}'">목록으로</button>							
 						</div>

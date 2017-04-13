@@ -34,9 +34,9 @@
 		<jsp:include page="header.jsp" flush="false" />	
 		
 		<!--=== Breadcrumbs ===-->
-  		<div class="breadcrumbs">
-      		<div class="container">      		
-          		<h1 class="pull-left">${shop.shopName}</h1>          		
+  		<div class="breadcrumbs" style="background: url('../image/common/searchHeaderImg.png') repeat;">
+      		<div class="container">
+          		<h1 class="pull-left" style="color: white; font-weight: bold;">${shop.shopName}</h1>          		
       		</div>
   		</div><!--/breadcrumbs-->
   		<!--=== End Breadcrumbs ===-->

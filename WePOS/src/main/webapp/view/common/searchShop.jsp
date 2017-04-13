@@ -39,7 +39,7 @@
 		<jsp:include page="header.jsp" flush="false" />
 	
 		<!--=== Search Block Version 2 ===-->
-		<div class="search-block">
+		<div class="search-block" style="background: url('../image/common/searchHeaderImg.png');">
 			<div class="container">	
 				<form id="searchShopForm" action="#" name="searchShopForm" method="get">
 					<div class="col-md-6 col-md-offset-3" style="margin-bottom: 10px">
@@ -91,7 +91,7 @@
 									
 					<div class="col-md-6 col-md-offset-3">							
 						<div class="input-group">	
-							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장의 정보를 입력하세요" value="${shopName}">
+							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장을 입력하세요" value="${shopName}">
 							<span class="input-group-btn">
 								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
@@ -106,7 +106,7 @@
 	
 		<br>
 		<!--=== Cube-Portfdlio ===-->
-   	 	<div class="cube-portfolio container margin-bottom-60">
+   	 	<div class="cube-portfolio container margin-bottom-30">
    	 		<div id="grid-container" class="cbp-l-grid-agency">   	  	 			 	 		 		
    	 			<c:forEach items="${shopList}" var="shop">
    	 				<div class="cbp-item">
@@ -119,7 +119,7 @@
                     				<div class="cbp-l-caption-body">
                     					<ul class="link-captions no-bottom-space">
                     						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-info-circle"></i></a></li>
-                                    		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="Design Object"><i class="rounded-x fa fa-search"></i></a></li>
+                                    		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="${shop.shopName}"><i class="rounded-x fa fa-search"></i></a></li>
                     					</ul>
                     				</div>
                     			</div>

@@ -64,8 +64,8 @@
 		</div>
 		<c:if test="${sessionScope.id != null}">
 			<div class="col-md-3">
-				<button class="btn-u" type="button" onclick="location.href='shopBoardWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>
-			</div>					
+				<button class="btn-u" type="button" onclick="location.href='shopBoardWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>				
+			</div>			
 		</c:if>
 	</div>	
 	
