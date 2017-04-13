@@ -58,6 +58,7 @@
 						<h2>매장 정보 수정</h2>				
 					</div>
 					<form name="shopInfoUpdateForm" action="shopInfoUpdate.do" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="shopCode" value="${shop.shopCode}">
 						<div class="input-group margin-bottom-10">
 							<span class="input-group-addon"><i class="icon-user-follow"></i></span>
 							<input type="text" id="shopName" name="shopName" class="form-control" value="${shop.shopName}">
@@ -223,7 +224,7 @@
 						</div>	
 						<div class="row">
 							<div class="col-md-10 col-md-offset-1">
-								<input type="button" id="ok" class="btn-u btn-block"  value="수정하기" onclick="checkShopRegistration()">
+								<input type="button" id="ok" class="btn-u btn-block"  value="수정하기" onclick="checkShopInfoUpdate()">
 							</div>
 						</div>
 					</form>

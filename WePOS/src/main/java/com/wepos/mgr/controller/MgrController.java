@@ -1,10 +1,16 @@
 package com.wepos.mgr.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +20,7 @@ import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.BusinessHoursDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.util.FileUtil;
 import com.wepos.mgr.dao.MgrDao;
 
 @Controller
@@ -25,9 +32,9 @@ public class MgrController {
 	@Autowired
 	private AdminDao adminDao;
 	
-	// 매장 검색
-	@RequestMapping(value = "/pos/shopInfoUpdate.do")
-	public ModelAndView shopInfoUpdate(@RequestParam("shopCode") int shopCode)
+	// 매장 수정
+	@RequestMapping(value = "/pos/shopInfoUpdate.do", method = RequestMethod.GET)
+	public ModelAndView shopInfoUpdateView(@RequestParam("shopCode") int shopCode)
 	{
 		ShopDto shop = mgrDao.shopInfo(shopCode);
 		
@@ -54,4 +61,39 @@ public class MgrController {
 		
 		return mav;
 	}
+	
+	// 매장 수정 기능 수행
+	@RequestMapping(value = "/pos/shopInfoUpdate.do", method = RequestMethod.POST)
+	public String shopInfoUpdateProcess(HttpServletRequest request, 
+			@ModelAttribute ShopDto shop, @ModelAttribute BusinessHoursDto businessHours) throws IOException, Exception
+	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		String oldFileName = shop.getShopFile();	
+		
+		String startTime = businessHours.getStartHour() + ":" + businessHours.getStartMinute() + businessHours.getStartHourType();
+		String endTime = businessHours.getEndHour() + ":" + businessHours.getEndMinute() + businessHours.getEndHourType();
+		
+		shop.setShopStartTime(startTime);
+		shop.setShopEndTime(endTime);
+		
+		if(!shop.getUpload().isEmpty())
+		{
+			shop.setShopFile(FileUtil.rename(shop.getUpload().getOriginalFilename()));
+			File file = new File(filePath + shop.getShopFile());
+			shop.getUpload().transferTo(file);
+			if(oldFileName != null)
+			{
+				FileUtil.removeFile(oldFileName, filePath);
+			}
+		}
+		else
+		{
+			shop.setShopFile(oldFileName);
+		}
+		
+		mgrDao.shopInfoUpdate(shop);
+		
+		return "redirect:/pos/shopInfoUpdate.do?shopCode=" + shop.getShopCode();
+	}
+		
 }

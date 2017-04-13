@@ -9,4 +9,8 @@ public class MgrDaoImpl extends SqlSessionDaoSupport implements MgrDao {
 	public ShopDto shopInfo(int shopCode) {
 		return getSqlSession().selectOne("shopInfo", shopCode);
 	}
+	
+	public void shopInfoUpdate(ShopDto shop) {
+		getSqlSession().update("shopInfoUpdate", shop);
+	}
 }

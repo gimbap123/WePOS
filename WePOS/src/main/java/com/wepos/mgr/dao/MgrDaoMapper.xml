@@ -9,4 +9,11 @@
 		where shop_code = #{shopCode}
 	</select>
 	
+	<update id="shopInfoUpdate" parameterType="shopDto">
+		update shop set shop_type_code = #{shopTypeCode}, city_code = #{cityCode}, local_code = #{localCode},
+			shop_name = #{shopName}, shop_desc = #{shopDesc}, shop_address = #{shopAddress},
+			shop_file= #{shopFile, jdbcType=VARCHAR}, shop_phone = #{shopPhone}, shop_start_time = #{shopStartTime},
+			shop_end_time = #{shopEndTime} where shop_code = #{shopCode}
+	</update>
+	
 </mapper>
