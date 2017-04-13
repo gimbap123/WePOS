@@ -57,40 +57,120 @@ $('.pos-table').on('click', function( event ) {
       var productStock = $(this).children('span').text();
       var productPrice = $(this).children('.productPrice').val();
      
-      $("#oldOrderList").children("tbody").append('<tr class="selectMenuList"></td><td class="menuName">'+productName+'</td><td class="menuCount">'+productStock+'</td><td class="menuPrice">'+productPrice+'</td></tr>');
+      $('#prevOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+productName+'</td><td class="menuCount">'+productStock+'</td><td class="menuPrice">'+productPrice+'</td></tr>');
       sumOrderPrice = sumOrderPrice + Number( productPrice );
     });
     
-    $("#oldOrderList").find('#sumOldOrderPrice').text( sumOrderPrice );
-    
-    
+    $("#prevOrderList").find('#totalPrevOrderPrice').text( sumOrderPrice );
 })
 
-// 주문 메뉴 리스트 클릭시 주문 취소
-$(document).on('click','.selectMenuList', function(){
-    var cancel = confirm( "[ "+$(this).children('.menuName').text()+" ] 주문을 취소 하시겠습니까?");
-    if ( cancel == true ){
-	$(this).remove();
-    }
-    calcPrice();
+// 기존 주문 메뉴 리스트 클릭시
+$('#prevOrderList').on('click', 'tr[class="selectMenuList"]', function() {
+  var productName = $(this).children('.menuName').text(); 
+  var productStock = $(this).children('.menuCount').text(); 
+  var productPrice = $(this).children('.menuPrice').text(); 
+  var totalPrice = Number( $('#totalPrevOrderPrice').text() );
+  
+  var unitPrice = Number( productPrice ) / Number( productStock );
+  
+  if ( productStock > 1 ) {
+    $(this).children('.menuCount').text( productStock - 1 ); 
+    $(this).children('.menuPrice').text( productPrice - unitPrice ); 
+    $('#totalPrevOrderPrice').text( totalPrice - unitPrice );
+  
+    addOrderList( productName, productStock, productPrice ); 
+  }
+  else if ( productStock <= 1 ) {
+    $('#totalPrevOrderPrice').text( totalPrice - unitPrice );
+    addOrderList( productName, productStock, productPrice ); 
+    $(this).remove();
+  }
+ 
+  var deleteTotalPrice = 0;
+  $('#cancelOrderList').find('.selectMenuList').each( function(){
+    var unitPrice = Number( $(this).children('.menuPrice').text() );
+    deleteTotalPrice = deleteTotalPrice + unitPrice;
+  });
+  
+  $('#totalCancelOrderPrice').text( deleteTotalPrice );
+});
+
+function addOrderList( name, amount, price ) {
+  var isSelectMenu = true; 
+  var unitPrice = price / amount;
+  
+  if ( $('#cancelOrderList').find('.selectMenuList').length < 1 ) {
+      $('#cancelOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+name+'</td><td class="menuCount">'+1+'</td><td class="menuPrice">'+unitPrice+'</td></tr>');
+  }
+  else {
+    $('#cancelOrderList').find('.selectMenuList').each( function() {
+      // 추가 하려는 메뉴가 이미 리스트에 있을 경우
+      if ( $(this).children('.menuName').text() === name ) {
+        var menuCount = Number( $(this).children(".menuCount").text() );
+        var menuPrice = Number( $(this).children(".menuPrice").text() );
+          
+        $(this).children(".menuCount").text( menuCount + 1 );
+        $(this).children(".menuPrice").text( menuPrice + unitPrice );
+        isSelectMenu = true;
+        return false;
+      }
+      else {
+        isSelectMenu = false; 
+      }
+    });
+  }
+  if ( isSelectMenu == false ) {
+      $('#cancelOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+name+'</td><td class="menuCount">'+1+'</td><td class="menuPrice">'+unitPrice+'</td></tr>');
+  }
+}
+
+
+
+// 주문 선택 내역 클릭시 
+$('#newOrderList').on('click', 'tr[class="selectMenuList"]', function() {
+  var productName = $(this).children('.menuName').text(); 
+  var productStock = $(this).children('.menuCount').text(); 
+  var productPrice = $(this).children('.menuPrice').text(); 
+  var totalPrice = Number( $('#totalNewOrderPrice').text() );
+  
+  var unitPrice = Number( productPrice ) / Number( productStock );
+  
+  if ( productStock > 1 ) {
+    $(this).children('.menuCount').text( productStock - 1 ); 
+    $(this).children('.menuPrice').text( productPrice - unitPrice ); 
+    $('#totalNewOrderPrice').text( totalPrice - unitPrice );
+  }
+  
+  else if ( productStock <= 1 ) {
+    $('#totalNewOrderPrice').text( totalPrice - unitPrice );
+    $(this).remove();
+  }
+});
+
+$('#newOrderList').find('.selectMenuList').on('click', function(){
+  alert( $(this).children('.menuName').text() );
 });
 
 // 주문 모달 창 취소 버튼 클릭시 이벤트
 $(document).on('click','#orderCancelButton', function(){
-    $('tbody').empty();
-    calcPrice();
+  $('.selectMenuList').remove();
+  $('#totalNewOrderPrice').text("");
+  $('#totalCancelOrderPrice').text("");
 });
 
 // 주문 모달 창 닫기(x) 버튼 클릭시 이벤트
 $('#orderModal').on('hide.bs.modal', function() {
-   $('tbody').empty();
-   calcPrice();
+  $('.selectMenuList').remove();
+  $('#totalNewOrderPrice').text("");
+  $('#totalCancelOrderPrice').text("");
 });
 
 // 주문 버튼 클릭
 $(document).on('click','#orderSubmitButton', function(){
+    
     var orders = new Array();
     var ordersDetailList = new Array(); 
+    var deleteOrders = new Array(); 
    
     var shopCode = ${shopCode};
     var tableCode;
@@ -128,6 +208,8 @@ $(document).on('click','#orderSubmitButton', function(){
         ordersDetailList.push( ordersDetail );
     })
     
+    // orders_detail 테이블에 delete 하기 위한 정보
+    
     $('#orderForm').children('input[name=orders]').attr( "value", orders );
     $('#orderForm').children('input[name=ordersDetailList]').attr( "value", ordersDetailList );
     
@@ -162,20 +244,75 @@ function orderMenu( i, price, stock ) {
         });
     }
     if ( isSelectedMenu == false ) {
-	$("#newOrderList").children("tbody").append('<tr class="selectMenuList"><td class="menuName">'+orderMenuName+'</td><td class="menuCount">1</td><td class="menuPrice">'+price+'</td></tr>');
+      $("#newOrderList").children("tbody").append('<tr class="selectMenuList"><td class="menuName">'+orderMenuName+'</td><td class="menuCount">1</td><td class="menuPrice">'+price+'</td></tr>');
     }
-    calcPrice();
-}
 
-function calcPrice() {
     var unitPrice = 0;
     var totalPrice = 0;
+
     $('#newOrderList').find('.selectMenuList').each( function() {
-	menuPrice = Number( $(this).children(".menuPrice").text() );
-	totalPrice = totalPrice + menuPrice;
+      var menuPrice = Number( $(this).children(".menuPrice").text() );
+      totalPrice = totalPrice + menuPrice;
     })
     
-    $("#totalPrice").text( totalPrice );
+    $("#totalNewOrderPrice").text( totalPrice );
 }
 
+$('#cancelOrderList').on('click', 'tr[class="selectMenuList"]', function() {
+  var productName = $(this).children('.menuName').text(); 
+  var productStock = $(this).children('.menuCount').text(); 
+  var productPrice = $(this).children('.menuPrice').text(); 
+  var totalPrice = Number( $('#totalCancelOrderPrice').text() );
+  var unitPrice = Number( productPrice ) / Number( productStock );
+  
+  if ( productStock > 1 ) {
+    $(this).children('.menuCount').text( productStock - 1 ); 
+    $(this).children('.menuPrice').text( productPrice - unitPrice ); 
+    $('#totalCancelOrderPrice').text( totalPrice - unitPrice );
+  
+    addOrderList2( productName, productStock, productPrice ); 
+  }
+  else if ( productStock <= 1 ) {
+    $('#totalCancelOrderPrice').text( totalPrice - unitPrice );
+    addOrderList2( productName, productStock, productPrice ); 
+    $(this).remove();
+  }
+
+  var deleteTotalPrice = 0;
+  $('#prevOrderList').find('.selectMenuList').each( function(){
+    var unitPrice = Number( $(this).children('.menuPrice').text() );
+    deleteTotalPrice = deleteTotalPrice + unitPrice;
+  });
+  
+  $('#totalPrevOrderPrice').text( deleteTotalPrice );
+});
+
+function addOrderList2( name, amount, price ) {
+  var isSelectMenu = true; 
+  var unitPrice = price / amount;
+  
+  if ( $('#prevOrderList').find('.selectMenuList').length < 1 ) {
+      $('#prevOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+name+'</td><td class="menuCount">'+1+'</td><td class="menuPrice">'+unitPrice+'</td></tr>');
+  }
+  else {
+    $('#prevOrderList').find('.selectMenuList').each( function() {
+      // 추가 하려는 메뉴가 이미 리스트에 있을 경우
+      if ( $(this).children('.menuName').text() === name ) {
+        var menuCount = Number( $(this).children(".menuCount").text() );
+        var menuPrice = Number( $(this).children(".menuPrice").text() );
+          
+        $(this).children(".menuCount").text( menuCount + 1 );
+        $(this).children(".menuPrice").text( menuPrice + unitPrice );
+        isSelectMenu = true;
+        return false;
+      }
+      else {
+        isSelectMenu = false; 
+      }
+    });
+  }
+  if ( isSelectMenu == false ) {
+      $('#prevOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+name+'</td><td class="menuCount">'+1+'</td><td class="menuPrice">'+unitPrice+'</td></tr>');
+  }
+}
 </script>
