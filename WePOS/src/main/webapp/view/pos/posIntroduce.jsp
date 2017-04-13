@@ -46,6 +46,10 @@
 <link rel="stylesheet"
 	href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" />">
 
+<link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css">  
+<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	
+
 <!-- CSS Page Style -->
 <link rel="stylesheet"
 	href="<c:url value="/assets/css/pages/page_search_inner_tables.css" />">
@@ -118,7 +122,7 @@
                 <div class="col-md-4 service-inner equal-height-column">
                     <i class="icon-custom icon-md rounded-x icon-bg-u icon-diamond"></i>
                     <span style="font-weight: bold;">등급별 혜택 제도</span>
-                    <p>회원가입을 통해 다양한 활동을 하시면 등급에 따른 할인혜택이 마구 쏟아집니다! 당신의 등급은 무엇인가요? 위 버튼을 눌러 등급을 확인해보세요!</p>
+                    <p>회원가입을 통해 다양한 활동을 하시면 등급에 따른 할인혜택이 마구 쏟아집니다! 당신의 등급은 무엇인가요? 회원가입을 통해 확인해 보세요!</p>
                 </div>
                 <div class="col-md-4 service-inner equal-height-column service-border">
                     <i class="icon-custom icon-md rounded-x icon-bg-u icon-rocket"></i>
@@ -152,26 +156,26 @@
                 <!-- Smallest Progress Bar -->
                 <div class="col-md-6 progress-box">
                     <h3 class="heading-xs">고객 평점(남)<span class="pull-right">8.8</span></h3>
-                    <div class="progress progress-u progress-xxs">
-                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="88">
+                    <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
+                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="88" style="width: 88%;">
                         </div>
                     </div>
 
                     <h3 class="heading-xs">고객 평점(여) <span class="pull-right">9.2</span></h3>
-                    <div class="progress progress-u progress-xxs">
-                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="76">
+                    <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
+                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="92" style="width: 92%;">
                         </div>
                     </div>
 
                     <h3 class="heading-xs">관리자 평점(남)<span class="pull-right">9.7</span></h3>
-                    <div class="progress progress-u progress-xxs">
-                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="97">
+                    <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
+                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="97" style="width: 97%;">
                         </div>
                     </div>
 
                     <h3 class="heading-xs">관리자 평점(여)<span class="pull-right">8.4</span></h3>
-                    <div class="progress progress-u progress-xxs">
-                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="69">
+                    <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
+                        <div class="progress-bar progress-bar-u" role="progressbar" data-width="84" style="width: 84%;">
                         </div>
                     </div>
                 </div>
@@ -190,8 +194,8 @@
 
         <div class="row team-v4">
             <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="assets/img/team/img1-md.jpg" alt="">
-                <span>Lee Dea Han</span>
+                <img class="img-responsive" src="../image/common/one.png" alt="">
+                <span style="color: black;">Lee Dea Han</span>
                 <small>- Technica Director -</small>
                 <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed a nulla non</p>
                 <ul class="list-inline team-social-v4">
@@ -201,8 +205,8 @@
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="assets/img/team/img5-md.jpg" alt="">
-                <span>Sim Dong Kyu</span>
+                <img class="img-responsive" src="../image/common/two.png" alt="">
+                <span style="color: black;">Sim Dong Kyu</span>
                 <small>- UI Designer -</small>
                 <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed a nulla non</p>
                 <ul class="list-inline team-social-v4">
@@ -212,8 +216,8 @@
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6 sm-margin-bottom-50">
-                <img class="img-responsive" src="assets/img/team/img3-md.jpg" alt="">
-                <span>Kang Kynug Wan</span>
+                <img class="img-responsive" src="../image/common/three.png" alt="">
+                <span style="color: black;">Kang Kynug Wan</span>
                 <small>- Backend Developer -</small>
                 <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed a nulla non</p>
                 <ul class="list-inline team-social-v4">
@@ -223,8 +227,8 @@
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6">
-                <img class="img-responsive" src="assets/img/team/img2-md.jpg" alt="">
-                <span>Jang Su Yong</span>
+                <img class="img-responsive" src="../image/common/four.png" alt="">
+                <span style="color: black;">Jang Su Yong</span>
                 <small>- Customer Support -</small>
                 <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed a nulla non</p>
                 <ul class="list-inline team-social-v4">

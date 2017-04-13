@@ -224,7 +224,9 @@
 
 								<tr>
 									<td name="repContents${cnt}" class="repContents${cnt}" id="repContents${reply.replyNumber}">${reply.replyContent }</td>
+									${pagingHtml}
 								</tr>
+
 
 							</table>
 							<hr style="margin: 20px 0 20px 0">
