@@ -106,7 +106,7 @@
 	
 		<br>
 		<!--=== Cube-Portfdlio ===-->
-   	 	<div class="cube-portfolio container margin-bottom-60">
+   	 	<div class="cube-portfolio container margin-bottom-30">
    	 		<div id="grid-container" class="cbp-l-grid-agency">   	  	 			 	 		 		
    	 			<c:forEach items="${shopList}" var="shop">
    	 				<div class="cbp-item">

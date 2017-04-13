@@ -91,7 +91,7 @@
 									
 					<div class="col-md-6 col-md-offset-3">							
 						<div class="input-group">	
-							<input type="text" name="productName" class="form-control"	placeholder="찾고자 하는 상품을 입력하세요" value="${shopName}">
+							<input type="text" name="productName" class="form-control"	placeholder="찾고자 하는 상품을 입력하세요" value="${productName}">
 							<span class="input-group-btn">
 								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
@@ -107,7 +107,7 @@
 		<br>
 		
 		<!--=== Cube-Portfdlio ===-->
-		<div class="cube-portfolio container margin-bottom-60">		
+		<div class="cube-portfolio container margin-bottom-30">		
 			<div id="grid-container" class="cbp-l-grid-agency">
 				<c:forEach items="${productList}" var="product">
 					<div class="cbp-item">
