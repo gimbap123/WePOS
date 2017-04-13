@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -128,7 +129,7 @@
 						</div>
 						<div class="cbp-title-dark">
 		                    <div class="cbp-l-grid-agency-title">${product.productName}</div>
-		                    <div class="cbp-l-grid-agency-desc">가격 : ${product.productPrice}원</div>
+		                    <div class="cbp-l-grid-agency-desc"><i class="fa fa-krw"></i> <fmt:formatNumber value="${product.productPrice}" type="number" />원</div>
 		                </div>
 					</div>
 				</c:forEach>

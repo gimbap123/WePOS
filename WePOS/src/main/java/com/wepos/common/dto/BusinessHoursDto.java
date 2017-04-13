@@ -46,5 +46,16 @@ public class BusinessHoursDto {
 	public void setEndMinute(String endMinute) {
 		this.endMinute = endMinute;
 	}
+	
+	public void parsingHours(String startTime, String endTime)
+	{
+		this.startHour = startTime.substring(0, 2);
+		this.startMinute = startTime.substring(3, 5);
+		this.startHourType = startTime.substring(5);
+		
+		this.endHour = endTime.substring(0, 2);
+		this.endMinute = endTime.substring(3, 5);
+		this.endHourType = endTime.substring(5);
+	}
 
 }
