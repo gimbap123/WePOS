@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wepos.common.dao.ProductDao">
+
+	<select id="searchProductCount" parameterType="map" resultType="int">
+		select count(product_code)
+		from product p
+		inner join shop s on p.shop_code = s.shop_code
+		<where>	    	
+			<if test="shopTypeCode != 0">
+				and s.shop_type_code = #{shopTypeCode}
+			</if>
+			<if test="cityCode != 0">
+				and s.city_code = #{cityCode}
+			</if>
+			<if test="localCode != 0">
+				and s.local_code = #{localCode}
+			</if>
+			<if test="productName != null">
+				and p.product_name like '%' || #{productName, jdbcType=VARCHAR} || '%'  				
+			</if>
+    	</where>    
+	</select>
+	
+	<select id="searchProduct" parameterType="map" resultType="productDto">	
+		select pro.product_code, pro.shop_code, pro.category_code, pro.product_name, pro.product_price, pro.product_stock,
+			pro.product_desc, pro.product_file
+		from
+		(
+			select rnumproduct.*, rownum as rnum
+			from
+			(	
+				select p.*
+				from product p
+				inner join shop s on p.shop_code = s.shop_code
+				<where>	    	
+						<if test="shopTypeCode != 0">
+							and s.shop_type_code = #{shopTypeCode}
+						</if>
+						<if test="cityCode != 0">
+							and s.city_code = #{cityCode}
+						</if>
+						<if test="localCode != 0">
+							and s.local_code = #{localCode}
+						</if>
+						<if test="productName != null">
+							and p.product_name like '%' || #{productName, jdbcType=VARCHAR} || '%'  				
+						</if>
+			    </where>
+			    order by product_code
+			) rnumproduct
+		) pro
+		<![CDATA[
+			where rnum >= #{start} and rnum <= #{end}
+		]]> 		
+	</select>
+
+</mapper>

@@ -41,7 +41,7 @@
 		<!--=== Search Block Version 2 ===-->
 		<div class="search-block" style="background: url('../image/common/searchHeaderImg.png');">
 			<div class="container">	
-				<form id="searchShopForm" action="#" name="searchShopForm" method="get">
+				<form id="searchProductForm" action="#" name="searchProductForm" method="get">
 					<div class="col-md-6 col-md-offset-3" style="margin-bottom: 10px">
 						<h2>매장 검색</h2>
 						<div class="row">
@@ -91,7 +91,7 @@
 									
 					<div class="col-md-6 col-md-offset-3">							
 						<div class="input-group">	
-							<input type="text" name="shopName" class="form-control"	placeholder="찾고자 하는 매장을 입력하세요" value="${shopName}">
+							<input type="text" name="productName" class="form-control"	placeholder="찾고자 하는 상품을 입력하세요" value="${shopName}">
 							<span class="input-group-btn">
 								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
@@ -105,37 +105,38 @@
 		<!--=== End Search Block Version 2 ===-->		
 	
 		<br>
+		
 		<!--=== Cube-Portfdlio ===-->
-   	 	<div class="cube-portfolio container margin-bottom-60">
-   	 		<div id="grid-container" class="cbp-l-grid-agency">   	  	 			 	 		 		
-   	 			<c:forEach items="${shopList}" var="shop">
-   	 				<div class="cbp-item">
-   	 					<div class="cbp-caption margin-bottom-20">
-   	 						<div class="cbp-caption-defaultWrap">
-                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
+		<div class="cube-portfolio container margin-bottom-60">		
+			<div id="grid-container" class="cbp-l-grid-agency">
+				<c:forEach items="${productList}" var="product">
+					<div class="cbp-item">
+						<div class="cbp-caption margin-bottom-20">
+							<div class="cbp-caption-defaultWrap">
+                        		<img src="${product.productFile}" alt="" style="height: 170px;">
                     		</div>
                     		<div class="cbp-caption-activeWrap">
-                    			<div class="cbp-l-caption-alignCenter">
-                    				<div class="cbp-l-caption-body">
-                    					<ul class="link-captions no-bottom-space">
-                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-info-circle"></i></a></li>
-                                    		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="${shop.shopName}"><i class="rounded-x fa fa-search"></i></a></li>
-                    					</ul>
-                    				</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="cbp-title-dark">
-                    		<div class="cbp-l-grid-agency-title">${shop.shopName}</div>
-                    		<div class="cbp-l-grid-agency-desc">${shop.shopAddress}</div>
-                		</div>
-   	 				</div>
-   	 			</c:forEach>
-   	 		</div>
-   	 		<div class="margin-bottom-30"></div>
+		                        <div class="cbp-l-caption-alignCenter">
+		                            <div class="cbp-l-caption-body">
+		                                <ul class="link-captions no-bottom-space">
+		                                    <li><a href="../common/shopDetail.do?shopCode=${product.shopCode}"><i class="rounded-x fa fa-link"></i></a></li>
+		                                    <li><a href="${product.productFile}" class="cbp-lightbox" data-title="${product.productName}"><i class="rounded-x fa fa-search"></i></a></li>
+		                                </ul>
+		                            </div>
+		                        </div>
+		                    </div>
+						</div>
+						<div class="cbp-title-dark">
+		                    <div class="cbp-l-grid-agency-title">${product.productName}</div>
+		                    <div class="cbp-l-grid-agency-desc">가격 : ${product.productPrice}원</div>
+		                </div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="margin-bottom-30"></div>
     		${pagingHtml}    		
-    	</div>
-		<!--=== End Cube-Portfdlio ===-->
+		</div>
+		<!--=== End Cube-Portfdlio ===-->	
 		
 		<jsp:include page="footer.jsp" flush="false" />		
 	</div>
@@ -150,7 +151,7 @@
 <script type="text/javascript" src="../assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-4.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
