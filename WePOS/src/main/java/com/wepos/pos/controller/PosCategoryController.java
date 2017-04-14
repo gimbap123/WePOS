@@ -42,7 +42,7 @@ public class PosCategoryController {
 	public String updateCategoryInfo(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) {
 		
 		int shopCode = posMainDao.getShopCode(mgrId);
-		categoryDto.setShopCode(shopCode);
+		categoryDto.setShopCode(shopCode);		
 		int createCategory=0;
 		int updateCategory=0;
 		if(categoryDto.getCategoryCode()==0){

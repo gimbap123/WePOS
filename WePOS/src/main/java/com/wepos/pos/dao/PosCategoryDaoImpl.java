@@ -18,4 +18,5 @@ public class PosCategoryDaoImpl extends SqlSessionDaoSupport implements PosCateg
 	public int deleteCategory(CategoryDto categoryDto){
 		return getSqlSession().delete("deleteCategory",categoryDto);
 	}
+	
 }
