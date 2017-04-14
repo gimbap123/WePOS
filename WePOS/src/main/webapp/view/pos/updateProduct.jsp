@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateMenu.js?ver=2"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js?ver=1"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -79,7 +79,7 @@
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<button class="btn btn-success" type="button" onclick="create()">메뉴 추가</button>
+						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
 						<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">							
@@ -103,7 +103,7 @@
 					<!-- Default panel contents -->
 					<!-- Table -->
 					<div class="panel-heading" align="center"><h3 id="menuInfoTag">메뉴 정보</h3></div>					
-					<form id="updateMenuForm" name="updateMenuForm" action="updateMenu.do?mgrId=${sessionScope.id}" method="post">
+					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
@@ -120,6 +120,7 @@
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 분류</th>
 									<th>
 										<select class="form-control" id="categoryCode" name="categoryCode">
+											<option value="999">선택하세요</option>
 											<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
 												<option value="${categoryList[j].categoryCode}">
 													<%-- ${categoryList[j].categoryCode==productList[j].categoryCode?'selected':''}> --%>
@@ -156,16 +157,15 @@
 						</table>						
 					</form>	
 				</div>
-										
 				<br>
 				<div role="group" aria-label="..."
-					class="btn-group btn-group-justified">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-lg btn-danger" onclick="checkNull()">완료</button>
+					class="btn-group btn-group-justified">					
+					<div class="btn-group" role="group" >
+						<button type="button" class="btn btn-lg btn-danger" id="deleteButton"
+									onclick="deleteProduct('${sessionScope.id}')" disabled>삭제</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-lg btn-primary" 
-									onclick="location.href='updateTableView.do?mgrId=${sessionScope.id}'">취소</button>
+						<button type="button" class="btn btn-lg btn-primary" id="okButton" onclick="checkNull()" disabled>완료</button>
 					</div>
 				</div>
 			</div>

@@ -35,7 +35,7 @@
  	 <bean class="com.wepos.pos.controller.PosLogController" />
  	 <bean class="com.wepos.pos.controller.PosIntroduceController" />
  	 <bean class="com.wepos.pos.controller.PosTableController" />
- 	 <bean class="com.wepos.pos.controller.PosMenuController" />
+ 	 <bean class="com.wepos.pos.controller.PosProductController" />
  	 <bean class="com.wepos.common.controller.SearchProductController" />
  	 <bean class="com.wepos.mgr.controller.MgrController" />
  	 <bean class="com.wepos.pos.controller.PosChartStatsController" />
@@ -49,7 +49,7 @@
      <bean class="com.wepos.pos.dao.PosMainDaoImpl" />
      <bean class="com.wepos.pos.dao.PosLogDaoImpl" />
      <bean class="com.wepos.pos.dao.PosTableDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosMenuDaoImpl" />
+     <bean class="com.wepos.pos.dao.PosProductDaoImpl" />
      <bean class="com.wepos.common.dao.ProductDaoImpl" />
      <bean class="com.wepos.mgr.dao.MgrDaoImpl" />
      <bean class="com.wepos.pos.dao.PosChartStatsDaoImpl" />
