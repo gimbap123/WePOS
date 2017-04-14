@@ -45,5 +45,19 @@
 		) ord
 		inner join payment_plan p on ord.payment_code = p.payment_code
 	</select>
+	
+	<select id="userTypeStats" parameterType="map" resultType="chartStatsDto">
+		select ord.label, sum(userPrice) as totalPrice
+		from
+		(
+			select NVL2(o.user_id, '회원', '비회원') as label , sum(od.order_price) as userPrice
+			from orders o
+			inner join orders_detail od on o.order_code = od.order_code
+			where o.shop_code = #{shopCode} and o.order_state = 1
+			and o.order_date between to_timestamp(#{start}, 'YYYY-MM-DD') and to_timestamp(#{finish}, 'YYYY-MM-DD')
+			group by o.user_id
+		) ord
+		group by ord.label
+	</select>
 
 </mapper>

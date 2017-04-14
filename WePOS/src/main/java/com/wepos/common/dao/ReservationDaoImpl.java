@@ -6,8 +6,8 @@ import com.wepos.common.dto.ReservationDto;
 
 public class ReservationDaoImpl extends SqlSessionDaoSupport implements ReservationDao {
 
-	public ReservationDto selectRes(ReservationDto reservationDto) {
-		return getSqlSession().selectOne("selectRes", reservationDto);
+	public void insertRes(ReservationDto reservationDto) {
+		getSqlSession().insert("insertRes", reservationDto);
 	}
 	
 }

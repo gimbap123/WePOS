@@ -75,6 +75,7 @@ public class ChartUtil {
 		chartTypeList.put("1", "월별 매출");
 		chartTypeList.put("2", "상품별 매출");
 		chartTypeList.put("3", "결제방식별 매출");
+		chartTypeList.put("4", "회원, 비회원별 매출");
 		
 		return chartTypeList;
 	}

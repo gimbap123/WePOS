@@ -16,4 +16,7 @@ public interface PosChartStatsDao {
 	// 결제방식별 통계
 	public List<ChartStatsDto> paymentPlanStats(Map<String, Object> map);
 	
+	// 회원, 비회원별 매출 통계
+	public List<ChartStatsDto> userTypeStats(Map<String, Object> map);
+	
 }
