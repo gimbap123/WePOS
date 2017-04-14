@@ -4,16 +4,16 @@
    
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
 
-	<insert id="createProduct" parameterType="TablesDto">
+	<insert id="createProduct" parameterType="ProductDto">
 		insert into product values(product_seq.nextval,#{shopCode},#{categoryCode},#{productName},#{productPrice},#{productStock},#{productDesc},0)
 	</insert>
 
-	<update id="updateProduct" parameterType="TablesDto">
+	<update id="updateProduct" parameterType="ProductDto">
 		update product set product_name=#{productName},category_code=#{categoryCode},product_price=#{productPrice},product_stock=#{productStock},product_desc=#{productDesc}
 		where shop_code=#{shopCode} and product_code=#{productCode}
 	</update>
 	
-	<delete id="deleteProduct" parameterType="int">
+	<delete id="deleteProduct" parameterType="ProductDto">
 		delete from product 
 		where shop_code=#{shopCode} and product_code=#{productCode}
 	</delete>

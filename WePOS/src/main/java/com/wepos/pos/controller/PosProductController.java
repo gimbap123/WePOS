@@ -62,9 +62,12 @@ public class PosProductController {
 	
 	// 테이블 삭제
 		@RequestMapping(value = "/pos/deleteProduct.do")
-		public String deleteProduct(@RequestParam(value = "tableCode") int tableCode,
-													@RequestParam(value = "mgrId") String mgrId) {
-			int result=posProductDao.deleteProduct(tableCode);
+		public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) {
+			int shopCode = posMainDao.getShopCode(mgrId);
+			productDto.setShopCode(shopCode);
+			System.out.println("productCode="+productDto.getProductCode());
+			System.out.println("shopCode="+productDto.getShopCode());
+			int result=posProductDao.deleteProduct(productDto);
 			System.out.println("result="+result);
 			return "redirect:updateProductView.do?mgrId="+mgrId;
 		}

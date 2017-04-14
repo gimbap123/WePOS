@@ -14,7 +14,7 @@ public class PosProductDaoImpl extends SqlSessionDaoSupport implements PosProduc
 		return getSqlSession().update( "updateProduct", productDto );
 	}
 	
-	public int deleteProduct(int productCode){
-		return getSqlSession().delete("deleteProduct",productCode);
+	public int deleteProduct(ProductDto productDto){
+		return getSqlSession().delete("deleteProduct",productDto);
 	}
 }

@@ -11,7 +11,7 @@ public interface PosProductDao {
 	public int updateProduct(ProductDto productDto);
 	
 	// 테이블 삭제
-	public int deleteProduct(int productCode);
+	public int deleteProduct(ProductDto productDto);
 
 }
 

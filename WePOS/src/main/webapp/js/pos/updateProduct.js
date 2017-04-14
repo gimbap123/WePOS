@@ -58,8 +58,8 @@ function createProduct(){
 	$('#deleteButton').prop("disabled",true);
 }
 
-function deleteproduct(productCode,mgrId){
-	var deleteproduct=confirm("테이블을 삭제하시겠습니까?")
+function deleteProduct(mgrId){
+	var deleteproduct=confirm("상품명 : "+$('#productName').val()+"\r삭제하시겠습니까?")
 	if(deleteproduct==true)
-		location.href="deleteproduct.do?productCode="+productCode+"&mgrId="+mgrId;
+		location.href="deleteProduct.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId;
 }

@@ -162,7 +162,7 @@
 					class="btn-group btn-group-justified">					
 					<div class="btn-group" role="group" >
 						<button type="button" class="btn btn-lg btn-danger" id="deleteButton"
-									onclick="location.href='deleteProduct.do?mgrId=${sessionScope.id}'" disabled>삭제</button>
+									onclick="deleteProduct('${sessionScope.id}')" disabled>삭제</button>
 					</div>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-lg btn-primary" id="okButton" onclick="checkNull()" disabled>완료</button>
