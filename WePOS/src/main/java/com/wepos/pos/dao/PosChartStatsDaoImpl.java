@@ -13,5 +13,10 @@ public class PosChartStatsDaoImpl extends SqlSessionDaoSupport implements PosCha
 		List<ChartStatsDto> chartStatsList = getSqlSession().selectList("monthStats", map);
 		return chartStatsList;
 	}
+	
+	public List<ChartStatsDto> productStats(Map<String, Object> map) {
+		List<ChartStatsDto> chartStatsList = getSqlSession().selectList("productStats", map);
+		return chartStatsList;
+	}
 
 }
