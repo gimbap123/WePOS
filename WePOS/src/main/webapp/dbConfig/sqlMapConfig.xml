@@ -32,18 +32,23 @@
 		<typeAlias alias="OrdersDetailDto" type="com.wepos.common.dto.OrdersDetailDto"/>
 		<typeAlias alias="SumOrdersDetailDto" type="com.wepos.common.dto.SumOrdersDetailDto"/>
 		<typeAlias alias="ReservationDto" type="com.wepos.common.dto.ReservationDto" />
+		<typeAlias alias="chartStatsDto" type="com.wepos.pos.dto.ChartStatsDto"/>
 	</typeAliases>
 		
 	<mappers>	    
-		<mapper resource="com/wepos/common/dao/CommonDaoMapper.xml"/>		
+		<mapper resource="com/wepos/common/dao/CommonDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/BoardDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/ShopDaoMapper.xml"/>
 		<mapper resource="com/wepos/admin/dao/AdminDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosMainDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosLogDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosTableDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosProductDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/ProductDaoMapper.xml"/>
 		<mapper resource="com/wepos/common/dao/ReservationMapper.xml"/>
+		<mapper resource="com/wepos/mgr/dao/MgrDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosChartStatsDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosCategoryDaoMapper.xml"/>
 	</mappers>
 	
 </configuration>

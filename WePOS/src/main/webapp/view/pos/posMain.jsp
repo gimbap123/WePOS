@@ -3,10 +3,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-  response.setHeader("pragma","No-cache");
-  response.setHeader("Cache-Control","no-cache");
-  response.addHeader("Cache-Control","No-store");
-  response.setDateHeader("Expires",0);
+  response.setHeader( "pragma", "No-cache" );
+  response.setHeader( "Cache-Control", "no-cache" );
+  response.addHeader( "Cache-Control", "No-store" );
+  response.setDateHeader( "Expires", 0 );
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -55,40 +55,39 @@
     <div class="content-side-right pos-main">
       <br>
       <button class="btn btn-primary" type="button">
-        총 테이블 <span class="badge pull-right" style="margin-top:4px">${tableCount}</span>
+        총 테이블 <span class="badge pull-right" style="margin-top: 4px">${tableCount}</span>
       </button>
       <br>
       <div class="row">
-      <c:forEach var="i" begin="0" end="${tableCount-1}">
-        <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
-          <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">
-              <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right" style="margin-top:4px"> ${tables[i].tableMax}인</span></a>
-              <input type="hidden" value="${tables[i].tableCode}">
-            </h3>
-          </div>
-          <div class="panel-body tableOrderList">
-            <ul>
-              <c:forEach var="ordersDetail" items="${ordersDetailList}">
-                <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
-                    <li class="list-unstyled productName">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.sumOrderAmount}</span>
-                    <input type="hidden" class="productPrice" value="${ordersDetail.sumOrderPrice}" />
+        <c:forEach var="i" begin="0" end="${tableCount-1}">
+          <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="panel-title">
+                <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right" style="margin-top: 4px"> ${tables[i].tableMax}인</span></a>
+                <input type="hidden" value="${tables[i].tableCode}">
+              </h3>
+            </div>
+            <div class="panel-body tableOrderList">
+              <ul>
+                <c:forEach var="ordersDetail" items="${ordersDetailList}">
+                  <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
+                    <li class="list-unstyled productName">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.sumOrderAmount}</span> <input type="hidden" class="productPrice" value="${ordersDetail.sumOrderPrice}" />
                     </li>
+                  </c:if>
+                </c:forEach>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <c:set var="tableOrderPrice" value="0" />
+              <c:forEach var="od" items="${ordersDetailList}">
+                <c:if test="${tables[i].tableCode == od.tableCode}">
+                  <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
                 </c:if>
               </c:forEach>
-            </ul>
+              <p class="text-right totalOrderPrice">${tableOrderPrice}
+            </div>
           </div>
-          <div class="panel-footer">
-            <c:set var="tableOrderPrice" value="0" />
-            <c:forEach var="od" items="${ordersDetailList}">
-              <c:if test="${tables[i].tableCode == od.tableCode}">
-                <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
-              </c:if>
-            </c:forEach>
-            <p class="text-right totalOrderPrice">${tableOrderPrice}
-          </div>
-        </div>
-      </c:forEach>
+        </c:forEach>
       </div>
     </div>
     <div class="pos-right">
@@ -225,7 +224,8 @@
                           </c:forEach>
                         </div>
                       </div>
-                    </c:forEach> <!-- 매장의 카테고리 메뉴별 출력 종료 -->
+                    </c:forEach>
+                    <!-- 매장의 카테고리 메뉴별 출력 종료 -->
                   </div>
                   <!-- End tab content-->
                 </div>
@@ -236,30 +236,30 @@
                   <!-- Default panel contents -->
                   <div class="panel-heading">기존 주문 내역</div>
                   <!-- List group -->
-                    <table class="table table-condensed" id="oldOrderList">
-                      <thead>
-                        <tr>
-                          <th>이름</th>
-                          <th>수량</th>
-                          <th>가격</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                      <tfoot>
-                        <tr class="info">
-                          <td colspan="2">합계</td>
-                          <td id="sumOldOrderPrice"></td>
-                        </tr>
-                      </tfoot>
-                    </table>
+                  <table class="table table-condensed" id="prevOrderList">
+                    <thead>
+                      <tr>
+                        <th>이름</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                      <tr class="info">
+                        <td colspan="2">합계</td>
+                        <td id="totalPrevOrderPrice"></td>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
-                
-                <div class="panel panel-primary">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">주문 선택 내역</div>
-                  <!-- List group -->
-                  <form id="orderForm" action="insertOrder.do?mgrId=${sessionScope.id}" method="post">
+
+                <form id="orderForm" action="insertOrder.do?mgrId=${sessionScope.id}" method="post">
+                  <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">주문 선택 내역</div>
+                    <!-- List group -->
                     <table class="table table-condensed" id="newOrderList">
                       <thead>
                         <tr>
@@ -273,17 +273,39 @@
                       <tfoot>
                         <tr class="info">
                           <td colspan="2">합계</td>
-                          <td id="totalPrice"></td>
+                          <td id="totalNewOrderPrice"></td>
                         </tr>
                       </tfoot>
                     </table>
-                    <input type="hidden" name="orders" value="" />
-                    <input type="hidden" name="ordersDetailList" value="" />
-                  </form>
-                </div>
-                
-                
-                
+                  </div>
+
+                  <div class="panel panel-danger">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">주문 취소 내역</div>
+                    <!-- List group -->
+                    <table class="table table-condensed" id="cancelOrderList">
+                      <thead>
+                        <tr>
+                          <th>이름</th>
+                          <th>수량</th>
+                          <th>가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                      <tfoot>
+                        <tr class="danger">
+                          <td colspan="2">합계</td>
+                          <td id="totalCancelOrderPrice"></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <input type="hidden" name="orders" value="" />
+                  <input type="hidden" name="insertOrdersDetail" value="" />
+                  <input type="hidden" name="deleteOrdersDetail" value="" />
+                </form>
+
               </div>
             </div>
             <!-- End row -->

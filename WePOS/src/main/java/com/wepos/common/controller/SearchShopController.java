@@ -655,7 +655,7 @@ public class SearchShopController {
 		return mav;
 	}
 	
-	// 매장 자유 게시판 글수정 기능 수행
+	// 매장 공지사항 글수정 기능 수행
 	@RequestMapping(value="/common/shopNoticeUpdate.do", method=RequestMethod.POST)
 	public String shopNoticeUpdateProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice) throws IOException, Exception
 	{	

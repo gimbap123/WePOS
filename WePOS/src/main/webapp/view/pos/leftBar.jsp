@@ -50,16 +50,18 @@
 					<li class="dropdown"><a href="javascript:void(0);"
 						class="dropdown-toggle" data-toggle="dropdown">매장관리</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">메뉴 관리</a></li>
+							<li><a href="updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
+							<li><a href="updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
 							<li><a href="updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 							<li><a href="salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
+							<li><a href="posChartStats.do?shopCode=${sessionScope.shopCode}">차트 통계</a></li>
 						</ul></li>
 					<!-- End Home -->
 					<!-- About Pages -->
 					<li class="dropdown"><a href="javascript:void(0);"
 						class="dropdown-toggle" data-toggle="dropdown">매장페이지 관리</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">매장정보</a></li>
+							<li><a href="shopInfoUpdate.do?shopCode=${sessionScope.shopCode}">매장정보</a></li>
 							<li><a href="#">찾아오시는 길</a></li>
 							<li><a href="#">자유게시판</a></li>
 						</ul></li>

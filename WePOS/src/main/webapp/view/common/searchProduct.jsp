@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -91,7 +92,7 @@
 									
 					<div class="col-md-6 col-md-offset-3">							
 						<div class="input-group">	
-							<input type="text" name="productName" class="form-control"	placeholder="찾고자 하는 상품을 입력하세요" value="${shopName}">
+							<input type="text" name="productName" class="form-control"	placeholder="찾고자 하는 상품을 입력하세요" value="${productName}">
 							<span class="input-group-btn">
 								<button class="btn-u" type="button" style="height: 34px" onclick="submit()">								
 									<i class="fa fa-search"></i>
@@ -107,7 +108,7 @@
 		<br>
 		
 		<!--=== Cube-Portfdlio ===-->
-		<div class="cube-portfolio container margin-bottom-60">		
+		<div class="cube-portfolio container margin-bottom-30">		
 			<div id="grid-container" class="cbp-l-grid-agency">
 				<c:forEach items="${productList}" var="product">
 					<div class="cbp-item">
@@ -128,7 +129,7 @@
 						</div>
 						<div class="cbp-title-dark">
 		                    <div class="cbp-l-grid-agency-title">${product.productName}</div>
-		                    <div class="cbp-l-grid-agency-desc">가격 : ${product.productPrice}원</div>
+		                    <div class="cbp-l-grid-agency-desc"><i class="fa fa-krw"></i> <fmt:formatNumber value="${product.productPrice}" type="number" />원</div>
 		                </div>
 					</div>
 				</c:forEach>

@@ -62,7 +62,7 @@
 				<nav class="navbar mCustomScrollbar" role="navigation"
 					data-mcs-theme="minimal-dark">
 				<div class="breadcrumbs-v3 img-v1" style="background: url(../image/common/posLog.jpg); 
-																					background-size: cover; background-position: center center;height: 30px">
+																					background-size: cover; background-position: center;height: 30px">
 					<div class="container text-center" style="width: 100%">
 						<h1>매출 통계</h1>
 					</div>

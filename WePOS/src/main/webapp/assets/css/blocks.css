@@ -12,10 +12,8 @@
 .breadcrumbs {
   overflow: hidden;
   padding: 10px 0 6px;
-  border-bottom: solid 1px #eee;
-  /* 이미지 수정 */
-  /* background: url(../img/patterns/breadcrumbs.png) repeat; */
-  background: url(../img/patterns/12.png) repeat;
+  border-bottom: solid 1px #eee;  
+  background: url(../img/patterns/breadcrumbs.png) repeat;  
 }
 
 .breadcrumbs h1 {

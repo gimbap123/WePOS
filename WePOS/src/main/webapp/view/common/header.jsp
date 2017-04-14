@@ -57,7 +57,8 @@
 					class="dropdown-toggle" data-toggle="dropdown"> 매장 관리 </a>
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">매장 영업</a></li>
-						<li><a href="#">메뉴 관리</a></li>
+						<li><a href="../pos/updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
+						<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
 						<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 						<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
 					</ul></li>
