@@ -11,3 +11,12 @@ ${iod}<br>
 ${dod}<br>
 
 ${deleteOddList}<br>
+
+    ModelAndView mav = new ModelAndView( "pos/insertOrder" );
+    mav.addObject( "mgrId", mgrId );
+    mav.addObject( "orders", orders );
+    mav.addObject( "iod", insertOrdersDetail );
+    mav.addObject( "dod", deleteOrdersDetail );
+
+    mav.addObject( "deleteOddList", deleteOddList );
+    return mav;

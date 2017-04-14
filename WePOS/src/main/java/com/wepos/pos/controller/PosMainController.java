@@ -70,7 +70,7 @@ public class PosMainController {
 
   // 주문 내역 DB 저장
   @RequestMapping( "/pos/insertOrder.do" )
-  public ModelAndView insertOrder(
+  public String insertOrder(
       @RequestParam( value = "mgrId" ) String mgrId,
       @RequestParam( value = "orders" ) List<?> orders,
       @RequestParam( value = "insertOrdersDetail" ) List<?> insertOrdersDetail,
@@ -157,19 +157,7 @@ public class PosMainController {
         deleteOddList.add( odd );
       }
     }
-    ModelAndView mav = new ModelAndView( "pos/insertOrder" );
-    // ModelAndView mav = new ModelAndView( "pos/posMain" );
-    // mav.addObject( "od", od );
-    // mav.addObject( "oddList", oddList );
-    // return "redirect:posMain.do?mgrId="+mgrId;
-
-    mav.addObject( "mgrId", mgrId );
-    mav.addObject( "orders", orders );
-    mav.addObject( "iod", insertOrdersDetail );
-    mav.addObject( "dod", deleteOrdersDetail );
-
-    mav.addObject( "deleteOddList", deleteOddList );
-    return mav;
+     return "redirect:posMain.do?mgrId="+mgrId;
   }
 
 }
