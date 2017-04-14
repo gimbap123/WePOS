@@ -46,7 +46,7 @@
 					class="dropdown-toggle" data-toggle="dropdown"> WE POS </a>
 					<ul class="dropdown-menu">
 						<li><a href="../common/showBoard.do?boardTypeCode=1">공지사항</a></li>
-						<li><a href="../pos/posIntroduce.do">We POS 소개</a></li>
+						<li><a href="../common/posIntroduce.do">We POS 소개</a></li>
 						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
 				<!-- End WE POS -->
