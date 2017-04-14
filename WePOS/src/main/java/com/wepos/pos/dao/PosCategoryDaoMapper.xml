@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.pos.dao.PosMainDao">
+
+	<insert id="createCategory" parameterType="CategoryDto">
+		insert into category values(#{shopCode},(select count(*)+1 from category where shop_code=#{shopCode}),#{categoryName})
+	</insert>
+
+	<update id="updateCategory" parameterType="CategoryDto">
+		update category set category_name=#{categoryName}
+		where shop_code=#{shopCode} and category_code=#{categoryCode}
+	</update>
+	
+	<delete id="deleteCategory" parameterType="CategoryDto">
+		delete from category
+		where shop_code=#{shopCode} and category_code=#{categoryCode}
+	</delete>
+</mapper>

@@ -26,13 +26,13 @@ public class PosProductController {
 	// 메뉴 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateProductView.do")
 	public ModelAndView getProductInfo(@RequestParam(value = "mgrId") String mgrId) {
-
+		
 		ProductDto productDto=new ProductDto();
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
 		ShopDto shop = posMainDao.getShop(shopCode);	
 		List<ProductDto> productList = posMainDao.getProductList(shopCode);
-		List<CategoryDto> categoryList = posMainDao.getCategory(shopCode);
+		List<CategoryDto> categoryList = posMainDao.getCategory(shopCode);		
 
 		ModelAndView mav = new ModelAndView("pos/updateProduct");
 		mav.addObject("shopCode", shopCode);
