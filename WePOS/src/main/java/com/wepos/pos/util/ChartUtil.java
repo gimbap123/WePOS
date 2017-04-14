@@ -1,6 +1,8 @@
 package com.wepos.pos.util;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,7 +12,7 @@ import com.wepos.pos.dto.ChartStatsDto;
 public class ChartUtil {
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject barChartData(List<ChartStatsDto> chartStatsList)
+	public static JSONObject barChartStat(List<ChartStatsDto> chartStatsList)
 	{
 		JSONObject jsonChartData = new JSONObject();
 		JSONArray labels = new JSONArray();
@@ -28,7 +30,7 @@ public class ChartUtil {
 		
 		for(ChartStatsDto chartStats : chartStatsList)
 		{
-			labels.add(chartStats.getMon() + "월");		
+			labels.add(chartStats.getLabel());
 				
 			dataArray.add(chartStats.getTotalPrice());		
 			
@@ -41,6 +43,16 @@ public class ChartUtil {
 		jsonChartData.put("datasets", datasets);
 		
 		return jsonChartData;
+	}
+	
+	public static Map<String, Object> chartTypeList()
+	{
+		Map<String, Object> chartTypeList = new HashMap<String, Object>();
+		chartTypeList.put("0", "선택");
+		chartTypeList.put("1", "월별 매출");
+		chartTypeList.put("2", "상품별 매출");
+		
+		return chartTypeList;
 	}
 
 }

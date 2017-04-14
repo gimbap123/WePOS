@@ -57,14 +57,12 @@
 					</div>					
 				</div>	
 				
-				<div class="margin-bottom-60"></div>		
-									
-				<section class="content" style="padding-top: 0px;">
-					
-					<div class="col-md-12" id="chartDiv">
-						
-					</div>
-					
+				<div class="margin-bottom-60"></div>
+				<input type="hidden" id="chartTitle" value="${chartTitle}">
+				
+				<section class="content" style="padding-top: 0px;">					
+					<div class="col-md-12" id="chartDiv">						
+					</div>					
 				</section>				
 			</div>
 		</div>

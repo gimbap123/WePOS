@@ -1,5 +1,9 @@
 package com.wepos.pos.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +31,8 @@ public class PosChartStatsController {
 	@RequestMapping(value = "/pos/posChartStats.do", method = RequestMethod.GET)
 	public ModelAndView posChartStatsView(@RequestParam("shopCode") int shopCode)
 	{
-		Map<String, Object> chartTypeList = new HashMap<String, Object>();
-		chartTypeList.put("0", "선택");
-		chartTypeList.put("1", "월별 매출");		
+		
+		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pos/posChartStats");	
@@ -42,28 +45,44 @@ public class PosChartStatsController {
 	@RequestMapping(value = "/pos/posChartStats.do", method = RequestMethod.POST)
 	public ModelAndView posChartStatsProcess(@RequestParam("shopCode") int shopCode, 
 			@RequestParam("chartType") int chartType, @RequestParam("start") String start, 
-			@RequestParam("finish") String finish)
-	{
+			@RequestParam("finish") String finish) throws ParseException
+	{	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateFinish = sdf.parse(finish);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dateFinish);
+		cal.add(Calendar.DATE, 1);
+		dateFinish = cal.getTime();
+		String stringFinish = sdf.format(dateFinish);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("chartType", chartType);
 		map.put("start", start);
-		map.put("finish", finish);
+		map.put("finish", stringFinish);
 		map.put("shopCode", shopCode);
 		
 		List<ChartStatsDto> chartStatsList = null;
 		JSONObject jsonChartData = null;
-		ChartUtil chartUtil = new ChartUtil();
+		String chartTitle = null;	
+				
 		if(chartType == 1)
 		{
 			chartStatsList = posChartStatsDao.monthStats(map);
-			jsonChartData = chartUtil.barChartData(chartStatsList);
-		}	
-				
-		String chartTitle = "월별 매출 (" + start + " ~ " + finish + ")";
+			jsonChartData = ChartUtil.barChartStat(chartStatsList);
+			chartTitle = "월별 매출 (기간 : " + start + " ~ " + finish + ")";		
+		}
+		if(chartType == 2)
+		{
+			chartStatsList = posChartStatsDao.productStats(map);
+			jsonChartData = ChartUtil.barChartStat(chartStatsList);
+			chartTitle = "상품별 매출 (기간 : " + start + " ~ " + finish + ")";
+		}
 		
-		Map<String, Object> chartTypeList = new HashMap<String, Object>();
-		chartTypeList.put("0", "선택");
-		chartTypeList.put("1", "월별 매출");
+		
+		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();
+				
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pos/posChartStats");

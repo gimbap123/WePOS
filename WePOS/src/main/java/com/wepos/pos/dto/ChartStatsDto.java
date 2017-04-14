@@ -2,14 +2,14 @@ package com.wepos.pos.dto;
 
 public class ChartStatsDto {
 	
-	private String mon;
+	private String label;
 	private String totalPrice;
-	
-	public String getMon() {
-		return mon;
+			
+	public String getLabel() {
+		return label;
 	}
-	public void setMon(String mon) {
-		this.mon = mon;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	public String getTotalPrice() {
 		return totalPrice;
@@ -17,5 +17,6 @@ public class ChartStatsDto {
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
 	
 }
