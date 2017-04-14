@@ -39,13 +39,14 @@ function chartTypeSelect(jsonChartData)
 				+ '<canvas id="barChart" style="height:300px"></canvas></div></div></div>');
 		barChartStats(jsonChartData);
 	}
-	else if($("#chartType").val() == 3)
+	else if($("#chartType").val() == 3 || $("#chartType").val() == 4)
 	{
 		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">'
 				+  '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body">'
-				+ '<canvas id="pieChart" style="height:300px"></canvas></div></div>');
+				+ '<canvas id="pieChart"></canvas></div></div>');
 		pieChartStats(jsonChartData);
 	}
+	
 }
 
 function barChartStats(jsonChartData)
