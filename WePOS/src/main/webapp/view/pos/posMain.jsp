@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=2" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=4" /> ">
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>" rel="stylesheet" type="text/css">
@@ -49,45 +49,48 @@
   <div class="wrapper">
     <!--=== Header v7 Left ===-->
     <jsp:include page="../pos/leftBar.jsp" flush="false" />
-    <c:forEach var="odl" items="${orderDetailList}">
-    ${odl.tableCode} <br>
-    </c:forEach>
+
     <div class="content-side-right pos-main">
-      <br>
-      <button class="btn btn-primary" type="button">
-        총 테이블 <span class="badge pull-right" style="margin-top: 4px">${tableCount}</span>
-      </button>
-      <br>
       <div class="row">
-        <c:forEach var="i" begin="0" end="${tableCount-1}">
-          <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
-            <div class="panel-heading">
-              <h3 class="panel-title" id="panel-title">
-                <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right" style="margin-top: 4px"> ${tables[i].tableMax}인</span></a>
-                <input type="hidden" value="${tables[i].tableCode}">
-              </h3>
-            </div>
-            <div class="panel-body tableOrderList">
-              <ul>
-                <c:forEach var="ordersDetail" items="${ordersDetailList}">
-                  <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
-                    <li class="list-unstyled productName">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.sumOrderAmount}</span> <input type="hidden" class="productPrice" value="${ordersDetail.sumOrderPrice}" />
-                    </li>
+        <c:if test="${tableCount < 1}">
+          <br>
+          <div class="alert alert-danger noTables" role="alert">
+            <p>테이블이 존재 하지 않습니다.</p>
+            <a href="updateTableView.do?mgrId=${sessionScope.id}" class="alert-link">테이블 설정</a> 하기
+          </div>
+        </c:if>
+
+        <c:if test="${tableCount >= 1}">
+          <c:forEach var="i" begin="0" end="${tableCount-1}">
+            <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
+              <div class="panel-heading">
+                <h3 class="panel-title" id="panel-title">
+                  <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right customerCount" style="margin-top: 4px"> ${tables[i].tableMax}인</span></a>
+                  <input type="hidden" value="${tables[i].tableCode}">
+                </h3>
+              </div>
+              <div class="panel-body tableOrderList">
+                <ul>
+                  <c:forEach var="ordersDetail" items="${ordersDetailList}">
+                    <c:if test="${tables[i].tableCode == ordersDetail.tableCode}">
+                      <li class="list-unstyled productName">${ordersDetail.productName}<span class="badge pull-right">${ordersDetail.sumOrderAmount}</span> <input type="hidden" class="productPrice" value="${ordersDetail.sumOrderPrice}" />
+                      </li>
+                    </c:if>
+                  </c:forEach>
+                </ul>
+              </div>
+              <div class="panel-footer">
+                <c:set var="tableOrderPrice" value="0" />
+                <c:forEach var="od" items="${ordersDetailList}">
+                  <c:if test="${tables[i].tableCode == od.tableCode}">
+                    <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
                   </c:if>
                 </c:forEach>
-              </ul>
+                <p class="text-right totalOrderPrice">${tableOrderPrice}
+              </div>
             </div>
-            <div class="panel-footer">
-              <c:set var="tableOrderPrice" value="0" />
-              <c:forEach var="od" items="${ordersDetailList}">
-                <c:if test="${tables[i].tableCode == od.tableCode}">
-                  <c:set var="tableOrderPrice" value="${tableOrderPrice+od.sumOrderPrice}" />
-                </c:if>
-              </c:forEach>
-              <p class="text-right totalOrderPrice">${tableOrderPrice}
-            </div>
-          </div>
-        </c:forEach>
+          </c:forEach>
+        </c:if>
       </div>
     </div>
     <div class="pos-right">
@@ -99,22 +102,22 @@
           <table class="table table-striped table-bordered">
             <tbody>
               <tr>
-                <td>날짜</td>
+                <td>시간</td>
                 <td>
                   <span id="realTime"></span>
                 </td>
               </tr>
               <tr>
                 <td>테이블</td>
-                <td>3</td>
+                <td id="useTableCount">${tableCount}</td>
               </tr>
               <tr>
                 <td>인원</td>
-                <td>3명</td>
+                <td id="totalCustomer"></td>
               </tr>
               <tr>
                 <td>금액</td>
-                <td>50,000원</td>
+                <td id="totalPrice"></td>
               </tr>
             </tbody>
           </table>
@@ -176,32 +179,37 @@
                   <!-- Nav tabs -->
                   <ul class="nav nav-pills" role="tablist">
                     <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
+                    <c:if test="${fn:length(category) > 0}">
                     <c:forEach var="c" items="${category}">
                       <li role="presentation"><a href="#category${c.categoryCode}" aria-controls="category${c.categoryCode}" role="tab" data-toggle="tab">${c.categoryName}</a></li>
                     </c:forEach>
+                    </c:if>
                   </ul>
                   <!-- Tab panes -->
                   <div class="tab-content">
                     <!-- 모든 카테고리 출력 -->
                     <div role="tabpanel" class="tab-pane active" id="all">
                       <div class="row">
-                        <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-                          <div class="col-sm-4">
-                            <!-- 메뉴 패널 -->
-                            <div class="panel panel-primary">
-                              <c:set var="price" value="${productList[i].productPrice}" />
-                              <c:set var="stock" value="${productList[i].productStock}" />
-                              <div class="panel-body orderList" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
-                                <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                        <c:if test="${fn:length(productList) > 0}">
+                          <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+                            <div class="col-sm-4">
+                              <!-- 메뉴 패널 -->
+                              <div class="panel panel-primary">
+                                <c:set var="price" value="${productList[i].productPrice}" />
+                                <c:set var="stock" value="${productList[i].productStock}" />
+                                <div class="panel-body orderList" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
+                                  <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
+                                  <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                                </div>
                               </div>
+                              <!-- 메뉴 패널 종료 -->
                             </div>
-                            <!-- 메뉴 패널 종료 -->
-                          </div>
-                        </c:forEach>
+                          </c:forEach>
+                        </c:if>
                       </div>
                     </div>
                     <!-- 매장의 카테고리 메뉴별 출력 -->
+                    <c:if test="${fn:length(productList) > 0}">
                     <c:forEach var="c" items="${category}">
                       <div role="tabpanel" class="tab-pane" id="category${c.categoryCode}">
                         <div class="row">
@@ -225,6 +233,7 @@
                         </div>
                       </div>
                     </c:forEach>
+                    </c:if>
                     <!-- 매장의 카테고리 메뉴별 출력 종료 -->
                   </div>
                   <!-- End tab content-->

@@ -11,7 +11,9 @@ $(document).ready(function() {
     App.initAnimateDropdown();
     OwlCarousel.initOwlCarousel();
     ProgressBar.initProgressBarHorizontal();
-    
+   
+    showTotalPrice(); 
+    getShopStatus();
 });
 
 setInterval("realTime()", 1000);
@@ -334,7 +336,29 @@ $(document).on('click','#orderSubmitButton', function(){
     $('#orderForm').submit();
 });
 
-function getProductCode( ordersDetail, menuName ) {
+function showTotalPrice(){
+  var totalPrice = 0;
+  $('.totalOrderPrice').each( function() {
+    totalPrice += Number( $(this).text() );
+  });
+  
+  $('#totalPrice').text( totalPrice );
+}
 
+function getShopStatus() {
+  var totalCustomer = 0;
+  var useTableCount = 0;
+  $('.pos-table').each( function() {
+  //alert( Number( $(this).find('.totalOrderPrice').text() ) );
+    if ( Number( $(this).find('.totalOrderPrice').text() ) > 0 ) {
+      var srcStr = $(this).find('.customerCount').text();
+      totalCustomer += Number( srcStr.substring(0, srcStr.length-1) );
+      useTableCount += 1;
+    }
+  });
+  
+  $('#totalCustomer').text( totalCustomer );
+  $('#useTableCount').text( useTableCount + " / " + $('#useTableCount').text() );
+  
 }
 </script>
