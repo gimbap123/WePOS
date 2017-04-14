@@ -1,8 +1,8 @@
 package com.wepos.pos.controller;
 
-
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +33,10 @@ public class PosMainController {
       @RequestParam( value = "mgrId" ) String mgrId ) {
 
     int shopCode = posMainDao.getShopCode( mgrId );
-    System.out.println( "PosMainController > getShopCode > shopCode : " + shopCode );
-    
+    System.out
+        .println( "PosMainController > getShopCode > shopCode : "
+            + shopCode );
+
     // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
     // 매장 내 테이블 정보 select
@@ -42,15 +44,17 @@ public class PosMainController {
     // 매장 내 테이블 숫자 select
     int tableCount = posMainDao.getTableCount( shopCode );
     // 매장 내 메뉴 select
-    List<ProductDto> productList = posMainDao.getProductList( shopCode );
+    List<ProductDto> productList = posMainDao
+        .getProductList( shopCode );
     // 카테고리 정보 select
     List<CategoryDto> category = posMainDao.getCategory( shopCode );
-    
+
     // 현재 테이블 주문 정보 select ( order_state == 0 인 (결제 전 주문) 항목들만 )
     List<OrdersDto> orderList = posMainDao.getOrderBeforePayment();
-    
+
     // 결제 전 테이블의 주문 상세 내역 select
-    List<SumOrdersDetailDto> ordersDetailList = posMainDao.getOrdersDetailBeforePayment();
+    List<SumOrdersDetailDto> ordersDetailList = posMainDao
+        .getOrdersDetailBeforePayment();
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -66,44 +70,106 @@ public class PosMainController {
 
   // 주문 내역 DB 저장
   @RequestMapping( "/pos/insertOrder.do" )
-  public String insertOrder(
+  public ModelAndView insertOrder(
       @RequestParam( value = "mgrId" ) String mgrId,
       @RequestParam( value = "orders" ) List<?> orders,
-      @RequestParam( value = "ordersDetailList" ) List<?> ordersDetailList ) {
+      @RequestParam( value = "insertOrdersDetail" ) List<?> insertOrdersDetail,
+      @RequestParam( value = "deleteOrdersDetail" ) List<?> deleteOrdersDetail ) {
 
-    List<OrdersDetailDto> oddList = new ArrayList<OrdersDetailDto>();
+    List<OrdersDetailDto> insertOddList = new ArrayList<OrdersDetailDto>();
+    List<OrdersDetailDto> deleteOddList = new ArrayList<OrdersDetailDto>();
+
     OrdersDto od = new OrdersDto();
+    if ( insertOrdersDetail != null ) {
 
-    od.setShopCode( Integer.parseInt( (String)orders.get( 0 ) ) );
-    od.setTableCode( Integer.parseInt( (String)orders.get( 1 ) ) );
-    // 입력하지 않아도 되는 컬럼
-    // od.setUserId( userId );
-    // od.setPaymentCode( paymentCode );
-    // od.setOrderDate( orderDate );
-    // od.setOrderState( orderState );
+      od.setShopCode( Integer.parseInt( (String)orders.get( 0 ) ) );
+      od.setTableCode( Integer.parseInt( (String)orders.get( 1 ) ) );
+      // 입력하지 않아도 되는 컬럼
+      // od.setUserId( userId );
+      // od.setPaymentCode( paymentCode );
+      // od.setOrderDate( orderDate );
+      // od.setOrderState( orderState );
 
-    // 개발 시 db 입력 잠시 보류
-    posMainDao.insertOrders( od );
-    int lastOrderCode = posMainDao.getOrderCode();
-    
-    for ( int i = 0; i < ordersDetailList.size(); i=i+3 ) {
-      OrdersDetailDto odd = new OrdersDetailDto();
-      odd.setOrderCode( lastOrderCode );
-      odd.setProductCode( Integer.parseInt( (String)ordersDetailList.get( i ) ) );
-      odd.setOrderAmount( Integer.parseInt( (String)ordersDetailList.get( i + 1 ) ) );
-      odd.setOrderPrice( Integer.parseInt( (String)ordersDetailList.get( i + 2 ) ) );
-      
-      // 개발시 db 입력 잠시 보류
-      posMainDao.insertOrdersDetail( odd );
-      
-      oddList.add(odd);
+      // 개발 시 db 입력 잠시 보류
+      posMainDao.insertOrders( od );
+      int lastOrderCode = posMainDao.getOrderCode();
+
+      for ( int i = 0; i < insertOrdersDetail.size(); i = i + 3 ) {
+        OrdersDetailDto odd = new OrdersDetailDto();
+        odd.setOrderCode( lastOrderCode );
+        odd.setProductCode( Integer
+            .parseInt( (String)insertOrdersDetail.get( i ) ) );
+        odd.setOrderAmount( Integer
+            .parseInt( (String)insertOrdersDetail.get( i + 1 ) ) );
+        odd.setOrderPrice( Integer
+            .parseInt( (String)insertOrdersDetail.get( i + 2 ) ) );
+
+        // 개발시 db 입력 잠시 보류
+        posMainDao.insertOrdersDetail( odd );
+
+        insertOddList.add( odd );
+      }
     }
 
-    //ModelAndView mav = new ModelAndView( "pos/posMain" );
-    //mav.addObject( "od", od );
-    //mav.addObject( "oddList", oddList );
-    System.out.println( "PosMainController > insertOrder() > mgrId : " + mgrId  );
-    return "redirect:posMain.do?mgrId="+mgrId;
+    // 주문 수정이 있을 때 수행
+    if ( deleteOrdersDetail != null ) {
+      for ( int i = 0; i < deleteOrdersDetail.size(); i = i + 3 ) {
+        // 남은 취소 주문 수량
+        int cancelOrderCount = Integer
+            .parseInt( (String)deleteOrdersDetail.get( i + 1 ) );
+
+        OrdersDetailDto odd = new OrdersDetailDto();
+        odd.setProductCode( Integer
+            .parseInt( (String)deleteOrdersDetail.get( i ) ) );
+        odd.setOrderAmount( Integer
+            .parseInt( (String)deleteOrdersDetail.get( i + 1 ) ) );
+        odd.setOrderPrice( Integer
+            .parseInt( (String)deleteOrdersDetail.get( i + 2 ) ) );
+        int unitPrice = odd.getOrderPrice() / odd.getOrderAmount();
+
+        // 최근 주문 수량이 취소 수량보다 작거나 같을경우 db의 최근 주문 내역(OrdersDetail) 삭제
+        while ( cancelOrderCount > 0 ) {
+          HashMap<String, Integer> orderInfo = new HashMap<String, Integer>();
+          orderInfo.put( "productCode", odd.getProductCode() );
+          orderInfo.put( "tableCode", od.getTableCode() );
+
+          // 최근 주문 수량
+          int lastestOrderCount = posMainDao.lastestOrderAmount( orderInfo );
+          int deleteOrderCode = posMainDao.getDeleteOrderCode( orderInfo );
+          orderInfo.put( "orderCode", deleteOrderCode );
+          
+          
+          if ( lastestOrderCount <= cancelOrderCount ) {
+            posMainDao.deleteOrdersDetail( orderInfo );
+          }
+          // 최근 주문 수량이 취소수량 보다 클 경우 db 최근 주문내역 update
+          else {
+            int amount = lastestOrderCount - cancelOrderCount;
+            int price = unitPrice * amount;
+            odd.setOrderCode( deleteOrderCode );
+            odd.setOrderAmount( amount );
+            odd.setOrderPrice( price );
+
+            posMainDao.updateOrderAmount( odd );
+          }
+          cancelOrderCount = cancelOrderCount - lastestOrderCount;
+        }
+        deleteOddList.add( odd );
+      }
+    }
+    ModelAndView mav = new ModelAndView( "pos/insertOrder" );
+    // ModelAndView mav = new ModelAndView( "pos/posMain" );
+    // mav.addObject( "od", od );
+    // mav.addObject( "oddList", oddList );
+    // return "redirect:posMain.do?mgrId="+mgrId;
+
+    mav.addObject( "mgrId", mgrId );
+    mav.addObject( "orders", orders );
+    mav.addObject( "iod", insertOrdersDetail );
+    mav.addObject( "dod", deleteOrdersDetail );
+
+    mav.addObject( "deleteOddList", deleteOddList );
+    return mav;
   }
 
 }

@@ -1,5 +1,6 @@
 package com.wepos.pos.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,4 +77,25 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
     return getSqlSession().selectList( "getOrdersDetailBeforePayment" );
   }
 
+  // 해당 상품의 최근 주문 수량
+  public int lastestOrderAmount( HashMap<String, Integer> orderInfo ) {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectOne( "lastestOrderAmount", orderInfo );
+  }
+
+  // 삭제 할 주문 번호 select 
+  public int getDeleteOrderCode( HashMap<String, Integer> orderInfo ) {
+    // TODO Auto-generated method stub
+    return getSqlSession().selectOne( "getDeleteOrderCode", orderInfo );
+  }
+  
+  // 주문 내역 삭제
+  public int deleteOrdersDetail( HashMap<String, Integer> orderInfo ) {
+    return getSqlSession().delete( "deleteOrdersDetail", orderInfo );
+  }
+  
+  // 주문 수량 update
+  public int updateOrderAmount( OrdersDetailDto odd ){
+    return getSqlSession().update( "updateOrderAmount", odd );
+  }
 }
