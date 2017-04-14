@@ -24,12 +24,26 @@
 			select od.product_code, sum(order_price) as totalPrice
 			from orders o
 			inner join orders_detail od on o.order_code = od.order_code
-			where o.shop_code = 4 and o.order_state = 1
+			where o.shop_code = #{shopCode} and o.order_state = 1
 			and o.order_date between to_timestamp(#{start}, 'YYYY-MM-DD') and to_timestamp(#{finish}, 'YYYY-MM-DD')
 			group by od.product_code
 			order by od.product_code
 		) ord
 		inner join product p on ord.product_code = p.product_code	
+	</select>
+	
+	<select id="paymentPlanStats" parameterType="map" resultType="chartStatsDto">
+		select p.payment_name as label, ord.totalPrice
+		from
+		(
+			select o.payment_code, sum(od.order_price) as totalPrice
+			from orders o
+			inner join orders_detail od on o.order_code = od.order_code
+			where o.shop_code = #{shopCode} and o.order_state = 1
+			and o.order_date between to_timestamp(#{start}, 'YYYY-MM-DD') and to_timestamp(#{finish}, 'YYYY-MM-DD')
+			group by o.payment_code
+		) ord
+		inner join payment_plan p on ord.payment_code = p.payment_code
 	</select>
 
 </mapper>
