@@ -37,7 +37,7 @@
   <select id="getProductList" parameterType="int" resultType="ProductDto">
     SELECT p.*,c.category_name
     FROM product p,category c
-    WHERE p.category_code=c.category_code and p.shop_code = #{shopCode}
+    WHERE p.category_code=c.category_code and p.shop_code = #{shopCode} and c.shop_code=#{shopCode}
     order by p.product_code asc
   </select>
   

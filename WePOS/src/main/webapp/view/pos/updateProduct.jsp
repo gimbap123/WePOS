@@ -84,7 +84,7 @@
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
 						<c:if test="${fn:length(productList)>0}">
-							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">							
+							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
 								<div class="col-md-3 col-sm-6">
 					                <div class="pricing-v1 pricing-v1-blue">			                	
 					                    <div class="pricing-head" 
