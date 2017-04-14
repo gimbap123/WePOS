@@ -302,7 +302,8 @@
                     </table>
                   </div>
                   <input type="hidden" name="orders" value="" />
-                  <input type="hidden" name="ordersDetailList" value="" />
+                  <input type="hidden" name="insertOrdersDetail" value="" />
+                  <input type="hidden" name="deleteOrdersDetail" value="" />
                 </form>
 
               </div>

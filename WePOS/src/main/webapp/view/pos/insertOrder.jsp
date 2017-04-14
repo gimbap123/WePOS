@@ -5,5 +5,9 @@
 %>
 <script>
 </script>
-${od} <br>
-${oddList} <br>
+${mgrId}<br>
+${orders}<br>
+${iod}<br>
+${dod}<br>
+
+${deleteOddList}<br>

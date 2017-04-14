@@ -85,4 +85,32 @@
    order by o.table_code, product_code
   </select>
   
+  <select id="lastestOrderAmount" resultType="int">
+    select order_amount
+    from ( select * from orders_detail where product_code = #{productCode} order by order_code desc )
+    where order_code in ( select order_code from orders where order_state = 0 and table_code = #{tableCode} )
+    and rownum = 1
+  </select>
+  
+  <!-- 삭제 할 주문 번호 -->
+  <select id="getDeleteOrderCode" resultType="int" parameterType="java.util.HashMap">
+    select max( order_code )
+    from orders_detail
+    where order_code in ( select order_code from orders where order_state = 0 and table_code = #{tableCode} )
+    and product_code = #{productCode}
+  </select>
+  
+  <!-- 주문 내역 삭제 -->
+  <delete id="deleteOrdersDetail" parameterType="int">
+    delete from orders_detail
+    where order_code = #{orderCode}
+  </delete>
+  
+  <!-- 주문 수량 변경 -->
+  <update id="updateOrderAmount" parameterType="OrdersDetailDto">
+    update orders_detail
+    set order_amount = #{orderAmount}, order_price = #{orderPrice}
+    where order_code = #{orderCode}
+    and product_code = #{productCode}
+  </update>
 </mapper>

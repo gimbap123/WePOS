@@ -165,56 +165,6 @@ $('#orderModal').on('hide.bs.modal', function() {
   $('#totalCancelOrderPrice').text("");
 });
 
-// 주문 버튼 클릭
-$(document).on('click','#orderSubmitButton', function(){
-    
-    var orders = new Array();
-    var ordersDetailList = new Array(); 
-    var deleteOrders = new Array(); 
-   
-    var shopCode = ${shopCode};
-    var tableCode;
-    
-    var productCode;
-    var orderAmount; 
-    var orderPrice;
-    
-    $('.pos-table').each( function() {
-      if ( $(this).find('.tableName').text() === $('#selectTableName').text() ){
-        tableCode = $(this).attr('id');
-      }
-    });
-   
-    // Orders 테이블에 insert 하기 위한 정보 
-    orders.push( shopCode );
-    orders.push( tableCode );
-   
-    // orders_detail 테이블에 insert 하기 위한 정보  
-    $('#newOrderList').find('.selectMenuList').each( function() {
-        var ordersDetail = new Array();
-        
-        var menuName = $(this).children('.menuName').text();
-        $('h3[class=menuName]').each( function() {
-          if ( $(this).text() === menuName ) {
-            var productCode = $(this).attr('id');
-            ordersDetail.push( productCode );
-            return false;
-          }
-        }); 
-       
-        ordersDetail.push( $(this).children('.menuCount').text() );
-        ordersDetail.push( $(this).children('.menuPrice').text() );
-
-        ordersDetailList.push( ordersDetail );
-    })
-    
-    // orders_detail 테이블에 delete 하기 위한 정보
-    
-    $('#orderForm').children('input[name=orders]').attr( "value", orders );
-    $('#orderForm').children('input[name=ordersDetailList]').attr( "value", ordersDetailList );
-    
-    $('#orderForm').submit();
-});
 
 function orderMenu( i, price, stock ) {
     var orderMenuName = $('.menuName')[i].innerHTML;
@@ -314,5 +264,77 @@ function addOrderList2( name, amount, price ) {
   if ( isSelectMenu == false ) {
       $('#prevOrderList').children('tbody').append('<tr class="selectMenuList"><td class="menuName">'+name+'</td><td class="menuCount">'+1+'</td><td class="menuPrice">'+unitPrice+'</td></tr>');
   }
+}
+
+
+// 주문 버튼 클릭
+$(document).on('click','#orderSubmitButton', function(){
+    
+    var orders = new Array();
+    var insertOrdersDetail = new Array(); 
+    var deleteOrdersDetail = new Array(); 
+   
+    var shopCode = ${shopCode};
+    var tableCode;
+    
+    var productCode;
+    var orderAmount; 
+    var orderPrice;
+    
+    $('.pos-table').each( function() {
+      if ( $(this).find('.tableName').text() === $('#selectTableName').text() ){
+        tableCode = $(this).attr('id');
+      }
+    });
+   
+    // Orders 테이블에 insert 하기 위한 정보 
+    orders.push( shopCode );
+    orders.push( tableCode );
+   
+    // orders_detail 테이블에 insert 하기 위한 정보  
+    $('#newOrderList').find('.selectMenuList').each( function() {
+        var ordersDetail = new Array();
+        
+        var menuName = $(this).children('.menuName').text();
+        $('h3[class=menuName]').each( function() {
+          if ( $(this).text() === menuName ) {
+            var productCode = $(this).attr('id');
+            ordersDetail.push( productCode );
+            return false;
+          }
+        });
+        ordersDetail.push( $(this).children('.menuCount').text() );
+        ordersDetail.push( $(this).children('.menuPrice').text() );
+
+        insertOrdersDetail.push( ordersDetail );
+    })
+    
+    // orders_detail 테이블에 delete 하기 위한 정보
+    $('#cancelOrderList').find('.selectMenuList').each( function() {
+      var ordersDetail = new Array();
+      
+      var menuName = $(this).children('.menuName').text();
+      $('h3[class=menuName]').each( function() {
+        if ( $(this).text() === menuName ) {
+          var productCode = $(this).attr('id');
+          ordersDetail.push( productCode );
+          return false;
+        }
+      });
+      ordersDetail.push( $(this).children('.menuCount').text() );
+      ordersDetail.push( $(this).children('.menuPrice').text() );
+      
+      deleteOrdersDetail.push( ordersDetail );
+    });
+    
+    $('#orderForm').children('input[name=orders]').attr( "value", orders );
+    $('#orderForm').children('input[name=insertOrdersDetail]').attr( "value", insertOrdersDetail );
+    $('#orderForm').children('input[name=deleteOrdersDetail]').attr( "value", deleteOrdersDetail );
+    
+    $('#orderForm').submit();
+});
+
+function getProductCode( ordersDetail, menuName ) {
+
 }
 </script>

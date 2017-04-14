@@ -1,5 +1,6 @@
 package com.wepos.pos.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +47,17 @@ public interface PosMainDao {
   
   // 결제 전 테이블의 주문 상세 내역 select
   public List<SumOrdersDetailDto> getOrdersDetailBeforePayment();
+  
+  // 최근 주문 수량
+  public int lastestOrderAmount( HashMap<String, Integer> orderInfo );
+  
+  // 삭제 할 주문 번호
+  public int getDeleteOrderCode( HashMap<String, Integer> orderInfo );
+  
+  // 주문 내역 삭제
+  public int deleteOrdersDetail( int orderCode );
+
+  // 주문 수량 업데이트
+  public int updateOrderAmount( OrdersDetailDto odd );
 }
 
