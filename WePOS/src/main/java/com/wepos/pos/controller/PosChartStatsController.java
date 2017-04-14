@@ -63,8 +63,8 @@ public class PosChartStatsController {
 		map.put("shopCode", shopCode);
 		
 		List<ChartStatsDto> chartStatsList = null;
-		JSONObject jsonChartData = null;
-		String chartTitle = null;	
+		Object jsonChartData = null;
+		String chartTitle = null;
 				
 		if(chartType == 1)
 		{
@@ -72,17 +72,26 @@ public class PosChartStatsController {
 			jsonChartData = ChartUtil.barChartStat(chartStatsList);
 			chartTitle = "월별 매출 (기간 : " + start + " ~ " + finish + ")";		
 		}
-		if(chartType == 2)
+		else if(chartType == 2)
 		{
 			chartStatsList = posChartStatsDao.productStats(map);
 			jsonChartData = ChartUtil.barChartStat(chartStatsList);
 			chartTitle = "상품별 매출 (기간 : " + start + " ~ " + finish + ")";
 		}
+		else if(chartType == 3)
+		{
+			chartStatsList = posChartStatsDao.paymentPlanStats(map);
+			jsonChartData = ChartUtil.pieChartStat(chartStatsList);
+			chartTitle = "결제방식별 매출 (기간 : " + start + " ~ " + finish + ")";
+		}
+		else if(chartType == 4)
+		{
+			chartStatsList = posChartStatsDao.userTypeStats(map);
+			jsonChartData = ChartUtil.pieChartStat(chartStatsList);
+			chartTitle = "회원, 비회원별별 매출 (기간 : " + start + " ~ " + finish + ")";
+		}		
 		
-		
-		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();
-				
-		
+		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();	
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pos/posChartStats");
@@ -90,6 +99,8 @@ public class PosChartStatsController {
 		mav.addObject("chartTitle", chartTitle);
 		mav.addObject("chartType", chartType);
 		mav.addObject("chartTypeList", chartTypeList);
+		mav.addObject("start", start);
+		mav.addObject("finish", finish);
 			
 		return mav;
 	}

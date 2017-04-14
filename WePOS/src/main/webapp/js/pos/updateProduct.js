@@ -29,11 +29,9 @@ function checkNull(){
 		return false;
 	}if(exptext.test($('#productStock').val())==false ||  $('#productStock').val().indexOf(' ') > -1 || $('#productStock').val()<0){
 		alert("재고를 확인하세요");
-		$('#productPrice').focus();
+		$('#productStock').focus();
 		return false;
-	}else if($('#product').val()<100)
-		alert("정원은 2~6 사이입니다.");
-	else{
+	}else{
 		if($('#productCode').val()!='')
 			$('#updateProductForm').submit();
 	}

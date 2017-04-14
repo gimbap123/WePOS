@@ -45,12 +45,37 @@ public class ChartUtil {
 		return jsonChartData;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static JSONArray pieChartStat(List<ChartStatsDto> chartStatsList)
+	{
+		JSONArray jsonChartArray = new JSONArray();
+		
+		String[] colorArr = {"#f56954", "#00a65a", "#00a65a"};
+
+		int cnt = 0;
+		for(ChartStatsDto chartStats : chartStatsList)
+		{
+			JSONObject jsonChartData = new JSONObject();
+			jsonChartData.put("value", chartStats.getTotalPrice());
+			jsonChartData.put("color", colorArr[cnt]);
+			jsonChartData.put("highlight", colorArr[cnt]);
+			jsonChartData.put("label", chartStats.getLabel());		
+			cnt++;
+			
+			jsonChartArray.add(jsonChartData);
+		}		
+		
+		return jsonChartArray;
+	}
+	
 	public static Map<String, Object> chartTypeList()
 	{
 		Map<String, Object> chartTypeList = new HashMap<String, Object>();
 		chartTypeList.put("0", "선택");
 		chartTypeList.put("1", "월별 매출");
 		chartTypeList.put("2", "상품별 매출");
+		chartTypeList.put("3", "결제방식별 매출");
+		chartTypeList.put("4", "회원, 비회원별 매출");
 		
 		return chartTypeList;
 	}

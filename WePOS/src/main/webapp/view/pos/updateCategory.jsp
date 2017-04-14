@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateCategory.js?ver=2"></script>
+<script language="JavaScript" src="../js/pos/updateCategory.js?ver=5"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -87,7 +87,7 @@
 								<div class="col-md-3 col-sm-6">
 					                <div class="pricing-v1 pricing-v1-blue">			                	
 					                    <div class="pricing-head" 
-					                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}')">
+					                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','${categoryList[i].countProduct}')">
 					                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
 					                    </div>
 				                	</div>
@@ -121,12 +121,16 @@
 										<input type="text" id="categoryCode" name="categoryCode" value="" size="15px" style="text-align:center;border:0" readonly>
 									</th>
 								</tr>
-								<tr id="categoryNameTr">
+								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">상품분류명</th>
 									<td>
 										<input type="text" id="categoryName" name="categoryName" value="" size="15px" style="text-align:center">
 									</td>
-								</tr>								
+								</tr>
+								<tr id="countProductTr">
+									<th style="text-align:center;vertical-align:middle;width:90px">등록된 메뉴</th>
+									<td style="text-align:center;vertical-align:middle"><span id="countProduct"></span></td>
+								</tr>
 							</tbody>
 						</table>						
 					</form>	

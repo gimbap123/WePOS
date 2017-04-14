@@ -66,6 +66,14 @@
     {
         min-height: 50px;
     }
+    
+    .noTables{
+      width: 600px;
+    }
+}
+
+.tableOrderList > ul {
+  margin-bottom: 0px; 
 }
 
 form#searchShop {
