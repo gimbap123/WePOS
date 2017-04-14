@@ -15,27 +15,18 @@ public class ReservationController {
 
 	@Autowired
 	private ReservationDao reservationDao;
-	
-	@RequestMapping(value="/common/reservation.do")
-	public String reservationOnload(@RequestParam("userId") String userId){
-		System.out.println("야 나 호출된다");
-		return null;
-	}
-	
+		
 	@RequestMapping(value="/common/reservation.do", method=RequestMethod.POST)
-	public String reservationProcess(@ModelAttribute ReservationDto reservationDto, @RequestParam("userId") String userId){
-		System.out.println("reservationDto.getResDate()"+reservationDto.getResDate());
-		System.out.println("reservationDto.getResDesc()"+reservationDto.getResDesc());
-		System.out.println("reservationDto.getReseNumber()"+reservationDto.getReseNumber());
-		System.out.println("reservationDto.getResPersons()"+reservationDto.getResPersons());
-		System.out.println("reservationDto.getResState()"+reservationDto.getResState());
-		System.out.println("reservationDto.getShopCode()"+reservationDto.getShopCode());
-		System.out.println("reservationDto.getUserId()"+reservationDto.getUserId());
-		System.out.println("=================[경계선]=================");
+	public String reservationProcess(@ModelAttribute ReservationDto reservationDto, @RequestParam("userId") String userId)
+	{
+		System.out.println("★userId="+userId);
+		//ReservationDto reservationDto = new ReservationDto(); ★여기서 시간을 받는 DTO를 만들어야 하는가?
 		
+		//String resDate = businessHours.getStartHour() + ":" + businessHours.getStartMinute() + businessHours.getStartHourType();
+		//reservationDto.setResDate(resDate);
 		
-		
-		return null;
+		reservationDao.insertRes(reservationDto);
+		return "redirect:/common/shopDetail.do";
 	}
 	
 }
