@@ -80,18 +80,24 @@
 					<hr>
 					<span style="float: right; margin-right: 20px">
 						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>
+						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 추가</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
-						<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">							
-							<div class="col-md-3 col-sm-6">
-				                <div class="pricing-v1 pricing-v1-blue">			                	
-				                    <div class="pricing-head" 
-				                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}')">
-				                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
-				                    </div>
-			                	</div>
-				            </div>
-						</c:forEach>
+						<c:if test="${fn:length(productList)>0}">
+							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">							
+								<div class="col-md-3 col-sm-6">
+					                <div class="pricing-v1 pricing-v1-blue">			                	
+					                    <div class="pricing-head" 
+					                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}')">
+					                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+					                    </div>
+				                	</div>
+					            </div>
+							</c:forEach>
+						</c:if>
+						<c:if test="${fn:length(productList)==0}">
+							<h1 align="center">등록된 메뉴가 없습니다.</h1>
+						</c:if>	
 					</div>
 				</nav>
 			</div>
@@ -121,11 +127,13 @@
 									<th>
 										<select class="form-control" id="categoryCode" name="categoryCode">
 											<option value="999">선택하세요</option>
-											<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
-												<option value="${categoryList[j].categoryCode}">
-													<%-- ${categoryList[j].categoryCode==productList[j].categoryCode?'selected':''}> --%>
-													${categoryList[j].categoryName}</option>
-											</c:forEach>
+											<c:if test="${fn:length(categoryList)>0}">
+												<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
+													<option value="${categoryList[j].categoryCode}">
+														<%-- ${categoryList[j].categoryCode==productList[j].categoryCode?'selected':''}> --%>
+														${categoryList[j].categoryName}</option>
+												</c:forEach>
+											</c:if>	
 									</select>
 									</th>
 								</tr>

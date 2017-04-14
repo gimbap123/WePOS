@@ -63,3 +63,4 @@ function deleteProduct(mgrId){
 	if(deleteproduct==true)
 		location.href="deleteProduct.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId;
 }
+
