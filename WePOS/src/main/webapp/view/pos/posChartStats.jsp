@@ -57,23 +57,12 @@
 					</div>					
 				</div>	
 				
-				<div class="margin-bottom-60"></div>		
-									
-				<section class="content" style="padding-top: 0px;">
-					
-					<div class="col-md-12">
-						<div class="box box-success">
-							<div class="box-header with-border">
-								<h3 class="box-title">${chartTitle}</h3>							
-							</div>
-							<div class="box-body">
-								<div class="chart">
-					            	<canvas id="barChart" style="height:300px"></canvas>
-					            </div>
-							</div>						
-						</div>
-					</div>
-					
+				<div class="margin-bottom-60"></div>
+				<input type="hidden" id="chartTitle" value="${chartTitle}">
+				
+				<section class="content" style="padding-top: 0px;">					
+					<div class="col-md-12" id="chartDiv">						
+					</div>					
 				</section>				
 			</div>
 		</div>
@@ -90,8 +79,14 @@
 							<div class="input-group margin-bottom-10">								
 								<span class="input-group-addon">차트</span>
 								<select class="form-control" id="chartType" name="chartType">
-									<option value="0">선택</option>
-									<option value="1">월별 매출</option>
+									<c:forEach items="${chartTypeList}" var="data">
+										<c:if test="${data.key ==  chartType}">
+											<option value="${data.key}" selected="selected">${data.value}</option>
+										</c:if>
+										<c:if test="${data.key !=  chartType}">
+											<option value="${data.key}">${data.value}</option>
+										</c:if>
+									</c:forEach>							
 								</select>				
 							</div>						
 							<div class="input-group margin-bottom-10">									
@@ -136,7 +131,7 @@
 	jQuery(document).ready(function() {
 		App.init();
 		Datepicker.initDatepicker();
-		barChartStats(${jsonChartData});		
+		chartTypeSelect(${jsonChartData});
 	});
 </script>
 </body>

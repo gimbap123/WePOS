@@ -78,31 +78,43 @@
 						<span style="float:right;margin-right:20px">
 							<button class="btn btn-success" type="button" onclick="create()">테이블 추가</button>
 						</span>
-						<button class="btn btn-primary" type="button">
-							총 테이블 <span class="badge">${tableCount}</span>
-						</button>
+						<c:if test="${tableCount>0}">
+							<button class="btn btn-primary" type="button">
+								총 테이블 <span class="badge">${tableCount}</span>
+							</button>
+						</c:if>
+						<c:if test="${tableCount==0}">
+							<button class="btn btn-primary" type="button">
+								총 테이블 <span class="badge">0</span>
+							</button>
+						</c:if>
 						<br>
-						<c:forEach var="i" begin="0" end="${tableCount-1}">
-							<div class="panel panel-success pos-table" data-toggle="modal"
-								data-target="#orderModal">
-								<div class="panel-heading">
-									<h3 class="panel-title" id="panel-title">
-										<a role="button" class="anchorjs-link" href="#panel-title">
-											<span class="anchorjs-icon">${tables[i].tableName}</span>
-										</a>
-											<span class="badge pull-right" style="margin-top:4px">${tables[i].tableMax}인</span>
-									</h3>
-								</div>
-								<div class="panel-body panel-updateTable" align="center">
-									<span style="float:right">
-										<input type="button" class="btn btn-success" value="수정"
-											onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">						
-										<input type="button" class="btn btn-danger" value="삭제"
-											onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">
-									</span>
-								</div>
-							</div>				
-						</c:forEach>
+						<c:if test="${tableCount>0}">
+							<c:forEach var="i" begin="0" end="${tableCount-1}">
+								<div class="panel panel-success pos-table" data-toggle="modal"
+									data-target="#orderModal">
+									<div class="panel-heading">
+										<h3 class="panel-title" id="panel-title">
+											<a role="button" class="anchorjs-link" href="#panel-title">
+												<span class="anchorjs-icon">${tables[i].tableName}</span>
+											</a>
+												<span class="badge pull-right" style="margin-top:4px">${tables[i].tableMax}인</span>
+										</h3>
+									</div>
+									<div class="panel-body panel-updateTable" align="center">
+										<span style="float:right">
+											<input type="button" class="btn btn-success" value="수정"
+												onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">						
+											<input type="button" class="btn btn-danger" value="삭제"
+												onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">
+										</span>
+									</div>
+								</div>				
+							</c:forEach>
+						</c:if>
+						<c:if test="${tableCount==0}">
+							<h1 align="center">등록된 테이블이 없습니다.</h1>
+						</c:if>	
 					</section>
 				</nav>
 		</div>

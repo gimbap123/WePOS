@@ -46,8 +46,8 @@
 <link rel="stylesheet"
 	href="<c:url value="/assets/plugins/font-awesome/css/font-awesome.min.css" />">
 
-<link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css">  
-<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="<c:url value="assets/plugins/fancybox/source/jquery.fancybox.css" /> ">  
+<link rel="stylesheet" href="<c:url value="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 	
 
 <!-- CSS Page Style -->
@@ -186,12 +186,13 @@
     <!--=== End Container Part ===-->
 
     <!--=== Team v4 ===-->
-    <div class="bg-color-light">
+    <div class="bg-color-light" style="padding: 50px 10px 50px 10px">
         <div class="headline-center margin-bottom-60">
+        <p>
+        <p>
             <h2>MEET WEPOS TEAM</h2>
             <p>WEPOS를 운영하고 있는 개발자들을 소개합니다<br>
 	        </div>
-
         <div class="row team-v4">
             <div class="col-md-3 col-sm-6 md-margin-bottom-50">
                 <img class="img-responsive" src="../image/common/one.png" alt="">
@@ -285,34 +286,46 @@
 
     <!-- Owl Clients v1 -->
     <div class="container content-sm">
-        <div class="owl-clients-v1">
+        <div class="owl-clients-v1 owl-carousel owl-theme" style="opacity: 1; display: block;">
+        <div class="owl-wrapper-outer">
+        <div class="owl-wrapper" style="width: 3240px; left: 0px; display: block; transition: all 800ms ease; transform: translate3d(px, 0px, 0px);">
             <div class="item">
-                <img src="assets/img/clients4/1.png" alt="">
+                <img src="../image/common/shop1.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/2.png" alt="">
+                <img src="../image/common/shop2.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/3.png" alt="">
+                <img src="../image/common/shop3.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/4.png" alt="">
+                <img src="../image/common/shop4.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/5.png" alt="">
+                <img src="../image/common/shop5.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/6.png" alt="">
+                <img src="../image/common/shop6.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/7.png" alt="">
+                <img src="../image/common/shop7.png" alt="">
             </div>
             <div class="item">
-                <img src="assets/img/clients4/8.png" alt="">
+                <img src="../image/common/shop8.png" alt="">
             </div>
-            <div class="item">
-                <img src="assets/img/clients4/9.png" alt="">
-            </div>
+        </div>
+        </div>
+        <div class="owl-controls clickable">
+        	<div class="owl-pagination">
+        		<div class="owl-page acive">
+        			<span class></span>
+        		</div>
+        		<div class="owl-page acive">
+        			<span class></span>
+        		</div>
+        	</div>
+        </div>
+        
         </div>
     </div>    
     <!-- End Owl Clients v1 -->

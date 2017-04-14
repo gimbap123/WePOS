@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js?ver=1"></script>
+<script language="JavaScript" src="../js/pos/updateCategory.js?ver=2"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -73,30 +73,29 @@
 					<div class="breadcrumbs-v3 img-v1" style="background:url(../image/common/updateMenu.jpg);background-size: cover;
 		  																				background-position: center;height:30px">
 						<div class="container text-center" style="width:100%">
-							<h1>메뉴 관리</h1>
+							<h1>상품분류 관리</h1>
 						</div>
 						<!--/end container-->
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>
-						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 추가</button>
+						<button class="btn btn-success" type="button" onclick="createCategory()">상품분류 추가</button>						
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
-						<c:if test="${fn:length(productList)>0}">
-							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+						<c:if test="${fn:length(categoryList)>0}">
+							<c:forEach var="i" begin="0" end="${fn:length(categoryList)-1}">							
 								<div class="col-md-3 col-sm-6">
 					                <div class="pricing-v1 pricing-v1-blue">			                	
 					                    <div class="pricing-head" 
-					                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}')">
-					                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+					                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}')">
+					                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
 					                    </div>
 				                	</div>
 					            </div>
 							</c:forEach>
 						</c:if>
-						<c:if test="${fn:length(productList)==0}">
-							<h1 align="center">등록된 메뉴가 없습니다.</h1>
+						<c:if test="${fn:length(categoryList)==0}">
+							<h1 align="center">등록된 상품분류가 없습니다.</h1>
 						</c:if>	
 					</div>
 				</nav>
@@ -108,8 +107,8 @@
 				<div class="panel panel-default panel-warning">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h3 id="menuInfoTag">메뉴 정보</h3></div>					
-					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" method="post">
+					<div class="panel-heading" align="center"><h3 id="categoryInfoTag">상품분류 정보</h3></div>					
+					<form id="updateCategoryForm" name="updateCategoryForm" action="updateCategory.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
@@ -117,50 +116,17 @@
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 번호</th>
+									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">분류 번호</th>
 									<th>
-										<input type="text" id="productCode" name="productCode" value="" size="15px" style="border:0" readonly>
+										<input type="text" id="categoryCode" name="categoryCode" value="" size="15px" style="text-align:center;border:0" readonly>
 									</th>
 								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 분류</th>
-									<th>
-										<select class="form-control" id="categoryCode" name="categoryCode">
-											<option value="999">선택하세요</option>
-											<c:if test="${fn:length(categoryList)>0}">
-												<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
-													<option value="${categoryList[j].categoryCode}">
-														<%-- ${categoryList[j].categoryCode==productList[j].categoryCode?'selected':''}> --%>
-														${categoryList[j].categoryName}</option>
-												</c:forEach>
-											</c:if>	
-									</select>
-									</th>
-								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px">상품명</th>
+								<tr id="categoryNameTr">
+									<th style="text-align:center;vertical-align:middle;width:90px">상품분류명</th>
 									<td>
-										<input type="text" id="productName" name="productName" value="" size="15px" style="text-align:center">
+										<input type="text" id="categoryName" name="categoryName" value="" size="15px" style="text-align:center">
 									</td>
-								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px">가 격</th>
-									<td>
-										<input type="text" id="productPrice" name="productPrice" value="" size="15px" style="text-align:center">
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px">재 고</th>
-									<td>
-										<input type="text" id="productStock" name="productStock" value="" size="15px" style="text-align:center">
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px">상품 설명</th>
-									<td>
-										<input type="text" id="productDesc" name="productDesc" value="" size="15px" style="text-align:center">
-									</td>
-								</tr>
+								</tr>								
 							</tbody>
 						</table>						
 					</form>	
@@ -170,7 +136,7 @@
 					class="btn-group btn-group-justified">					
 					<div class="btn-group" role="group" >
 						<button type="button" class="btn btn-lg btn-danger" id="deleteButton"
-									onclick="deleteProduct('${sessionScope.id}')" disabled>삭제</button>
+									onclick="deleteCategory('${sessionScope.id}')" disabled>삭제</button>
 					</div>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-lg btn-primary" id="okButton" onclick="checkNull()" disabled>완료</button>

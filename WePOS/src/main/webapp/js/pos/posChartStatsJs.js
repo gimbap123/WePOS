@@ -11,16 +11,34 @@ function checkPosChartStats()
 	}
 	else if($("#startMonth").val() == 0)
 	{
-		alert("시작되는 월을 선택하세요.");
+		alert("시작일을 선택하세요.");
 		return false;
 	}
 	else if($("#endMonth").val() == 0)
 	{
-		alert("끝나는 월을 선택하세요.");
+		alert("종료일을 선택하세요.");
 		return false;
 	}
 	
 	document.chartStatsOption.submit();	
+}
+
+function chartTypeSelect(jsonChartData)
+{
+	
+	var chartTitle = $("#chartTitle").val();
+	
+	if($("#chartType").val() == 0)
+	{
+		$("#chartDiv").html('<h1>차트를 검색하세요.</h1>');
+	}
+	else if($("#chartType").val() == 1 || $("#chartType").val() == 2)
+	{
+		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">' 
+				+ '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body"> <div class="chart">' 
+				+ '<canvas id="barChart" style="height:300px"></div></canvas></div></div>');
+		barChartStats(jsonChartData);
+	}
 }
 
 function barChartStats(jsonChartData)
