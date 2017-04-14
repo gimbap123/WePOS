@@ -52,9 +52,14 @@
   </select> -->
   
   <select id="getCategory" parameterType="int" resultType="CategoryDto">
-    select *
-    from category
-    where shop_code = #{shopCode}
+	select p.*, c.*
+	from ( select category_code, count( category_code ) "countProduct"
+				from product
+				where shop_code = #{shopCode}
+				group by category_code
+				order by category_code ) p, category c
+	where p.category_code = c.category_code
+	and c.shop_code = #{shopCode}
   </select>
   
   

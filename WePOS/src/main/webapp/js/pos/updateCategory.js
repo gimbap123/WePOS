@@ -1,8 +1,9 @@
-function categoryInfo(code,name){
-	$('#categoryInfoTag').text("상품 수정");
+function categoryInfo(code,name,count){
+	$('#categoryInfoTag').text("상품분류 수정");
 	$('#categoryCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
 	$('#categoryCode').val(code);
 	$('#categoryName').val(name);
+	$('#countProduct').text(count);
 	$('#okButton').prop("disabled",false);
 	$('#deleteButton').prop("disabled",false);
 }
@@ -33,8 +34,15 @@ function createCategory(){
 }
 
 function deleteCategory(mgrId){
-	var deletecategory=confirm("상품명 : "+$('#categoryName').val()+"\r삭제하시겠습니까?")
-	if(deletecategory==true)
-		location.href="deleteCategory.do?categoryCode="+$('#categoryCode').val()+"&mgrId="+mgrId;
+	if($('#countProduct').text()>0){
+		alert("등록된 상품이 존재합니다.")
+		return false;
+	}else{
+		var deletecategory=confirm("상품명 : "+$('#categoryName').val()+"\r삭제하시겠습니까?")
+		if(deletecategory==true)
+			location.href="deleteCategory.do?categoryCode="+$('#categoryCode').val()+"&mgrId="+mgrId;
+	}
+		
+	
 }
 

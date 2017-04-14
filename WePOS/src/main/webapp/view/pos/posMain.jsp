@@ -52,12 +52,12 @@
 
     <div class="content-side-right pos-main">
       <div class="row">
+        <br>
+        <br>
         <c:if test="${tableCount < 1}">
-          <br>
-          <div class="alert alert-danger noTables" role="alert">
-            <p>테이블이 존재 하지 않습니다.</p>
-            <a href="updateTableView.do?mgrId=${sessionScope.id}" class="alert-link">테이블 설정</a> 하기
-          </div>
+          <h1 align="center">
+            등록된 테이블이 없습니다. <a class="btn btn-success" href="updateTableView.do?mgrId=${sessionScope.id}">테이블 설정</a>
+          </h1>
         </c:if>
 
         <c:if test="${tableCount >= 1}">
@@ -177,14 +177,21 @@
                 <div role="tabpanel">
 
                   <!-- Nav tabs -->
-                  <ul class="nav nav-pills" role="tablist">
-                    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
-                    <c:if test="${fn:length(category) > 0}">
-                    <c:forEach var="c" items="${category}">
-                      <li role="presentation"><a href="#category${c.categoryCode}" aria-controls="category${c.categoryCode}" role="tab" data-toggle="tab">${c.categoryName}</a></li>
-                    </c:forEach>
-                    </c:if>
-                  </ul>
+                  <c:if test="${fn:length(category) <= 0}">
+                    <br>
+                    <h1 align="center">
+                      등록된 상품분류가 없습니다 <a class="btn btn-success" href="updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 설정</a>
+                    </h1>
+                  </c:if>
+                  <c:if test="${fn:length(category) > 0}">
+                    <ul class="nav nav-pills" role="tablist">
+                      <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
+
+                      <c:forEach var="c" items="${category}">
+                        <li role="presentation"><a href="#category${c.categoryCode}" aria-controls="category${c.categoryCode}" role="tab" data-toggle="tab">${c.categoryName}</a></li>
+                      </c:forEach>
+                    </ul>
+                  </c:if>
                   <!-- Tab panes -->
                   <div class="tab-content">
                     <!-- 모든 카테고리 출력 -->
@@ -210,29 +217,29 @@
                     </div>
                     <!-- 매장의 카테고리 메뉴별 출력 -->
                     <c:if test="${fn:length(productList) > 0}">
-                    <c:forEach var="c" items="${category}">
-                      <div role="tabpanel" class="tab-pane" id="category${c.categoryCode}">
-                        <div class="row">
-                          <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-                            <!-- 카테고리 코드1  (식사) -->
-                            <c:if test="${productList[i].categoryCode == c.categoryCode}">
-                              <div class="col-sm-4">
-                                <!-- 메뉴 패널 -->
-                                <div class="panel panel-primary">
-                                  <c:set var="price" value="${productList[i].productPrice}" />
-                                  <c:set var="stock" value="${productList[i].productStock}" />
-                                  <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
-                                    <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                    <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                      <c:forEach var="c" items="${category}">
+                        <div role="tabpanel" class="tab-pane" id="category${c.categoryCode}">
+                          <div class="row">
+                            <c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+                              <!-- 카테고리 코드1  (식사) -->
+                              <c:if test="${productList[i].categoryCode == c.categoryCode}">
+                                <div class="col-sm-4">
+                                  <!-- 메뉴 패널 -->
+                                  <div class="panel panel-primary">
+                                    <c:set var="price" value="${productList[i].productPrice}" />
+                                    <c:set var="stock" value="${productList[i].productStock}" />
+                                    <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
+                                      <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
+                                      <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                                    </div>
                                   </div>
+                                  <!-- 메뉴 패널 종료 -->
                                 </div>
-                                <!-- 메뉴 패널 종료 -->
-                              </div>
-                            </c:if>
-                          </c:forEach>
+                              </c:if>
+                            </c:forEach>
+                          </div>
                         </div>
-                      </div>
-                    </c:forEach>
+                      </c:forEach>
                     </c:if>
                     <!-- 매장의 카테고리 메뉴별 출력 종료 -->
                   </div>

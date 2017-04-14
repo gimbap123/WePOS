@@ -5,6 +5,7 @@ public class CategoryDto {
 	private int shopCode;
 	private int categoryCode;
 	private String categoryName;
+	private int countProduct;
 	
 	public int getShopCode() {
 		return shopCode;
@@ -25,7 +26,13 @@ public class CategoryDto {
 		this.categoryName = categoryName;
 	}
 
-  @Override
+	public int getCountProduct() {
+		return countProduct;
+	}
+	public void setCountProduct(int countProduct) {
+		this.countProduct = countProduct;
+	}
+@Override
   public String toString(){
     return "CategoryDto [" +
         " shopCode : " + shopCode +

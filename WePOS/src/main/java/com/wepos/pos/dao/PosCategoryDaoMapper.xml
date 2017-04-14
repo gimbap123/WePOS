@@ -17,4 +17,5 @@
 		delete from category
 		where shop_code=#{shopCode} and category_code=#{categoryCode}
 	</delete>
+	
 </mapper>
