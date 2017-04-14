@@ -9,12 +9,12 @@ function checkPosChartStats()
 		alert("차트를 선택하세요.");
 		return false;
 	}
-	else if($("#startMonth").val() == 0)
+	else if($("#start").val() == 0)
 	{
 		alert("시작일을 선택하세요.");
 		return false;
 	}
-	else if($("#endMonth").val() == 0)
+	else if($("#finish").val() == 0)
 	{
 		alert("종료일을 선택하세요.");
 		return false;
@@ -119,6 +119,15 @@ function pieChartStats(jsonChartData)
     };
     //Create pie or douhnut chart
     // You can switch between pie and douhnut using the method below.
+    
     pieChart.Doughnut(jsonChartData, pieOptions);
 }
+
+function resetChartStatsOption()
+{
+	$("#start").val(null);
+	$("#finish").val(null);
+	$("#chartType").val("0");
+}
+
 

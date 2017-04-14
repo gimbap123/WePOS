@@ -93,6 +93,8 @@ public class PosChartStatsController {
 		mav.addObject("chartTitle", chartTitle);
 		mav.addObject("chartType", chartType);
 		mav.addObject("chartTypeList", chartTypeList);
+		mav.addObject("start", start);
+		mav.addObject("finish", finish);
 			
 		return mav;
 	}
