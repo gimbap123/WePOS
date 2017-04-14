@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,6 +26,10 @@
 <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
 
+<!-- 달력 추가 -->
+<link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+
 <script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
 
 <title>We POS</title>
@@ -34,9 +39,9 @@
 		<jsp:include page="header.jsp" flush="false" />	
 		
 		<!--=== Breadcrumbs ===-->
-  		<div class="breadcrumbs">
-      		<div class="container">      		
-          		<h1 class="pull-left">${shop.shopName}</h1>          		
+  		<div class="breadcrumbs" style="background: url('../image/common/searchHeaderImg.png') repeat;">
+      		<div class="container">
+          		<h1 class="pull-left" style="color: white; font-weight: bold;">${shop.shopName}</h1>          		
       		</div>
   		</div><!--/breadcrumbs-->
   		<!--=== End Breadcrumbs ===-->
@@ -52,7 +57,7 @@
 	            <div class="col-sm-7">	            
 	            	<h3>${shop.shopName }</h3>
                 	<p>${shop.shopDesc}</p>
-                	<hr>                	
+                	<hr style="margin: 20px 0 20px 0">                 	
                 	<h3>매장 설명</h3>
                 	<input type="hidden" id="shopCode" value="${shop.shopCode}">
 	                <ul class="list-unstyled who">
@@ -60,6 +65,18 @@
 	                    <li><i class="fa fa-phone"></i>${shop.shopPhone}</li>	                    
 	                    <li><i class="fa fa-calendar"></i>${shop.shopStartTime} ~ ${shop.shopEndTime}</li>
 	                </ul>	                
+	                <hr style="margin: 20px 0 20px 0"> 
+	                <div class="col-md-3 btn-buy animated fadeInRight">
+	                    <c:if test="${sessionScope.id!=null}">
+	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal"  data-target="#responsive">
+							<i class="fa fa-clock-o"></i> RESERVATION</button>
+						</c:if>
+						<c:if test="${sessionScope.id==null}">
+	                    <button class="btn-u btn-u-lg" type="button" data-target="#responsive" onClick="location.href='login.do'">
+							<h6 style="color: white;font-weight: bold;"><i class="fa fa-clock-o"></i>예약을 하시려면 로그인이 필요합니다</h6></button>
+						</c:if>
+	                </div>	
+	                <jsp:include page="reservationModal.jsp" flush="false" />	
 	            </div>
 	        </div>
 	        
@@ -107,8 +124,13 @@
 <!-- JS Implementing Plugins -->           
 <script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+<!-- 추가  -->
+<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
 
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MH-LfB9ijazDzhwbfkceUzZAO0LiYsk&callback=initMap">
@@ -153,6 +175,7 @@
     jQuery(document).ready(function() {
     	App.init();    	
     	tabClick('shopNoticeTab')
+    	Datepicker.initDatepicker();
     });
 </script>	
 </body>

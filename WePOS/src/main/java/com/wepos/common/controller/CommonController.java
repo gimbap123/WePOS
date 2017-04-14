@@ -302,6 +302,12 @@ public class CommonController {
 		
 		return mav;
 	}
+	
+	//WEPOS 소개 페이지로 이동
+	@RequestMapping("/common/posIntroduce.do")
+	public String showIntroduce(){
+		return "common/posIntroduce";
+	}
 
 }
 
