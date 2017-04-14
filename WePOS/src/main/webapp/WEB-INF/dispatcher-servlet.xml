@@ -35,8 +35,10 @@
  	 <bean class="com.wepos.pos.controller.PosLogController" />
  	 <bean class="com.wepos.pos.controller.PosIntroduceController" />
  	 <bean class="com.wepos.pos.controller.PosTableController" />
+ 	 <bean class="com.wepos.pos.controller.PosProductController" />
  	 <bean class="com.wepos.common.controller.SearchProductController" />
  	 <bean class="com.wepos.mgr.controller.MgrController" />
+ 	 <bean class="com.wepos.pos.controller.PosChartStatsController" />
 
    
 	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
@@ -47,8 +49,10 @@
      <bean class="com.wepos.pos.dao.PosMainDaoImpl" />
      <bean class="com.wepos.pos.dao.PosLogDaoImpl" />
      <bean class="com.wepos.pos.dao.PosTableDaoImpl" />
+     <bean class="com.wepos.pos.dao.PosProductDaoImpl" />
      <bean class="com.wepos.common.dao.ProductDaoImpl" />
      <bean class="com.wepos.mgr.dao.MgrDaoImpl" />
+     <bean class="com.wepos.pos.dao.PosChartStatsDaoImpl" />
           
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
 	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />

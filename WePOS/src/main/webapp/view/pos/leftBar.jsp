@@ -50,9 +50,10 @@
 					<li class="dropdown"><a href="javascript:void(0);"
 						class="dropdown-toggle" data-toggle="dropdown">매장관리</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">메뉴 관리</a></li>
+							<li><a href="updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
 							<li><a href="updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 							<li><a href="salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
+							<li><a href="posChartStats.do?shopCode=${sessionScope.shopCode}">차트 통계</a></li>
 						</ul></li>
 					<!-- End Home -->
 					<!-- About Pages -->

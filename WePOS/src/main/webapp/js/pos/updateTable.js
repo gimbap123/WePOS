@@ -23,7 +23,7 @@ function checkNull(){
 		alert("정원은 2~6 사이입니다.");
 		$('#tableMax').focus();
 		return false;
-	}else if($('#tableMax').val()>6)
+	}else if($('#tableMax').val()>6 || $('#tableMax').val()<1)
 		alert("정원은 2~6 사이입니다.");
 	else{
 		if($('#tableCode').val()!='')

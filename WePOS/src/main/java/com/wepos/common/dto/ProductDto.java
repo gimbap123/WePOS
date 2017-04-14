@@ -6,6 +6,7 @@ public class ProductDto {
   private int productCode;
   private int shopCode;
   private int categoryCode;
+  private String categoryName;
   private String productName;
   private int productPrice;
   private int productStock;
@@ -31,7 +32,13 @@ public class ProductDto {
   public void setCategoryCode( int categoryCode ) {
     this.categoryCode = categoryCode;
   }
-  public String getProductName() {
+  public String getCategoryName() {
+	return categoryName;
+}
+public void setCategoryName(String categoryName) {
+	this.categoryName = categoryName;
+}
+public String getProductName() {
     return productName;
   }
   public void setProductName( String productName ) {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wepos.pos.dao.PosChartStatsDao">
+
+	<select id="monthStats" parameterType="map" resultType="chartStatsDto">
+		select mo.mon as mon, sum(mo.order_price) as totalPrice
+		from
+		(
+			select to_char(o.order_date, 'MM') as mon, od.order_price
+			from orders o
+			inner join orders_detail od on o.order_code = od.order_code
+			where o.shop_code = #{shopCode}
+			and o.order_date between to_timestamp(#{start}, 'YYYY-MM-DD') and to_timestamp(#{finish}, 'YYYY-MM-DD')
+		) mo
+		group by mo.mon
+		order by mo.mon
+	</select>
+
+</mapper>
