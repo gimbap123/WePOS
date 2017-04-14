@@ -36,20 +36,20 @@ function chartTypeSelect(jsonChartData)
 	{
 		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">' 
 				+ '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body"> <div class="chart">' 
-				+ '<canvas id="barChart" style="height:300px"></div></canvas></div></div>');
+				+ '<canvas id="barChart" style="height:300px"></canvas></div></div></div>');
 		barChartStats(jsonChartData);
+	}
+	else if($("#chartType").val() == 3)
+	{
+		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">'
+				+  '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body">'
+				+ '<canvas id="pieChart" style="height:300px"></canvas></div></div>');
+		pieChartStats(jsonChartData);
 	}
 }
 
 function barChartStats(jsonChartData)
-{
-	if(jsonChartData == null)
-	{
-		return false;
-	}
-	//-------------
-    //- BAR CHART -
-    //-------------
+{		
     var barChartCanvas = $("#barChart").get(0).getContext("2d");
     var barChart = new Chart(barChartCanvas);
     var barChartData = jsonChartData;
@@ -86,5 +86,39 @@ function barChartStats(jsonChartData)
 
     barChartOptions.datasetFill = false;
     barChart.Bar(barChartData, barChartOptions);
+}
+
+function pieChartStats(jsonChartData)
+{
+	var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+    var pieChart = new Chart(pieChartCanvas);
+    
+    var pieOptions = {
+      //Boolean - Whether we should show a stroke on each segment
+      segmentShowStroke: true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor: "#fff",
+      //Number - The width of each segment stroke
+      segmentStrokeWidth: 2,
+      //Number - The percentage of the chart that we cut out of the middle
+      percentageInnerCutout: 50, // This is 0 for Pie charts
+      //Number - Amount of animation steps
+      animationSteps: 100,
+      //String - Animation easing effect
+      animationEasing: "easeOutBounce",
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate: true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale: false,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true,
+      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //String - A legend template
+      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+    };
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    pieChart.Doughnut(jsonChartData, pieOptions);
 }
 

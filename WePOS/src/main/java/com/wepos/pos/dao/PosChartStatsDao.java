@@ -13,4 +13,7 @@ public interface PosChartStatsDao {
 	// 상품별 통계
 	public List<ChartStatsDto> productStats(Map<String, Object> map);
 	
+	// 결제방식별 통계
+	public List<ChartStatsDto> paymentPlanStats(Map<String, Object> map);
+	
 }
