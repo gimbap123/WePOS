@@ -136,9 +136,11 @@ public class PosMainController {
           // 최근 주문 수량
           int lastestOrderCount = posMainDao.lastestOrderAmount( orderInfo );
           int deleteOrderCode = posMainDao.getDeleteOrderCode( orderInfo );
+          orderInfo.put( "orderCode", deleteOrderCode );
+          
           
           if ( lastestOrderCount <= cancelOrderCount ) {
-            posMainDao.deleteOrdersDetail( deleteOrderCode );
+            posMainDao.deleteOrdersDetail( orderInfo );
           }
           // 최근 주문 수량이 취소수량 보다 클 경우 db 최근 주문내역 update
           else {

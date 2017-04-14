@@ -90,8 +90,8 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
   }
   
   // 주문 내역 삭제
-  public int deleteOrdersDetail( int orderCode ) {
-    return getSqlSession().delete( "deleteOrdersDetail", orderCode );
+  public int deleteOrdersDetail( HashMap<String, Integer> orderInfo ) {
+    return getSqlSession().delete( "deleteOrdersDetail", orderInfo );
   }
   
   // 주문 수량 update

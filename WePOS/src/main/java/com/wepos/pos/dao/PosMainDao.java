@@ -55,7 +55,7 @@ public interface PosMainDao {
   public int getDeleteOrderCode( HashMap<String, Integer> orderInfo );
   
   // 주문 내역 삭제
-  public int deleteOrdersDetail( int orderCode );
+  public int deleteOrdersDetail( HashMap<String, Integer> orderInfo );
 
   // 주문 수량 업데이트
   public int updateOrderAmount( OrdersDetailDto odd );

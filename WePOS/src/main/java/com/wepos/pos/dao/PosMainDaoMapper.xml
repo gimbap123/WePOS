@@ -102,9 +102,10 @@
   </select>
   
   <!-- 주문 내역 삭제 -->
-  <delete id="deleteOrdersDetail" parameterType="int">
+  <delete id="deleteOrdersDetail" parameterType="java.util.HashMap">
     delete from orders_detail
     where order_code = #{orderCode}
+    and product_code = #{productCode}
   </delete>
   
   <!-- 주문 수량 변경 -->
