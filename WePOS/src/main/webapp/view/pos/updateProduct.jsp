@@ -108,7 +108,7 @@
 				<div class="panel panel-default panel-warning">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h3 id="menuInfoTag">메뉴 정보</h3></div>					
+					<div class="panel-heading" align="center"><h3 id="productInfoTag">메뉴 정보</h3></div>					
 					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>

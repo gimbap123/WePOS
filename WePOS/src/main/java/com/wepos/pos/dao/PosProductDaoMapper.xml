@@ -13,6 +13,12 @@
 		where shop_code=#{shopCode} and product_code=#{productCode}
 	</update>
 	
+	<select id="countOrder" parameterType="int" resultType="int">
+		select count(od.product_code)
+		from orders o,orders_detail od
+		where o.order_code=od.order_code and od.product_code=#{productCode}
+	</select>
+	
 	<delete id="deleteProduct" parameterType="ProductDto">
 		delete from product 
 		where shop_code=#{shopCode} and product_code=#{productCode}

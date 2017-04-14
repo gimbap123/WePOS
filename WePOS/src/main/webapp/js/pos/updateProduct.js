@@ -1,5 +1,5 @@
 function productInfo(code,name,price,stock,desc,categoryCode){
-	$('#productInfoTag').text("상품 수정");
+	$('#productInfoTag').text("메뉴 수정");
 	$('#productCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
 	$('#productCode').val(code);
 	$('#productName').val(name);
@@ -58,7 +58,15 @@ function createProduct(){
 
 function deleteProduct(mgrId){
 	var deleteproduct=confirm("상품명 : "+$('#productName').val()+"\r삭제하시겠습니까?")
-	if(deleteproduct==true)
+	if(deleteproduct==true){
 		location.href="deleteProduct.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId;
+		//var test=location.href="countOrder.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId;
+		/*if(test=="1"){
+			alert("주문 내역이 있는 메뉴입니다.");
+			return false;
+		}*/
+	}
+		
+		
 }
 

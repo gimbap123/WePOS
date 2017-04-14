@@ -60,17 +60,36 @@ public class PosProductController {
 		return "redirect:updateProductView.do?mgrId="+mgrId;
 	}
 	
-	// 테이블 삭제
-		@RequestMapping(value = "/pos/deleteProduct.do")
-		public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) {
-			int shopCode = posMainDao.getShopCode(mgrId);
-			productDto.setShopCode(shopCode);
-			System.out.println("productCode="+productDto.getProductCode());
-			System.out.println("shopCode="+productDto.getShopCode());
+	// 주문량 조회
+	@RequestMapping(value = "/pos/countOrder.do")
+	public String countOrder(@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) {
+		int shopCode = posMainDao.getShopCode(mgrId);
+		productDto.setShopCode(shopCode);
+		int countOrder=posProductDao.countOrder(productDto.getProductCode());
+		if(countOrder==0){
+			return "deleteProduct.do?productCode="+productDto.getProductCode()+"&mgrId="+mgrId;
+		}
+		else
+			return "1";
+	}
+	
+	// 메뉴 삭제
+	@RequestMapping(value = "/pos/deleteProduct.do")
+	public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,@RequestParam(value = "productCode") int productCode,ProductDto productDto) {
+		int shopCode = posMainDao.getShopCode(mgrId);
+		productDto.setShopCode(shopCode);
+		System.out.println("상품코드="+productDto.getProductCode());
+		int countOrder=posProductDao.countOrder(productCode);
+		if(countOrder==0){
 			int result=posProductDao.deleteProduct(productDto);
 			System.out.println("result="+result);
-			return "redirect:updateProductView.do?mgrId="+mgrId;
 		}
+		else
+		System.out.println("productCode="+productDto.getProductCode());
+		System.out.println("shopCode="+productDto.getShopCode());
+		
+		return "redirect:updateProductView.do?mgrId="+mgrId;
+	}
 	
 }
 

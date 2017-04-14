@@ -12,6 +12,9 @@ public interface PosProductDao {
 	
 	// 테이블 삭제
 	public int deleteProduct(ProductDto productDto);
+	
+	// 주문량 조회
+	public int countOrder(int productCode);
 
 }
 

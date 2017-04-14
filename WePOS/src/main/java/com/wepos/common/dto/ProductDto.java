@@ -73,6 +73,6 @@ public String getProductName() {
   }
   public void setUpload(MultipartFile upload) {
 	this.upload = upload;
-  }  
+  }
   
 }
