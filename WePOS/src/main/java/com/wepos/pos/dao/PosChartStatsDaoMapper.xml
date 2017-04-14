@@ -12,9 +12,9 @@
 			inner join orders_detail od on o.order_code = od.order_code
 			where o.shop_code = #{shopCode}
 			and o.order_date between to_timestamp(#{start}, 'YYYY-MM-DD') and to_timestamp(#{finish}, 'YYYY-MM-DD')
-			order by order_date
 		) mo
 		group by mo.mon
+		order by mo.mon
 	</select>
 
 </mapper>
