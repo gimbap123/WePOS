@@ -28,12 +28,14 @@ public class PosCategoryController {
 
 		int shopCode = posMainDao.getShopCode(mgrId);		
 		ShopDto shop = posMainDao.getShop(shopCode);
-		List<CategoryDto> categoryList = posMainDao.getCategory(shopCode);
+		List<CategoryDto> categoryList = posCategoryDao.selectCategory(shopCode);
+		List<CategoryDto> countProduct = posCategoryDao.countProduct(shopCode);
 
 		ModelAndView mav = new ModelAndView("pos/updateCategory");
 		mav.addObject("shopCode", shopCode);
 		mav.addObject("shop", shop);
 		mav.addObject("categoryList", categoryList);
+		mav.addObject("countProduct", countProduct);
 		return mav;
 	}
 

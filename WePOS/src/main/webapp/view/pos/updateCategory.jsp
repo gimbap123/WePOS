@@ -85,11 +85,22 @@
 						<c:if test="${fn:length(categoryList)>0}">
 							<c:forEach var="i" begin="0" end="${fn:length(categoryList)-1}">							
 								<div class="col-md-3 col-sm-6">
-					                <div class="pricing-v1 pricing-v1-blue">			                	
-					                    <div class="pricing-head" 
-					                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','${categoryList[i].countProduct}')">
-					                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
-					                    </div>
+					                <div class="pricing-v1 pricing-v1-blue">
+					                	<c:if test="${fn:length(countProduct)!=0}">
+					                		<c:if test="${countProduct[i].countProduct!=null}">
+							                    <div class="pricing-head" 
+							                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','${countProduct[i].countProduct}')">
+							                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
+						                        </div>
+					                        </c:if>
+					                        <c:if test="${countProduct[i].countProduct==null}">
+						                    	<div class="pricing-head" 
+						                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','0')">
+						                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>					                   
+					                    		</div>
+					                    	</c:if>
+					                    </c:if>
+					                    	
 				                	</div>
 					            </div>
 							</c:forEach>

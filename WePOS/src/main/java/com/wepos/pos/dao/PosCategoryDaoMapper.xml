@@ -4,6 +4,20 @@
    
 <mapper namespace="com.wepos.pos.dao.PosMainDao">
 
+	<select id="selectCategory" parameterType="int" resultType="CategoryDto">
+		select * from category
+		where shop_code=#{shopCode}
+		order by category_code asc
+	</select>
+	
+	<select id="countProduct" parameterType="int" resultType="CategoryDto">
+		select category_code, count( category_code ) "countProduct"
+		from product
+		where shop_code = #{shopCode}
+		group by category_code
+		order by category_code
+	</select>
+
 	<insert id="createCategory" parameterType="CategoryDto">
 		insert into category values(#{shopCode},(select count(*)+1 from category where shop_code=#{shopCode}),#{categoryName})
 	</insert>

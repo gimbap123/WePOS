@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.pos.dao.PosCategoryDao;
 import com.wepos.pos.dao.PosMainDao;
 import com.wepos.pos.dao.PosProductDao;
 
@@ -22,6 +23,9 @@ public class PosProductController {
 	
 	@Autowired
 	private PosProductDao posProductDao;
+	
+	@Autowired
+	private PosCategoryDao posCategoryDao;
 
 	// 메뉴 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateProductView.do")
@@ -32,7 +36,7 @@ public class PosProductController {
 		productDto.setShopCode(shopCode);
 		ShopDto shop = posMainDao.getShop(shopCode);	
 		List<ProductDto> productList = posMainDao.getProductList(shopCode);
-		List<CategoryDto> categoryList = posMainDao.getCategory(shopCode);		
+		List<CategoryDto> categoryList = posCategoryDao.selectCategory(shopCode);		
 
 		ModelAndView mav = new ModelAndView("pos/updateProduct");
 		mav.addObject("shopCode", shopCode);
