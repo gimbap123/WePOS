@@ -62,7 +62,7 @@
 						class="dropdown-toggle" data-toggle="dropdown">매장페이지 관리</a>
 						<ul class="dropdown-menu">
 							<li><a href="shopInfoUpdate.do?shopCode=${sessionScope.shopCode}">매장정보</a></li>
-							<li><a href="#">찾아오시는 길</a></li>
+							<li><a href="posShopNotice.do?shopCode=${sessionScope.shopCode}">공지사항</a></li>
 							<li><a href="#">자유게시판</a></li>
 						</ul></li>
 					<!-- End About Pages -->

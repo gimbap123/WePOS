@@ -191,14 +191,15 @@ function shopNoticeUpdate()
 	document.shopNoticeUpdateForm.submit();
 }
 
-function shopNoticeDelete(noticeNumber, shopCode, fileName)
+function shopNoticeDelete(noticeNumber, shopCode, fileName, menuType)
 {
 	var flag = confirm("글을 삭제하시겠습니까?");
 	
 	if(flag)
 	{
-		alert("삭제되었습니다.");
-		location.href = 'shopNoticeDelete.do?noticeNumber=' + noticeNumber + '&shopCode=' + shopCode + '&noticeFile=' + fileName;
+		alert("삭제되었습니다.");		
+		location.href = 'shopNoticeDelete.do?noticeNumber=' + noticeNumber + '&shopCode=' + shopCode + '&noticeFile=' + fileName 
+			+ '&menuType=' + menuType;
 	}
 	else
 	{

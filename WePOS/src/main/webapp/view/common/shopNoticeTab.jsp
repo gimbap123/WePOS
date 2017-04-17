@@ -5,6 +5,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title"><i class="icon-note"></i> 공지사항 (총 ${shopNoticeCount}개의 공지사항이 있습니다.)</h3>	
 	</div>	
+	<input type="hidden" name="menuType" value="${menuType}">
 	
 	<div class="table-responsive">
 		<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
@@ -27,7 +28,7 @@
 				<c:forEach items="${shopNoticeList}" var="shopNotice">
 					<tr>
 						<td>${shopNotice.noticeNumber}</td>
-						<td><a href="shopNoticeDetail.do?noticeNumber=${shopNotice.noticeNumber}">${shopNotice.noticeTitle}</a></td>
+						<td><a href="../common/shopNoticeDetail.do?noticeNumber=${shopNotice.noticeNumber}&menuType=${menuType}">${shopNotice.noticeTitle}</a></td>
 						<td>${shopNotice.mgrId}</td>
 						<td>${shopNotice.noticeDate}</td>
 						<td>${shopNotice.noticeReadCnt}</td>
@@ -64,7 +65,7 @@
 		</div>
 		<c:if test="${sessionScope.shopCode == shopCode}">
 			<div class="col-md-3">
-				<button class="btn-u" type="button" onclick="location.href='shopNoticeWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>
+				<button class="btn-u" type="button" onclick="location.href='../common/shopNoticeWrite.do?shopCode=${shopCode}&menuType=${menuType}'"><i class="icon-pencil"></i> 글쓰기</button>
 			</div>					
 		</c:if>
 	</div>	
