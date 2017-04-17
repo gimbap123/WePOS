@@ -28,4 +28,8 @@ public class PosCategoryDaoImpl extends SqlSessionDaoSupport implements PosCateg
 		return getSqlSession().delete("deleteCategory",categoryDto);
 	}
 	
+	public int checkName(CategoryDto categoryDto){
+		return getSqlSession().selectOne("checkCategoryName",categoryDto);
+	}
+	
 }

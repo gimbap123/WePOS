@@ -79,3 +79,7 @@
 form#searchShop {
   display: table-row-group; 
 }
+
+button#orderButton {
+  height:70px; 
+}

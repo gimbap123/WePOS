@@ -19,7 +19,7 @@
 	</select>
 
 	<insert id="createCategory" parameterType="CategoryDto">
-		insert into category values(#{shopCode},(select count(*)+1 from category where shop_code=#{shopCode}),#{categoryName})
+		insert into category values(#{shopCode},(select NVL2(max(category_code),max(category_code) + 1,1 ) "categoryCode" from category where shop_code=#{shopCode}),#{categoryName})
 	</insert>
 
 	<update id="updateCategory" parameterType="CategoryDto">
@@ -31,5 +31,10 @@
 		delete from category
 		where shop_code=#{shopCode} and category_code=#{categoryCode}
 	</delete>
+	
+	<select id="checkCategoryName" parameterType="CategoryDto" resultType="int">
+		select count(category_name) from category 
+		where shop_code=#{shopCode} and category_name=#{categoryName}
+	</select>
 	
 </mapper>

@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js?ver=1"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -79,18 +79,36 @@
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>
-						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 추가</button>
+						<%-- <c:if test="${fn:length(categoryList)>0}"> --%>
+							<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 등록</button>							
+						<%-- </c:if> --%>
+						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 등록</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
 						<c:if test="${fn:length(productList)>0}">
 							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
 								<div class="col-md-3 col-sm-6">
-					                <div class="pricing-v1 pricing-v1-blue">			                	
-					                    <div class="pricing-head" 
-					                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}')">
-					                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
-					                    </div>
+					                <div class="pricing-v1 pricing-v1-blue">
+					                	<c:if test="${fn:length(countOrder)>0}">
+					                		<c:if test="${countOrder[i].countOrder!=null}">
+							                    <div class="pricing-head" 
+							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','${countOrder[i].countOrder}')">
+							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+							                    </div>
+						                    </c:if>
+						                    <c:if test="${countOrder[i].countOrder==null}">
+							                    <div class="pricing-head" 
+							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0')">
+							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+							                    </div>
+						                    </c:if>
+					                    </c:if>
+					                    <c:if test="${fn:length(countOrder)==0}">
+						                    <div class="pricing-head" 
+						                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0')">
+						                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+						                    </div>
+					                    </c:if>
 				                	</div>
 					            </div>
 							</c:forEach>
@@ -117,6 +135,12 @@
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
+									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">매장 번호</th>
+									<th>
+										<input type="text" id="shopCode" name="shopCode" value="${shop.shopCode}" size="15px" style="text-align:center;border:0" readonly>
+									</th>
+								</tr>
+								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 번호</th>
 									<th>
 										<input type="text" id="productCode" name="productCode" value="" size="15px" style="border:0" readonly>
@@ -140,8 +164,14 @@
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">상품명</th>
 									<td>
-										<input type="text" id="productName" name="productName" value="" size="15px" style="text-align:center">
+										<input type="text" id="productName" name="productName" value="" size="15px" style="text-align:center" 
+											onchange="checkProductName()" disabled>
 									</td>
+								</tr>
+								<tr>
+									<th colspan=2 style="text-align:center;vertical-align:middle;width:90px;height:30px">
+										<div id="checkNameTh"></div>
+									</th>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">가 격</th>
@@ -159,6 +189,12 @@
 									<th style="text-align:center;vertical-align:middle;width:90px">상품 설명</th>
 									<td>
 										<input type="text" id="productDesc" name="productDesc" value="" size="15px" style="text-align:center">
+									</td>
+								</tr>
+								<tr>
+									<th style="text-align:center;vertical-align:middle;width:90px">현재 주문량</th>
+									<td>
+										<input type="text" id="countOrder" name="countOrder" value="" size="15px" style="text-align:center;border:0" readonly>
 									</td>
 								</tr>
 							</tbody>
