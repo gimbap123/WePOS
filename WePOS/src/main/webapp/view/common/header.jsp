@@ -57,10 +57,24 @@
 					class="dropdown-toggle" data-toggle="dropdown"> 매장 관리 </a>
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">매장 영업</a></li>
-						<li><a href="../pos/updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
-						<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
-						<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
-						<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
+						<li class="dropdown-submenu">
+							<a href="javascript:void(0);">매장 관리</a>															
+							<ul class="dropdown-menu">
+								<li><a href="../pos/updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
+								<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
+								<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
+								<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
+								<li><a href="../pos/posChartStats.do?shopCode=${sessionScope.shopCode}">차트 통계</a></li>	
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a href="javascript:void(0);">매장 페이지 관리</a>
+							<ul class="dropdown-menu">
+								<li><a href="../pos/shopInfoUpdate.do?shopCode=${sessionScope.shopCode}">매장 정보</a></li>
+								<li><a href="../pos/posShopNotice.do?shopCode=${sessionScope.shopCode}">공지사항</a></li>
+								<li><a href="../pos/posShopBoard.do?shopCode=${sessionScope.shopCode}">자유 게시판</a></li>									
+							</ul>
+						</li>
 					</ul></li>
 				</c:if>			
 				<!-- End 매장 관리(관리자 기능) -->
@@ -92,17 +106,7 @@
 						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
 						<li><a href="#">Q&A</a></li>
 					</ul></li>
-				<!-- End 게시판 -->
-
-				<!-- 기타 메뉴 -->
-				<li class="dropdown"><a href="javascript:void(0);"
-					class="dropdown-toggle" data-toggle="dropdown"> 기타 메뉴 </a>
-					<ul class="dropdown-menu">
-						<li><a href="#">메뉴 1</a></li>
-						<li><a href="#">메뉴 2</a></li>
-						<li><a href="#">메뉴 3</a></li>
-					</ul></li>
-				<!-- End 기타 메뉴 -->
+				<!-- End 게시판 -->				
 			</ul>
 		</div>
 		<!--/end container-->
