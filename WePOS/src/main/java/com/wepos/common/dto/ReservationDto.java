@@ -8,9 +8,10 @@ public class ReservationDto {
 	private String userId;
 	private int shopCode;
 	private int resPersons;
-	private Date resDate;
+	private String resDate;
 	private String resDesc;
 	private String resState;
+	private String resFinalDate;
 	
 	public int getReseNumber() {
 		return reseNumber;
@@ -44,11 +45,11 @@ public class ReservationDto {
 		this.resPersons = resPersons;
 	}
 
-	public Date getResDate() {
+	public String getResDate() {
 		return resDate;
 	}
 
-	public void setResDate(Date resDate) {
+	public void setResDate(String resDate) {
 		this.resDate = resDate;
 	}
 
@@ -66,6 +67,14 @@ public class ReservationDto {
 
 	public void setResState(String resState) {
 		this.resState = resState;
+	}
+
+	public String getResFinalDate() {
+		return resFinalDate;
+	}
+	
+	public void setResFinalDate(String resFinalDate) {
+		this.resFinalDate = resFinalDate;
 	}
 
 	@Override

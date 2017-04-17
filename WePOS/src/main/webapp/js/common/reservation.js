@@ -1,7 +1,7 @@
 //예약 확인
 function checkRes(){
 	
-	if($('#resePersons').val()==0){
+	if($('#resPersons').val()==0){
 		alert("예약 인원을 선택해주세요");
 		return false;
 	}else if($('#start').val()==''){

@@ -5,7 +5,7 @@
 <mapper namespace="com.wepos.common.dao.ReservationDao">
 	
 	<insert id="insertRes" parameterType="ReservationDto">
-		insert into reservation values(reservation_seq.nextval, #{userId}, #{shopCode}, #{resePersons}, sysdate, ${resDesc})
+		insert into reservation values(reservation_seq.nextval, #{userId}, #{shopCode}, #{resPersons}, #{resFinalDate}, #{resDesc}, 0)
 	</insert>
 
 </mapper>
