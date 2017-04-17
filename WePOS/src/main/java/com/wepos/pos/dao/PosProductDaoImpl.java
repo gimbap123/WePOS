@@ -1,8 +1,11 @@
 package com.wepos.pos.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ProductDto;
+import com.wepos.mgr.dto.CategoryDto;
 
 public class PosProductDaoImpl extends SqlSessionDaoSupport implements PosProductDao{
 	
@@ -18,7 +21,11 @@ public class PosProductDaoImpl extends SqlSessionDaoSupport implements PosProduc
 		return getSqlSession().delete("deleteProduct",productDto);
 	}
 	
-	public int countOrder(int productCode){
-		return getSqlSession().selectOne("countOrder",productCode);
+	public List<ProductDto> countOrder(int shopCode){
+		return getSqlSession().selectList("countOrder",shopCode);
+	}
+	
+	public int checkName(ProductDto ProductDto){
+		return getSqlSession().selectOne("checkProductName",ProductDto);
 	}
 }

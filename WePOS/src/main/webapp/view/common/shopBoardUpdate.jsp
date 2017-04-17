@@ -51,6 +51,7 @@
 				<div class="table-responsive">		
 					<form action="shopBoardUpdate.do" name="shopBoardUpdateForm" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="boardNumber" value="${shopBoard.boardNumber}">
+						<input type="hidden" name="menuType" value="${menuType}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">제 목</td>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="application/javascript; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script>
+var tableCode;
+var tableName;
 
 $(document).ready(function() {
     App.init();
@@ -42,19 +44,37 @@ function realTime() {
     document.getElementById("realTime").innerHTML = ampm + hours
       + ":" + minutes + ":" + seconds;
       }
-      
+     
+$('#selectTable').on('click', function() {
+});
+
+$(document).on('click', '.pos-table', function( event ) {
+  tableCode = $(this).data('code');
+  tableName = $(this).data('name');
+  $('#selectedTable').children('h4').text( tableName );
+  $('#selectedTable').attr("data-code", tableCode );
+  $('#selectedTable').attr("data-name", tableName );
+});
+
+$('#orderButton').on('click', function() {
+  var code = $('#selectedTable').attr('data-code'); 
+  $('.pos-table').trigger('dblclick');
+});
+
 // 테이블 클릭 시 주문 모달창 호출
-$('.pos-table').on('click', function( event ) {
-    var selectedTable = $(this).find('.tableName').html();
+$(document).on('dblclick', '.pos-table', function( event ) {
+  if( tableCode == $(this).attr('data-code') ) {
+    var selectedTableCode = tableCode;
+    var selectedTableName = tableName;
     var sumOrderPrice = 0;
     // 모달 창 호출
     $('#orderModal').modal();
     
     // 선택한 테이블 이름 출력 
-    $('#selectTableName').text( selectedTable );
+    $('#selectTableName').text( selectedTableName );
 
     // 주문 메뉴 하나당 주문 현황에 추가
-    $(this).find('.productName').each( function(){
+    $('.pos-table[data-code='+selectedTableCode+']').find('.productName').each( function(){
       var productName = $(this).contents().get(0).nodeValue;
       var productStock = $(this).children('span').text();
       var productPrice = $(this).children('.productPrice').val();
@@ -64,6 +84,8 @@ $('.pos-table').on('click', function( event ) {
     });
     
     $("#prevOrderList").find('#totalPrevOrderPrice').text( sumOrderPrice );
+    return false;
+  }
 })
 
 // 기존 주문 메뉴 리스트 클릭시

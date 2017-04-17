@@ -51,6 +51,7 @@
 				<div class="table-responsive">		
 					<form action="shopNoticeWrite.do" name="shopNoticeWriteForm" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="shopCode" value="${shopCode}">
+						<input type="hidden" name="menuType" value="${menuType}">
 						<table class="table table-bordered table-striped table-hover tablesorter">
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">제 목</td>
@@ -75,8 +76,8 @@
 							<tr>
 								<td colspan="2" style="vertical-align: middle;" align="right">							
 									<button class="btn-u" type="button" onclick="shopNoticeWrite()">등록</button>
-									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="location.href='shopDetail.do?shopCode=${shopCode}'">목록으로</button>										
-								</td>
+									<button class="btn-u" type="button" style="margin-right: 10px;" onclick="location.href='../common/shopNoticeSelectMenu.do?shopCode=${shopCode}&menuType=${menuType}'">목록으로</button>										
+								</td> 
 							</tr>
 						</table>	
 					</form>			

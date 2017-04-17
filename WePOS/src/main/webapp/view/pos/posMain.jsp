@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=4" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=5" /> ">
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>" rel="stylesheet" type="text/css">
@@ -60,9 +60,10 @@
           </h1>
         </c:if>
 
-        <c:if test="${tableCount >= 1}">
+        <c:if test="${tableCount >= 1}">a
+        ${tables}
           <c:forEach var="i" begin="0" end="${tableCount-1}">
-            <div id="${tables[i].tableCode}" class="panel panel-success pos-table">
+            <div id="${tables[i].tableCode}" class="panel panel-success pos-table" data-code="${tables[i].tableCode}" data-name="${tables[i].tableName}">
               <div class="panel-heading">
                 <h3 class="panel-title" id="panel-title">
                   <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right customerCount" style="margin-top: 4px"> ${tables[i].tableMax}인</span></a>
@@ -122,6 +123,8 @@
             </tbody>
           </table>
         </div>
+        <div class="panel panel-success">
+        <div class="panel-heading" id="selectedTable" data-code="" data-name=""><h4 class="text-success">테이블 선택</h4></div>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-lg btn-success" data-toggle="tooltip">예약</button>
@@ -143,17 +146,22 @@
             <button type="button" class="btn btn-lg btn-success">계산서출력</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success">테이블 상세</button>
+            <button type="button" id="selectTable" class="btn btn-lg btn-success">테이블 상세</button>
           </div>
         </div>
-        <br>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-danger">주문</button>
+            <button type="button" class="btn btn-lg btn-danger" id="orderButton">주문</button>
+          </div>
+        </div>
+        <div role="group" aria-label="..." class="btn-group btn-group-justified">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-lg btn-info">현금결제</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-primary">계산</button>
+            <button type="button" class="btn btn-lg btn-primary">카드결제</button>
           </div>
+        </div>
         </div>
       </div>
       <!-- End Owl Clients v1 -->

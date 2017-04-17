@@ -20,6 +20,9 @@ public interface PosCategoryDao {
 	
 	// 상품분류 삭제
 	public int deleteCategory(CategoryDto categoryDto);
+	
+	// 상품분류명 중복검사
+	public int checkName(CategoryDto categoryDto);
 
 }
 

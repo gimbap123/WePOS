@@ -5,6 +5,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title"><i class="icon-note"></i> 자유 게시판 (총 ${shopBoardCount}개의 게시물이 있습니다.)</h3>	
 	</div>	
+	<input type="hidden" name="menuType" value="${menuType}">
 	
 	<div class="table-responsive">
 		<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
@@ -27,7 +28,7 @@
 				<c:forEach items="${shopBoardList}" var="shopBoard">
 					<tr>
 						<td>${shopBoard.boardNumber}</td>
-						<td><a href="shopBoardDetail.do?boardNumber=${shopBoard.boardNumber}">${shopBoard.boardTitle}</a></td>
+						<td><a href="../common/shopBoardDetail.do?boardNumber=${shopBoard.boardNumber}&menuType=${menuType}">${shopBoard.boardTitle}</a></td>
 						<td>${shopBoard.totalId}</td>
 						<td>${shopBoard.boardDate}</td>
 						<td>${shopBoard.boardReadCnt}</td>
@@ -64,7 +65,7 @@
 		</div>
 		<c:if test="${sessionScope.id != null}">
 			<div class="col-md-3">
-				<button class="btn-u" type="button" onclick="location.href='shopBoardWrite.do?shopCode=${shopCode}'"><i class="icon-pencil"></i> 글쓰기</button>				
+				<button class="btn-u" type="button" onclick="location.href='../common/shopBoardWrite.do?shopCode=${shopCode}&menuType=${menuType}'"><i class="icon-pencil"></i> 글쓰기</button>				
 			</div>			
 		</c:if>
 	</div>	

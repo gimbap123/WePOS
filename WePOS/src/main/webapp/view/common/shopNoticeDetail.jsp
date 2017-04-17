@@ -34,7 +34,8 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=2"></script>
+
 
 <title>We POS</title>
 </head>
@@ -70,10 +71,10 @@
 						</c:if>						
 						<div align="right">						
 							<c:if test="${sessionScope.shopCode == shopNotice.shopCode}">
-								<button class="btn-u" type="button" onclick="location.href='shopNoticeUpdate.do?noticeNumber=${shopNotice.noticeNumber}'">수정</button>																		
-								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode}, '${fileName}')">삭제</button>
+								<button class="btn-u" type="button" onclick="location.href='shopNoticeUpdate.do?noticeNumber=${shopNotice.noticeNumber}&menuType=${menuType}'">수정</button>																		
+								<button class="btn-u" type="button" onclick="shopNoticeDelete(${shopNotice.noticeNumber}, ${shopNotice.shopCode}, '${fileName}', '${menuType}')">삭제</button>
 							</c:if>
-							<button class="btn-u" type="button" onclick="location.href='shopDetail.do?shopCode=${shopNotice.shopCode}'">목록으로</button>							
+							<button class="btn-u" type="button" onclick="location.href='../common/shopNoticeSelectMenu.do?shopCode=${shopNotice.shopCode}&menuType=${menuType}'">목록으로</button>							
 						</div>
 					</div>
 				</div>
