@@ -13,34 +13,42 @@ public class ChartUtil {
 	
 	@SuppressWarnings("unchecked")
 	public static JSONObject barChartStat(List<ChartStatsDto> chartStatsList)
-	{
+	{		
 		JSONObject jsonChartData = new JSONObject();
-		JSONArray labels = new JSONArray();
-		JSONArray datasets = new JSONArray();
-		JSONArray dataArray = new JSONArray();
 		
-		JSONObject jsonData = new JSONObject();
-		jsonData.put("label", "총 매출");
-		jsonData.put("fillColor", "rgba(210, 214, 222, 1)");
-		jsonData.put("strokeColor", "rgba(210, 214, 222, 1)");
-		jsonData.put("pointColor", "rgba(210, 214, 222, 1)");
-		jsonData.put("pointStrokeColor", "#c1c7d1");
-		jsonData.put("pointHighlightFill", "#fff");
-		jsonData.put("pointHighlightStroke", "rgba(220,220,220,1)");
-		
-		for(ChartStatsDto chartStats : chartStatsList)
+		if(chartStatsList.size() == 0)
 		{
-			labels.add(chartStats.getLabel());
-				
-			dataArray.add(chartStats.getTotalPrice());		
-			
+			jsonChartData = null;
 		}
-		
-		jsonData.put("data", dataArray);
-		datasets.add(jsonData);	
-		
-		jsonChartData.put("labels", labels);
-		jsonChartData.put("datasets", datasets);
+		else
+		{
+			JSONArray labels = new JSONArray();
+			JSONArray datasets = new JSONArray();
+			JSONArray dataArray = new JSONArray();
+			
+			JSONObject jsonData = new JSONObject();
+			jsonData.put("label", "총 매출");
+			jsonData.put("fillColor", "rgba(210, 214, 222, 1)");
+			jsonData.put("strokeColor", "rgba(210, 214, 222, 1)");
+			jsonData.put("pointColor", "rgba(210, 214, 222, 1)");
+			jsonData.put("pointStrokeColor", "#c1c7d1");
+			jsonData.put("pointHighlightFill", "#fff");
+			jsonData.put("pointHighlightStroke", "rgba(220,220,220,1)");
+			
+			for(ChartStatsDto chartStats : chartStatsList)
+			{
+				labels.add(chartStats.getLabel());
+					
+				dataArray.add(chartStats.getTotalPrice());		
+				
+			}
+			
+			jsonData.put("data", dataArray);
+			datasets.add(jsonData);	
+			
+			jsonChartData.put("labels", labels);
+			jsonChartData.put("datasets", datasets);
+		}
 		
 		return jsonChartData;
 	}
@@ -51,19 +59,26 @@ public class ChartUtil {
 		JSONArray jsonChartArray = new JSONArray();
 		
 		String[] colorArr = {"#f56954", "#00a65a", "#00a65a"};
-
-		int cnt = 0;
-		for(ChartStatsDto chartStats : chartStatsList)
+		
+		if(chartStatsList.size() == 0)
 		{
-			JSONObject jsonChartData = new JSONObject();
-			jsonChartData.put("value", chartStats.getTotalPrice());
-			jsonChartData.put("color", colorArr[cnt]);
-			jsonChartData.put("highlight", colorArr[cnt]);
-			jsonChartData.put("label", chartStats.getLabel());		
-			cnt++;
-			
-			jsonChartArray.add(jsonChartData);
-		}		
+			jsonChartArray = null;
+		}
+		else
+		{
+			int cnt = 0;
+			for(ChartStatsDto chartStats : chartStatsList)
+			{
+				JSONObject jsonChartData = new JSONObject();
+				jsonChartData.put("value", chartStats.getTotalPrice());
+				jsonChartData.put("color", colorArr[cnt]);
+				jsonChartData.put("highlight", colorArr[cnt]);
+				jsonChartData.put("label", chartStats.getLabel());		
+				cnt++;
+				
+				jsonChartArray.add(jsonChartData);
+			}		
+		}	
 		
 		return jsonChartArray;
 	}
@@ -78,6 +93,6 @@ public class ChartUtil {
 		chartTypeList.put("4", "회원, 비회원별 매출");
 		
 		return chartTypeList;
-	}
+	}	
 
 }
