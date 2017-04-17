@@ -13,14 +13,21 @@
 		where shop_code=#{shopCode} and product_code=#{productCode}
 	</update>
 	
-	<select id="countOrder" parameterType="int" resultType="int">
-		select count(od.product_code)
+	<select id="countOrder" parameterType="int" resultType="ProductDto">
+		select od.product_code,sum(od.order_amount) "countOrder"
 		from orders o,orders_detail od
-		where o.order_code=od.order_code and od.product_code=#{productCode}
+		where o.order_code=od.order_code and o.shop_code=#{shopCode} and o.order_state=0
+		group by od.product_code
+		order by od.product_code asc
 	</select>
 	
 	<delete id="deleteProduct" parameterType="ProductDto">
 		delete from product 
 		where shop_code=#{shopCode} and product_code=#{productCode}
 	</delete>
+	
+	<select id="checkProductName" parameterType="ProductDto" resultType="int">
+		select count(product_name) from product 
+		where shop_code=#{shopCode} and product_name=#{productName}
+	</select>
 </mapper>

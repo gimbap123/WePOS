@@ -13,6 +13,7 @@ public class ProductDto {
   private String productDesc;
   private String productFile;
   private MultipartFile upload;
+  private int countOrder;
   
   public int getProductCode() {
     return productCode;
@@ -74,5 +75,11 @@ public String getProductName() {
   public void setUpload(MultipartFile upload) {
 	this.upload = upload;
   }
+public int getCountOrder() {
+	return countOrder;
+}
+public void setCountOrder(int countOrder) {
+	this.countOrder = countOrder;
+}
   
 }

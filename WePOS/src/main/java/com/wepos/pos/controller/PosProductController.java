@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,12 +38,14 @@ public class PosProductController {
 		ShopDto shop = posMainDao.getShop(shopCode);	
 		List<ProductDto> productList = posMainDao.getProductList(shopCode);
 		List<CategoryDto> categoryList = posCategoryDao.selectCategory(shopCode);		
-
+		List<ProductDto> countOrder=posProductDao.countOrder(shopCode);
+		
 		ModelAndView mav = new ModelAndView("pos/updateProduct");
 		mav.addObject("shopCode", shopCode);
 		mav.addObject("shop", shop);
 		mav.addObject("productList", productList);
 		mav.addObject("categoryList", categoryList);
+		mav.addObject("countOrder",countOrder);
 		return mav;
 	}
 
@@ -62,37 +65,44 @@ public class PosProductController {
 			System.out.println("수정 성공여부 = "+updateProduct);
 		}
 		return "redirect:updateProductView.do?mgrId="+mgrId;
-	}
-	
-	// 주문량 조회
-	@RequestMapping(value = "/pos/countOrder.do")
-	public String countOrder(@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) {
-		int shopCode = posMainDao.getShopCode(mgrId);
-		productDto.setShopCode(shopCode);
-		int countOrder=posProductDao.countOrder(productDto.getProductCode());
-		if(countOrder==0){
-			return "deleteProduct.do?productCode="+productDto.getProductCode()+"&mgrId="+mgrId;
-		}
-		else
-			return "1";
-	}
+	}	
 	
 	// 메뉴 삭제
 	@RequestMapping(value = "/pos/deleteProduct.do")
-	public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,@RequestParam(value = "productCode") int productCode,ProductDto productDto) {
+	public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,
+													@RequestParam(value = "productCode") int productCode,
+													ProductDto productDto) {
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
 		System.out.println("상품코드="+productDto.getProductCode());
-		int countOrder=posProductDao.countOrder(productCode);
-		if(countOrder==0){
-			int result=posProductDao.deleteProduct(productDto);
-			System.out.println("result="+result);
-		}
-		else
-		System.out.println("productCode="+productDto.getProductCode());
-		System.out.println("shopCode="+productDto.getShopCode());
+		int result=posProductDao.deleteProduct(productDto);
+		System.out.println("result="+result);
 		
 		return "redirect:updateProductView.do?mgrId="+mgrId;
+	}
+	
+	// 카테고리명 중복확인
+	@RequestMapping(value="/pos/checkProductName.do", method=RequestMethod.POST)
+	public ModelAndView checkProductNameProcess(@RequestParam(value = "productName") String productName,
+																					@RequestParam(value = "shopCode") int shopCode)
+	{
+		String comment="";
+		ModelAndView mav=new ModelAndView();
+		ProductDto productDto=new ProductDto();		
+		productDto.setProductName(productName);
+		productDto.setShopCode(shopCode);
+		int checkResult = posProductDao.checkName(productDto);
+		System.out.println("checkName 중복여부 : " + checkResult);		
+		
+		if(checkResult>=1)
+			comment="이미 등록된 이름입니다.";
+		else if(checkResult==0)
+			comment="사용 가능한 이름입니다.";
+		
+		mav.addObject("checkResult",checkResult);
+		mav.addObject("comment",comment);
+		mav.setViewName("pos/checkName");			
+		return mav;
 	}
 	
 }

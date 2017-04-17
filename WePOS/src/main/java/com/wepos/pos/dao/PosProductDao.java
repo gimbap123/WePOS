@@ -1,5 +1,7 @@
 package com.wepos.pos.dao;
 
+import java.util.List;
+
 import com.wepos.common.dto.ProductDto;
 
 public interface PosProductDao {
@@ -14,7 +16,10 @@ public interface PosProductDao {
 	public int deleteProduct(ProductDto productDto);
 	
 	// 주문량 조회
-	public int countOrder(int productCode);
+	public List<ProductDto> countOrder(int shopCode);
+	
+	// 상품명 중복검사
+	public int checkName(ProductDto productDto);
 
 }
 

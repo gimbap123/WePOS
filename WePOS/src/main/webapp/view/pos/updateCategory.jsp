@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateCategory.js?ver=5"></script>
+<script language="JavaScript" src="../js/pos/updateCategory.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -90,17 +90,22 @@
 					                		<c:if test="${countProduct[i].countProduct!=null}">
 							                    <div class="pricing-head" 
 							                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','${countProduct[i].countProduct}')">
-							                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
-						                        </div>
-					                        </c:if>
-					                        <c:if test="${countProduct[i].countProduct==null}">
-						                    	<div class="pricing-head" 
-						                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','0')">
-						                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>					                   
-					                    		</div>
-					                    	</c:if>
-					                    </c:if>
-					                    	
+								                    <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
+							                    </div>
+							                </c:if>
+							                <c:if test="${countProduct[i].countProduct==null}">
+							                    <div class="pricing-head" 
+							                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','0')">
+								                    <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>
+							                    </div>
+							                </c:if>
+					                    </c:if>    
+				                        <c:if test="${fn:length(countProduct)==0}">
+					                    	<div class="pricing-head" 
+					                    		onclick="categoryInfo('${categoryList[i].categoryCode}','${categoryList[i].categoryName}','0')">
+					                        <h3 class="text-center"><label style="color:#5cb85c">${categoryList[i].categoryName}</label></h3>					                   
+				                    		</div>
+				                    	</c:if>					                    	
 				                	</div>
 					            </div>
 							</c:forEach>
@@ -127,16 +132,28 @@
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
+									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">매장 번호</th>
+									<th>
+										<input type="text" id="shopCode" name="shopCode" value="${shop.shopCode}" size="15px" style="text-align:center;border:0" readonly>
+									</th>
+								</tr>
+								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">분류 번호</th>
 									<th>
-										<input type="text" id="categoryCode" name="categoryCode" value="" size="15px" style="text-align:center;border:0" readonly>
+										<input type="text" id="categoryCode" name="categoryCode" value="" size="15px" style="text-align:center;border:0" readonly >
 									</th>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">상품분류명</th>
 									<td>
-										<input type="text" id="categoryName" name="categoryName" value="" size="15px" style="text-align:center">
+										<input type="text" id="categoryName" name="categoryName" value="" size="15px" style="text-align:center "
+												onchange="checkCategoryName()" disabled>
 									</td>
+								</tr>
+								<tr>
+									<th colspan=2 style="text-align:center;vertical-align:middle;width:90px;height:30px">
+										<div id="checkNameTh"></div>
+									</th>
 								</tr>
 								<tr id="countProductTr">
 									<th style="text-align:center;vertical-align:middle;width:90px">등록된 메뉴</th>

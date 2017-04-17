@@ -1,10 +1,13 @@
 package com.wepos.pos.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,14 +61,38 @@ public class PosCategoryController {
 	}
 	
 	// 테이블 삭제
-		@RequestMapping(value = "/pos/deleteCategory.do")
-		public String deleteCategory(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) {
-			int shopCode = posMainDao.getShopCode(mgrId);
-			categoryDto.setShopCode(shopCode);
-			int result=posCategoryDao.deleteCategory(categoryDto);
-			System.out.println("result="+result);
-			return "redirect:updateCategoryView.do?mgrId="+mgrId;
-		}
+	@RequestMapping(value = "/pos/deleteCategory.do")
+	public String deleteCategory(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) {
+		int shopCode = posMainDao.getShopCode(mgrId);
+		categoryDto.setShopCode(shopCode);
+		int result=posCategoryDao.deleteCategory(categoryDto);
+		System.out.println("result="+result);
+		return "redirect:updateCategoryView.do?mgrId="+mgrId;
+	}
+	
+	// 카테고리명 중복확인
+	@RequestMapping(value="/pos/checkCategoryName.do", method=RequestMethod.POST)
+	public ModelAndView checkCategoryNameProcess(@RequestParam(value = "categoryName") String categoryName,
+																	@RequestParam(value = "shopCode") int shopCode)
+	{
+		String comment="";
+		ModelAndView mav=new ModelAndView();
+		CategoryDto categoryDto=new CategoryDto();		
+		categoryDto.setCategoryName(categoryName);
+		categoryDto.setShopCode(shopCode);
+		int checkResult = posCategoryDao.checkName(categoryDto);
+		System.out.println("checkName 중복여부 : " + checkResult);		
+		
+		if(checkResult>=1)
+			comment="이미 등록된 이름입니다.";
+		else if(checkResult==0)
+			comment="사용 가능한 이름입니다.";
+		
+		mav.addObject("checkResult",checkResult);
+		mav.addObject("comment",comment);
+		mav.setViewName("pos/checkName");			
+		return mav;
+	}
 	
 }
 
