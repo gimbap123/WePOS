@@ -438,12 +438,15 @@ public class SearchShopController {
 		mav.addObject("searchBoardText", searchBoardText);
 		mav.addObject("searchBoardTypeList", searchBoardTypeList);
 		mav.addObject("shopCode", shopCode);
+		mav.addObject("menuType", "common");
+		
 		return mav;
 	}
 	
 	// 매장 자유게시판 상세보기
 	@RequestMapping(value="/common/shopBoardDetail.do")
-	public ModelAndView shopBoardDetailView(HttpServletRequest request, @RequestParam("boardNumber") int boardNumber)
+	public ModelAndView shopBoardDetailView(HttpServletRequest request, @RequestParam("boardNumber") int boardNumber,
+			@RequestParam("menuType") String menuType)
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
@@ -468,6 +471,7 @@ public class SearchShopController {
 		mav.setViewName("common/shopBoardDetail");
 		mav.addObject("shopBoard", shopBoard);
 		mav.addObject("fileName", fileName);
+		mav.addObject("menuType", menuType);
 				
 		return mav;
 	}
@@ -535,18 +539,21 @@ public class SearchShopController {
 	
 	// 매장 자유 게시판 글쓰기
 	@RequestMapping(value="/common/shopBoardWrite.do", method=RequestMethod.GET)
-	public ModelAndView shopBoardWriteView(@RequestParam("shopCode") int shopCode)
+	public ModelAndView shopBoardWriteView(@RequestParam("shopCode") int shopCode,
+			@RequestParam("menuType") String menuType)
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopBoardWrite");
 		mav.addObject("shopCode", shopCode);
+		mav.addObject("menuType", menuType);
 		
 		return mav;
 	}
 	
 	// 매장 자유 게시판 글쓰기 기능 수행
 	@RequestMapping(value="/common/shopBoardWrite.do", method=RequestMethod.POST)
-	public String shopBoardWriteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard) throws IOException, Exception
+	public String shopBoardWriteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard,
+			@RequestParam("menuType") String menuType) throws IOException, Exception
 	{		
 		String newFileName = "";
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
@@ -560,24 +567,28 @@ public class SearchShopController {
 		}
 		
 		shopDao.shopBoardWrite(shopBoard);
-		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
+		
+		return "redirect:/common/shopBoardSelectMenu.do?shopCode=" + shopBoard.getShopCode() + "&menuType=" + menuType;
 	}
 	
 	// 매장 자유 게시판 글수정
 	@RequestMapping(value="/common/shopBoardUpdate.do", method=RequestMethod.GET)
-	public ModelAndView shopBoardUpdateView(@RequestParam("boardNumber") int boardNumber)
+	public ModelAndView shopBoardUpdateView(@RequestParam("boardNumber") int boardNumber,
+			@RequestParam("menuType") String menuType)
 	{
 		ShopBoardDto shopBoard = shopDao.shopBoardDetail(boardNumber);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopBoardUpdate");
 		mav.addObject("shopBoard", shopBoard);
+		mav.addObject("menuType", menuType);
 		
-		return mav;		
+		return mav;
 	}
 	
 	// 매장 자유 게시판 글수정 기능 수행
 	@RequestMapping(value="/common/shopBoardUpdate.do", method=RequestMethod.POST)
-	public String shopBoardUpdateProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard) throws IOException, Exception
+	public String shopBoardUpdateProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard,
+			@RequestParam("menuType") String menuType) throws IOException, Exception
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
 		String oldFileName = shopBoard.getBoardFile();
@@ -598,12 +609,14 @@ public class SearchShopController {
 		}
 		
 		shopDao.shopBoardUpdate(shopBoard);
-		return "redirect:/common/shopBoardDetail.do?boardNumber=" + shopBoard.getBoardNumber();
+		
+		return "redirect:/common/shopBoardDetail.do?boardNumber=" + shopBoard.getBoardNumber() + "&menuType=" + menuType;
 	}
 	
 	// 매장 자유 게시판 글삭제
 	@RequestMapping(value="/common/shopBoardDelete.do")
-	public String shopBoardDeleteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard)
+	public String shopBoardDeleteProcess(HttpServletRequest request, @ModelAttribute ShopBoardDto shopBoard,
+			@RequestParam("menuType") String menuType)
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
 		
@@ -613,7 +626,8 @@ public class SearchShopController {
 		}
 		
 		shopDao.shopBoardDelete(shopBoard.getBoardNumber());
-		return "redirect:/common/shopDetail.do?shopCode=" + shopBoard.getShopCode();
+		
+		return "redirect:/common/shopBoardSelectMenu.do?shopCode=" + shopBoard.getShopCode() + "&menuType=" + menuType;
 	}
 	
 	// 매장 공지사항 글쓰기
@@ -718,6 +732,23 @@ public class SearchShopController {
 		else if("pos".equals(menuType))
 		{
 			redirect = "redirect:/pos/posShopNotice.do?shopCode=" + shopCode;
+		}
+		
+		return redirect;
+	}
+	
+	// 매장 자유 게시판 메뉴에 따른 목록으로
+	@RequestMapping(value="/common/shopBoardSelectMenu.do")
+	public String shopBoardSelectMenu(@RequestParam("shopCode") int shopCode, @RequestParam("menuType") String menuType)
+	{
+		String redirect = null;
+		if("common".equals(menuType))
+		{
+			redirect = "redirect:/common/shopDetail.do?shopCode=" + shopCode;
+		}
+		else if("pos".equals(menuType))
+		{
+			redirect = "redirect:/pos/posShopBoard.do?shopCode=" + shopCode;
 		}
 		
 		return redirect;

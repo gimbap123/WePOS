@@ -63,7 +63,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="shopInfoUpdate.do?shopCode=${sessionScope.shopCode}">매장정보</a></li>
 							<li><a href="posShopNotice.do?shopCode=${sessionScope.shopCode}">공지사항</a></li>
-							<li><a href="#">자유게시판</a></li>
+							<li><a href="posShopBoard.do?shopCode=${sessionScope.shopCode}">자유게시판</a></li>
 						</ul></li>
 					<!-- End About Pages -->
 					<!-- Blog -->

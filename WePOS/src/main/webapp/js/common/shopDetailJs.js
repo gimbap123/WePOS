@@ -156,14 +156,15 @@ function shopBoardUpdate()
 	document.shopBoardUpdateForm.submit();
 }
 
-function shopBoardDelete(boardNumber, shopCode, fileName)
+function shopBoardDelete(boardNumber, shopCode, fileName, menuType)
 {
 	var flag = confirm("글을 삭제하시겠습니까?");
 	
 	if(flag)
 	{
 		alert("삭제되었습니다.");
-		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode + '&boardFile=' + fileName;
+		location.href = 'shopBoardDelete.do?boardNumber=' + boardNumber + '&shopCode=' + shopCode + '&boardFile=' + fileName
+		+ '&menuType=' + menuType;
 	}
 	else
 	{
