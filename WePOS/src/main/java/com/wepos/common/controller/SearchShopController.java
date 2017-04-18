@@ -257,6 +257,8 @@ public class SearchShopController {
 		mav.addObject("categoryList", categoryList);
 		mav.addObject("categoryCode", categoryCode);
 		mav.addObject("pagingHtml", page.getPagingHtml()); 
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("shopCode", shopCode);
 		
 		return mav;
 	}

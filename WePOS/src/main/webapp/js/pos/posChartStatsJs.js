@@ -30,23 +30,32 @@ function chartTypeSelect(jsonChartData)
 	
 	if($("#chartType").val() == 0)
 	{
-		$("#chartDiv").html('<h1>차트를 검색하세요.</h1>');
+		$("#chartDiv").html('<h1 align="center">차트를 검색하세요.</h1>');
 	}
-	else if($("#chartType").val() == 1 || $("#chartType").val() == 2)
+	else
 	{
-		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">' 
-				+ '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body"> <div class="chart">' 
-				+ '<canvas id="barChart" style="height:300px"></canvas></div></div></div>');
-		barChartStats(jsonChartData);
-	}
-	else if($("#chartType").val() == 3 || $("#chartType").val() == 4)
-	{
-		$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">'
-				+  '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body">'
-				+ '<canvas id="pieChart" style="height:450px"></canvas></div></div>');
-		pieChartStats(jsonChartData);
-	}
-	
+		if(jsonChartData == null)
+		{
+			$("#chartDiv").html('<h1 align="center">조회한 기간에 해당하는 정보가 없습니다.</h1>');
+		}
+		else
+		{
+			if($("#chartType").val() == 1 || $("#chartType").val() == 2)
+			{
+				$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">' 
+						+ '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body"> <div class="chart">' 
+						+ '<canvas id="barChart" style="height:300px"></canvas></div></div></div>');
+				barChartStats(jsonChartData);
+			}
+			else if($("#chartType").val() == 3 || $("#chartType").val() == 4)
+			{
+				$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">'
+						+  '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body">'
+						+ '<canvas id="pieChart" style="height:450px"></canvas></div></div>');
+				pieChartStats(jsonChartData);
+			}
+		}
+	}	
 }
 
 function barChartStats(jsonChartData)

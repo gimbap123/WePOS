@@ -67,7 +67,7 @@
   </select>
   
   <select id="productList" parameterType="map" resultType="ProductDto">
-  	select p.product_name, p.product_price, p.product_desc, p.product_file
+  	select p.product_code, p.product_name, p.product_price, p.product_desc, p.product_file
   	from 
   	(
   		select rnumproduct.*, rownum as rnum

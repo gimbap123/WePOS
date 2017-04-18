@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="../assets/chart/AdminLTE.min.css">
 <link rel="stylesheet" href="../assets/chart/_all-skins.min.css">
 
-<script language="JavaScript" src="../js/pos/posChartStatsJs.js"></script>
+<script language="JavaScript" src="../js/pos/posChartStatsJs.js?v=1"></script>
 
 <title>WePOS</title>
 </head>
