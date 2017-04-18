@@ -44,10 +44,23 @@ function realTime() {
     document.getElementById("realTime").innerHTML = ampm + hours
       + ":" + minutes + ":" + seconds;
       }
-     
-$('#selectTable').on('click', function() {
+
+// 주문 모달 창 취소 버튼 클릭시 이벤트
+$(document).on('click','#orderCancelButton', function(){
+  $('.selectMenuList').remove();
+  $('#totalNewOrderPrice').text("");
+  $('#totalCancelOrderPrice').text("");
 });
 
+// 주문 모달 창 닫기(x) 버튼 클릭시 이벤트
+$('#orderModal').on('hide.bs.modal', function() {
+  $('.selectMenuList').remove();
+  $('#totalNewOrderPrice').text("");
+  $('#totalCancelOrderPrice').text("");
+});
+
+    
+// 테이블 클릭시 해당 테이블의 정보 구함 
 $(document).on('click', '.pos-table', function( event ) {
   tableCode = $(this).data('code');
   tableName = $(this).data('name');
@@ -57,7 +70,6 @@ $(document).on('click', '.pos-table', function( event ) {
 });
 
 $('#orderButton').on('click', function() {
-  var code = $('#selectedTable').attr('data-code'); 
   $('.pos-table').trigger('dblclick');
 });
 
@@ -173,20 +185,6 @@ $('#newOrderList').on('click', 'tr[class="selectMenuList"]', function() {
 
 $('#newOrderList').find('.selectMenuList').on('click', function(){
   alert( $(this).children('.menuName').text() );
-});
-
-// 주문 모달 창 취소 버튼 클릭시 이벤트
-$(document).on('click','#orderCancelButton', function(){
-  $('.selectMenuList').remove();
-  $('#totalNewOrderPrice').text("");
-  $('#totalCancelOrderPrice').text("");
-});
-
-// 주문 모달 창 닫기(x) 버튼 클릭시 이벤트
-$('#orderModal').on('hide.bs.modal', function() {
-  $('.selectMenuList').remove();
-  $('#totalNewOrderPrice').text("");
-  $('#totalCancelOrderPrice').text("");
 });
 
 
