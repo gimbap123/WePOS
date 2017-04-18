@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.pos.dao.PosPaymentDao">
+  <select id="getPaymentInfoOfTable" resultType="SumOrdersDetailDto" parameterType="String">
+   SELECT od.product_code, sum(od.order_amount) "sum_order_amount", sum(od.order_price) "sum_order_price", o.table_code, p.product_name
+   FROM orders_detail od, orders o, product p
+   WHERE od.order_code = o.order_code
+   and od.product_code = p.product_code
+   AND od.order_code IN ( SELECT order_code FROM orders WHERE order_state = 0 )
+   and o.table_code = #{tableCode}
+   group by o.table_code, od.product_code, p.product_name
+   order by o.table_code, product_code 
+  </select>
+</mapper>

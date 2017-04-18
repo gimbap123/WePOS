@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.user.dao.UserDao">
+
+	<insert id="productGradeWrite" parameterType="productGradeDto">
+		insert into product_grade 
+		values(#{userId}, #{productCode}, #{grade}, #{gradeComment})
+	</insert>
+	
+	<select id="productGradeList" parameterType="map" resultType="productGradeDto">
+		select *
+		from product_grade
+		where user_id = #{userId} and product_code in
+		<foreach collection="productCodeList" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<update id="productGradeUpdate" parameterType="productGradeDto">
+		update product_grade set grade = #{grade}, grade_comment = #{gradeComment}
+		where user_id = #{userId} and product_code = #{productCode}
+	</update>
+	
+	<delete id="productGradeDelete" parameterType="productGradeDto">
+		delete from product_grade where user_id = #{userId} and product_code = #{productCode}
+	</delete>
+	
+</mapper>

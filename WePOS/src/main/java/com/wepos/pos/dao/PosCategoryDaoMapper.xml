@@ -2,7 +2,7 @@
 <!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="com.wepos.pos.dao.PosMainDao">
+<mapper namespace="com.wepos.pos.dao.PosChartStatsDao">
 
 	<select id="selectCategory" parameterType="int" resultType="CategoryDto">
 		select * from category
