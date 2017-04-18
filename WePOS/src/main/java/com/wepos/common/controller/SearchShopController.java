@@ -31,8 +31,10 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
+import com.wepos.common.dao.ReservationDao;
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ProductDto;
+import com.wepos.common.dto.ReservationDto;
 import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
@@ -49,7 +51,7 @@ public class SearchShopController {
   
   @Autowired
   private AdminDao adminDao;
-    
+  
   // 매장 검색
   @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
   public ModelAndView searchShopView(HttpServletRequest request, 

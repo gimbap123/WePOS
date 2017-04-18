@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page	import="java.util.*, com.wepos.common.*, com.wepos.common.dto.ShopDto"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<script language="JavaScript" src="../js/common/reservation.js?ver=3"></script>
+<script language="JavaScript" src="../js/common/reservation.js?ver=1"></script>
+
 					<!-- MODAL -->
 	                <form id="resForm" name="resForm" action="reservation.do" method="post">
 	                <input type="hidden" id="userId" name="userId" value="${sessionScope.id }">
 	                <input type="hidden" id="shopCode" name="shopCode" value="${shop.shopCode}">
+	                
 	                <div class="margin-bottom-40">
                         <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
