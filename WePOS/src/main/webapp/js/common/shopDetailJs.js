@@ -208,3 +208,39 @@ function shopNoticeDelete(noticeNumber, shopCode, fileName, menuType)
 	}
 }
 
+function productGradeView(productCode, flag)
+{		
+	if(flag)
+	{
+		$("#userGradeDiv" + productCode).show();		
+	}
+	else
+	{
+		$("#userGradeDiv" + productCode).hide();
+	}	
+}
+
+function productGrade(productCode)
+{	
+	var grade = $("#userGradeDiv" + productCode + "> form > div > input:radio:checked").val();
+	
+	if(grade == 0)
+	{
+		alert("평점을 선택하세요.(1점 이상)");
+		return false;
+	}
+	
+	params = $("#productGradeForm" + productCode).serialize();
+		
+	$.ajax({
+		type : "get",
+		url : "../user/productGrade.do",
+		data : params,
+		dataType : "html",
+		success : function(data)
+		{
+			alert("평점이 등록되었습니다.");
+			$("#productListTab").html(data);
+		}
+	})	
+}
