@@ -34,71 +34,75 @@
               <tfoot>
                 <tr>
                   <td colspan=4 class="success">결제 할 금액</td>
-                  <td class="totalPaymentPrice warning"> </td>
+                  <td class="totalPaymentPrice warning"></td>
                 </tr>
               </tfoot>
             </table>
           </div>
           <div class="col-sm-4">
-            <div class="panel panel-primary" id="paymentPanel">
-              <div class="panel-heading">받은 금액</div>
-              <div class="panel-body form-inline receivedMoney">
-                <div class="input-group">
-                  <div class="input-group-addon">￦</div>
-                  <input type="number" min="0" step="100" class="form-control input-lg" id="totalReceivedMoney" placeholder="금액 입력">
+            <form id="paymentForm" name="paymentForm" action="posPayment.do" method="post">
+              <input type="hidden" id="shopCode" name="shopCode" value=""/>
+              <input type="hidden" id="tableCode" name="tableCode" value=""/>
+              <div class="panel panel-primary" id="paymentPanel">
+                <div class="panel-heading">받은 금액</div>
+                <div class="panel-body form-inline receivedMoney">
+                  <div class="input-group">
+                    <div class="input-group-addon">￦</div>
+                    <input type="number" min="0" step="100" class="form-control input-lg" id="totalReceivedMoney" placeholder="금액 입력">
+                  </div>
                 </div>
-              </div>
-              <!-- End received Money -->
-              <div role="group" aria-label="..." class="btn-group btn-group-justified">
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton" data-toggle="tooltip">+50000</button>
+                <!-- End received Money -->
+                <div role="group" aria-label="..." class="btn-group btn-group-justified">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton" data-toggle="tooltip">+50000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">+10000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">+5000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">+1000</button>
+                  </div>
                 </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">+10000</button>
+                <!-- End button group -->
+                <div role="group" aria-label="..." class="btn-group btn-group-justified">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton" data-toggle="tooltip">-50000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">-10000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">-5000</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-info receivedMoneyButton">-1000</button>
+                  </div>
                 </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">+5000</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">+1000</button>
-                </div>
-              </div>
-              <!-- End button group -->
-              <div role="group" aria-label="..." class="btn-group btn-group-justified">
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton" data-toggle="tooltip">-50000</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">-10000</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">-5000</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-info receivedMoneyButton">-1000</button>
-                </div>
-              </div>
-              <!-- End button group -->
+                <!-- End button group -->
 
-              <div class="panel-heading">청구 금액</div>
-              <div class="panel-body form-inline paymentMoney">
-                <div class="input-group">
-                  <div class="input-group-addon">￦</div>
-                  <input type="number" min="0" step="100" class="form-control input-lg" id="totalPaymentPrice" placeholder="금액 입력" readonly>
+                <div class="panel-heading">청구 금액</div>
+                <div class="panel-body form-inline paymentMoney">
+                  <div class="input-group">
+                    <div class="input-group-addon">￦</div>
+                    <input type="number" min="0" step="100" class="form-control input-lg" id="totalPaymentPrice" placeholder="금액 입력" readonly>
+                  </div>
                 </div>
-              </div>
-              <!-- End paymentMoney -->
+                <!-- End paymentMoney -->
 
-              <div class="panel-heading">거스름돈</div>
-              <div class="panel-body form-inline changeMoney">
-                <div class="input-group">
-                  <div class="input-group-addon">￦</div>
-                  <input type="number" min="0" step="100" class="form-control input-lg" id="changePrice" placeholder="금액 입력" readonly>
+                <div class="panel-heading">거스름돈</div>
+                <div class="panel-body form-inline changeMoney">
+                  <div class="input-group">
+                    <div class="input-group-addon">￦</div>
+                    <input type="number" min="0" step="100" class="form-control input-lg" id="changePrice" placeholder="금액 입력" readonly>
+                  </div>
                 </div>
+                <!-- End change -->
               </div>
-              <!-- End change -->
-            </div>
-            <!-- End payment Panel -->
+              <!-- End payment Panel -->
+            </form>
           </div>
         </div>
         <!-- End row -->

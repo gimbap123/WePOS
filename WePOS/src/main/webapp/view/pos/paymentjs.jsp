@@ -18,11 +18,11 @@ $(document).on('click', '#cashPayment', function() {
   var selectedTableCode = $('#selectedTable').attr('data-code');
    
   $('#paymentModal').modal();
- 
+  // $('#paymentForm').chlidren('#shopCode').val();
   $('#paymentTableName').text( tableName );
  
    $.ajax({
-     url : "/WePOS/pos/posPayment.do",
+     url : "/WePOS/pos/getPaymentInfo.do",
      type: "get",
      data : { "tableCode" : selectedTableCode },
      success : function( responseData ){
@@ -63,4 +63,15 @@ $('.receivedMoneyButton').on('click', function() {
   }
 });
 
+$('#totalReceivedMoney').on('change', function() {
+  $('.receivedMoneyButton').trigger('click');
+});
+
+$('#paymentSubmitButton').on('click', function() {
+  //alert( shopCode + "\n" + tableCode );
+  $('#paymentForm').children('#shopCode').attr('value', shopCode );
+  $('#paymentForm').children('#tableCode').attr('value', tableCode );
+  
+  $('#paymentForm').submit();
+});
 </script>
