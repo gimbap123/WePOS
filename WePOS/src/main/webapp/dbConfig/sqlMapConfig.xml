@@ -50,6 +50,7 @@
 		<mapper resource="com/wepos/mgr/dao/MgrDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosChartStatsDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosCategoryDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosPaymentDaoMapper.xml"/>
 		<mapper resource="com/wepos/user/dao/UserDaoMapper.xml"/>
 	</mappers>
 	
