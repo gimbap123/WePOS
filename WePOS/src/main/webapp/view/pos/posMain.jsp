@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=5" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=6" /> ">
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>" rel="stylesheet" type="text/css">
@@ -158,10 +158,10 @@
         </div>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
           <div class="btn-group" role="group">
-            <button type="button" id="cashPayment" class="btn btn-lg btn-info">현금결제</button>
+            <button type="button" id="cashPaymentButton" class="btn btn-lg btn-info">현금결제</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" id="cardPayment" class="btn btn-lg btn-primary">카드결제</button>
+            <button type="button" id="cardPaymentButton" class="btn btn-lg btn-primary">카드결제</button>
           </div>
         </div>
         </div>

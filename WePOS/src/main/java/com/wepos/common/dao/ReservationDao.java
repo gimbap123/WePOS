@@ -19,6 +19,9 @@ public interface ReservationDao {
 	
 	//예약 내역 삭제하기
 	public void deleteRes(int reseNumber);
+	
+	//해당 매장 해당 아이디의 주문건수 가져오기
+	public int countRes(ReservationDto reservationDto);
 
 	
 }

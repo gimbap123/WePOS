@@ -49,9 +49,24 @@
 	                           <li><i class="fa fa-krw"></i> <fmt:formatNumber value="${product.productPrice}" type="number" />원</li>	                          
 	                       </ul>
 	                       <p>${product.productDesc}</p>
-	                       <c:if test="${sessionScope.id != null && sessionScope.userType != 2}">
-	                       	<button class="btn-u" type="button" onclick="productGradeView(${product.productCode}, true)">평점 주기</button>
-	                       	</c:if>
+	                      
+	                       <ul class="list-inline star-vote" style="padding-left: 5px">
+	                       		<c:forEach var="i" begin="1" end="5" step="1">
+	                       			<c:if test="${product.avgGrade >= i}">
+	                       				<li style="margin: 0px; padding: 0px;"><i class="color-green fa fa-star"></i></li>											                       			
+	                       			</c:if>
+	                       			<c:if test="${product.avgGrade < i}">
+	                       				<li style="margin: 0px; padding: 0px;"><i class="color-green fa fa-star-o"></i></li>											                       			
+	                       			</c:if>
+	                       		</c:forEach>                                                          
+                            </ul>
+                           
+	                       <div class="row" style="padding-left: 15px">
+		                       <button class="btn-u" type="button" data-toggle="modal" data-target="#productGradeModal" onclick="productGradeModal(${product.productCode}, '${product.productName}')">평점 보기</button>
+		                       <c:if test="${sessionScope.id != null && sessionScope.userType != 2}">
+		                       		<button class="btn-u" type="button" onclick="productGradeView(${product.productCode}, true)">평점 주기</button>
+		                       </c:if>
+	                       </div>	                       
                     	</div>
                     	<div class="col-md-5" id="userGradeDiv${product.productCode}" style="display: none;">
                     		
@@ -128,17 +143,17 @@
 										</span>	
 		                              </div>  
 	                              </form>   
-                    		</c:if>
-                    	                    	   
+                    		</c:if>                    	                    	   
                     		                                                                           	
-                    	</div>
-                    	
-                    	
+                    	</div>                 	
         			</div>
         		</c:forEach>
         	</c:if>           
            
-		</div><!--/col-md-9-->        	
+		</div><!--/col-md-9-->   
+		<%-- <jsp:include page="productGradeModal.jsp" flush="false" />	 --%>
+		<div class="modal fade" id="productGradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">			
+		</div>
 	</div><!--/row-->
 	${pagingHtml}     
 </div><!--/container-->		

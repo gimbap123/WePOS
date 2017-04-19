@@ -39,7 +39,7 @@
 			</div>
 			<!-- End Logo -->
 		</div>
-		<a class="btn btn-success btn-lg btn-block" 
+		<a class="btn btn-success btn-lg btn-block" id="shop" data-code="${shopCode}"
 				href="<c:url value="/pos/posMain.do?mgrId=${sessionScope.id}"/>">${shop.shopName}</a>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-responsive-collapse">

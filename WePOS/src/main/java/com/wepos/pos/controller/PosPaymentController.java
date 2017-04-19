@@ -1,15 +1,19 @@
 package com.wepos.pos.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.wepos.common.dto.SumOrdersDetailDto;
@@ -20,8 +24,8 @@ public class PosPaymentController {
 
   @Autowired
   private PosPaymentDao posPaymentDao;
-  
-  @RequestMapping(value = "/pos/posPayment.do", method=RequestMethod.GET, produces="text/json;charset=UTF8")
+
+  @RequestMapping(value = "/pos/getPaymentInfo.do", method=RequestMethod.GET, produces="text/json;charset=UTF8")
   public void paymentAjax( 
     @RequestParam("tableCode") String tableCode, HttpServletResponse response ) {
     response.setContentType( "text/html;charset=UTF-8" );
@@ -42,4 +46,21 @@ public class PosPaymentController {
       e.printStackTrace();
     }
   }
+
+  @RequestMapping( value = "/pos/posPayment.do", method=RequestMethod.POST )
+  public String posPayment( @RequestParam("shopCode") int shopCode,
+                            @RequestParam("tableCode") int tableCode,
+                            @RequestParam("paymentCode") int paymentCode,
+                            HttpSession session) {
+  
+    Map<String, Integer> paymentInfo = new HashMap<String, Integer>();
+    
+    paymentInfo.put( "shopCode", shopCode );
+    paymentInfo.put( "tableCode", tableCode );
+    paymentInfo.put( "paymentCode", paymentCode );
+    posPaymentDao.updatePaymentComplete( paymentInfo );
+    
+    return "redirect:posMain.do?mgrId="+session.getAttribute( "id" );
+  }
+     
 }

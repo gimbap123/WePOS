@@ -14,6 +14,25 @@
                         <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
+                                
+                                
+                                <c:if test="${countRes > 0 }">
+                                 <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="headline" style="margin: 0 0 20px 0; padding-bottom: -10px; display: inline-block; border-bottom: 2px solid #72c02c;">
+                                    <h5><i class="icon-shield"></i> ${sessionScope.id }님은 이미 해당 매장에 등록된 예약이 있습니다.</h5></div>
+                                   	<div style="text-align: center;"><a href="../common/reservationCheck.do?userId=${sessionScope.id}">[예약 확인하러 가기]</a></div>
+                                    </div>	
+                                <div class="modal-footer">
+                                	<button type="button" class="btn-u btn-u-default" data-dismiss="modal">돌아가기</button>
+                                </div>
+                                </c:if>
+                                
+                                
+                                <c:if test="${countRes < 1 }">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
@@ -80,6 +99,9 @@
                                         <button type="button" class="btn-u btn-u-default" data-dismiss="modal">취소하기</button>
                                         <button type="button" class="btn-u btn-u-primary" onclick="checkRes()">예약하기</button>
                                     </div>
+                                    </c:if>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

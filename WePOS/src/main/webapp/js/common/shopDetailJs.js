@@ -296,4 +296,28 @@ function productGradeDelete(productCode)
 	}	
 }
 
+function productGradeModal(productCode, productName)
+{
+	$("#productGradeModal").html("");	
+	
+	$.get("../user/productGradeModal.do", {productCode : productCode, productName : productName}, function(result)
+	{		
+		$("#productGradeModal").append(result);		
+	})	
+}
+
+function gradeModalPaging(pageNum)
+{
+	var productCode = $("#productCode").val();
+	var productName = $("#productName").val();
+	
+	$("#productGradeModal").html("");	
+	
+	$.get("../user/productGradeModal.do", {productCode : productCode, productName : productName, pageNum : pageNum}, function(result)
+	{		
+		$("#productGradeModal").append(result);		
+	})	
+	
+}
+
 
