@@ -16,7 +16,8 @@
   
   <update id="updatePaymentComplete" parameterType="java.util.HashMap">
     update orders
-    set order_state = 1
+    set order_state = 1,
+        payment_code = #{paymentCode}
     where shop_code = #{shopCode}
     and table_code = #{tableCode} 
   </update>

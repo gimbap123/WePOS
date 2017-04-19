@@ -50,12 +50,14 @@ public class PosPaymentController {
   @RequestMapping( value = "/pos/posPayment.do", method=RequestMethod.POST )
   public String posPayment( @RequestParam("shopCode") int shopCode,
                             @RequestParam("tableCode") int tableCode,
+                            @RequestParam("paymentCode") int paymentCode,
                             HttpSession session) {
   
     Map<String, Integer> paymentInfo = new HashMap<String, Integer>();
     
     paymentInfo.put( "shopCode", shopCode );
     paymentInfo.put( "tableCode", tableCode );
+    paymentInfo.put( "paymentCode", paymentCode );
     posPaymentDao.updatePaymentComplete( paymentInfo );
     
     return "redirect:posMain.do?mgrId="+session.getAttribute( "id" );

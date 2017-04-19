@@ -5,20 +5,33 @@
 // 결제창 취소 버튼 클릭시 이벤트
 $(document).on('click','#paymentCancelButton', function(){
   $('#paymentTable').children('tbody').children('tr').remove();
-  $('#totalPaymentPrice').text("");
+  $('#cashPaymentPrice').text("");
 });
 
 // 결제창 닫기(x) 버튼 클릭시 이벤트
 $('#paymentModal').on('hide.bs.modal', function() {
   $('#paymentTable').children('tbody').children('tr').remove();
-  $('#totalPaymentPrice').text("");
+  $('#cashPaymentPrice').text("");
 });
 
-$(document).on('click', '#cashPayment', function() {
+//
+$(document).on('click', '#cashPaymentButton', function() {
+//  $('#cashNavTab').addClass('active');
+//  $('#cardNavTab').removeClass('active');
+  $('#paymentTab a[href="#cash"]').tab( 'show' );
+  getPaymentInfo();
+});
+
+$(document).on('click', '#cardPaymentButton', function() {
+//  $('#cashNavTab').removeClass('active');
+//  $('#cardNavTab').addClass('active');
+  $('#paymentTab a[href="#card"]').tab( 'show' );
+  getPaymentInfo();
+});
+function getPaymentInfo(){
   var selectedTableCode = $('#selectedTable').attr('data-code');
    
   $('#paymentModal').modal();
-  // $('#paymentForm').chlidren('#shopCode').val();
   $('#paymentTableName').text( tableName );
  
    $.ajax({
@@ -26,7 +39,6 @@ $(document).on('click', '#cashPayment', function() {
      type: "get",
      data : { "tableCode" : selectedTableCode },
      success : function( responseData ){
-         //$("#ajax").remove();
          var data = JSON.parse( responseData );
          if( !data ){
              alert("존재하지 않는 테이블 입니다");
@@ -45,10 +57,11 @@ $(document).on('click', '#cashPayment', function() {
          });
          
          $('#paymentTable').find('.totalPaymentPrice').text( totalPaymentPrice );
-         $('#paymentPanel').find('#totalPaymentPrice').val( totalPaymentPrice );
+         $('#cashPaymentPrice').val( totalPaymentPrice );
+         $('#cardPaymentPrice').val( totalPaymentPrice );
       }
    });
- });
+ }
  
 $('.receivedMoneyButton').on('click', function() {
   var receivedMoney = $('#totalReceivedMoney').val();
@@ -57,8 +70,8 @@ $('.receivedMoneyButton').on('click', function() {
     $('#totalReceivedMoney').val( 0 );
   }
  
-  $('#changePrice').val( $('#totalReceivedMoney').val() - $('#totalPaymentPrice').val() );
-  if( $('#changePrice').val() < $('#totalPaymentPrice').val() ) {
+  $('#changePrice').val( $('#totalReceivedMoney').val() - $('#cashPaymentPrice').val() );
+  if( $('#changePrice').val() < $('#cashPaymentPrice').val() ) {
     $('#changePrice').addClass( "bg-danger" );
   }
 });
@@ -69,9 +82,29 @@ $('#totalReceivedMoney').on('change', function() {
 
 $('#paymentSubmitButton').on('click', function() {
   //alert( shopCode + "\n" + tableCode );
-  $('#paymentForm').children('#shopCode').attr('value', shopCode );
-  $('#paymentForm').children('#tableCode').attr('value', tableCode );
+  $('#cashPaymentForm').children('#shopCode').attr('value', shopCode );
+  $('#cashPaymentForm').children('#tableCode').attr('value', tableCode );
   
-  $('#paymentForm').submit();
+  $('#cashPaymentForm').submit();
 });
+
+// 카드번호 랜덤생성
+$(document).on('click', '#cardReadButton', function() {
+  var text = getRandomText( 16 ); 
+  $('#cardNumber').val( text );
+  
+  $('#cardPaymentResult').attr('placeholder', '승인완료');
+  
+});
+
+function getRandomText( stringLength ) {
+  var text = "";
+  //var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var possible = "0123456789";
+
+  for( var i=0; i < stringLength; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 </script>
