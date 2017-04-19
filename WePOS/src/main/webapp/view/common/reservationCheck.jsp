@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/reservation.js?ver=2"></script>
+<script language="JavaScript" src="../js/common/reservation.js?ver=3"></script>
 
 </head>
 
@@ -129,6 +129,10 @@
 					<span class="input-group-addon">주문내역</span>
 					<input type="text" id="resDesc" name="resDesc" class="form-control" value="${reservationCheckDto.resDesc}">
 				</div>
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon">예약상태</span>
+					<input type="text" id="resState" name="resState" class="form-control" value="${resState}" readonly>
+				</div>
 				<hr>
 		
 				<div class="row">
@@ -139,7 +143,7 @@
 						<input type="button" id="cancel" class="btn-u btn-block" onclick="deleteRes()" value="삭 제" >
 					</span>
 					<span class="col-md-4 col-md-offset-0">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="updateRes()" value="수정하기" float="right">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="updateRes()" value="수 정" float="right">
 					</span>
 				</div>
 			</form>

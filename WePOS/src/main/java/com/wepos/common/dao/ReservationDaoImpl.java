@@ -30,4 +30,8 @@ public class ReservationDaoImpl extends SqlSessionDaoSupport implements Reservat
 		getSqlSession().delete("deleteRes", reseNumber);
 	}
 	
+	public int countRes(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("countRes", reservationDto);
+	}
+	
 }

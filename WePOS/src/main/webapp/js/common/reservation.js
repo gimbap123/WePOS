@@ -70,6 +70,7 @@ function deleteRes()
 		var userId = $("#userId").val()
 		var shopCode = $("#shopCode").val()
 		var reseNumber = $("#reseNumber").val()
+		alert(userId)
 		alert(shopCode)
 		alert(reseNumber)
 		
