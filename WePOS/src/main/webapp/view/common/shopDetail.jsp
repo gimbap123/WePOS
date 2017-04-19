@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js?v=3"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
 
 <title>We POS</title>
 </head>
@@ -69,7 +69,7 @@
 	                <div class="col-md-3 btn-buy animated fadeInRight">
 	                    <c:if test="${sessionScope.id!=null}">
 	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal"  data-target="#responsive">
-							<i class="fa fa-clock-o"></i> RESERVATION</button>
+							<i class="fa fa-clock-o"></i> 예약하기</button>
 						</c:if>
 						<c:if test="${sessionScope.id==null}">
 	                    <button class="btn-u btn-u-lg" type="button" data-target="#responsive" onClick="location.href='login.do'">

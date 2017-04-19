@@ -6,7 +6,7 @@
 
 	<insert id="productGradeWrite" parameterType="productGradeDto">
 		insert into product_grade 
-		values(#{userId}, #{productCode}, #{grade}, #{gradeComment})
+		values(#{userId}, #{productCode}, #{grade}, #{gradeComment}, sysdate)
 	</insert>
 	
 	<select id="productGradeList" parameterType="map" resultType="productGradeDto">
@@ -26,5 +26,29 @@
 	<delete id="productGradeDelete" parameterType="productGradeDto">
 		delete from product_grade where user_id = #{userId} and product_code = #{productCode}
 	</delete>
+	
+	<select id="productGradeCount" parameterType="int" resultType="int">
+		select count(user_id) 
+		from product_grade
+		where product_code = #{productCode}
+	</select>
+	
+	<select id="productGradeModalList" parameterType="map" resultType="productGradeDto">
+		select rpg.user_id, rpg.product_code, rpg.grade, rpg.grade_comment, rpg.grade_date
+		from
+		(
+			select pg.*, rownum as rnum
+			from
+			(
+				select *
+				from product_grade
+				where product_code = #{productCode}
+				order by grade_date desc
+			) pg
+		) rpg
+		<![CDATA[
+			where rnum >= #{start} and rnum <= #{end}
+		]]>
+	</select>
 	
 </mapper>
