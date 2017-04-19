@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,7 +52,7 @@
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script language="JavaScript" src="../js/pos/salesLog.js?ver=1"></script>
+	<script language="JavaScript" src="../js/pos/salesLog.js?ver=6"></script>
 
 </head>
 <body>
@@ -73,12 +74,17 @@
 						<div class="panel panel-yellow margin-bottom-40">
 							<table class="table table-hover">
 								<div class="panel-heading">
-									<c:if test="${flag==0}">
-										<h2 class="panel-title" style="margin-left:20px;font-size:20px">매출 통계</h2>
+									<c:if test="${posLogDto.searchType==null}">
+										<h2 class="panel-title" style="margin-left:20px;font-size:20px">총 매출 통계</h2>
 									</c:if>
-									<c:if test="${flag==1}">											
+									<c:if test="${posLogDto.searchType!=null}">
 										<span style="float:right;margin-right:20px">
-											<h2 class="panel-title" style="font-size:20px">메뉴 - ${posLogDto.productName}</h2>
+											<c:if test="${posLogDto.searchGroup==1}">
+												<h2 class="panel-title" style="font-size:20px">상품분류 - ${posLogDto.categoryName}</h2>
+											</c:if>
+											<c:if test="${posLogDto.searchGroup==2}">
+												<h2 class="panel-title" style="font-size:20px">메뉴 - ${posLogDto.productName}</h2>
+											</c:if>
 										</span>										
 										<h2 class="panel-title" style="margin-left:20px;font-size:20px">
 											<c:if test="${posLogDto.searchType==1}">
@@ -95,24 +101,37 @@
 								</div>
 								<thead>
 									<tr style="background: #999; color: white; text-align: center">
-										<th style="text-align: center">일시</th>										
-										<th style="text-align: center">메뉴</th>
-										<th style="text-align: center">단가</th>
+										<th style="text-align: center">일시</th>
+										<c:if test="${posLogDto.searchGroup==1}">
+											<th style="text-align: center">분류</th>
+										</c:if>
+										<c:if test="${posLogDto.searchGroup==2}">
+											<th style="text-align: center">메뉴</th>
+											<th style="text-align: center">단가</th>
+										</c:if>										
 										<th style="text-align: center">수량</th>
 										<th style="text-align: center; color: blue">매출</th>
 									</tr>
-								</thead>				
+								</thead>
 								
 								<tbody>
-									<c:if test="${data==1}">
+									<c:if test="${fn:length(resultLog)>0}">
 										<c:set var="total" value="0" />
 										<c:forEach var="resultLog" items="${resultLog}">
 											<tr>
 												<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
-												<td style="text-align: center">${resultLog.productName}</td>
-												<td style="text-align: center">
-													<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
-												</td>
+												<%-- <c:if test="${resultLog.categoryName!=null}">
+													<td style="text-align: center">${resultLog.categoryName}</td>
+												</c:if> --%>
+												<c:if test="${posLogDto.searchGroup==1}">
+													<td style="text-align: center">${resultLog.categoryName}</td>
+												</c:if>
+												<c:if test="${posLogDto.searchGroup==2}">
+													<td style="text-align: center">${resultLog.productName}</td>
+													<td style="text-align: center">
+														<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원
+													</td>
+												</c:if>
 												<td style="text-align: center">${resultLog.orderAmount}</td>
 												<td style="text-align: center">
 													<fmt:formatNumber value="${resultLog.orderPrice}" type="number" /> 원
@@ -121,7 +140,7 @@
 											<c:set var="total" value="${total + resultLog.orderPrice}" />
 										</c:forEach>
 									</c:if>
-									<c:if test="${data==0}">
+									<c:if test="${fn:length(resultLog)==0}">
 										<tr>
 											<th colspan="6" style="text-align: center;">
 												<h3>검색된 데이터가 없습니다.</h3>
@@ -152,35 +171,34 @@
 					<!-- Table -->
 					<div class="panel-heading" align="center" style="background:#5cb85c">
 						<h2 style="color:white">검색 조건 설정</h2>
+						<h4 style="color:white">매장코드 : <span id="shopCode">${shop.shopCode}</span></h4>
 					</div>
-					<form id="searchForm" name="searchForm" 
-						action="searchLog.do?mgrId=${sessionScope.id}"
-						method="post">
+					<form id="searchForm" name="searchForm" action="searchLog.do?mgrId=${sessionScope.id}" method="post">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
-									<td style="text-align: center;vertical-align: middle;">조회</td>
+									<th rowspan=2 style="text-align: center;vertical-align: middle;width: 56px; height: 41px">분 류</th>
+									<td>
+										<select class="form-control" id="searchGroup" name="searchGroup">
+											<option value="999">-- 선택하세요 --</option>
+											<option value="1">상품분류별 통계</option>
+											<option value="2">메뉴별 통계</option>
+										</select>
+									</td>
+								</tr>
+								<tr id="groupChild">
+								</tr>
+								<tr>
+									<th style="text-align: center;vertical-align: middle;width: 56px; height: 41px">통 계</th>
 									<td style="text-align: center">
 										<select class="form-control" id="searchType" name="searchType">
 											<option value="999">-- 선택하세요 --</option>
-											<option value="1">상세 조회</option>
-											<option value="2">일별 조회</option>
-											<option value="3">월별 조회</option>											
+											<option value="1">상세 통계</option>
+											<option value="2">일별 통계</option>
+											<option value="3">월별 통계</option>											
 										</select>
 									</td>
-								</tr>
-								<tr>
-									<td style="text-align: center;vertical-align: middle;">메뉴</td>
-									<td style="text-align: center">
-										<select class="form-control" id="productCode" name="productCode">
-											<option value="999">-- 선택하세요 --</option>
-											<option value="000">전체 메뉴</option>
-											<c:forEach items="${product}" var="product">
-												<option value="${product.productCode}">${product.productName}</option>
-											</c:forEach>
-										</select>
-									</td>
-								</tr>
+								</tr>								
 								<tr id="newStart">
 								</tr>
 								<tr id="newEnd">
