@@ -10,14 +10,14 @@
 
 <!--=== Content Part ===-->
 <div class="container content" style="padding-bottom: 20px; padding-top: 20px;">		
-	<div class="row">
-    	<div class="col-md-8">
+	<div class="row" style="margin-bottom: 10px;">
+    	<div class="col-md-10">
         	<c:if test="${fn:length(productList) == 0}">
         		<h2>등록된 상품이 없습니다.</h2>
         	</c:if>		
         	<c:if test="${productList != null}">
         		<div class="row">
-	        		<div class="col-md-4">	        			
+	        		<div class="col-md-3">	        			
 	        			<div class="input-group">
 	        				<select class="form-control" name="categoryCode" id="categoryCode">
 	        					<option value="0">전체</option>
@@ -41,7 +41,7 @@
         		<c:forEach items="${productList}" var="product">
         			<div class="row clients-page" style="margin-bottom: 20px">
         				<div class="col-md-4">
-                        	<img src="${product.productFile}" class="img-responsive hover-effect" alt="" style="width: 200px; height: 120px"/>
+                        	<img src="${product.productFile}" class="img-responsive hover-effect" alt="" style="width: 290px; height: 180px"/>
                     	</div>
                     	<div class="col-md-3">
                     		<h3>${product.productName}</h3>
@@ -64,12 +64,11 @@
 	                       <div class="row" style="padding-left: 15px">
 		                       <button class="btn-u" type="button" data-toggle="modal" data-target="#productGradeModal" onclick="productGradeModal(${product.productCode}, '${product.productName}')">평점 보기</button>
 		                       <c:if test="${sessionScope.id != null && sessionScope.userType != 2}">
-		                       		<button class="btn-u" type="button" onclick="productGradeView(${product.productCode}, true)">평점 주기</button>
+		                       		<button class="btn-u" type="button" onclick="$('#userGradeDiv' + ${product.productCode}).show()">평점 주기</button>
 		                       </c:if>
-	                       </div>	                       
+	                       </div>
                     	</div>
-                    	<div class="col-md-5" id="userGradeDiv${product.productCode}" style="display: none;">
-                    		
+                    	<div class="col-md-5" id="userGradeDiv${product.productCode}" style="display: none;">                    		
                     		<c:set var="flag" value="0" />
                     		<c:forEach items="${productGradeList}" var="productGrade">
                     			<c:if test="${product.productCode ==  productGrade.productCode}">
@@ -94,7 +93,7 @@
 			                            </div>                             
 			                             <hr style="margin: 15px">
 			                             <div class="input-group">
-			                             	<input type="text" class="form-control" id="gradeComment" name="gradeComment" placeholder="상품평을 입력하세요." value="${productGrade.gradeComment}">	
+			                             	<input type="text" class="form-control" id="gradeComment${product.productCode}" name="gradeComment" placeholder="상품평을 입력하세요." value="${productGrade.gradeComment}">	
 			                              	<span class="input-group-btn">
 												<button class="btn-u" type="button" style="height: 34px" onclick="productGradeUpdate(${product.productCode})">								
 													<i class="fa fa-pencil"></i>
@@ -106,7 +105,7 @@
 												</button>
 											</span>	
 											<span class="input-group-btn">
-												<button class="btn-u" type="button" style="height: 34px" onclick="productGradeView(${product.productCode}, false)">								
+												<button class="btn-u" type="button" style="height: 34px" onclick="productGradeCancle(${product.productCode}, '${productGrade.gradeComment}', ${productGrade.grade})">								
 													<i class="fa fa- fa-reply"></i>
 												</button>
 											</span>	
@@ -130,21 +129,20 @@
 		                            </div>                             
 		                             <hr style="margin: 15px">
 		                             <div class="input-group">
-		                             	<input type="text" class="form-control" id="gradeComment" name="gradeComment" placeholder="상품평을 입력하세요.">	
+		                             	<input type="text" class="form-control" id="gradeComment${product.productCode}" name="gradeComment" placeholder="상품평을 입력하세요.">	
 		                              	<span class="input-group-btn">
 											<button class="btn-u" type="button" style="height: 34px" onclick="productGrade(${product.productCode})">								
 												<i class="fa fa-pencil"></i>
 											</button>
 										</span>	
 										<span class="input-group-btn">
-											<button class="btn-u" type="button" style="height: 34px" onclick="productGradeView(${product.productCode}, false)">								
+											<button class="btn-u" type="button" style="height: 34px" onclick="productGradeCancle(${product.productCode}, '', 0)">								
 												<i class="fa fa- fa-reply"></i>
 											</button>
 										</span>	
 		                              </div>  
 	                              </form>   
-                    		</c:if>                    	                    	   
-                    		                                                                           	
+                    		</c:if>                   		                                                                           	
                     	</div>                 	
         			</div>
         		</c:forEach>

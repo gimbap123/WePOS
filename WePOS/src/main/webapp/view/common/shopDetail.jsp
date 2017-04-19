@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js"></script>
+<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
 
 <title>We POS</title>
 </head>
