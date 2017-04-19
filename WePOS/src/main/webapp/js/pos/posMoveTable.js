@@ -32,7 +32,6 @@ $(document).on('click', '.pos-move-table', function() {
 });
 
 $(document).on('click', '#moveSubmitButton', function() {
-  alert( shopCode );
   $('#moveTableForm input[name="shopCode"]').val( shopCode );
   $('#moveTableForm').submit();
 });

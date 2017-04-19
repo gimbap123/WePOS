@@ -1,10 +1,8 @@
 package com.wepos.pos.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +35,6 @@ public class PosMainController {
       @RequestParam( value = "mgrId" ) String mgrId ) {
 
     int shopCode = posMainDao.getShopCode( mgrId );
-    System.out
-        .println( "PosMainController > getShopCode > shopCode : "
-            + shopCode );
 
     // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
@@ -98,7 +93,6 @@ public class PosMainController {
       // od.setOrderDate( orderDate );
       // od.setOrderState( orderState );
 
-      // 개발 시 db 입력 잠시 보류
       posMainDao.insertOrders( od );
       int lastOrderCode = posMainDao.getOrderCode();
 
@@ -112,9 +106,8 @@ public class PosMainController {
         odd.setOrderPrice( Integer
             .parseInt( (String)insertOrdersDetail.get( i + 2 ) ) );
 
-        // 개발시 db 입력 잠시 보류
         posMainDao.insertOrdersDetail( odd );
-
+        posMainDao.updateTableStateToUsed();
         insertOddList.add( odd );
       }
     }

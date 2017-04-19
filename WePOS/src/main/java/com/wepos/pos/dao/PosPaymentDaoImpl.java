@@ -19,4 +19,8 @@ public class PosPaymentDaoImpl extends SqlSessionDaoSupport implements PosPaymen
     return getSqlSession().update( "updatePaymentComplete", paymentInfo );
   }
 
+  public void updateTableStatusToUnused( int tableCode ) {
+    getSqlSession().update( "updateTableStatusToUnused", tableCode );
+    // TODO Auto-generated method stub
+  }
 }

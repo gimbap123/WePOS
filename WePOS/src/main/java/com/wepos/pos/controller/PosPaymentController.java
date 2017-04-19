@@ -57,6 +57,7 @@ public class PosPaymentController {
     paymentInfo.put( "tableCode", tableCode );
     paymentInfo.put( "paymentCode", paymentCode );
     posPaymentDao.updatePaymentComplete( paymentInfo );
+    posPaymentDao.updateTableStatusToUnused( tableCode );
     
     return "redirect:posMain.do?mgrId="+session.getAttribute( "id" );
   }

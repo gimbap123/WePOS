@@ -75,7 +75,7 @@
   </insert>
   
   <select id="getOrderCode" resultType="int">
-    SELECT max(order_code)
+    SELECT nvl( max(order_code), 0 )
     FROM orders
   </select>
   
@@ -122,5 +122,15 @@
     set order_amount = #{orderAmount}, order_price = #{orderPrice}
     where order_code = #{orderCode}
     and product_code = #{productCode}
+  </update>
+  
+  <!-- 테이블 상태 update -->
+  <update id="updateTableStateToUsed">
+    UPDATE tables
+    SET table_state = 1
+    WHERE table_code = ( SELECT table_code 
+                          FROM orders 
+                          WHERE order_code = ( SELECT MAX( order_code ) 
+                                               FROM orders ) )
   </update>
 </mapper>

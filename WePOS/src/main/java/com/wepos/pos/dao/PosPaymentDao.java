@@ -9,4 +9,6 @@ public interface PosPaymentDao {
   public List<SumOrdersDetailDto> getPaymentInfoOfTable( String tableCode );
 
   public int updatePaymentComplete( Map<String, Integer> paymentInfo );
+
+  public void updateTableStatusToUnused( int tableCode );
 }

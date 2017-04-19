@@ -22,7 +22,9 @@ $(document).on('click', '#cashPaymentButton', function() {
     $('#paymentTab a[href="#cash"]').tab( 'show' );
     getPaymentInfo();
   }
-  alert( "주문이 있는 테이블을 선택하세요");
+  else {
+    alert( "주문이 있는 테이블을 선택하세요");
+  }
 });
 
 $(document).on('click', '#cardPaymentButton', function() {
@@ -30,7 +32,9 @@ $(document).on('click', '#cardPaymentButton', function() {
     $('#paymentTab a[href="#card"]').tab( 'show' );
     getPaymentInfo();
   }
-  alert( "주문이 있는 테이블을 선택하세요");
+  else {
+    alert( "주문이 있는 테이블을 선택하세요");
+  }
 });
 
 function checkActiveTable() {
