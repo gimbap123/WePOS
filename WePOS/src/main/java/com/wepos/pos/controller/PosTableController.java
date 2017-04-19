@@ -43,7 +43,6 @@ public class PosTableController {
 		mav.addObject("tables", tables);
 		mav.addObject("productList", productList);
 		mav.addObject("tableCount", tableCount);
-		// mav.addObject( "category", category );
 		return mav;
 	}
 

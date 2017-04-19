@@ -1,11 +1,14 @@
 package com.wepos.user.dto;
 
+import java.sql.Date;
+
 public class ProductGradeDto {
 	
 	private String userId;
 	private int productCode;
 	private int grade;
 	private String gradeComment;
+	private Date gradeDate;
 	
 	public String getUserId() {
 		return userId;
@@ -30,6 +33,12 @@ public class ProductGradeDto {
 	}
 	public void setGradeComment(String gradeComment) {
 		this.gradeComment = gradeComment;
+	}
+	public Date getGradeDate() {
+		return gradeDate;
+	}
+	public void setGradeDate(Date gradeDate) {
+		this.gradeDate = gradeDate;
 	}
 
 }

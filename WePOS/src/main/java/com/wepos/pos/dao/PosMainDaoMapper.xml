@@ -9,6 +9,7 @@
     FROM shop s, tables t
     WHERE s.shop_code = t.shop_code
     AND s.shop_code = #{shopCode}
+    AND t.table_state!=2
   </select>
   
   <!-- 매니저 아이디로 매장 코드 구함 -->
@@ -29,7 +30,7 @@
   <select id="getTables" parameterType="int" resultType="TablesDto">
     select * 
     from tables 
-    where shop_code= #{shopCode}
+    where shop_code= #{shopCode} and table_state!=2
     order by table_code asc
   </select>
   

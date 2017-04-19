@@ -15,6 +15,6 @@ public class PosTableDaoImpl extends SqlSessionDaoSupport implements PosTableDao
 	}
 	
 	public int deleteTable(int tableCode){
-		return getSqlSession().delete("deleteTable",tableCode);
+		return getSqlSession().update("deleteTable",tableCode);
 	}
 }

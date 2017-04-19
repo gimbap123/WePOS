@@ -67,23 +67,38 @@
   </select>
   
   <select id="productList" parameterType="map" resultType="ProductDto">
-  	select p.product_code, p.product_name, p.product_price, p.product_desc, p.product_file
+  	select p.product_code, p.product_name, p.product_price, p.product_desc, p.product_file, p.avgGrade
   	from 
   	(
   		select rnumproduct.*, rownum as rnum
   		from
   		(
-  			select *
-  			from product
+  			select p.*, pg.avgGrade
+  			from product p
+  			inner join 
+  			(
+  				select p.product_code, NVL(round(avg(pg.grade)), 0) as avgGrade
+  				from product_grade pg
+  				right outer join product p on pg.product_code = p.product_code
+  				<where>
+  					<if test="shopCode != null">
+  						and p.shop_code = #{shopCode}
+  					</if>  
+  					<if test="categoryCode != 0">
+	  					and p.category_code = #{categoryCode}
+	  				</if>	
+  				</where>	
+  				group by p.product_code
+  			) pg on p.product_code = pg.product_code	
   			<where>
   				<if test="shopCode != null">
-  					and shop_code = #{shopCode}
+  					and p.shop_code = #{shopCode}
   				</if>  				
   				<if test="categoryCode != 0">
-  					and category_code = #{categoryCode}
+  					and p.category_code = #{categoryCode}
   				</if>
   			</where>  			
-  			order by product_code
+  			order by p.product_code
   		) rnumproduct  		
   	) p
   	<![CDATA[

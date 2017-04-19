@@ -131,7 +131,7 @@
 <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/datepicker.js?v=1"></script>
+<script type="text/javascript" src="../assets/js/plugins/datepicker.js?v=2"></script>
 
 <!-- 차트 관련 -->
 <script src="../assets/chart/Chart.min.js"></script>

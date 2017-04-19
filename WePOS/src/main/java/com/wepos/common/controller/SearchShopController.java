@@ -309,15 +309,11 @@ public class SearchShopController {
 		
 	// 매장 공지사항
 	@RequestMapping(value="/common/shopNotice.do")
-	public ModelAndView shopNodticeView(HttpServletRequest request, @RequestParam("shopCode") int shopCode,
+	public ModelAndView shopNodticeView(@RequestParam("shopCode") int shopCode,
 			@RequestParam(value="searchNoticeType", defaultValue="all") String searchNoticeType, 
 			@RequestParam(value="searchNoticeText", defaultValue="") String searchNoticeText,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
-	{		
-		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
-		int index = filePath.indexOf("\\WePOS");
-		filePath = filePath.substring(index);
-				
+	{						
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
 		map.put("searchNoticeType", searchNoticeType);
@@ -335,19 +331,7 @@ public class SearchShopController {
 		
 		if(shopNoticeCount > 0)
 		{
-			shopNoticeList = shopDao.shopNoticeList(map);
-			for(ShopNoticeDto shopNotice : shopNoticeList)
-			{
-				if(shopNotice.getNoticeFile() != null)
-				{
-					String fileName = shopNotice.getNoticeFile();
-					shopNotice.setNoticeFile(filePath + fileName);
-				}
-				else
-				{
-					shopNotice.setNoticeFile("/WePOS/uploadFile/nullImg.jpg");
-				}
-			}	 		  		  
+			shopNoticeList = shopDao.shopNoticeList(map); 		  
 		 }
 		else
 		{
@@ -410,15 +394,11 @@ public class SearchShopController {
 	
 	// 매장 자유 게시판
 	@RequestMapping(value="/common/shopBoard.do")
-	public ModelAndView shopBoardView(HttpServletRequest request, @RequestParam("shopCode") int shopCode,
+	public ModelAndView shopBoardView(@RequestParam("shopCode") int shopCode,
 			@RequestParam(value="searchBoardType", defaultValue="all") String searchBoardType, 
 			@RequestParam(value="searchBoardText", defaultValue="") String searchBoardText,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
-	{		
-		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
-		int index = filePath.indexOf("\\WePOS");
-		filePath = filePath.substring(index);
-				
+	{					
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
 		map.put("searchBoardType", searchBoardType);
@@ -436,19 +416,7 @@ public class SearchShopController {
 		
 		if(shopBoardCount > 0)
 		{
-			shopBoardList = shopDao.shopBoardList(map);
-			for(ShopBoardDto shopBoard : shopBoardList)
-			{
-				if(shopBoard.getBoardFile() != null)
-				{
-					String fileName = shopBoard.getBoardFile();
-					shopBoard.setBoardFile(filePath + fileName);
-				}
-				else
-				{
-					shopBoard.setBoardFile("/WePOS/uploadFile/nullImg.jpg");
-				}
-			}	 		  		  
+			shopBoardList = shopDao.shopBoardList(map); 		  		  
 		 }
 		else
 		{

@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wepos.common.dto.ShopDto;
 import com.wepos.pos.dao.PosChartStatsDao;
+import com.wepos.pos.dao.PosMainDao;
 import com.wepos.pos.dto.ChartStatsDto;
 import com.wepos.pos.util.ChartUtil;
 
@@ -27,16 +27,21 @@ public class PosChartStatsController {
 	@Autowired
 	private PosChartStatsDao posChartStatsDao;
 	
+	@Autowired
+	private PosMainDao posMainDao;
+	
 	// 차트 통계
 	@RequestMapping(value = "/pos/posChartStats.do", method = RequestMethod.GET)
 	public ModelAndView posChartStatsView(@RequestParam("shopCode") int shopCode)
 	{
 		
+		ShopDto shop = posMainDao.getShop(shopCode);
 		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pos/posChartStats");	
 		mav.addObject("chartTypeList", chartTypeList);
+		mav.addObject("shop", shop);
 		
 		return mav;
 	}
@@ -47,6 +52,7 @@ public class PosChartStatsController {
 			@RequestParam("chartType") int chartType, @RequestParam("start") String start, 
 			@RequestParam("finish") String finish) throws ParseException
 	{	
+		ShopDto shop = posMainDao.getShop(shopCode);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateFinish = sdf.parse(finish);
 		
@@ -94,6 +100,7 @@ public class PosChartStatsController {
 		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();	
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("shop", shop);
 		mav.setViewName("pos/posChartStats");
 		mav.addObject("jsonChartData", jsonChartData);
 		mav.addObject("chartTitle", chartTitle);

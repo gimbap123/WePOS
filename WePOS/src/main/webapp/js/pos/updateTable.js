@@ -44,10 +44,18 @@ function create(){
 	$('#tableCode').attr("style","visibility:hidden");
 }
 
-function deleteTable(tableCode,mgrId){
-	var deleteTable=confirm("테이블을 삭제하시겠습니까?")
-	if(deleteTable==true)
-		location.href="deleteTable.do?tableCode="+tableCode+"&mgrId="+mgrId;
+function deleteTable(tableCode,tableState,mgrId){
+	if(tableState==1){
+		alert("사용중인 테이블입니다.");
+		return false;
+	}else{
+		var deleteTable=confirm("테이블을 삭제하시겠습니까?")
+		if(deleteTable==true)
+			location.href="deleteTable.do?tableCode="+tableCode+"&mgrId="+mgrId;
+		else
+			alert("취소되었습니다.");
+	}
+	
 }
 
 

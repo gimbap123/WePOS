@@ -18,4 +18,11 @@ public interface UserDao {
 	
 	// 상품 평점 삭제
 	public void productGradeDelete(ProductGradeDto productGrad);
+
+	// 상품 평점 갯수
+	public int productGradeCount(int productCode);
+	
+	// 평점 보기 - 평점 리스트
+	public List<ProductGradeDto> productGradeModalList(Map<String, Object> map);
+	
 }
