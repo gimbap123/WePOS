@@ -13,8 +13,12 @@ public class PosLogDto {
 	private Date calendarBegin;
 	private Date calendarEnd;
 	private int searchType;
+	private int searchGroup;
 	private Date monthBegin;
 	private Date monthEnd;
+	private int shopCode;
+	private int categoryCode;
+	private String categoryName;
 	
 	public String getOrderDate() {
 		return orderDate;
@@ -76,6 +80,12 @@ public class PosLogDto {
 	public void setSearchType(int searchType) {
 		this.searchType = searchType;
 	}
+	public int getSearchGroup() {
+		return searchGroup;
+	}
+	public void setSearchGroup(int searchGroup) {
+		this.searchGroup = searchGroup;
+	}
 	public Date getMonthBegin() {
 		return monthBegin;
 	}
@@ -87,6 +97,24 @@ public class PosLogDto {
 	}
 	public void setMonthEnd(Date monthEnd) {
 		this.monthEnd = monthEnd;
+	}
+	public int getShopCode() {
+		return shopCode;
+	}
+	public void setShopCode(int shopCode) {
+		this.shopCode = shopCode;
+	}
+	public int getCategoryCode() {
+		return categoryCode;
+	}	
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 		
 }

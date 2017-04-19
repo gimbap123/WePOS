@@ -4,9 +4,27 @@
    
 <mapper namespace="com.wepos.user.dao.UserDao">
 
-	<insert id="insertProductGrade" parameterType="productGradeDto">
+	<insert id="productGradeWrite" parameterType="productGradeDto">
 		insert into product_grade 
 		values(#{userId}, #{productCode}, #{grade}, #{gradeComment})
 	</insert>
+	
+	<select id="productGradeList" parameterType="map" resultType="productGradeDto">
+		select *
+		from product_grade
+		where user_id = #{userId} and product_code in
+		<foreach collection="productCodeList" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<update id="productGradeUpdate" parameterType="productGradeDto">
+		update product_grade set grade = #{grade}, grade_comment = #{gradeComment}
+		where user_id = #{userId} and product_code = #{productCode}
+	</update>
+	
+	<delete id="productGradeDelete" parameterType="productGradeDto">
+		delete from product_grade where user_id = #{userId} and product_code = #{productCode}
+	</delete>
 	
 </mapper>

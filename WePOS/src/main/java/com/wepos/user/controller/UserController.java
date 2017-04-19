@@ -21,7 +21,27 @@ public class UserController {
 			@RequestParam("shopCode") int shopCode, @RequestParam(value="pageNum", defaultValue="1") int currentPage,
 			@RequestParam(value="categoryCode", defaultValue="0") int categoryCode)
 	{
-		userDao.insertProductGrade(productGrade);
+		userDao.productGradeWrite(productGrade);
+		return "redirect:/common/productList.do?shopCode=" + shopCode + "&pageNum=" + currentPage + "&categoryCode=" + categoryCode;
+	}
+	
+	// 상품 평점 수정 기능
+	@RequestMapping("/user/productGradeUpdate.do")
+	public String productGradeUpdate(@ModelAttribute ProductGradeDto productGrade,
+			@RequestParam("shopCode") int shopCode, @RequestParam(value="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(value="categoryCode", defaultValue="0") int categoryCode)
+	{
+		userDao.productGradeUpdate(productGrade);
+		return "redirect:/common/productList.do?shopCode=" + shopCode + "&pageNum=" + currentPage + "&categoryCode=" + categoryCode;
+	}
+	
+	// 상품 평점 삭제 기능
+	@RequestMapping("/user/productGradeDelete.do")
+	public String productGradeDelete(@ModelAttribute ProductGradeDto productGrade,
+			@RequestParam("shopCode") int shopCode, @RequestParam(value="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(value="categoryCode", defaultValue="0") int categoryCode)
+	{
+		userDao.productGradeDelete(productGrade);
 		return "redirect:/common/productList.do?shopCode=" + shopCode + "&pageNum=" + currentPage + "&categoryCode=" + categoryCode;
 	}
 

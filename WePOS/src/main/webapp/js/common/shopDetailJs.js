@@ -230,7 +230,7 @@ function productGrade(productCode)
 		return false;
 	}
 	
-	params = $("#productGradeForm" + productCode).serialize();
+	params = $("#gradeForm" + productCode).serialize();
 		
 	$.ajax({
 		type : "get",
@@ -244,3 +244,56 @@ function productGrade(productCode)
 		}
 	})	
 }
+
+function productGradeUpdate(productCode)
+{	
+	var grade = $("#userGradeDiv" + productCode + "> form > div > input:radio:checked").val();
+	
+	if(grade == 0)
+	{
+		alert("평점을 선택하세요.(1점 이상)");
+		return false;
+	}
+	
+	params = $("#gradeUpdateForm" + productCode).serialize();
+	
+	$.ajax({
+		type : "get",
+		url : "../user/productGradeUpdate.do",
+		data : params,
+		dataType : "html",
+		success : function(data)
+		{
+			alert("평점이 수정되었습니다.");
+			$("#productListTab").html(data);
+		}
+	})	
+}
+
+function productGradeDelete(productCode)
+{		
+	var flag = confirm("평점을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		params = $("#gradeUpdateForm" + productCode).serialize();
+		
+		$.ajax({
+			type : "get",
+			url : "../user/productGradeDelete.do",
+			data : params,
+			dataType : "html",
+			success : function(data)
+			{
+				alert("평점이 삭제되었습니다.");
+				$("#productListTab").html(data);
+			}
+		})			
+	}
+	else
+	{
+		return false;
+	}	
+}
+
+

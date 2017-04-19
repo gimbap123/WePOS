@@ -8,8 +8,11 @@ function checkForm(){
 	}else if($('#productCode').val()==999){
 		alert("메뉴를 선택해주세요");
 		return false;
+	}else if($('#searchGroup').val()==999 || $('#categoryCode').val()==999){
+		alert("분류를 선택해주세요");
+		return false;
 	}else if($('#searchType').val()==999){
-		alert("정렬방식을 선택해주세요");
+		alert("통계를 선택해주세요");
 		return false;
 	}else if($('#monthBegin').val()==999 || $('#monthEnd').val()==999){
 		alert("조회하실 월을 선택해주세요");
@@ -26,11 +29,11 @@ $(function(){
 			$('#month *').remove();
 			var add='';
 			var add1='';
-			add+='<td style="text-align: center;vertical-align: middle;">시작일</td>'+
+			add+='<th style="text-align: center;vertical-align: middle;">시작일</th>'+
 						'<td style="text-align: center">'+
 							'<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">'+
 						'</td>'
-			add1+='<td style="text-align: center;vertical-align: middle;">종료일</td>'+
+			add1+='<th style="text-align: center;vertical-align: middle;">종료일</th>'+
 						'<td style="text-align: center;vertical-align: middle;">'+
 							'<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">'+
 						'</td>'
@@ -79,14 +82,14 @@ $(function(){
 			$('#newStart *').remove();
 		    $('#newEnd *').remove(); 
 			var month='';
-			month+='<td style="text-align: center;vertical-align: middle;">월</td><td style="text-align: center">'+
-								'<select class="form-control" id="monthBegin" name="monthBegin" style="width:45%;display:inline">'+
+			month+='<th style="text-align: center;vertical-align: middle;">월</th><td style="text-align: center;padding-left:0;padding-right:0">'+
+								'<select class="form-control" id="monthBegin" name="monthBegin" style="width:40%;padding:0;display:inline">'+
 									'<option value="999">선택</option>'
 										for(var i=1;i<=12;i++){
 											month+='<option value="2017-0'+i+'-01">'+i+'월</option>'
 										}
 			month+='</select> ~ '+
-							'<select class="form-control" id="monthEnd" name="monthEnd" style="width:45%;display:inline">'+
+							'<select class="form-control" id="monthEnd" name="monthEnd" style="width:40%;padding:0;display:inline">'+
 								'<option value="999">선택</option>'
 									for(var i=1;i<=12;i++){
 										if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12)
@@ -101,4 +104,50 @@ $(function(){
 		}
 	});
 })
+
+
+$(function(){
+	$('#searchGroup').change(function(){
+		var searchGroup=this.value;
+		if(searchGroup==1){
+			$('#groupChild *').remove();
+			$('#searchType option[value=1]').remove();
+			var add='';
+				add += '<td style="text-align: center">'+
+								'<select class="form-control" id="categoryCode" name="categoryCode">'+
+									'<option value="999">-- 선택하세요 --</option>'+
+									'<option value="000">전 체</option>'+
+								'</select>'+
+							'</td>';
+				
+			$('#groupChild').html(add);
+			
+			$.post("searchCategory.do", {shopCode : $('#shopCode').html()}, function(result)
+					{			
+						$("#categoryCode").append(result);
+					});	
+		}
+		
+		if(searchGroup==2){
+			$('#groupChild *').remove();
+			$('#searchType option[value=1]').remove();
+			$("#searchType option:eq(1)").before("<option value='1'>상세 통계</option>");
+			var add='';
+			add += '<td style="text-align: center">'+
+							'<select class="form-control" id="productCode" name="productCode">'+
+								'<option value="999">-- 선택하세요 --</option>'+
+								'<option value="000">전 체</option>'+
+							'</select>'+
+						'</td>';
+			
+			$('#groupChild').html(add);
+			
+			$.post("searchProduct.do", {shopCode : $('#shopCode').html()}, function(result)
+					{			
+						$("#productCode").append(result);
+					});
+		}
+	});
+})
+
 

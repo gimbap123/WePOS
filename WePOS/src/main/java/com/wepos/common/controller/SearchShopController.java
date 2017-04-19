@@ -2,6 +2,7 @@ package com.wepos.common.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +32,10 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
+import com.wepos.common.dao.ReservationDao;
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ProductDto;
+import com.wepos.common.dto.ReservationDto;
 import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
@@ -40,6 +43,8 @@ import com.wepos.common.util.FileUtil;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
+import com.wepos.user.dao.UserDao;
+import com.wepos.user.dto.ProductGradeDto;
 
 @Controller
 public class SearchShopController {
@@ -49,7 +54,10 @@ public class SearchShopController {
   
   @Autowired
   private AdminDao adminDao;
-    
+  
+  @Autowired
+  private UserDao userDao;
+
   // 매장 검색
   @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
   public ModelAndView searchShopView(HttpServletRequest request, 
@@ -206,10 +214,11 @@ public class SearchShopController {
 	
 	// 상품 리스트
 	@RequestMapping(value="/common/productList.do")
-	public ModelAndView productListView(HttpServletRequest request, @RequestParam("shopCode") int shopCode,
+	public ModelAndView productListView(HttpSession session, HttpServletRequest request, 
+			@RequestParam("shopCode") int shopCode,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage,
 			@RequestParam(value="categoryCode", defaultValue="0") int categoryCode)
-	{	
+	{			
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
 		filePath = filePath.substring(index);
@@ -229,6 +238,7 @@ public class SearchShopController {
 		map.put("end", page.getEndCount());
 		
 		List<ProductDto> productList = null;
+		List<Integer> productCodeList = new ArrayList<Integer>();
 		
 		if(productCount > 0)
 		{
@@ -244,11 +254,23 @@ public class SearchShopController {
 				{
 					product.setProductFile("/WePOS/uploadFile/nullImg.jpg");
 				}
+				
+				productCodeList.add(product.getProductCode());
 			}	 		  		  
 		 }
 		else
 		{
 			productList = Collections.emptyList();
+		}
+		
+		List<ProductGradeDto> productGradeList = null;
+		
+		if(session.getAttribute("id") != null)
+		{
+			Map<String, Object> productGradeMap = new HashMap<String, Object>();
+			productGradeMap.put("userId", session.getAttribute("id"));
+			productGradeMap.put("productCodeList", productCodeList);
+			productGradeList = userDao.productGradeList(productGradeMap);
 		}
 		
 		ModelAndView mav = new ModelAndView();	
@@ -259,6 +281,7 @@ public class SearchShopController {
 		mav.addObject("pagingHtml", page.getPagingHtml()); 
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("shopCode", shopCode);
+		mav.addObject("productGradeList", productGradeList);
 		
 		return mav;
 	}
