@@ -208,16 +208,19 @@ function shopNoticeDelete(noticeNumber, shopCode, fileName, menuType)
 	}
 }
 
-function productGradeView(productCode, flag)
+
+function productGradeCancle(productCode, gradeComment, grade)
 {		
-	if(flag)
+	if(grade == 0)
 	{
-		$("#userGradeDiv" + productCode).show();		
+		$("#userGradeDiv" + productCode + "> form > div > input:radio:checked").attr("checked", false);
 	}
 	else
 	{
-		$("#userGradeDiv" + productCode).hide();
+		$("#userGradeDiv" + productCode + "> form > div > input:radio:input[id=quality-" + grade + "-" + productCode + "]").attr("checked", true);
 	}	
+	$("#gradeComment" + productCode).val(gradeComment);
+	$("#userGradeDiv" + productCode).hide();
 }
 
 function productGrade(productCode)
