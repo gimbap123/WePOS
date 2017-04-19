@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js?v=1"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -79,10 +79,8 @@
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<%-- <c:if test="${fn:length(categoryList)>0}"> --%>
-							<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 등록</button>							
-						<%-- </c:if> --%>
-						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 등록</button>
+						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>	
+						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 관리</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
 						<c:if test="${fn:length(productList)>0}">
@@ -92,20 +90,20 @@
 					                	<c:if test="${fn:length(countOrder)>0}">
 					                		<c:if test="${countOrder[i].countOrder!=null}">
 							                    <div class="pricing-head" 
-							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','${countOrder[i].countOrder}')">
+							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','${countOrder[i].countOrder}', '${productList[i].productFile}')">
 							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
 							                    </div>
 						                    </c:if>
 						                    <c:if test="${countOrder[i].countOrder==null}">
 							                    <div class="pricing-head" 
-							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0')">
+							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
 							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
 							                    </div>
 						                    </c:if>
 					                    </c:if>
 					                    <c:if test="${fn:length(countOrder)==0}">
 						                    <div class="pricing-head" 
-						                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0')">
+						                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
 						                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
 						                    </div>
 					                    </c:if>
@@ -127,7 +125,7 @@
 					<!-- Default panel contents -->
 					<!-- Table -->
 					<div class="panel-heading" align="center"><h3 id="productInfoTag">메뉴 정보</h3></div>					
-					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" method="post">
+					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" enctype="multipart/form-data" method="post" >
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
@@ -195,6 +193,17 @@
 									<th style="text-align:center;vertical-align:middle;width:90px">현재 주문량</th>
 									<td>
 										<input type="text" id="countOrder" name="countOrder" value="" size="15px" style="text-align:center;border:0" readonly>
+									</td>
+								</tr>
+								<tr id="productFileTr" style="display: none;">
+									<th style="text-align:center;vertical-align:middle;width:90px">첨부 파일</th>
+									<td>
+										<input type="text" id="productFile" name="productFile" value="" size="15px" style="text-align:center;border:0" readonly>										
+									</td>
+								</tr>
+								<tr id="uploadTr" style="display: none;">				
+									<td colspan="2">
+										<input type="file" class="form-control" name="upload" >										
 									</td>
 								</tr>
 							</tbody>

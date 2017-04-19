@@ -52,7 +52,7 @@
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script language="JavaScript" src="../js/pos/salesLog.js?ver=7"></script>
+	<script language="JavaScript" src="../js/pos/salesLog.js?ver=11"></script>
 
 </head>
 <body>

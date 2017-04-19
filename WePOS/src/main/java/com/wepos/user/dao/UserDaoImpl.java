@@ -26,4 +26,13 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 		getSqlSession().delete("productGradeDelete", productGrad);
 	}
 	
+	public int productGradeCount(int productCode) {		
+		return getSqlSession().selectOne("productGradeCount", productCode);
+	}
+	
+	public List<ProductGradeDto> productGradeModalList(Map<String, Object> map) {
+		List<ProductGradeDto> productGradeModalList = getSqlSession().selectList("productGradeModalList", map);
+		return productGradeModalList;
+	}
+	
 }

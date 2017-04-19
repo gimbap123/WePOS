@@ -23,6 +23,10 @@
 	<delete id="deleteRes" parameterType="int">
 		delete from reservation where rese_number=#{reseNumber}
 	</delete>
+	
+	<select id="countRes" parameterType="ReservationDto" resultType="int">
+		select count(*) from reservation where shop_code=#{shopCode} and user_id=#{userId}
+	</select>
 
 
 </mapper>

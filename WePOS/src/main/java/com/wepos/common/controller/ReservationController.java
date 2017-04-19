@@ -28,9 +28,9 @@ public class ReservationController {
 	{
 		String resDate = reservationDto.getResDate() + " " + businessHoursDto.getStartHour() + ":" + businessHoursDto.getStartMinute() + " " + businessHoursDto.getStartHourType();
 		reservationDto.setResFinalDate(resDate);
-				
+			System.out.println("userId="+reservationDto.getUserId());
 		reservationDao.insertRes(reservationDto);
-		return "redirect:/common/shopDetail.do?shopCode="+reservationDto.getShopCode();
+		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
 	
 	//예약 확인
@@ -62,13 +62,19 @@ public class ReservationController {
 		String Minute = businessHoursDto.getStartMinute();
 		
 		ShopDto ShopNameDto = reservationDao.selectShopName(reservationDto);
-		
+
+		String resState = reservationCheckDto.getResState();
+		if(resState.equals("0"))	{	resState = "예약 대기";	}
+		if(resState.equals("1"))	{	resState = "예약 완료";	}
+		if(resState.equals("2"))	{	resState = "예약 취소";	}
+			
 		ModelAndView mav=new ModelAndView();
     	mav.addObject("reservationCheckDto",reservationCheckDto);
     	mav.addObject("ShopNameDto", ShopNameDto);
     	mav.addObject("HoursType", HoursType);
     	mav.addObject("Hours", Hours);
     	mav.addObject("Minute", Minute);
+    	mav.addObject("resState", resState);
     	mav.setViewName("/common/reservationCheck");
     	
 		return mav;
@@ -81,9 +87,9 @@ public class ReservationController {
 	{
 		String resDate = reservationDto.getResDate() + " " + businessHoursDto.getStartHour() + ":" + businessHoursDto.getStartMinute() + " " + businessHoursDto.getStartHourType();
 		reservationDto.setResFinalDate(resDate);
-				
+			System.out.println("userId="+reservationDto.getUserId());
 		reservationDao.updateRes(reservationDto);
-		return "redirect:/common/shopDetail.do?shopCode="+reservationDto.getShopCode();
+		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
 	
 	//삭제 진행
@@ -92,7 +98,9 @@ public class ReservationController {
 			@RequestParam("userId") String userId, @RequestParam("shopCode") int shopCode, @RequestParam("reseNumber") int reseNumber)
 	{
 		reservationDao.deleteRes(reseNumber);
-		return "redirect:/common/shopDetail.do?shopCode="+reservationDto.getShopCode();
+		System.out.println("userId="+reservationDto.getUserId());
+		System.out.println("userId="+userId);
+		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
 	
 }

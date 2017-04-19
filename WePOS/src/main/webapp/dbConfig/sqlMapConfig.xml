@@ -53,6 +53,8 @@
 		<mapper resource="com/wepos/pos/dao/PosPaymentDaoMapper.xml"/>
 		<mapper resource="com/wepos/user/dao/UserDaoMapper.xml"/>
 		<mapper resource="com/wepos/pos/dao/PosFunctionDaoMapper.xml"/>
+		<mapper resource="com/wepos/pos/dao/PosReservationDaoMapper.xml"/>
+>>>>>>> branch 'branch_170325' of https://github.com/gimbap123/WePOS.git
 	</mappers>
 	
 </configuration>
