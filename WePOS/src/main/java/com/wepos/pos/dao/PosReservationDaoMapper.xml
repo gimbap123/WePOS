@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wepos.pos.dao.PosReservationDao">
+	
+	<select id="selectResList" parameterType="int" resultType="ReservationDto"> 
+		select * from reservation where shop_code=#{shopCode} order by rese_number desc
+	</select>
+	
+	<select id="countPosRes" parameterType="int" resultType="int">
+		select count(*) from reservation where shop_code=#{shopCode}
+	</select>
+	
+	<update id="updateState" parameterType="ReservationDto">
+		update reservation set res_state=#{resState} where rese_number=#{reseNumber}
+	</update>
+	
+	<select id="selectStateZero" parameterType="int" resultType="int"> 
+		select count(*) from (select * from reservation where shop_code=#{shopCode}) where res_state=0
+	</select>
+	
+</mapper>
