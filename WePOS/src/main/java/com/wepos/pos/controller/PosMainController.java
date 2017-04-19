@@ -19,6 +19,7 @@ import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.SumOrdersDetailDto;
 import com.wepos.common.dto.TablesDto;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.pos.dao.PosFunctionDao;
 import com.wepos.pos.dao.PosMainDao;
 
 @Controller
@@ -26,6 +27,9 @@ public class PosMainController {
 
   @Autowired
   private PosMainDao posMainDao;
+  
+  @Autowired
+  private PosFunctionDao posFunctionDao;
 
   // 포스 페이지 이동
   @RequestMapping( value = "/pos/posMain.do" )
@@ -55,6 +59,9 @@ public class PosMainController {
     // 결제 전 테이블의 주문 상세 내역 select
     List<SumOrdersDetailDto> ordersDetailList = posMainDao
         .getOrdersDetailBeforePayment();
+    
+    // 이동 가능한 테이블 정봄
+    List<Integer> movableTableCode = posFunctionDao.getMovableTableList( shopCode );
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -65,6 +72,7 @@ public class PosMainController {
     mav.addObject( "category", category );
     mav.addObject( "orderList", orderList );
     mav.addObject( "ordersDetailList", ordersDetailList );
+    mav.addObject( "movableTableCode", movableTableCode );
     return mav;
   }
 
@@ -78,7 +86,7 @@ public class PosMainController {
 
     List<OrdersDetailDto> insertOddList = new ArrayList<OrdersDetailDto>();
     List<OrdersDetailDto> deleteOddList = new ArrayList<OrdersDetailDto>();
-
+    
     OrdersDto od = new OrdersDto();
     if ( insertOrdersDetail != null ) {
 

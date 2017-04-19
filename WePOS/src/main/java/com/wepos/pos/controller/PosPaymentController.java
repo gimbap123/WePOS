@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.wepos.common.dto.SumOrdersDetailDto;
@@ -37,7 +36,6 @@ public class PosPaymentController {
     
     if( oddList != null ) {
       paymentJson = gson.toJson( oddList );
-      System.out.println( paymentJson );
     }
     try {
       response.getWriter().print( paymentJson );

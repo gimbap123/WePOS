@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="application/javascript; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<script>
+/**
+ * 
+ */
 var shopCode = $('#shop').attr('data-code');
 var tableCode;
 var tableName;
@@ -297,7 +297,6 @@ $(document).on('click','#orderSubmitButton', function(){
     var insertOrdersDetail = new Array(); 
     var deleteOrdersDetail = new Array(); 
    
-    shopCode = ${shopCode};
     var tableCode;
     
     var productCode;
@@ -382,4 +381,3 @@ function getShopStatus() {
   $('#useTableCount').text( useTableCount + " / " + $('#useTableCount').text() );
   
 }
-</script>

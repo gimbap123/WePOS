@@ -60,6 +60,14 @@ input[type="number"]::-webkit-inner-spin-button {
         margin-top: 20px;
     }
     
+    .pos-move-table
+    {
+        float: left;
+        margin-right: 20px;
+        min-width: 139px;
+        margin-top: 20px;
+    }
+   
     .tableOrderList
     {
         min-height: 130px;
