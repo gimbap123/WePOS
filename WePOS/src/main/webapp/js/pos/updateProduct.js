@@ -1,4 +1,7 @@
-function productInfo(code,name,price,stock,desc,categoryCode,countOrder){
+function productInfo(code,name,price,stock,desc,categoryCode,countOrder, productFile){
+	$('#productFileTr').show();
+	$('#uploadTr').show();
+	
 	$('#productInfoTag').text("메뉴 수정");
 	$('#productName').prop("disabled",false);
 	$('#productCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
@@ -9,6 +12,11 @@ function productInfo(code,name,price,stock,desc,categoryCode,countOrder){
 	$('#productDesc').val(desc);
 	$('#categoryCode').val(categoryCode);
 	$('#countOrder').val(countOrder);
+	if(productFile == "")
+	{
+		productFile = "파일이 없습니다.";
+	}
+	$('#productFile').val(productFile);
 	$('#okButton').prop("disabled",false);
 	$('#deleteButton').prop("disabled",false);
 }
@@ -69,6 +77,9 @@ function createProduct(){
 		return false;
 	}
 	else{
+		$('#productFileTr').hide();
+		$('#uploadTr').show();
+		
 		$('#productInfoTag').text("메뉴 추가");
 		$('#productCode').val(0);
 		$('#productName').val('');
@@ -77,11 +88,12 @@ function createProduct(){
 		$('#productDesc').val('');
 		$('#categoryCode').val(999);
 		$('#countOrder').val(0);
+		$('#productFile').val('');
 		$('#productName').attr("placeholder","메뉴명 입력");
 		$('#productPrice').attr("placeholder","가격 입력");
 		$('#productStock').attr("placeholder","재고량 입력");
 		$('#productDesc').attr("placeholder","메뉴 설명 입력");
-		$('#productCode').attr("style","visibility:hidden");
+		$('#productCode').attr("style","visibility:hidden");		
 		
 		$('#okButton').prop("disabled",false);
 		$('#deleteButton').prop("disabled",true);
@@ -97,7 +109,7 @@ function deleteProduct(mgrId){
 	else{
 		var deleteproduct=confirm("상품명 : "+$('#productName').val()+"\r삭제하시겠습니까?")
 		if(deleteproduct==true){
-			location.href="deleteProduct.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId;
+			location.href="deleteProduct.do?productCode="+$('#productCode').val()+"&mgrId="+mgrId + "&productFile=" + $('#productFile').val();
 	}
 	}
 		
