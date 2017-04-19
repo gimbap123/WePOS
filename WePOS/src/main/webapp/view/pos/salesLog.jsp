@@ -105,7 +105,7 @@
 										<c:if test="${posLogDto.searchGroup==1}">
 											<th style="text-align: center">분류</th>
 										</c:if>
-										<c:if test="${posLogDto.searchGroup==2}">
+										<c:if test="${posLogDto.searchGroup!=1}">
 											<th style="text-align: center">메뉴</th>
 											<th style="text-align: center">단가</th>
 										</c:if>										
@@ -123,7 +123,7 @@
 												<c:if test="${posLogDto.searchGroup==1}">
 													<td style="text-align: center">${resultLog.categoryName}</td>
 												</c:if>
-												<c:if test="${posLogDto.searchGroup==2}">
+												<c:if test="${posLogDto.searchGroup!=1}">
 													<td style="text-align: center">${resultLog.productName}</td>
 													<td style="text-align: center">
 														<fmt:formatNumber value="${resultLog.productPrice}" type="number" /> 원

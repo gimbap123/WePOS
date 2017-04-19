@@ -10,7 +10,7 @@
 		from orders o
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
-		where o.shop_code=#{shopCode}
+		where o.shop_code=#{shopCode} and o.order_state=1
 		order by o.order_date desc
 	</select>
 
@@ -21,7 +21,7 @@
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
 		<where>
-			o.shop_code=#{shopCode}
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{calendarBegin} and #{calendarEnd}+1
 			</if>
@@ -41,7 +41,7 @@
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
 		<where>
-			o.shop_code=#{shopCode}
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{calendarBegin} and #{calendarEnd}+1
 			</if>
@@ -63,7 +63,7 @@
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
 		<where>
-			o.shop_code=#{shopCode}
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{monthBegin} and #{monthEnd}+1
 			</if>
@@ -99,7 +99,7 @@
 	<if test="categoryCode!=000">
 		and t.category_code=#{categoryCode}
 	</if>
-	order by t.category_code asc
+	order by t.order_date desc
 	</select>
 	
 	<select id="categoryMonthLog" parameterType="PosLogDto" resultType="PosLogDto">
@@ -117,7 +117,7 @@
 	<if test="categoryCode!=000">
 		and t.category_code=#{categoryCode}
 	</if>
-	order by t.category_code asc
+	order by t.order_date desc
 	</select>
 
 </mapper>
