@@ -8,11 +8,11 @@ function checkForm(){
 	}else if($('#productCode').val()==999){
 		alert("메뉴를 선택해주세요");
 		return false;
-	}else if($('#searchType3').val()==999){
-		alert("통계를 선택해주세요");
-		return false;
-	}else if($('#searchType1').val()==999 || $('#searchType2').val()==999){
+	}else if($('#searchGroup').val()==999 || $('#categoryCode').val()==999){
 		alert("분류를 선택해주세요");
+		return false;
+	}else if($('#searchType').val()==999){
+		alert("통계를 선택해주세요");
 		return false;
 	}else if($('#monthBegin').val()==999 || $('#monthEnd').val()==999){
 		alert("조회하실 월을 선택해주세요");

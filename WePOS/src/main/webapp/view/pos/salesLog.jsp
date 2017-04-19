@@ -52,7 +52,7 @@
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script language="JavaScript" src="../js/pos/salesLog.js?ver=6"></script>
+	<script language="JavaScript" src="../js/pos/salesLog.js?ver=7"></script>
 
 </head>
 <body>
@@ -120,9 +120,6 @@
 										<c:forEach var="resultLog" items="${resultLog}">
 											<tr>
 												<td style="text-align: center;padding:0;vertical-align:middle">${resultLog.orderDate}</td>
-												<%-- <c:if test="${resultLog.categoryName!=null}">
-													<td style="text-align: center">${resultLog.categoryName}</td>
-												</c:if> --%>
 												<c:if test="${posLogDto.searchGroup==1}">
 													<td style="text-align: center">${resultLog.categoryName}</td>
 												</c:if>
