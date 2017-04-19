@@ -1,5 +1,6 @@
 function categoryInfo(code,name,count){
 	$('#categoryInfoTag').text("상품분류 수정");
+	$('#categoryName').prop("disabled",false);
 	$('#categoryCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
 	$('#categoryCode').val(code);
 	$('#categoryName').val(name);
