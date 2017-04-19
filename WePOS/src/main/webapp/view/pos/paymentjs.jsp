@@ -6,28 +6,43 @@
 $(document).on('click','#paymentCancelButton', function(){
   $('#paymentTable').children('tbody').children('tr').remove();
   $('#cashPaymentPrice').text("");
+  $('#cardNumber').val("");
 });
 
 // 결제창 닫기(x) 버튼 클릭시 이벤트
 $('#paymentModal').on('hide.bs.modal', function() {
   $('#paymentTable').children('tbody').children('tr').remove();
   $('#cashPaymentPrice').text("");
+  $('#cardNumber').val("");
 });
 
 //
 $(document).on('click', '#cashPaymentButton', function() {
 //  $('#cashNavTab').addClass('active');
 //  $('#cardNavTab').removeClass('active');
-  $('#paymentTab a[href="#cash"]').tab( 'show' );
-  getPaymentInfo();
+  if( checkActiveTable() == true ) {
+    $('#paymentTab a[href="#cash"]').tab( 'show' );
+    getPaymentInfo();
+  }
 });
 
 $(document).on('click', '#cardPaymentButton', function() {
 //  $('#cashNavTab').removeClass('active');
 //  $('#cardNavTab').addClass('active');
-  $('#paymentTab a[href="#card"]').tab( 'show' );
-  getPaymentInfo();
+  if( checkActiveTable() == true ) {
+    $('#paymentTab a[href="#card"]').tab( 'show' );
+    getPaymentInfo();
+  }
 });
+
+function checkActiveTable() {
+  if( $('.pos-table[id='+tableCode+'] ul > li').length <= 0 ) {
+    alert( "주문이 있는 테이블을 선택하세요");
+    return false;
+  }
+  return true;
+}
+
 function getPaymentInfo(){
   var selectedTableCode = $('#selectedTable').attr('data-code');
    
