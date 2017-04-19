@@ -32,8 +32,10 @@ import com.wepos.admin.dao.AdminDao;
 import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
+import com.wepos.common.dao.ReservationDao;
 import com.wepos.common.dao.ShopDao;
 import com.wepos.common.dto.ProductDto;
+import com.wepos.common.dto.ReservationDto;
 import com.wepos.common.dto.ShopBoardDto;
 import com.wepos.common.dto.ShopBoardReplyDto;
 import com.wepos.common.dto.ShopDto;
@@ -55,7 +57,10 @@ public class SearchShopController {
   
   @Autowired
   private UserDao userDao;
-    
+  
+  @Autowired
+  private ReservationDao reservationDao;
+
   // 매장 검색
   @RequestMapping(value = "/common/searchShop.do", method = RequestMethod.GET)
   public ModelAndView searchShopView(HttpServletRequest request, 
@@ -157,7 +162,7 @@ public class SearchShopController {
   	//매장 상세보기
 	@RequestMapping(value="/common/shopDetail.do")
 	public ModelAndView shopDetailView(HttpServletRequest request, 
-			@RequestParam("shopCode") int shopCode) throws Exception
+			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
@@ -201,9 +206,14 @@ public class SearchShopController {
 				coordinateMap.put("y", (String)location.get("lng").toString());				
 			}
 		}	
+		ReservationDto reservationDto = new ReservationDto();
+		reservationDto.setShopCode(shopCode);
+		reservationDto.setUserId(userId);
+		int countRes = reservationDao.countRes(reservationDto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopDetail");
+		mav.addObject("countRes", countRes);
 		mav.addObject("shop", shop);
 		mav.addObject("coordinateMap", coordinateMap);		
 		

@@ -1,13 +1,37 @@
 package com.wepos.common.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.wepos.common.dto.BusinessHoursDto;
 import com.wepos.common.dto.ReservationDto;
+import com.wepos.common.dto.ShopDto;
 
 public class ReservationDaoImpl extends SqlSessionDaoSupport implements ReservationDao {
 
 	public void insertRes(ReservationDto reservationDto) {
 		getSqlSession().insert("insertRes", reservationDto);
+	}
+	
+	public ReservationDto selectReservation(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("selectReservation", reservationDto);
+	}
+	
+	public ShopDto selectShopName(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("selectShopName", reservationDto);
+	}
+	
+	public void updateRes(ReservationDto reservationDto) {
+		getSqlSession().update("updateRes", reservationDto);
+	}
+	
+	public void deleteRes(int reseNumber) {
+		getSqlSession().delete("deleteRes", reseNumber);
+	}
+	
+	public int countRes(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("countRes", reservationDto);
 	}
 	
 }

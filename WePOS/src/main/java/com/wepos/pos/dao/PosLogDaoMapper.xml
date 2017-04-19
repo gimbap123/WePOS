@@ -4,12 +4,13 @@
 
 <mapper namespace="com.wepos.pos.dao.PosLogDao">
 
-	<select id="mainLog" resultType="PosLogDto">
+	<select id="mainLog" parameterType="PosLogDto" resultType="PosLogDto">
 		select o.order_date,p.product_name, p.product_price, od.order_amount,
 			(p.product_price*od.order_amount) "order_price"
 		from orders o
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
+		where o.shop_code=#{shopCode} and o.order_state=1
 		order by o.order_date desc
 	</select>
 
@@ -18,8 +19,9 @@
 			(p.product_price*od.order_amount) "order_price"
 		from orders o
 		inner join orders_detail od on o.order_code = od.order_code
-		inner join product p on od.product_code = p.product_code		
+		inner join product p on od.product_code = p.product_code
 		<where>
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{calendarBegin} and #{calendarEnd}+1
 			</if>
@@ -39,6 +41,7 @@
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
 		<where>
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{calendarBegin} and #{calendarEnd}+1
 			</if>
@@ -60,6 +63,7 @@
 		inner join orders_detail od on o.order_code = od.order_code
 		inner join product p on od.product_code = p.product_code
 		<where>
+			o.shop_code=#{shopCode} and o.order_state=1
 			<if test="productCode==000">
 				and o.order_date between #{monthBegin} and #{monthEnd}+1
 			</if>
@@ -68,14 +72,52 @@
 				#{monthBegin} and #{monthEnd}+1
 			</if>
 		</where>
-		group by
-			to_char(o.order_date,'yy-mm'),p.product_name,p.product_price
+		group by to_char(o.order_date,'yy-mm'),p.product_name,p.product_price
 		order by to_char(o.order_date,'yy-mm') desc
 	</select>
 
 	<select id="productName" parameterType="int" resultType="String">
 		select product_name from product where product_code=#{productCode}
 	</select>
-
+	
+	<select id="categoryName" parameterType="PosLogDto" resultType="String">
+		select category_name from category where category_code=#{categoryCode} and shop_code=#{shopCode}
+	</select>
+	
+	<select id="categoryDayLog" parameterType="PosLogDto" resultType="PosLogDto">
+	select t.order_date,c.category_name,t.order_amount,t.order_price
+	from
+		(select to_char(o.order_date,'yy-mm-dd') as order_date,p.category_code, sum(od.order_price) as order_price, sum(od.order_amount) as order_amount
+		from orders o  
+		inner join orders_detail od on o.order_code= od.order_code  
+		inner join product p on od.product_code = p.product_code
+		inner join category c on p.category_code=c.category_code
+		where o.shop_code=#{shopCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1 and o.order_state=1
+		group by to_char(o.order_date,'yy-mm-dd'),p.category_code) t
+	inner join category c on t.category_code=c.category_code
+	where c.shop_code = #{shopCode}
+	<if test="categoryCode!=000">
+		and t.category_code=#{categoryCode}
+	</if>
+	order by t.order_date desc
+	</select>
+	
+	<select id="categoryMonthLog" parameterType="PosLogDto" resultType="PosLogDto">
+	select t.order_date,c.category_name,t.order_amount,t.order_price
+	from
+		(select to_char(o.order_date,'yy-mm') as order_date,p.category_code, sum(od.order_price) as order_price, sum(od.order_amount) as order_amount
+		from orders o  
+		inner join orders_detail od on o.order_code= od.order_code  
+		inner join product p on od.product_code = p.product_code
+		inner join category c on p.category_code=c.category_code
+		where o.shop_code=#{shopCode} and o.order_date between #{monthBegin} and #{monthEnd}+1 and o.order_state=1
+		group by to_char(o.order_date,'yy-mm'),p.category_code) t
+	inner join category c on t.category_code=c.category_code
+	where c.shop_code = #{shopCode}
+	<if test="categoryCode!=000">
+		and t.category_code=#{categoryCode}
+	</if>
+	order by t.order_date desc
+	</select>
 
 </mapper>

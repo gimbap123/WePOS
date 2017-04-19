@@ -20,6 +20,8 @@
 				</c:if>
 				<c:if test="${sessionScope.id != null}">
 					<c:if test="${sessionScope.userType== 1}">
+						<li><a href="../common/reservationCheck.do?userId=${sessionScope.id}">예약내역</a></li>
+						<li class="topbar-devider"></li>		
 						<li><a href="../common/showUserInfo.do?userId=${sessionScope.id}">회원정보</a></li>
 					</c:if>
 					<c:if test="${sessionScope.userType== 2}">
@@ -30,11 +32,12 @@
 					<li class="topbar-devider"></li>				
 					<li><a href="../common/logout.do">로그아웃</a></li>
 				</c:if>
-			</ul>
+			</ul>	
 		</div>
 		<!-- End Topbar -->
 	</div>
 	<!--/end container-->
+	
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div
