@@ -208,3 +208,92 @@ function shopNoticeDelete(noticeNumber, shopCode, fileName, menuType)
 	}
 }
 
+function productGradeView(productCode, flag)
+{		
+	if(flag)
+	{
+		$("#userGradeDiv" + productCode).show();		
+	}
+	else
+	{
+		$("#userGradeDiv" + productCode).hide();
+	}	
+}
+
+function productGrade(productCode)
+{	
+	var grade = $("#userGradeDiv" + productCode + "> form > div > input:radio:checked").val();
+	
+	if(grade == 0)
+	{
+		alert("평점을 선택하세요.(1점 이상)");
+		return false;
+	}
+	
+	params = $("#gradeForm" + productCode).serialize();
+		
+	$.ajax({
+		type : "get",
+		url : "../user/productGrade.do",
+		data : params,
+		dataType : "html",
+		success : function(data)
+		{
+			alert("평점이 등록되었습니다.");
+			$("#productListTab").html(data);
+		}
+	})	
+}
+
+function productGradeUpdate(productCode)
+{	
+	var grade = $("#userGradeDiv" + productCode + "> form > div > input:radio:checked").val();
+	
+	if(grade == 0)
+	{
+		alert("평점을 선택하세요.(1점 이상)");
+		return false;
+	}
+	
+	params = $("#gradeUpdateForm" + productCode).serialize();
+	
+	$.ajax({
+		type : "get",
+		url : "../user/productGradeUpdate.do",
+		data : params,
+		dataType : "html",
+		success : function(data)
+		{
+			alert("평점이 수정되었습니다.");
+			$("#productListTab").html(data);
+		}
+	})	
+}
+
+function productGradeDelete(productCode)
+{		
+	var flag = confirm("평점을 삭제하시겠습니까?");
+	
+	if(flag)
+	{
+		params = $("#gradeUpdateForm" + productCode).serialize();
+		
+		$.ajax({
+			type : "get",
+			url : "../user/productGradeDelete.do",
+			data : params,
+			dataType : "html",
+			success : function(data)
+			{
+				alert("평점이 삭제되었습니다.");
+				$("#productListTab").html(data);
+			}
+		})			
+	}
+	else
+	{
+		return false;
+	}	
+}
+
+

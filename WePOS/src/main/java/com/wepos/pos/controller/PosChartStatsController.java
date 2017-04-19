@@ -69,7 +69,7 @@ public class PosChartStatsController {
 		if(chartType == 1)
 		{
 			chartStatsList = posChartStatsDao.monthStats(map);
-			jsonChartData = ChartUtil.barChartStat(chartStatsList);
+			jsonChartData = ChartUtil.barChartStat(chartStatsList);				
 			chartTitle = "월별 매출 (기간 : " + start + " ~ " + finish + ")";		
 		}
 		else if(chartType == 2)
