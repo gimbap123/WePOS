@@ -13,7 +13,7 @@
 		where table_code=#{tableCode}
 	</update>
 	
-	<delete id="deleteTable" parameterType="int">
-		delete from tables where table_code=#{tableCode}
-	</delete>
+	<update id="deleteTable" parameterType="int">
+		update tables set table_state=2 where table_code=#{tableCode}
+	</update>
 </mapper>

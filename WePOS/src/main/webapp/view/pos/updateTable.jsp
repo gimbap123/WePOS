@@ -54,7 +54,7 @@
 	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
-<script language="JavaScript" src="../js/pos/updateTable.js?ver=2"></script>
+<script language="JavaScript" src="../js/pos/updateTable.js?ver=3"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -96,7 +96,11 @@
 									<div class="panel-heading">
 										<h3 class="panel-title" id="panel-title">
 											<a role="button" class="anchorjs-link" href="#panel-title">
-												<span class="anchorjs-icon">${tables[i].tableName}</span>
+												<span class="anchorjs-icon">${tables[i].tableName}
+													<c:if test="${tables[i].tableState eq '1'.charAt(0)}">
+														- 사용중
+													</c:if>
+												</span>												
 											</a>
 												<span class="badge pull-right" style="margin-top:4px">${tables[i].tableMax}인</span>
 										</h3>
@@ -106,7 +110,7 @@
 											<input type="button" class="btn btn-success" value="수정"
 												onclick="tableInfo('${tables[i].tableCode}','${tables[i].tableName}','${tables[i].tableDesc}','${tables[i].tableMax}')">						
 											<input type="button" class="btn btn-danger" value="삭제"
-												onclick="deleteTable('${tables[i].tableCode}','${sessionScope.id}')">
+												onclick="deleteTable('${tables[i].tableCode}','${tables[i].tableState}','${sessionScope.id}')">
 										</span>
 									</div>
 								</div>				
