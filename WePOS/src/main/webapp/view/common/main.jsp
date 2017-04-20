@@ -40,7 +40,7 @@
 	            <div class="da-slide">
 	                <h2><i>We POS에</i> <br /> <i>오신걸</i> <br /> <i>환영합니다.</i></h2>
 	                <p><i>We POS에 가입된 매장들의</i> <br /> <i>정보와 상품을 만나볼 수 있습니다.</i></p>
-	                <div class="da-img"><img class="img-responsive" src="../assets/plugins/parallax-slider/img/1.png" alt=""></div>
+	                <div class="da-img"><img class="img-responsive" src="../image/common/posfinal.png" alt=""></div>
 	            </div>
 	            <div class="da-slide">
 	                <h2><i>RESPONSIVE VIDEO</i> <br /> <i>SUPPORT AND</i> <br /> <i>MANY MORE</i></h2>
@@ -74,7 +74,7 @@
 	                </c:if>
 	                <c:if test="${sessionScope.id != null}">        	
 		                <div class="col-md-9 animated fadeInLeft">
-		                    <span>${sessionScope.id}님 We POS 오신걸 환영합니다.</span>
+		                    <span><font color="#72c02c">${sessionScope.id}</font>님 We POS 오신걸 환영합니다.</span>
 		                    <p>매장 정보, 상품 정보, 상품 평점, 테이블 현황 등의 다양한 기능을 사용하실 수 있습니다.</p>
 		                </div>	                	                          
 		                <div class="col-md-3 btn-buy animated fadeInRight">
