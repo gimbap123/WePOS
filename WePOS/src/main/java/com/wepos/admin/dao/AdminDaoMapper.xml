@@ -4,7 +4,7 @@
 	 
 <mapper namespace="com.wepos.admin.dao.AdminDao">
 	<select id="getShopType" resultType="shopTypeDto">
-		select * from shop_type
+		select * from shop_type order by shop_type_code
 	</select>
 	
 	<select id="getCity" resultType="cityDto">
