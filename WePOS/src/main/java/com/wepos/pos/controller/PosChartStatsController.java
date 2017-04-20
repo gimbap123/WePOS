@@ -89,13 +89,13 @@ public class PosChartStatsController {
 			chartStatsList = posChartStatsDao.paymentPlanStats(map);
 			jsonChartData = ChartUtil.pieChartStat(chartStatsList);
 			chartTitle = "결제방식별 매출 (기간 : " + start + " ~ " + finish + ")";
-		}
+		}	
 		else if(chartType == 4)
 		{
 			chartStatsList = posChartStatsDao.userTypeStats(map);
 			jsonChartData = ChartUtil.pieChartStat(chartStatsList);
 			chartTitle = "회원, 비회원별별 매출 (기간 : " + start + " ~ " + finish + ")";
-		}		
+		}	
 		
 		Map<String, Object> chartTypeList = ChartUtil.chartTypeList();	
 		
