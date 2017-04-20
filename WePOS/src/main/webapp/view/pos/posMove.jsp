@@ -19,7 +19,7 @@
           <div class="col-sm-7">
             <c:forEach var="table" items="${tables}" varStatus="status">
               <c:forEach var="i" items="${movableTableCode}">
-                <c:if test="${table.tableCode == i}">
+                <c:if test="${table.tableCode eq i}">
                   <div class="panel panel-success pos-move-table" data-code="${table.tableCode}" data-name="${table.tableName}">
                     <div class="panel-heading">
                       <h3 class="panel-title" id="panel-title">
