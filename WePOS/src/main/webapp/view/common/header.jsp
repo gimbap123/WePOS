@@ -109,7 +109,7 @@
 				<!-- End 검색 -->
 
 				<!-- 게시판 -->
-				<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>		
+				<li><a href="../common/showBoard.do?boardTypeCode=2">자유게시판</a></li>
 			</ul>
 		</div>
 		<!--/end container-->
