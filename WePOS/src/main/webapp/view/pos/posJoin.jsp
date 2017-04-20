@@ -11,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-          테이블 합석<small id="joinTableName text-danger"></small>
+          테이블 합석<small id="joinTableName text-danger">[합석 가능한 테이블만 보여집니다]</small>
         </h3>
       </div>
       <div class="modal-body">
@@ -21,24 +21,24 @@
               <c:set var="flag" value="false" />
               <c:forEach var="i" items="${movableTableCode}" varStatus="iStatus">
                 <c:if test="${flag eq 'false'}">
-                <c:choose>
-                  <c:when test="${table.tableCode eq i}">
-                    <c:set var="break" value="true"/>
-                  </c:when>
-                  <c:otherwise>
-                    <c:if test="${iStatus.last eq true}">
-                      ${table.tableCode} / ${i} <br>
-                      <div class="panel panel-success pos-join-table" data-code="${table.tableCode}" data-name="${table.tableName}">
-                        <div class="panel-heading">
-                          <h3 class="panel-title" id="panel-title">
-                            <a role="button" class="anchorjs-link" href="#panel-title"> <span class="anchorjs-icon">${table.tableName}</span>
-                            </a> <span class="badge pull-right" style="margin-top: 4px">${table.tableMax}인</span>
-                          </h3>
+                
+                  <c:choose>
+                    <c:when test="${table.tableCode eq i}">
+                      <c:set var="flag" value="true" />
+                    </c:when>
+                    <c:otherwise>
+                      <c:if test="${iStatus.last eq true}">
+                        <div class="panel panel-success pos-join-table" data-code="${table.tableCode}" data-name="${table.tableName}">
+                          <div class="panel-heading">
+                            <h3 class="panel-title" id="panel-title">
+                              <a role="button" class="anchorjs-link" href="#panel-title"> <span class="anchorjs-icon">${table.tableName}</span>
+                              </a> <span class="badge pull-right" style="margin-top: 4px">${table.tableMax}인</span>
+                            </h3>
+                          </div>
                         </div>
-                      </div>
-                    </c:if>
-                  </c:otherwise>
-                </c:choose>
+                      </c:if>
+                    </c:otherwise>
+                  </c:choose>
                 </c:if>
               </c:forEach>
             </c:forEach>
@@ -54,7 +54,7 @@
                       <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                     </div>
                     <input type="text" class="form-control input-lg" id="joinFromTable" readonly>
-                    <input type="hidden" id="joinFromTableCode" name="joinFromTableCode" value="">
+                    <input type="hidden" id="joinFromTableCode" name="fromTableCode" value="">
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@
                       <span class="glyphicon glyphicon-log-in"></span>
                     </div>
                     <input type="text" class="form-control input-lg" id="joinToTable" readonly>
-                    <input type="hidden" id="joinToTableCode" name="joinToTableCode" value="">
+                    <input type="hidden" id="joinToTableCode" name="toTableCode" value="">
                     <input type="hidden" id="shopCode" name="shopCode" value="">
                   </div>
                 </div>

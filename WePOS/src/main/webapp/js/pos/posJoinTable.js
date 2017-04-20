@@ -16,9 +16,14 @@ $('#joinTableModal').on('hide.bs.modal', function() {
 
 //
 $(document).on('click', '#joinButton', function() {
-    $('#joinTableModal').modal();
-    $('#joinFromTable').val( tableName );
-    $('#joinFromTableCode').val( tableCode );
+    if ( checkActiveTable() == false ) {
+      alert( "비어있는 테이블입니다.")
+    }
+    else {
+      $('#joinTableModal').modal();
+      $('#joinFromTable').val( tableName );
+      $('#joinFromTableCode').val( tableCode );
+    }
 });
 
 $(document).on('click', '.pos-join-table', function() {
