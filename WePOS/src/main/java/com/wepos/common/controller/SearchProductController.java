@@ -32,7 +32,7 @@ public class SearchProductController {
 	@Autowired
 	private ProductDao productDao;
 	
-	// 매장 검색
+	// 상품 검색
 	@RequestMapping(value = "/common/searchProduct.do")
 	public ModelAndView searchProductView(HttpServletRequest request, 
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
@@ -59,7 +59,7 @@ public class SearchProductController {
 		if(shop.getShopTypeCode() == 0 && shop.getCityCode() == 0 && shop.getLocalCode() == 0 
 				&& productName == null)
 		{
-			page = new PagingUtil(currentPage, productCount, 8, 5, "searchProduct.do");
+			page = new PagingUtil(currentPage, productCount, 12, 5, "searchProduct.do");
 		}
 		else
 		{
@@ -74,7 +74,7 @@ public class SearchProductController {
 				paramString = "?productName=" + productName + "&shopTypeCode=" + shop.getShopTypeCode() +
 						"&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
 			}
-			page = new PagingUtil(paramString, currentPage, productCount, 8, 5, "searchProduct.do");
+			page = new PagingUtil(paramString, currentPage, productCount, 12, 5, "searchProduct.do");
 		}
 		
 		map.put("start", page.getStartCount());

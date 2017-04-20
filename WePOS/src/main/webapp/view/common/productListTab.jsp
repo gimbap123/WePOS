@@ -14,8 +14,8 @@
     	<div class="col-md-10">
         	<c:if test="${fn:length(productList) == 0}">
         		<h2>등록된 상품이 없습니다.</h2>
-        	</c:if>		
-        	<c:if test="${productList != null}">
+        	</c:if>
+        	<c:if test="${fn:length(productList) != 0}">
         		<div class="row">
 	        		<div class="col-md-3">	        			
 	        			<div class="input-group">

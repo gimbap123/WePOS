@@ -106,35 +106,40 @@
 	
 		<br>
 		<!--=== Cube-Portfdlio ===-->
-   	 	<div class="cube-portfolio container margin-bottom-30">
-   	 		<div id="grid-container" class="cbp-l-grid-agency">   	  	 			 	 		 		
-   	 			<c:forEach items="${shopList}" var="shop">
-   	 				<div class="cbp-item">
-   	 					<div class="cbp-caption margin-bottom-20">
-   	 						<div class="cbp-caption-defaultWrap">
-                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
-                    		</div>
-                    		<div class="cbp-caption-activeWrap">
-                    			<div class="cbp-l-caption-alignCenter">
-                    				<div class="cbp-l-caption-body">
-                    					<ul class="link-captions no-bottom-space">
-                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}&userId=${sessionScope.id}"><i class="rounded-x fa fa-info-circle"></i></a></li>
-                                    		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="${shop.shopName}"><i class="rounded-x fa fa-search"></i></a></li>
-                    					</ul>
-                    				</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="cbp-title-dark">
-                    		<div class="cbp-l-grid-agency-title">${shop.shopName}</div>
-                    		<div class="cbp-l-grid-agency-desc">${shop.shopAddress}</div>
-                		</div>
-   	 				</div>
-   	 			</c:forEach>
-   	 		</div>
-   	 		<div class="margin-bottom-30"></div>
-    		${pagingHtml}    		
+   	 	<div class="cube-portfolio container margin-bottom-30" style="min-height: 390px;">  
+   	 		<c:if test="${shopCount == 0}">
+       			<h2>등록된 매장이 없습니다.</h2>
+       		</c:if>
+       		<c:if test="${shopCount != 0}">
+       			<div id="grid-container" class="cbp-l-grid-agency">     			 			 	 		 		
+	   	 			<c:forEach items="${shopList}" var="shop">
+	   	 				<div class="cbp-item">
+	   	 					<div class="cbp-caption margin-bottom-20">
+	   	 						<div class="cbp-caption-defaultWrap">
+	                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
+	                    		</div>
+	                    		<div class="cbp-caption-activeWrap">
+	                    			<div class="cbp-l-caption-alignCenter">
+	                    				<div class="cbp-l-caption-body">
+	                    					<ul class="link-captions no-bottom-space">
+	                    						<li><a href="../common/shopDetail.do?shopCode=${shop.shopCode}"><i class="rounded-x fa fa-info-circle"></i></a></li>
+	                                    		<li><a href="${shop.shopFile}" class="cbp-lightbox" data-title="${shop.shopName}"><i class="rounded-x fa fa-search"></i></a></li>
+	                    					</ul>
+	                    				</div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+	                    	<div class="cbp-title-dark">
+	                    		<div class="cbp-l-grid-agency-title">${shop.shopName}</div>
+	                    		<div class="cbp-l-grid-agency-desc">${shop.shopAddress}</div>
+	                		</div>
+	   	 				</div>
+	   	 			</c:forEach>   	 			
+	   	 		</div>  
+       		</c:if>   	 		
+   	 		<div class="margin-bottom-30"></div>    		   		
     	</div>
+    	${pagingHtml} 
 		<!--=== End Cube-Portfdlio ===-->
 		
 		<jsp:include page="footer.jsp" flush="false" />		
