@@ -11,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-          테이블 이동 <small id="moveTableName text-danger">[이동 가능한 테이블만 표시됩니다.]</small>
+          테이블 이동 <small id="moveTableName text-danger">[이동 가능한 테이블만 보여집니다.]</small>
         </h3>
       </div>
       <div class="modal-body">
