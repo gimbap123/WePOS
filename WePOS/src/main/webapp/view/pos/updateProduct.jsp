@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js?v=5"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js?v=6"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -126,6 +126,8 @@
 					<!-- Table -->
 					<div class="panel-heading" align="center"><h3 id="productInfoTag">상품 정보</h3></div>					
 					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" enctype="multipart/form-data" method="post" >
+						<input type="hidden" id="productCode" name="productCode" value="">
+						<input type="hidden" id="shopCode" name="shopCode" value="${shop.shopCode}">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
@@ -133,21 +135,9 @@
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
 								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">매장 번호</th>
-									<th>
-										<input type="text" id="shopCode" name="shopCode" value="${shop.shopCode}" size="15px" style="text-align:center;border:0" readonly>
-									</th>
-								</tr>
-								<tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 번호</th>
-									<th>
-										<input type="text" id="productCode" name="productCode" value="" size="15px" style="border:0" readonly>
-									</th>
-								</tr>
-								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">상품 분류</th>
 									<th>
-										<select class="form-control" id="categoryCode" name="categoryCode">
+										<select class="form-control" id="categoryCode" name="categoryCode" disabled>
 											<option value="999">선택하세요</option>
 											<c:if test="${fn:length(categoryList)>0}">
 												<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
@@ -174,19 +164,19 @@
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">가 격</th>
 									<td>
-										<input type="text" id="productPrice" name="productPrice" value="" size="15px" style="text-align:center">
+										<input type="text" id="productPrice" name="productPrice" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">재 고</th>
 									<td>
-										<input type="text" id="productStock" name="productStock" value="" size="15px" style="text-align:center">
+										<input type="text" id="productStock" name="productStock" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">상품 설명</th>
 									<td>
-										<input type="text" id="productDesc" name="productDesc" value="" size="15px" style="text-align:center">
+										<input type="text" id="productDesc" name="productDesc" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 								<tr>

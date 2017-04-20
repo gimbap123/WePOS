@@ -69,35 +69,43 @@
 		<div class="wrapper">
 			<!--=== Header ===-->
 			<jsp:include page="header.jsp" flush="false" />
-
+			<c:if test="${boardTypeCode==1}">
+				<div class="breadcrumbs" style="background: url('../image/common/searchHeaderImg.png') repeat;">
+		      		<div class="container">
+		          		<h1 class="pull-left" style="color: white; font-weight: bold;">공지사항</h1>          		
+		      		</div>
+		  		</div>
+	  		</c:if>
 			<!--=== Search Block Version 2 ===-->
-			<div class="search-block99">
-				<div class="container">
-					<div class="col-md-8 col-md-offset-1">
-						<h2 style="text-align: left;">
-							<img src="../image/common/showBoard.png" style="float: left; margin: 0 10px 0 10px">
-							여러분의 소중한 후기를 남겨주세요!
-						</h2>
-
-						<hr style="margin: 5px 0 0 5px">
-
-						<h5>
-							자유게시판은 회원 여러분들이 자유롭게 글을 등록하는 공간입니다.<br> 
-							게시판에 글을 등록하시면 저희 WePOS에서 제공하는 다양한 혜택을<br> 
-							누리실 수 있습니다. 여러분의 많은 관심을 부탁드립니다. 감사합니다!<br>
-						</h5>
-
-						<h6>
-							(타인을 비방하는 글이나 상업성 광고 및 개인정보 유출 등에 해당하는 글은<br> 
-							작성자에게 별도의 통보없이 즉시 삭제되오니 참고 부탁드립니다.)
-						</h6>
+			<c:if test="${boardTypeCode==2}">
+				<div class="search-block99">
+					<div class="container">
+						<div class="col-md-8 col-md-offset-1">							
+							<h2 style="text-align: left;">
+								<img src="../image/common/showBoard.png" style="float: left; margin: 0 10px 0 10px">
+								여러분의 소중한 후기를 남겨주세요!
+							</h2>
+	
+							<hr style="margin: 5px 0 0 5px">
+	
+							<h5>
+								자유게시판은 회원 여러분들이 자유롭게 글을 등록하는 공간입니다.<br> 
+								게시판에 글을 등록하시면 저희 WePOS에서 제공하는 다양한 혜택을<br> 
+								누리실 수 있습니다. 여러분의 많은 관심을 부탁드립니다. 감사합니다!<br>
+							</h5>
+	
+							<h6>
+								(타인을 비방하는 글이나 상업성 광고 및 개인정보 유출 등에 해당하는 글은<br> 
+								작성자에게 별도의 통보없이 즉시 삭제되오니 참고 부탁드립니다.)
+							</h6>							
+						</div>
 					</div>
 				</div>
-			</div>
+			</c:if>	
 			<!--/container-->
 
 			<!--=== End Search Block Version 2 ===-->
-			<div class="container content-sm">
+			<div class="container content-sm" style="min-height: 300px">
 				<!-- Begin Table Search Panel v1 -->
 				<div class="table-search-v1 panel panel-u margin-bottom-50">
 					<div class="panel-heading">
@@ -106,7 +114,7 @@
 							<i class="icon-note"></i> 공지사항 ( 총 ${count} 건의 글 )
 							</c:if>
 							<c:if test="${boardTypeCode==2}">
-							<i class="icon-note"></i> FAQ ( 총 ${count} 건의 글 )
+							<i class="icon-note"></i> 자유게시판 ( 총 ${count} 건의 글 )
 							</c:if>
 							
 							<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
@@ -123,7 +131,7 @@
 									style="height: 20px; color: black;">
 								<!-- <input type="submit" value="검색" style="width: 50px; height: 20px; vertical-align: middle; text-align: center; color: gray;"> -->
 								<b><a href="javascript:document.searchBoard.submit()"
-									style="color: white; text-decoration: none;">[FIND]</a></b>
+									style="color: white; text-decoration: none;">검색</a></b>
 							</div>
 
 						</h3>

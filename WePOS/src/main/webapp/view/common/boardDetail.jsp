@@ -128,8 +128,8 @@
 
 			<input type="hidden" name="boardNumber" value="${boardDto.boardNumber}">
 
-			<div class="container content" style="width: 60%; min-height: 558px">
-				<div class="row blog-page">
+			<div class="container content" style="width: 60%;">
+				<div class="row blog-page" >
 					<div class="col-md-12">
 						<div class="blog margin-bottom-40">
 						
@@ -142,21 +142,26 @@
 								<ul class="list-unstyled list-inline blog-info">
 									<li><i class="fa fa-calendar"></i> ${boardDto.boardDate}</li>
 									<li><i class="fa fa-pencil"></i> ${boardDto.totalId}</li>
-									<li><i class="fa fa-comments"></i> ${repCount}개의 댓글</li>
+									<c:if test="${boardTypeCode!=1}">
+										<li><i class="fa fa-comments"></i> ${repCount}개의 댓글</li>
+									</c:if>
 								</ul>
 							</div>
 							<hr>
+							
 							<div class="blog-img">
-
-								<img class="img-responsive" src="${boardDto.boardFile}" alt="">
-								
+								<img class="img-responsive" src="${boardDto.boardFile}" alt="">								
 							</div>
+							<br>
+							<div style="min-height: 250px">
 							<p>${boardDto.boardContent}</p>
+							</div>
 							<hr>
-							<b>첨부파일:</b> <a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
+							
+							<%-- <b>첨부파일:</b> <a href="file.do?boardFile=${boardDto.boardFile}">${boardDto.boardFile}</a>
 							<c:if test="${boardDto.boardFile==null}">
 								파일이 존재하지 않습니다.
-							</c:if>
+							</c:if> --%>
 
 								<c:if test="${sessionScope.id==boardDto.totalId}">	
 								<a class="btn-u btn-u-small" onClick="location.href='showBoard.do?boardTypeCode=${boardTypeCode}'" style="float: right;"><i
@@ -172,7 +177,7 @@
 								</c:if>
 							
 					</form>
-
+					<c:if test="${boardTypeCode!=1}">	
 							<div style="height: 20px"></div>
 							<div class="headline" ><h3>Comment</h3></div>
 							
@@ -235,7 +240,7 @@
 
 					</form>				
 					</div>
-					
+					</c:if>
 						</div>
 					</div>
 				</div>

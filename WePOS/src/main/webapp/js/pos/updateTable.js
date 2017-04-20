@@ -1,4 +1,7 @@
 function tableInfo(tableCode,tableName,tableDesc,tableMax){
+	$('#tableName').prop("disabled",false);
+	$('#tableDesc').prop("disabled",false);
+	$('#tableMax').prop("disabled",false);
 	$('#tableInfoTag').text("테이블 정보");
 	$('#tableCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
 	$('#tableCode').val(tableCode);
@@ -33,6 +36,9 @@ function checkNull(){
 }
 
 function create(){
+	$('#tableName').prop("disabled",false);
+	$('#tableDesc').prop("disabled",false);
+	$('#tableMax').prop("disabled",false);
 	$('#tableInfoTag').text("테이블 추가");
 	$('#tableCode').val(0);
 	$('#tableName').val('');
