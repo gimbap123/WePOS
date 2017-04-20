@@ -63,7 +63,7 @@
 							<a href="javascript:void(0);">매장 관리</a>														
 							<ul class="dropdown-menu">
 								<li><a href="../pos/updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
-								<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
+								<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">상품 관리</a></li>
 								<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 								<li><a href="../pos/posReservation.do?mgrId=${sessionScope.id}&shopCode=${sessionScope.shopCode}">예약 관리</a></li>
 							</ul>
