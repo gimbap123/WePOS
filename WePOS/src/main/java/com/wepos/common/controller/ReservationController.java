@@ -18,7 +18,7 @@ import com.wepos.common.dto.ShopDto;
 public class ReservationController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
-
+		
 	@Autowired
 	private ReservationDao reservationDao;
 		
@@ -28,7 +28,7 @@ public class ReservationController {
 	{
 		String resDate = reservationDto.getResDate() + " " + businessHoursDto.getStartHour() + ":" + businessHoursDto.getStartMinute() + " " + businessHoursDto.getStartHourType();
 		reservationDto.setResFinalDate(resDate);
-			System.out.println("userId="+reservationDto.getUserId());
+
 		reservationDao.insertRes(reservationDto);
 		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}

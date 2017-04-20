@@ -222,21 +222,19 @@ public class SearchShopController {
 	}
 	
 	//RESERVATION 버튼을 눌렀을때
-	@RequestMapping(value="/common/reservationGo.do")
+	@RequestMapping(value="/common/reservationModal.do", method=RequestMethod.GET)
 	public ModelAndView reservationGo(HttpServletRequest request, 
 			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
 	{
 		ReservationDto reservationDto = new ReservationDto();
 		reservationDto.setShopCode(shopCode);
 		reservationDto.setUserId(userId);
-		System.out.println("reservationGo의 userId="+reservationDto.getUserId());
-		System.out.println("reservationGo의 userId="+userId);
-		System.out.println("reservationGo의 shopCode="+shopCode);
 		int countRes = reservationDao.countRes(reservationDto);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/shopDetail");
+		mav.setViewName("/common/reservationModal");
 		mav.addObject("countRes", countRes);
+		mav.addObject("shopCode", shopCode);
 		return mav;
 	}
 	

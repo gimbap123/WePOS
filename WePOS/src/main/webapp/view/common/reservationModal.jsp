@@ -8,14 +8,15 @@
 					<!-- MODAL -->
 	                <form id="resForm" name="resForm" action="reservation.do" method="post">
 	                <input type="hidden" id="userId" name="userId" value="${sessionScope.id }">
-	                <input type="hidden" id="shopCode" name="shopCode" value="${shop.shopCode}">
+	                <input type="hidden" id="shopCode" name="shopCode" value="${shopCode}">
 	                
 	                <div class="margin-bottom-40">
-                        <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                
-                                
+								
+								<%-- <c:set var="countRes" value="0" /> --%>
+                                 
                                 <c:if test="${countRes > 0 }">
                                  <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -104,8 +105,16 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
+                    </div>
                     </div>
                     </form>
-                    </body>
 	                <!-- MODAL -->  
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=1"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+    	App.init();    	
+    	Datepicker.initDatepicker();
+    });
+</script>	
