@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,13 +63,24 @@
 	    <div class="purchase">
 	        <div class="container">
 	            <div class="row">
-	                <div class="col-md-9 animated fadeInLeft">
-	                    <span>We POS 시스템을 통해 편리한 경험을 느껴보세요.</span>
-	                    <p>회원가입하시면 매장 예약, 메뉴 평점, 게시물 쓰기 등의 다양한 기능을 사용하실 수 있습니다.</p>
-	                </div>	                	                          
-	                <div class="col-md-3 btn-buy animated fadeInRight">
-	                    <a href="registration.do" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> 회원가입</a>
-	                </div>
+	            	<c:if test="${sessionScope.id == null}">            	
+		                <div class="col-md-9 animated fadeInLeft">
+		                    <span>We POS 시스템을 통해 편리한 경험을 느껴보세요.</span>
+		                    <p>회원가입하시면 매장 예약, 상품 평점, 게시물 쓰기 등의 다양한 기능을 사용하실 수 있습니다.</p>
+		                </div>	                	                          
+		                <div class="col-md-3 btn-buy animated fadeInRight">
+		                    <a href="registration.do" class="btn-u btn-u-lg"><i class="fa fa-users"></i> 회원가입</a>
+		                </div>
+	                </c:if>
+	                <c:if test="${sessionScope.id != null}">        	
+		                <div class="col-md-9 animated fadeInLeft">
+		                    <span>${sessionScope.id}님 We POS 오신걸 환영합니다.</span>
+		                    <p>매장 정보, 상품 정보, 상품 평점, 테이블 현황 등의 다양한 기능을 사용하실 수 있습니다.</p>
+		                </div>	                	                          
+		                <div class="col-md-3 btn-buy animated fadeInRight">
+		                    <a href="searchShop.do" class="btn-u btn-u-lg"><i class="fa fa-search"></i> 매장 검색</a>
+		                </div>
+	                </c:if>
 	            </div>
 	        </div>
 	    </div><!--/row-->

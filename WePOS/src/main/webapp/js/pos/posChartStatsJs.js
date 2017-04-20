@@ -51,7 +51,7 @@ function chartTypeSelect(jsonChartData)
 			{
 				$("#chartDiv").html('<div class="box box-success"><div class="box-header with-border">'
 						+  '<h3 class="box-title">' + chartTitle + '</h3></div><div class="box-body">'
-						+ '<canvas id="pieChart" style="height:450px"></canvas></div></div>');
+						+ '<canvas id="pieChart" style="max-height:450px"></canvas></div></div>');
 				pieChartStats(jsonChartData);
 			}
 		}

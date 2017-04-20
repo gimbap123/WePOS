@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=8" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=9" /> ">
 
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
@@ -141,7 +141,7 @@
             <button type="button" class="btn btn-lg btn-success" id="moveButton">이동</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success">합석</button>
+            <button type="button" class="btn btn-lg btn-success" id="joinButton">합석</button>
           </div>
         </div>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
@@ -166,6 +166,7 @@
     <jsp:include page="./posOrder.jsp" flush="false" />
     <jsp:include page="./posPayment.jsp" flush="false" />
     <jsp:include page="./posMove.jsp" flush="false" />
+    <jsp:include page="./posJoin.jsp" flush="false" />
     
 
   </div>
@@ -198,8 +199,9 @@
 
   <!-- JS user custom -->
   <script type="text/javascript" src="<c:url value="../js/pos/posMoveTable.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posJoinTable.js"/>"></script>
   <script type="text/javascript" src="<c:url value="../js/pos/posOrder.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js?ver=1"/>"></script>
 
    <!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>

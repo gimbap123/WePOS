@@ -50,7 +50,9 @@ public class PosPaymentController {
                             @RequestParam("tableCode") int tableCode,
                             @RequestParam("paymentCode") int paymentCode,
                             HttpSession session) {
-  
+    
+    System.out.println( "PosPaymentController:54 > " + paymentCode );
+    
     Map<String, Integer> paymentInfo = new HashMap<String, Integer>();
     
     paymentInfo.put( "shopCode", shopCode );

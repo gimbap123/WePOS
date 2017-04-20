@@ -49,7 +49,7 @@
               </ul>
 
               <!-- Tab panes -->
-              <div class="tab-content ">
+              <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="cash">
                   <form id="cashPaymentForm" action="posPayment.do" method="post">
                     <input type="hidden" id="shopCode" name="shopCode" value="" />

@@ -23,7 +23,8 @@ $(document).on('click', '#moveButton', function() {
     $('#moveTableModal').modal();
     $('#fromTable').val( tableName );
     $('#fromTableCode').val( tableCode );
-  }
+   }
+
 });
 
 $(document).on('click', '.pos-move-table', function() {
