@@ -50,7 +50,6 @@
 					<ul class="dropdown-menu">
 						<li><a href="../common/showBoard.do?boardTypeCode=1">공지사항</a></li>
 						<li><a href="../common/posIntroduce.do">We POS 소개</a></li>
-						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
 				<!-- End WE POS -->
 				
@@ -104,12 +103,12 @@
 				<!-- End 검색 -->
 
 				<!-- 게시판 -->
-				<li class="dropdown"><a href="javascript:void(0);"
-					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
+				<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
+				<!-- <li class="dropdown"><a href="javascript:void(0);"
+					class="dropdown-toggle" data-toggle="dropdown"> FAQ </a>
 					<ul class="dropdown-menu">						
 						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
-						<li><a href="#">Q&A</a></li>
-					</ul></li>
+					</ul></li> -->
 				<!-- End 게시판 -->				
 			</ul>
 		</div>
