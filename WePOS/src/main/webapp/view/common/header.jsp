@@ -109,13 +109,7 @@
 				<!-- End 검색 -->
 
 				<!-- 게시판 -->
-				<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
-				<!-- <li class="dropdown"><a href="javascript:void(0);"
-					class="dropdown-toggle" data-toggle="dropdown"> FAQ </a>
-					<ul class="dropdown-menu">						
-						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
-					</ul></li> -->
-				<!-- End 게시판 -->				
+				<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>		
 			</ul>
 		</div>
 		<!--/end container-->
