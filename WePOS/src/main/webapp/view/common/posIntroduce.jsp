@@ -87,7 +87,7 @@
         <div class="headline-center margin-bottom-60">
             <h2>WE ARE WEPOS</h2>
             <p>우리 WEPOS SYSTEM에 오신 여러분을 진심으로 환영합니다. <br>
-           매장은 운영하는 <strong>관리자</strong> 뿐만 아니라, 일반 <strong>고객분들</strong> 에게도 아주 유용한 정보를 제공하고 있습니다 </p>                
+           매장을 운영하는 <strong>관리자</strong> 뿐만 아니라, 일반 <strong>고객분들</strong> 에게도 매우 유용한 정보를 제공하고 있습니다 </p>                
         </div>
 
         <div class="row">
@@ -146,8 +146,8 @@
         <div class="container content-sm">
             <div class="headline-center margin-bottom-60">
                 <h2>WHY WEPOS?</h2>
-                <p>저희 WEPOS를 이용하고 계신 매장, 고객분들의 정보를 숨깅없이 제공합니다<br>
-               회원 분들의 <strong>홈페이지 이용 평점</strong>, 관리자 분들의 <strong>운영 시스템 평점</strong> 등 다양한 정보를 알려드립니다 </p>                
+                <p>저희 WEPOS는 최고의 전문가들로 구성되어 있습니다<br>
+               회원 분들의 <strong>편의</strong>와 다양한 <strong>기술 제공</strong>을 위해 더 노력하겠습니다</p>                
             </div>
 
             <div class="row">
@@ -155,25 +155,25 @@
 
                 <!-- Smallest Progress Bar -->
                 <div class="col-md-6 progress-box">
-                    <h3 class="heading-xs">고객 평점(남)<span class="pull-right">8.8</span></h3>
+                    <h3 class="heading-xs">HTML/CSS<span class="pull-right">8.8</span></h3>
                     <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
                         <div class="progress-bar progress-bar-u" role="progressbar" data-width="88" style="width: 88%;">
                         </div>
                     </div>
 
-                    <h3 class="heading-xs">고객 평점(여) <span class="pull-right">9.2</span></h3>
+                    <h3 class="heading-xs">Photoshop<span class="pull-right">9.2</span></h3>
                     <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
                         <div class="progress-bar progress-bar-u" role="progressbar" data-width="92" style="width: 92%;">
                         </div>
                     </div>
 
-                    <h3 class="heading-xs">관리자 평점(남)<span class="pull-right">9.7</span></h3>
+                    <h3 class="heading-xs">DataBase<span class="pull-right">9.7</span></h3>
                     <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
                         <div class="progress-bar progress-bar-u" role="progressbar" data-width="97" style="width: 97%;">
                         </div>
                     </div>
 
-                    <h3 class="heading-xs">관리자 평점(여)<span class="pull-right">8.4</span></h3>
+                    <h3 class="heading-xs">Javascript<span class="pull-right">8.4</span></h3>
                     <div class="progress progress-u progress-xxs" style="opacity: 1; left: 0px;">
                         <div class="progress-bar progress-bar-u" role="progressbar" data-width="84" style="width: 84%;">
                         </div>
@@ -242,93 +242,7 @@
     </div>
     <!--=== End Team v4 ===-->
 
-    <!--=== Testimonials v4 ===-->
-    <div class="container content-sm">
-        <div class="container content-sm">
-            <div class="headline-center margin-bottom-60">
-                <h2>WHAT PEOPLE SAY</h2>
-                <p>이번달에 선정된 고객 여러분의 후기를 소개합니다<br>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <!-- Testimonials v4 -->
-                    <div class="testimonials-v4 md-margin-bottom-50">
-                        <div class="testimonials-v4-in">
-                            <p>The best programs are written so that computing machines can perform them quickly and so that human beings can understand them clearly. A programmer is ideally an essayist who works with traditional aesthetic and literary forms as well as mathematical concepts.</p>
-                        </div>
-                        <img class="rounded-x" src="assets/img/testimonials/img5.jpg" alt="thumb">
-                        <span class="testimonials-author">
-                            Jeremy Asigner<br>
-                            <em>Web Developer, <a href="#">Google Inc.</a></em>
-                        </span>
-                    </div>
-                    <!-- End Testimonials v4 -->
-                </div>
-                <div class="col-sm-6">
-                    <!-- Testimonials v4 -->
-                    <div class="testimonials-v4">
-                        <div class="testimonials-v4-in">
-                            <p>We see a lot of feature-driven product design in which the cost of features is not properly accounted. Features can have a negative value to customers because they make the products more difficult to understand and use. We are finding that people like products that just work.</p>
-                        </div>
-                        <img class="rounded-x" src="assets/img/testimonials/img4.jpg" alt="thumb">
-                        <span class="testimonials-author">
-                            John Davenport<br>
-                            <em>UX/UI Designer, <a href="#">Apple Inc.</a></em>
-                        </span>
-                    </div>
-                    <!-- End Testimonials v4 -->
-                </div>
-            </div><!--/end row-->
-        </div><!--/end container-->
-    </div>
-    <!--=== End Testimonials v4 ===-->
-
-    <!-- Owl Clients v1 -->
-    <div class="container content-sm">
-        <div class="owl-clients-v1 owl-carousel owl-theme" style="opacity: 1; display: block;">
-        <div class="owl-wrapper-outer">
-        <div class="owl-wrapper" style="width: 3240px; left: 0px; display: block; transition: all 800ms ease; transform: translate3d(px, 0px, 0px);">
-            <div class="item">
-                <img src="../image/common/shop1.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop2.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop3.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop4.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop5.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop6.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop7.png" alt="">
-            </div>
-            <div class="item">
-                <img src="../image/common/shop8.png" alt="">
-            </div>
-        </div>
-        </div>
-        <div class="owl-controls clickable">
-        	<div class="owl-pagination">
-        		<div class="owl-page acive">
-        			<span class></span>
-        		</div>
-        		<div class="owl-page acive">
-        			<span class></span>
-        		</div>
-        	</div>
-        </div>
-        
-        </div>
-    </div>    
-    <!-- End Owl Clients v1 -->
+   
 
     <jsp:include page="../common/footer.jsp" flush="false" />
     <!--=== End Footer Version 1 ===-->

@@ -49,10 +49,12 @@
 	<link rel="stylesheet" type="text/css"
 		href="<c:url value="/assets/css/headers/header-v7.css"/>">
 		
+	<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=3"></script>
+		
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script language="JavaScript" src="../js/pos/posReservation.js?ver=3"></script>
+	<script language="JavaScript" src="../js/pos/posReservation.js?ver=1"></script>
 
 </head>
 <body>
@@ -113,6 +115,29 @@
 										</c:forEach>
 									</c:if>
 									
+									<!-- 예약 상태로 검색시 -->
+										<c:set var="cnt" value="1" />
+										<c:forEach var="stateList" items="${stateList}">
+											<tr height="40px" name="selectThisTr${cnt}" id="selectThisTr${cnt}"
+												onclick="reservationInfo('${stateList.reseNumber}', '${stateList.userId}', '${stateList.resPersons}', '${stateList.resDate}', '${stateList.resState}')">
+												<th style="text-align: center;padding:0;vertical-align:middle">${stateList.reseNumber }</th>
+												<th style="text-align: center;padding:0;vertical-align:middle">${stateList.userId }</th>
+												<th style="text-align: center;padding:0;vertical-align:middle">${stateList.resPersons }명</th>
+												<th style="text-align: center;padding:0;vertical-align:middle">${stateList.resDate }</th>
+												<th style="text-align: center;padding:0;vertical-align:middle">${stateList.resDesc }</th>
+												<c:if test="${stateList.resState==0}">
+												<th style="text-align: center;padding:0;vertical-align:middle">예약대기</th>
+												</c:if>
+												<c:if test="${stateList.resState==1}">
+												<th style="text-align: center;padding:0;vertical-align:middle">예약완료</th>
+												</c:if>
+												<c:if test="${stateList.resState==2}">
+												<th style="text-align: center;padding:0;vertical-align:middle">예약취소</th>
+												</c:if>
+											</tr>
+											<c:set var="cnt" value="${cnt +1 }" />
+										</c:forEach>
+																
 									<c:if test="${countPosRes==0}">
 										<tr>
 											<th colspan="6" style="text-align: center;">
@@ -125,7 +150,12 @@
 										<th colspan="6" style="text-align: center;">
 											<h3>
 												대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;
-												<fmt:formatNumber value="${countStateZero}" type="number" /> 건
+												<c:if test="${countStateZero!=null}">
+													<fmt:formatNumber value="${countStateZero}" type="number" /> 건
+												</c:if>
+												<c:if test="${stateListSize!=null}">
+													<fmt:formatNumber value="${stateListSize}" type="number" /> 건
+												</c:if>
 											</h3>
 										</th>
 									</tr>	
@@ -203,13 +233,13 @@
 						<div class="panel-heading" align="center" >
 							<h4>예약 상태 검색</h4>
 						</div>
-						<form id="searchForm" name="searchForm" action="searchLog.do?mgrId=${sessionScope.id}" method="post">
+						<form id="searchStateForm" name="searchStateForm" action="searchState.do?mgrId=${sessionScope.id}" method="post">
 							<table class="table table-striped table-bordered">
 								<tbody>
 									<tr>
-										<th rowspan=2 style="text-align: center;vertical-align: middle;width: 80px; height: 41px">예약상태</th>
+										<th rowspan=2 style="text-align: center;vertical-align: middle;width: 80px; height: 41px">예약<br>상태</th>
 										<th>
-										<select class="form-control" id="resStateFind" name="resStateFind">
+										<select class="form-control" id="searchType" name="searchType">
 											<option value="0">예약대기</option>
 											<option value="1">예약완료</option>
 											<option value="2">예약취소</option>
@@ -221,19 +251,25 @@
 									<tr>
 										<th style="text-align: center;vertical-align: middle;width: 80px; height: 41px">시작일</th>
 										<td style="text-align: center">
-											<input type="text" id="calendarBegin" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">
+											<input type="text" id="start" name="calendarBegin" placeholder="클릭하여 선택" style="text-align:center">
 										</td>
 									</tr>	
+									<tr id="newStart">
+									</tr>
 									<tr>
 										<th style="text-align: center;vertical-align: middle;width: 80px; height: 41px">종료일</th>
 										<td style="text-align: center">
-											<input type="text" id="calendarEnd" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
+											<input type="text" id="finish" name="calendarEnd" placeholder="클릭하여 선택" style="text-align:center">
 										</td>
+									</tr>
+									<tr id="newEnd">
+									</tr>
 								</tbody>
 							</table>
 							<div role="group" class="btn-group btn-group-justified">
 								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-lg btn-primary" onclick="checkStateForm()">조회</button>
+									<input type="hidden" name="shopCodes" id="shopCodes" value="${sessionScope.shopCode}">
 								</div>
 								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-lg btn-danger" 
@@ -295,6 +331,7 @@
 			App.initAnimateDropdown();
 			OwlCarousel.initOwlCarousel();
 			ProgressBar.initProgressBarHorizontal();
+			Datepicker.initDatepicker();
 		});
 	</script>
 

@@ -1,16 +1,20 @@
 package com.wepos.pos.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dto.ReservationDto;
 import com.wepos.pos.dao.PosReservationDao;
+import com.wepos.pos.dto.PosLogDto;
 
 @Controller
 public class PosReservationContoroller {
@@ -46,6 +50,32 @@ public class PosReservationContoroller {
 		posReservationDao.updateState(reservationDto);
 		
 		return "redirect:posReservation.do?mgrId="+mgrId+"&shopCode="+shopCode;
+	}
+	
+	// 예약 상태로 검색
+	@RequestMapping(value="/pos/searchState.do", method=RequestMethod.POST)
+	public ModelAndView searchState(@RequestParam("mgrId") String mgrId, @RequestParam("searchType") int searchType,
+			@ModelAttribute PosLogDto posLogDto, @RequestParam("shopCodes") int shopCode, @ModelAttribute ReservationDto reservationDto)
+	{
+		String calendarBegin = posLogDto.getCalendarBegin().toString();
+		String calendarEnd = posLogDto.getCalendarEnd().toString();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("shopCode", shopCode);
+		map.put("calendarBegin", calendarBegin);
+		map.put("calendarEnd", calendarEnd);
+		
+		List<ReservationDto> stateList = posReservationDao.selectStateList(map);
+		System.out.println("stateList.size="+stateList.size());
+		int stateListSize = stateList.size();
+		System.out.println("stateListSize="+stateListSize);
+		
+		ModelAndView mav = new ModelAndView("pos/posReservation");
+		
+		mav.addObject("stateList", stateList);
+		mav.addObject("stateListSize", stateListSize);
+		return mav;
 	}
 	
 }
