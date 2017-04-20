@@ -4,10 +4,10 @@
 <mapper namespace="com.wepos.pos.dao.PosChartStatsDao">
 
 	<select id="monthStats" parameterType="map" resultType="chartStatsDto">
-		select concat(mo.mon, '월') as label, sum(mo.order_price) as totalPrice
+		select mo.mon as label, sum(mo.order_price) as totalPrice
 		from
 		(
-			select to_char(o.order_date, 'MM') as mon, od.order_price
+			select to_char(o.order_date, 'YYYY-MM') as mon, od.order_price
 			from orders o
 			inner join orders_detail od on o.order_code = od.order_code
 			where o.shop_code = #{shopCode} and o.order_state = 1
