@@ -98,4 +98,10 @@ public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
   public int updateOrderAmount( OrdersDetailDto odd ){
     return getSqlSession().update( "updateOrderAmount", odd );
   }
+
+  public void updateTableStateToUsed() {
+    getSqlSession().update( "updateTableStateToUsed" );
+    // TODO Auto-generated method stub
+    
+  }
 }

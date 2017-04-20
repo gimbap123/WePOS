@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.wepos.pos.dao.PosFunctionDao">
+  <select id="getMovableTableList" resultType="Integer" parameterType="Integer">
+    select distinct table_code
+    from tables  
+    where table_code not in ( 
+      select distinct o.table_code  
+      from orders o, orders_detail od  
+      where o.order_code  = od.order_code  
+        and o.shop_code   = #{shopCode}  
+        and o.order_state = 0 )  
+    and shop_code     = #{shopCode}
+    order by table_code
+  </select>
+  
+  <update id="moveTable" parameterType="java.util.Map">
+    UPDATE orders
+    SET table_code = #{toTableCode}
+    WHERE table_code = #{fromTableCode}
+    AND order_state = 0
+    AND shop_code = #{shopCode}
+  </update>
+</mapper>

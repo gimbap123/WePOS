@@ -21,4 +21,10 @@
     where shop_code = #{shopCode}
     and table_code = #{tableCode} 
   </update>
+  
+  <update id="updateTableStatusToUnused" parameterType="Integer">
+    update tables
+    set table_state = 0
+    where table_code = #{tableCode}
+  </update>
 </mapper>

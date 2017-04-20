@@ -17,7 +17,7 @@
 <head>
 <title>${shop.shopName}[${shopCode}]</title>
 <!-- Meta -->
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -39,7 +39,8 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=6" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=8" /> ">
+
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>" rel="stylesheet" type="text/css">
@@ -132,23 +133,15 @@
             <button type="button" class="btn btn-lg btn-success" data-toggle="tooltip">예약</button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success">반품</button>
+            <button type="button" class="btn btn-lg btn-success">계산서출력</button>
           </div>
         </div>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success">이동</button>
+            <button type="button" class="btn btn-lg btn-success" id="moveButton">이동</button>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-lg btn-success">합석</button>
-          </div>
-        </div>
-        <div role="group" aria-label="..." class="btn-group btn-group-justified">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success">계산서출력</button>
-          </div>
-          <div class="btn-group" role="group">
-            <button type="button" id="selectTable" class="btn btn-lg btn-success">테이블 상세</button>
           </div>
         </div>
         <div role="group" aria-label="..." class="btn-group btn-group-justified">
@@ -168,8 +161,11 @@
       </div>
       <!-- End Owl Clients v1 -->
     </div>
+    
+    <!-- include files for Modal HTML source code -->
     <jsp:include page="./posOrder.jsp" flush="false" />
     <jsp:include page="./posPayment.jsp" flush="false" />
+    <jsp:include page="./posMove.jsp" flush="false" />
     
 
   </div>
@@ -199,9 +195,13 @@
   <script type="text/javascript" src="<c:url value="/assets/js/plugins/fancy-box.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/assets/js/plugins/progress-bar.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/assets/js/plugins/owl-carousel.js"/>"></script>
-  <jsp:include page="./orderjs.jsp" flush="false" />
-  <jsp:include page="./paymentjs.jsp" flush="false" />
-  <!--[if lt IE 9]>
+
+  <!-- JS user custom -->
+  <script type="text/javascript" src="<c:url value="../js/pos/posMoveTable.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posOrder.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js"/>"></script>
+
+   <!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>
     <script src="<c:url value="/assets/plugins/html5shiv.js"/>"></script>
     <script src="<c:url value="/assets/plugins/placeholder-IE-fixes.js"/>"></script>
