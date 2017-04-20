@@ -113,6 +113,9 @@ public class MgrController {
 			@RequestParam(value="searchNoticeText", defaultValue="") String searchNoticeText,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
 	{
+		
+		ShopDto shop = mgrDao.shopInfo(shopCode);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
 		map.put("searchNoticeType", searchNoticeType);
@@ -154,7 +157,7 @@ public class MgrController {
 		mav.addObject("searchNoticeType", searchNoticeType);
 		mav.addObject("searchNoticeText", searchNoticeText);
 		mav.addObject("searchNoticeTypeList", searchNoticeTypeList);
-		mav.addObject("shopCode", shopCode);
+		mav.addObject("shop", shop);
 		mav.addObject("menuType", "pos");
 		
 		return mav;
@@ -167,6 +170,9 @@ public class MgrController {
 			@RequestParam(value="searchBoardText", defaultValue="") String searchBoardText,
 			@RequestParam(value="pageNum", defaultValue="1") int currentPage)
 	{
+		
+		ShopDto shop = mgrDao.shopInfo(shopCode);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopCode", shopCode);
 		map.put("searchBoardType", searchBoardType);
@@ -208,7 +214,7 @@ public class MgrController {
 		mav.addObject("searchBoardType", searchBoardType);
 		mav.addObject("searchBoardText", searchBoardText);
 		mav.addObject("searchBoardTypeList", searchBoardTypeList);
-		mav.addObject("shopCode", shopCode);
+		mav.addObject("shop", shop);
 		mav.addObject("menuType", "pos");
 		
 		return mav;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,10 +77,12 @@
 					<input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="이메일" value="${userInfo.userEmail}">
 				</div>
 				<hr>
-				<div align="center">
-				WePOS를 더 이상 사용하지 않는다면 &nbsp;&nbsp;
-				<a href="deleteUserInfoView.do?userId=${sessionScope.id}">회원탈퇴</a>
-				</div>
+				<c:if test="${sessionScope.userType== 1}">
+					<div align="center">
+					WePOS를 더 이상 사용하지 않는다면 &nbsp;&nbsp;
+					<a href="deleteUserInfoView.do?userId=${sessionScope.id}">회원탈퇴</a>
+					</div>
+				</c:if>
 				<br>
 		
 				<div class="row">

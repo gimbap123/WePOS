@@ -40,7 +40,8 @@
  	 <bean class="com.wepos.mgr.controller.MgrController" />
  	 <bean class="com.wepos.pos.controller.PosChartStatsController" />
  	 <bean class="com.wepos.pos.controller.PosCategoryController" />
-  	 <bean class="com.wepos.pos.controller.PosPaymentController" />
+ 	 <bean class="com.wepos.pos.controller.PosFunctionController" />
+   <bean class="com.wepos.pos.controller.PosPaymentController" />
  	 <bean class="com.wepos.user.controller.UserController" />
  	 <bean class="com.wepos.pos.controller.PosReservationContoroller" />
 
@@ -61,6 +62,7 @@
      <bean class="com.wepos.pos.dao.PosCategoryDaoImpl" />
      <bean class="com.wepos.pos.dao.PosPaymentDaoImpl" />
      <bean class="com.wepos.user.dao.UserDaoImpl" />
+     <bean class="com.wepos.pos.dao.PosFunctionDaoImpl" />
      <bean class="com.wepos.pos.dao.PosReservationDaoImpl" />
           
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->

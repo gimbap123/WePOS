@@ -273,7 +273,7 @@ public class SearchShopController {
 		
 		List<ProductGradeDto> productGradeList = null;
 		
-		if(session.getAttribute("id") != null)
+		if(session.getAttribute("id") != null && productCodeList.size() != 0)
 		{
 			Map<String, Object> productGradeMap = new HashMap<String, Object>();
 			productGradeMap.put("userId", session.getAttribute("id"));

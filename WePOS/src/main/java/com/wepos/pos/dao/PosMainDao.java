@@ -59,5 +59,8 @@ public interface PosMainDao {
 
   // 주문 수량 업데이트
   public int updateOrderAmount( OrdersDetailDto odd );
+
+  // 테이블 상태값 update
+  public void updateTableStateToUsed();
 }
 

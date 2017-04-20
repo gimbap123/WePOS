@@ -1,6 +1,10 @@
 package com.wepos.pos.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.common.util.FileUtil;
 import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.pos.dao.PosCategoryDao;
 import com.wepos.pos.dao.PosMainDao;
@@ -30,13 +35,13 @@ public class PosProductController {
 
 	// 메뉴 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateProductView.do")
-	public ModelAndView getProductInfo(@RequestParam(value = "mgrId") String mgrId) {
-		
+	public ModelAndView getProductInfo(HttpServletRequest request, @RequestParam(value = "mgrId") String mgrId) {
+				
 		ProductDto productDto=new ProductDto();
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
 		ShopDto shop = posMainDao.getShop(shopCode);	
-		List<ProductDto> productList = posMainDao.getProductList(shopCode);
+		List<ProductDto> productList = posMainDao.getProductList(shopCode);		
 		List<CategoryDto> categoryList = posCategoryDao.selectCategory(shopCode);		
 		List<ProductDto> countOrder=posProductDao.countOrder(shopCode);
 		
@@ -51,16 +56,45 @@ public class PosProductController {
 
 	// 메뉴 등록 및 수정
 	@RequestMapping(value = "/pos/updateProduct.do")
-	public String updateProductInfo(@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) {
+	public String updateProductInfo(HttpServletRequest request, 
+			@RequestParam(value = "mgrId") String mgrId,ProductDto productDto) throws IOException, Exception 
+	{		
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		String oldFileName = productDto.getProductFile();		
 		
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
 		int createProduct=0;
 		int updateProduct=0;
-		if(productDto.getProductCode()==0){
+		if(productDto.getProductCode()==0)
+		{
+			if(!productDto.getUpload().isEmpty())
+			{
+				String newFileName = FileUtil.rename(productDto.getUpload().getOriginalFilename());
+				productDto.setProductFile(newFileName);
+				File file = new File(filePath + newFileName);
+				productDto.getUpload().transferTo(file);
+			}			
 			createProduct=posProductDao.createProduct(productDto);
 			System.out.println("등록 성공여부 = "+createProduct);
-		}else{
+		}
+		else
+		{
+			if(!productDto.getUpload().isEmpty())
+			{
+				productDto.setProductFile(FileUtil.rename(productDto.getUpload().getOriginalFilename()));
+				File file = new File(filePath + productDto.getProductFile());
+				productDto.getUpload().transferTo(file);
+				if(oldFileName != null)
+				{
+					FileUtil.removeFile(oldFileName, filePath);
+				}
+			}
+			else
+			{
+				productDto.setProductFile(oldFileName);
+			}	
+			
 			updateProduct=posProductDao.updateProduct(productDto);			
 			System.out.println("수정 성공여부 = "+updateProduct);
 		}
@@ -69,9 +103,16 @@ public class PosProductController {
 	
 	// 메뉴 삭제
 	@RequestMapping(value = "/pos/deleteProduct.do")
-	public String deleteProduct(@RequestParam(value = "mgrId") String mgrId,
-													@RequestParam(value = "productCode") int productCode,
-													ProductDto productDto) {
+	public String deleteProduct(HttpServletRequest request, @RequestParam(value = "mgrId") String mgrId,
+			@RequestParam(value = "productCode") int productCode,	ProductDto productDto) 
+	{
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
+		
+		if(productDto.getProductFile() != null)
+		{
+			FileUtil.removeFile(productDto.getProductFile(), filePath);
+		}
+		
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
 		System.out.println("상품코드="+productDto.getProductCode());

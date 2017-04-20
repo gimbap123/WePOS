@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="application/javascript; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<script>
+/**
+ * 
+ */
 
 // 결제창 취소 버튼 클릭시 이벤트
 $(document).on('click','#paymentCancelButton', function(){
@@ -18,26 +18,27 @@ $('#paymentModal').on('hide.bs.modal', function() {
 
 //
 $(document).on('click', '#cashPaymentButton', function() {
-//  $('#cashNavTab').addClass('active');
-//  $('#cardNavTab').removeClass('active');
   if( checkActiveTable() == true ) {
     $('#paymentTab a[href="#cash"]').tab( 'show' );
     getPaymentInfo();
   }
+  else {
+    alert( "주문이 있는 테이블을 선택하세요");
+  }
 });
 
 $(document).on('click', '#cardPaymentButton', function() {
-//  $('#cashNavTab').removeClass('active');
-//  $('#cardNavTab').addClass('active');
   if( checkActiveTable() == true ) {
     $('#paymentTab a[href="#card"]').tab( 'show' );
     getPaymentInfo();
   }
+  else {
+    alert( "주문이 있는 테이블을 선택하세요");
+  }
 });
 
 function checkActiveTable() {
-  if( $('.pos-table[id='+tableCode+'] ul > li').length <= 0 ) {
-    alert( "주문이 있는 테이블을 선택하세요");
+  if( $('.pos-table[data-code='+tableCode+'] ul > li').length == 0 ) {
     return false;
   }
   return true;
@@ -122,4 +123,3 @@ function getRandomText( stringLength ) {
 
   return text;
 }
-</script>

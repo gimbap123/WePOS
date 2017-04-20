@@ -51,7 +51,7 @@
 						<h1>자유 게시판</h1>
 					</div>
 				</div>
-				<input type="hidden" id="shopCode" value="${shopCode}">					
+				<input type="hidden" id="shopCode" value="${shop.shopCode}">
 			<section class="content" style="padding-top: 0px;">	
 				<jsp:include page="../common/shopBoardTab.jsp" flush="false" />
 			</section>	

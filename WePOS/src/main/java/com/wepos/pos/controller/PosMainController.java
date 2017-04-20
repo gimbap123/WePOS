@@ -1,10 +1,8 @@
 package com.wepos.pos.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +17,7 @@ import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.SumOrdersDetailDto;
 import com.wepos.common.dto.TablesDto;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.pos.dao.PosFunctionDao;
 import com.wepos.pos.dao.PosMainDao;
 
 @Controller
@@ -26,6 +25,9 @@ public class PosMainController {
 
   @Autowired
   private PosMainDao posMainDao;
+  
+  @Autowired
+  private PosFunctionDao posFunctionDao;
 
   // 포스 페이지 이동
   @RequestMapping( value = "/pos/posMain.do" )
@@ -33,9 +35,6 @@ public class PosMainController {
       @RequestParam( value = "mgrId" ) String mgrId ) {
 
     int shopCode = posMainDao.getShopCode( mgrId );
-    System.out
-        .println( "PosMainController > getShopCode > shopCode : "
-            + shopCode );
 
     // 매장 코드 번호로 매장 정보 Select
     ShopDto shop = posMainDao.getShop( shopCode );
@@ -55,6 +54,9 @@ public class PosMainController {
     // 결제 전 테이블의 주문 상세 내역 select
     List<SumOrdersDetailDto> ordersDetailList = posMainDao
         .getOrdersDetailBeforePayment();
+    
+    // 이동 가능한 테이블 정봄
+    List<Integer> movableTableCode = posFunctionDao.getMovableTableList( shopCode );
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
     mav.addObject( "shopCode", shopCode );
@@ -65,6 +67,7 @@ public class PosMainController {
     mav.addObject( "category", category );
     mav.addObject( "orderList", orderList );
     mav.addObject( "ordersDetailList", ordersDetailList );
+    mav.addObject( "movableTableCode", movableTableCode );
     return mav;
   }
 
@@ -78,7 +81,7 @@ public class PosMainController {
 
     List<OrdersDetailDto> insertOddList = new ArrayList<OrdersDetailDto>();
     List<OrdersDetailDto> deleteOddList = new ArrayList<OrdersDetailDto>();
-
+    
     OrdersDto od = new OrdersDto();
     if ( insertOrdersDetail != null ) {
 
@@ -90,7 +93,6 @@ public class PosMainController {
       // od.setOrderDate( orderDate );
       // od.setOrderState( orderState );
 
-      // 개발 시 db 입력 잠시 보류
       posMainDao.insertOrders( od );
       int lastOrderCode = posMainDao.getOrderCode();
 
@@ -104,9 +106,8 @@ public class PosMainController {
         odd.setOrderPrice( Integer
             .parseInt( (String)insertOrdersDetail.get( i + 2 ) ) );
 
-        // 개발시 db 입력 잠시 보류
         posMainDao.insertOrdersDetail( odd );
-
+        posMainDao.updateTableStateToUsed();
         insertOddList.add( odd );
       }
     }
