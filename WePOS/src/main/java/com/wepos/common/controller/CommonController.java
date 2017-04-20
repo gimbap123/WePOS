@@ -1,10 +1,15 @@
 package com.wepos.common.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,15 +132,33 @@ public class CommonController {
 	
 	// 로그인 ---------------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/common/login.do", method=RequestMethod.GET)
-	public String loginView()
+	public ModelAndView loginView(HttpServletRequest request)
 	{
-		return "common/login";
+		String cookieId = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null)
+		{
+			for(Cookie cookie : cookies)
+			{
+				if(cookie.getName().equals("id"))
+				{
+					cookieId = cookie.getValue();					
+				}
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/login");
+		mav.addObject("cookieId", cookieId);
+		
+		return mav;
 	}
 	
 	// 로그인 기능 수행(세션 userType에서 1 - 일반회원, 2 - 관리자, 3 - WePOS 관리자)
 	@RequestMapping(value="/common/login.do", method=RequestMethod.POST)
-	public String loginProcess(HttpSession session,
-			@RequestParam("id") String id, @RequestParam("password") String password)
+	public String loginProcess(HttpSession session, HttpServletResponse response,
+			@RequestParam("id") String id, @RequestParam("password") String password,
+			@RequestParam("checkState") Boolean checkState) throws IOException, Exception
 	{
 		Map<String, String> loginInfo = new HashMap<String, String>();
 		loginInfo.put("id", id);
@@ -161,7 +184,18 @@ public class CommonController {
 				int shopCode = commonDao.mgrShopCode(id);
 				session.setAttribute("id", id);
 				session.setAttribute("userType", 2);
-				session.setAttribute("shopCode", shopCode);
+				session.setAttribute("shopCode", shopCode);				
+			
+				Cookie cookie = new Cookie("id", id);
+				if(checkState)
+				{
+					cookie.setMaxAge(60 * 60 * 24);
+				}
+				else
+				{
+					cookie.setMaxAge(0);
+				}					
+				response.addCookie(cookie);				
 				
 				result = "/common/main";	
 			}
@@ -171,8 +205,8 @@ public class CommonController {
 			UserLoginDto userLoginDto = new UserLoginDto();
 			userLoginDto.setUserId(id);
 			userLoginDto.setUserLoginState('1');
-			commonDao.userLoginLog(userLoginDto);
-			
+			commonDao.userLoginLog(userLoginDto);		
+									
 			int userGradeCode = commonDao.userGradeCode(id);
 			session.setAttribute("id", id);
 						
@@ -184,6 +218,17 @@ public class CommonController {
 			{
 				session.setAttribute("userType", 1);
 			}
+			
+			Cookie cookie = new Cookie("id", id);
+			if(checkState)
+			{
+				cookie.setMaxAge(60 * 60 * 24);
+			}
+			else
+			{
+				cookie.setMaxAge(0);
+			}					
+			response.addCookie(cookie);	
 			
 			result = "/common/main";	
 		}
