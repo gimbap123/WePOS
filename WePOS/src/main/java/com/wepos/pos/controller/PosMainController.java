@@ -55,7 +55,7 @@ public class PosMainController {
     List<SumOrdersDetailDto> ordersDetailList = posMainDao
         .getOrdersDetailBeforePayment();
     
-    // 이동 가능한 테이블 정봄
+    // 이동 가능한 테이블 정보
     List<Integer> movableTableCode = posFunctionDao.getMovableTableList( shopCode );
 
     ModelAndView mav = new ModelAndView( "pos/posMain" );
@@ -141,7 +141,9 @@ public class PosMainController {
           
           
           if ( lastestOrderCount <= cancelOrderCount ) {
+            // orders_detail 테이블의 정보를 삭제
             posMainDao.deleteOrdersDetail( orderInfo );
+            
           }
           // 최근 주문 수량이 취소수량 보다 클 경우 db 최근 주문내역 update
           else {
