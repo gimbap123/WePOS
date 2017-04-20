@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="<c:url value="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" /> ">
 <link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />">
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=9" /> ">
+<link rel="stylesheet" href="<c:url value="/assets/css/custom.css?ver=10" /> ">
 
 <link rel="stylesheet" href="<c:url value="/css/posMain.css" /> ">
 
@@ -53,8 +53,6 @@
 
     <div class="content-side-right pos-main">
       <div class="row">
-        <br>
-        <br>
         <c:if test="${tableCount < 1}">
           <h1 align="center">
             등록된 테이블이 없습니다. <a class="btn btn-success" href="updateTableView.do?mgrId=${sessionScope.id}">테이블 설정</a>
@@ -63,10 +61,7 @@
 
         <c:if test="${tableCount >= 1}">
           <c:forEach var="i" begin="0" end="${tableCount-1}">
-            <div id="${tables[i].tableCode}" class="panel panel-success pos-table" 
-              data-code="${tables[i].tableCode}" 
-              data-name="${tables[i].tableName}"
-              >
+            <div id="${tables[i].tableCode}" class="panel panel-success pos-table" data-code="${tables[i].tableCode}" data-name="${tables[i].tableName}">
               <div class="panel-heading">
                 <h3 class="panel-title" id="panel-title">
                   <a role="button"><span class="anchorjs-icon tableName">${tables[i].tableName}</span><span class="badge pull-right customerCount" style="margin-top: 4px"> ${tables[i].tableMax}인</span></a>
@@ -127,8 +122,10 @@
           </table>
         </div>
         <div class="panel panel-success">
-        <div class="panel-heading" id="selectedTable" data-code="" data-name=""><h4 class="text-success">테이블 선택</h4></div>
-        <div role="group" aria-label="..." class="btn-group btn-group-justified">
+          <div class="panel-heading" id="selectedTable" data-code="" data-name="">
+            <h4 class="text-success">테이블 선택</h4>
+          </div>
+          <!--         <div role="group" aria-label="..." class="btn-group btn-group-justified">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-lg btn-success" data-toggle="tooltip">예약</button>
           </div>
@@ -136,38 +133,39 @@
             <button type="button" class="btn btn-lg btn-success">계산서출력</button>
           </div>
         </div>
-        <div role="group" aria-label="..." class="btn-group btn-group-justified">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success" id="moveButton">이동</button>
+ -->
+          <div role="group" aria-label="..." class="btn-group btn-group-justified">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-success" id="moveButton">이동</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-success" id="joinButton">합석</button>
+            </div>
           </div>
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-success" id="joinButton">합석</button>
+          <div role="group" aria-label="..." class="btn-group btn-group-justified">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-danger" id="orderButton">주문</button>
+            </div>
           </div>
-        </div>
-        <div role="group" aria-label="..." class="btn-group btn-group-justified">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-lg btn-danger" id="orderButton">주문</button>
+          <div role="group" aria-label="..." class="btn-group btn-group-justified">
+            <div class="btn-group" role="group">
+              <button type="button" id="cashPaymentButton" class="btn btn-lg btn-info">현금결제</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" id="cardPaymentButton" class="btn btn-lg btn-primary">카드결제</button>
+            </div>
           </div>
-        </div>
-        <div role="group" aria-label="..." class="btn-group btn-group-justified">
-          <div class="btn-group" role="group">
-            <button type="button" id="cashPaymentButton" class="btn btn-lg btn-info">현금결제</button>
-          </div>
-          <div class="btn-group" role="group">
-            <button type="button" id="cardPaymentButton" class="btn btn-lg btn-primary">카드결제</button>
-          </div>
-        </div>
         </div>
       </div>
       <!-- End Owl Clients v1 -->
     </div>
-    
+
     <!-- include files for Modal HTML source code -->
     <jsp:include page="./posOrder.jsp" flush="false" />
     <jsp:include page="./posPayment.jsp" flush="false" />
     <jsp:include page="./posMove.jsp" flush="false" />
     <jsp:include page="./posJoin.jsp" flush="false" />
-    
+
 
   </div>
 
@@ -203,7 +201,7 @@
   <script type="text/javascript" src="<c:url value="../js/pos/posOrder.js"/>"></script>
   <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js?ver=1"/>"></script>
 
-   <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>
     <script src="<c:url value="/assets/plugins/html5shiv.js"/>"></script>
     <script src="<c:url value="/assets/plugins/placeholder-IE-fixes.js"/>"></script>

@@ -6,7 +6,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 id="myModalLabel1" class="modal-title">${productName} 평점 보기</h4>
+                <h4 id="myModalLabel1" class="modal-title"><font color="#72c02c">${productName}</font> 평점 보기</h4>
         </div>
         <div class="modal-body">
         	<div class="table-search-v1 panel panel-u margin-bottom-30" style="margin-top: 10px; margin-bottom: 10px;'">
