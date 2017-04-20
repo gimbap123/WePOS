@@ -50,15 +50,15 @@
   <div class="wrapper">
     <!--=== Header v7 Left ===-->
     <jsp:include page="../pos/leftBar.jsp" flush="false" />
-
+	
     <div class="content-side-right pos-main">
       <div class="row">
-        <c:if test="${tableCount < 1}">
-          <h1 align="center">
-            등록된 테이블이 없습니다. <a class="btn btn-success" href="updateTableView.do?mgrId=${sessionScope.id}">테이블 설정</a>
-          </h1>
+		<c:if test="${tableCount < 1}">
+			<div align="center" style="vertical-align:center;margin-top:300px">
+	          <h1 align="center">등록된 테이블이 없습니다.</h1>
+	          <a class="btn btn-success" href="updateTableView.do?mgrId=${sessionScope.id}">테이블 설정</a>
+	        </div>  
         </c:if>
-
         <c:if test="${tableCount >= 1}">
           <c:forEach var="i" begin="0" end="${tableCount-1}">
             <div id="${tables[i].tableCode}" class="panel panel-success pos-table" data-code="${tables[i].tableCode}" data-name="${tables[i].tableName}">
