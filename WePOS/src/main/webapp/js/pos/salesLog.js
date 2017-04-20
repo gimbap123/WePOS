@@ -6,7 +6,7 @@ function checkForm(){
 		alert("종료일을 선택해주세요");
 		return false;
 	}else if($('#productCode').val()==999){
-		alert("메뉴를 선택해주세요");
+		alert("상품을 선택해주세요");
 		return false;
 	}else if($('#searchGroup').val()==999 || $('#categoryCode').val()==999){
 		alert("분류를 선택해주세요");

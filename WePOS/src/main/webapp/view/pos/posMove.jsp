@@ -11,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-          테이블 이동 <small id="moveTableName text-danger">[이동 가능한 테이블만 표시됩니다.]</small>
+          테이블 이동 <small id="moveTableName text-danger">[이동 가능한 테이블만 보여집니다.]</small>
         </h3>
       </div>
       <div class="modal-body">
@@ -19,7 +19,7 @@
           <div class="col-sm-7">
             <c:forEach var="table" items="${tables}" varStatus="status">
               <c:forEach var="i" items="${movableTableCode}">
-                <c:if test="${table.tableCode == i}">
+                <c:if test="${table.tableCode eq i}">
                   <div class="panel panel-success pos-move-table" data-code="${table.tableCode}" data-name="${table.tableName}">
                     <div class="panel-heading">
                       <h3 class="panel-title" id="panel-title">

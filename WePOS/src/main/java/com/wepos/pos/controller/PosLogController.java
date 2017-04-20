@@ -61,7 +61,7 @@ public class PosLogController {
 		List<PosLogDto> searchLog=null;
 		
 		if(posLogDto.getProductCode()==0)
-			posLogDto.setProductName("전체 메뉴");
+			posLogDto.setProductName("전체 상품");
 		else{
 			String productName=posLogDao.productName(posLogDto.getProductCode());
 			posLogDto.setProductName(productName);

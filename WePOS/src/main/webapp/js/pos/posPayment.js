@@ -97,11 +97,20 @@ $('#totalReceivedMoney').on('change', function() {
 });
 
 $('#paymentSubmitButton').on('click', function() {
-  //alert( shopCode + "\n" + tableCode );
-  $('#cashPaymentForm').children('#shopCode').attr('value', shopCode );
-  $('#cashPaymentForm').children('#tableCode').attr('value', tableCode );
   
-  $('#cashPaymentForm').submit();
+  if ( $('#paymentTab>li[id="cashNavTab"]').attr("class") == "active") {
+    $('#cashPaymentForm').children('#shopCode').attr('value', shopCode );
+    $('#cashPaymentForm').children('#tableCode').attr('value', tableCode );
+
+    $('#cashPaymentForm').submit();
+  }
+  else if( $('#paymentTab>li[id="cardNavTab"]').attr("class") == "active" ) {
+    $('#cardPaymentForm').children('#shopCode').attr('value', shopCode );
+    $('#cardPaymentForm').children('#tableCode').attr('value', tableCode );
+   
+    $('#cardPaymentForm').submit();
+  }
+  
 });
 
 // 카드번호 랜덤생성

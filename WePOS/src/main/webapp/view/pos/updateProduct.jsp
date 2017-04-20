@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js?v=1"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js?v=5"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -79,7 +79,7 @@
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>	
+						<button class="btn btn-primary" type="button" onclick="createProduct()">상품 추가</button>	
 						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 관리</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
@@ -124,7 +124,7 @@
 				<div class="panel panel-default panel-warning">
 					<!-- Default panel contents -->
 					<!-- Table -->
-					<div class="panel-heading" align="center"><h3 id="productInfoTag">메뉴 정보</h3></div>					
+					<div class="panel-heading" align="center"><h3 id="productInfoTag">상품 정보</h3></div>					
 					<form id="updateProductForm" name="updateProductForm" action="updateProduct.do?mgrId=${sessionScope.id}" enctype="multipart/form-data" method="post" >
 						<table class="table table-striped table-bordered">
 							<tbody>

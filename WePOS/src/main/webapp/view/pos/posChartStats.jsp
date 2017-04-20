@@ -55,11 +55,9 @@
 					<div class="container text-center" style="width: 100%">
 						<h1>차트 통계</h1>
 					</div>					
-				</div>	
-				
+				</div>					
 				<div class="margin-bottom-60"></div>
-				<input type="hidden" id="chartTitle" value="${chartTitle}">
-				
+				<input type="hidden" id="chartTitle" value="${chartTitle}">				
 				<section class="content" style="padding-top: 0px;">					
 					<div class="col-md-12" id="chartDiv">						
 					</div>					
