@@ -56,53 +56,7 @@ $(function(){
 			$('#newEnd').html(add1);			
 			
 		} // if 3
-
-
-	$(function(){
-		$('#searchGroup').change(function(){
-			var searchGroup=this.value;
-			if(searchGroup==1){
-				$('#groupChild *').remove();
-				$('#searchType option[value=1]').remove();
-				var add='';
-					add += '<td style="text-align: center">'+
-									'<select class="form-control" id="categoryCode" name="categoryCode">'+
-										'<option value="999">-- 선택하세요 --</option>'+
-										'<option value="000">전 체</option>'+
-									'</select>'+
-								'</td>';
-					
-				$('#groupChild').html(add);
-				
-				$.post("searchCategory.do", {shopCode : $('#shopCode').html()}, function(result)
-						{
-							$("#categoryCode").append(result);
-						});	
-			} // if 1
-			
-			if(searchGroup==2){
-				$('#groupChild *').remove();
-				$('#searchType option[value=1]').remove();
-				$("#searchType option:eq(1)").before("<option value='1'>상세 통계</option>");
-				var add='';
-				add += '<td style="text-align: center">'+
-								'<select class="form-control" id="productCode" name="productCode">'+
-									'<option value="999">-- 선택하세요 --</option>'+
-									'<option value="000">전 체</option>'+
-								'</select>'+
-							'</td>';
-				
-				$('#groupChild').html(add);
-				
-				$.post("searchProduct.do", {shopCode : $('#shopCode').html()}, function(result)
-						{			
-							$("#productCode").append(result);
-						});
-			} // if 2
-			})
-		});
-	
-	$(function() {
+		
 		$("#start").datepicker(
 				{
 					showMonthAfterYear : true,
@@ -137,8 +91,50 @@ $(function(){
 				});
 		$("#finish").datepicker("option", "dateFormat", "yy-mm-dd");
 		$("#finish").datepicker("option", "showAnim", "slideDown");
+	});
 
-	});	
+	$('#searchGroup').change(function(){
+		var searchGroup=this.value;
+		if(searchGroup==1){
+			$('#groupChild *').remove();
+			$('#searchType option[value=1]').remove();
+			var add='';
+				add += '<td style="text-align: center">'+
+								'<select class="form-control" id="categoryCode" name="categoryCode">'+
+									'<option value="999">-- 선택하세요 --</option>'+
+									'<option value="000">전 체</option>'+
+								'</select>'+
+							'</td>';
+				
+			$('#groupChild').html(add);
+			
+			$.post("searchCategory.do", {shopCode : $('#shopCode').html()}, function(result)
+					{
+						$("#categoryCode").append(result);
+					});	
+		} // if 1
+		
+		if(searchGroup==2){
+			$('#groupChild *').remove();
+			$('#searchType option[value=1]').remove();
+			$("#searchType option:eq(1)").before("<option value='1'>상세 통계</option>");
+			var add='';
+			add += '<td style="text-align: center">'+
+							'<select class="form-control" id="productCode" name="productCode">'+
+								'<option value="999">-- 선택하세요 --</option>'+
+								'<option value="000">전 체</option>'+
+							'</select>'+
+						'</td>';
+			
+			$('#groupChild').html(add);
+			
+			$.post("searchProduct.do", {shopCode : $('#shopCode').html()}, function(result)
+					{			
+						$("#productCode").append(result);
+					});
+		} // if 2
+
+	});
+		
 	
-	})
-})
+});
