@@ -51,7 +51,7 @@
 						class="dropdown-toggle" data-toggle="dropdown">매장 관리</a>
 						<ul class="dropdown-menu">
 							<li><a href="updateCategoryView.do?mgrId=${sessionScope.id}">상품분류 관리</a></li>
-							<li><a href="updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
+							<li><a href="updateProductView.do?mgrId=${sessionScope.id}">상품 관리</a></li>
 							<li><a href="updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 							<li><a href="../pos/posReservation.do?mgrId=${sessionScope.id}&shopCode=${sessionScope.shopCode}">예약 관리</a></li>
 						</ul></li>

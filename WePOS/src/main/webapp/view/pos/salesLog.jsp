@@ -52,7 +52,7 @@
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script language="JavaScript" src="../js/pos/salesLog.js?ver=21"></script>
+	<script language="JavaScript" src="../js/pos/salesLog.js?ver=30"></script>
 
 </head>
 <body>
@@ -83,7 +83,7 @@
 												<h2 class="panel-title" style="font-size:20px">상품분류 - ${posLogDto.categoryName}</h2>
 											</c:if>
 											<c:if test="${posLogDto.searchGroup==2}">
-												<h2 class="panel-title" style="font-size:20px">메뉴 - ${posLogDto.productName}</h2>
+												<h2 class="panel-title" style="font-size:20px">상품 - ${posLogDto.productName}</h2>
 											</c:if>
 										</span>										
 										<h2 class="panel-title" style="margin-left:20px;font-size:20px">
@@ -106,7 +106,7 @@
 											<th style="text-align: center">분류</th>
 										</c:if>
 										<c:if test="${posLogDto.searchGroup!=1}">
-											<th style="text-align: center">메뉴</th>
+											<th style="text-align: center">상품</th>
 											<th style="text-align: center">단가</th>
 										</c:if>										
 										<th style="text-align: center">수량</th>
@@ -179,7 +179,7 @@
 										<select class="form-control" id="searchGroup" name="searchGroup">
 											<option value="999">-- 선택하세요 --</option>
 											<option value="1">상품분류별 통계</option>
-											<option value="2">메뉴별 통계</option>
+											<option value="2">상품별 통계</option>
 										</select>
 									</td>
 								</tr>

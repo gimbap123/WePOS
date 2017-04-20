@@ -129,18 +129,19 @@
 					<!-- Table -->
 					<div class="panel-heading" align="center"><h3 id="tableInfoTag">테이블 정보</h3></div>					
 					<form id="updateTableForm" name="updateTableForm" action="updateTable.do?mgrId=${sessionScope.id}" method="post">
+						<input type="hidden" id="tableCode" name="tableCode" value="">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">날짜</th>
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
-								</tr>
-								<tr>
+								</tr>								
+								<!-- <tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">고유번호</th>
 									<th>
 										<input type="text" id="tableCode" name="tableCode" value="" size="15px" style="border:0" readonly>
 									</th>
-								</tr>
+								</tr> -->
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">테이블 이름</th>
 									<td>
