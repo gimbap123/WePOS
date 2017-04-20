@@ -66,10 +66,16 @@
 								<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
 								<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 								<li><a href="../pos/posReservation.do?mgrId=${sessionScope.id}&shopCode=${sessionScope.shopCode}">예약 관리</a></li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a href="javascript:void(0);">매장 통계</a>														
+							<ul class="dropdown-menu">
 								<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
 								<li><a href="../pos/posChartStats.do?shopCode=${sessionScope.shopCode}">차트 통계</a></li>	
 							</ul>
 						</li>
+						
 						<li class="dropdown-submenu">
 							<a href="javascript:void(0);">매장 페이지 관리</a>
 							<ul class="dropdown-menu">
