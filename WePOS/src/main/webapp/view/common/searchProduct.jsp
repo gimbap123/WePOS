@@ -44,7 +44,7 @@
 			<div class="container">	
 				<form id="searchProductForm" action="#" name="searchProductForm" method="get">
 					<div class="col-md-6 col-md-offset-3" style="margin-bottom: 10px">
-						<h2>매장 검색</h2>
+						<h2>상품 검색</h2>
 						<div class="row">
 							<div class="col-md-4">
 								<select class="form-control" id="shopTypeCode" name="shopTypeCode">
@@ -108,7 +108,7 @@
 		<br>
 		
 		<!--=== Cube-Portfdlio ===-->
-		<div class="cube-portfolio container margin-bottom-30">		
+		<div class="cube-portfolio container margin-bottom-30" style="min-height: 390px;">		
 			<div id="grid-container" class="cbp-l-grid-agency">
 				<c:forEach items="${productList}" var="product">
 					<div class="cbp-item">
@@ -134,9 +134,9 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div class="margin-bottom-30"></div>
-    		${pagingHtml}    		
+			<div class="margin-bottom-30"></div>    				
 		</div>
+		${pagingHtml}    
 		<!--=== End Cube-Portfdlio ===-->	
 		
 		<jsp:include page="footer.jsp" flush="false" />		
