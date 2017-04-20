@@ -51,6 +51,7 @@ public class ReservationController {
 		{
 		
 		String resDate = reservationCheckDto.getResDate();
+		System.out.println("resDate="+resDate);
 
 		reservationCheckDto.setResDate(resDate.substring(0, 10));
 		businessHoursDto.setStartHourType(resDate.substring(17));
@@ -95,11 +96,19 @@ public class ReservationController {
 	//삭제 진행
 	@RequestMapping(value="/common/reservationDelete.do", method=RequestMethod.GET)
 	public String deleteReservationProcess(@ModelAttribute ReservationDto reservationDto,
-			@RequestParam("userId") String userId, @RequestParam("shopCode") int shopCode, @RequestParam("reseNumber") int reseNumber)
+			@RequestParam("userId") String userId, @RequestParam("shopCode") int shopCode, @RequestParam("reseNumber") int reseNumber,
+			@RequestParam("resState") String resState)
 	{
 		reservationDao.deleteRes(reseNumber);
-		System.out.println("userId="+reservationDto.getUserId());
-		System.out.println("userId="+userId);
+		System.out.println("예약 삭제의 userId="+reservationDto.getUserId());
+		System.out.println("예약 삭제의 userId="+userId);
+		System.out.println("예약 삭제의 resState="+resState);
+		
+		if(resState.equals("예약 완료"))
+		{
+			
+		}
+		
 		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
 	

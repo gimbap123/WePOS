@@ -67,13 +67,15 @@ function deleteRes()
 	
 	if(deleteRes)
 	{
+		var resState = $("#resState").val()
 		var userId = $("#userId").val()
 		var shopCode = $("#shopCode").val()
 		var reseNumber = $("#reseNumber").val()
+		alert(resState)
 		alert(userId)
 		alert(shopCode)
 		alert(reseNumber)
 		
-		location.href = "../common/reservationDelete.do?shopCode=" + shopCode + "&userId=" + userId + "&reseNumber=" + reseNumber;
+		location.href = "../common/reservationDelete.do?shopCode=" + shopCode + "&userId=" + userId + "&reseNumber=" + reseNumber + "&resState=" + resState;
 	}
 }

@@ -124,7 +124,7 @@
   	select count(*) as totalTable, sum(decode(table_state, 0, 1, 0)) as emptyTable , 
   		sum(decode(table_state, 1, 1, 0)) as useTable
   	from tables
-  	where shop_code = #{shopCode}
+  	where shop_code = #{shopCode} and table_state != 2
   </select>
   
   <select id="categoryList" parameterType="int" resultType="categoryDto">

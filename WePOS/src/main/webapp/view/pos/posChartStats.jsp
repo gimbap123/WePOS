@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="../assets/chart/AdminLTE.min.css">
 <link rel="stylesheet" href="../assets/chart/_all-skins.min.css">
 
-<script language="JavaScript" src="../js/pos/posChartStatsJs.js?v=1"></script>
+<script language="JavaScript" src="../js/pos/posChartStatsJs.js"></script>
 
 <title>WePOS</title>
 </head>
@@ -90,23 +90,9 @@
 								</select>				
 							</div>						
 							<div class="input-group margin-bottom-10">									
-								<span class="input-group-addon">월별</span>																						
-								<section>
-									<c:if test="${start == null}">
-										<input type="text" class="form-control" name="start" id="start" placeholder="클릭하여 시작일을 선택">
-									</c:if>
-									<c:if test="${start != null}">
-										<input type="text" class="form-control" name="start" id="start" placeholder="클릭하여 시작일을 선택" value="${start}">
-									</c:if>									                                   
-                                </section>													
-								<section>    
-									<c:if test="${finish == null}">
-										<input type="text" class="form-control" name="finish" id="finish" placeholder="클릭하여 시작일을 선택">
-									</c:if>
-									<c:if test="${finish != null}">
-										<input type="text" class="form-control" name="finish" id="finish" placeholder="클릭하여 시작일을 선택" value="${finish}">
-									</c:if>                              	                                                              
-                                </section>                                                            						
+								<span class="input-group-addon">기간</span>					
+								<input type="text" class="form-control" name="start" id="start" placeholder="클릭하여 시작일을 선택">
+								<input type="text" class="form-control" name="finish" id="finish" placeholder="클릭하여 종료일을 선택">								                                                                         						
 							</div>
 							<div class="input-group" style="width: 100%">
 								<button type="button" class="btn btn-lg btn-primary" style="width: 50%;" onclick="checkPosChartStats()">조회</button>
@@ -141,6 +127,7 @@
 	jQuery(document).ready(function() {
 		App.init();
 		Datepicker.initDatepicker();
+		datepickerValueInit('${start}', '${finish}');
 		chartTypeSelect(${jsonChartData});
 	});
 </script>

@@ -34,5 +34,19 @@ function updateResState()
 	var shopCode = $("#shopCode").val()
 	
 	location.href = "../pos/updateReservationState.do?mgrId="+mgrId+"&shopCode=" + shopCode + "&userId=" + userId + "&reseNumber=" + reseNumber+"&resState="+resState;
-	
+}
+
+
+//관리자 예약 관리 페이지 예약 상태로 조회
+function checkStateForm()
+{
+	if($('#start').val()==''){
+		alert("시작일을 선택해주세요");
+		return false;
+	}else if($('#finish').val()==''){
+		alert("종료일을 선택해주세요");
+		return false;
+	}else{
+		$('#searchStateForm').submit();
+	}
 }
