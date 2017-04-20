@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/reservation.js?ver=3"></script>
+<script language="JavaScript" src="../js/common/reservation.js?ver=2"></script>
 
 </head>
 
@@ -134,7 +134,9 @@
 					<input type="text" id="resState" name="resState" class="form-control" value="${resState}" readonly>
 				</div>
 				<hr>
-		
+				
+				
+				<c:if test="${resState=='예약 대기'}">
 				<div class="row">
 					<span class="col-md-4 col-md-offset-0">
 						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
@@ -146,6 +148,29 @@
 						<input type="button" id="ok" class="btn-u btn-block" onclick="updateRes()" value="수 정" float="right">
 					</span>
 				</div>
+				</c:if>
+				<c:if test="${resState=='예약 완료'}">
+				<div class="row">
+					<span class="col-md-6 col-md-offset-0">
+						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
+					</span>
+					<span class="col-md-6 col-md-offset-0">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="완료확인" float="right">
+					</span>
+				</div>
+				</c:if>
+				<c:if test="${resState=='예약 취소'}">
+				<div class="row">
+					<span class="col-md-6 col-md-offset-0">
+						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
+					</span>
+					<span class="col-md-6 col-md-offset-0">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="취소확인" float="right">
+					</span>
+				</div>
+				</c:if>
+				
+				
 			</form>
 		</div>
 		<!--End Reg Block-->
@@ -169,7 +194,7 @@
 	<script type="text/javascript" src="../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=1"></script>
 	<script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();

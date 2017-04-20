@@ -50,7 +50,6 @@
 					<ul class="dropdown-menu">
 						<li><a href="../common/showBoard.do?boardTypeCode=1">공지사항</a></li>
 						<li><a href="../common/posIntroduce.do">We POS 소개</a></li>
-						<li><a href="#">회원 등급 제도</a></li>
 					</ul></li>
 				<!-- End WE POS -->
 				
@@ -67,10 +66,16 @@
 								<li><a href="../pos/updateProductView.do?mgrId=${sessionScope.id}">메뉴 관리</a></li>
 								<li><a href="../pos/updateTableView.do?mgrId=${sessionScope.id}">테이블 관리</a></li>
 								<li><a href="../pos/posReservation.do?mgrId=${sessionScope.id}&shopCode=${sessionScope.shopCode}">예약 관리</a></li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a href="javascript:void(0);">매장 통계</a>														
+							<ul class="dropdown-menu">
 								<li><a href="../pos/salesLog.do?mgrId=${sessionScope.id}">매출 통계</a></li>
 								<li><a href="../pos/posChartStats.do?shopCode=${sessionScope.shopCode}">차트 통계</a></li>	
 							</ul>
 						</li>
+						
 						<li class="dropdown-submenu">
 							<a href="javascript:void(0);">매장 페이지 관리</a>
 							<ul class="dropdown-menu">
@@ -88,8 +93,8 @@
 				<li class="dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle" data-toggle="dropdown"> 관리자 기능 </a>
 					<ul class="dropdown-menu">
-						<li><a href="../admin/shopMgrRegistration.do">매장 관리자 추가</a></li>
-						<li><a href="../admin/shopRegistration.do">매장 추가</a></li>						
+						<li><a href="../admin/shopRegistration.do">매장 추가</a></li>
+						<li><a href="../admin/shopMgrRegistration.do">매장 관리자 추가</a></li>						
 					</ul></li>
 				</c:if>
 				<!-- End WePOS 관리자 기능 -->
@@ -104,13 +109,7 @@
 				<!-- End 검색 -->
 
 				<!-- 게시판 -->
-				<li class="dropdown"><a href="javascript:void(0);"
-					class="dropdown-toggle" data-toggle="dropdown"> 게시판 </a>
-					<ul class="dropdown-menu">						
-						<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>
-						<li><a href="#">Q&A</a></li>
-					</ul></li>
-				<!-- End 게시판 -->				
+				<li><a href="../common/showBoard.do?boardTypeCode=2">FAQ</a></li>		
 			</ul>
 		</div>
 		<!--/end container-->

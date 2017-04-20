@@ -66,7 +66,7 @@
   
   <insert id="insertOrders" parameterType="OrdersDto">
     INSERT INTO orders 
-    VALUES( orders_seq.nextval, #{shopCode}, #{tableCode}, null, #{paymentCode}, sysdate, '0')
+    VALUES( orders_seq.nextval, #{shopCode}, #{tableCode}, null, 0, sysdate, '0')
   </insert>
   
   <insert id="insertOrdersDetail" parameterType="OrdersDetailDto">

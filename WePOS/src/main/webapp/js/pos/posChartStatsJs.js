@@ -140,4 +140,10 @@ function resetChartStatsOption()
 	$("#chartType").val("0");
 }
 
+function datepickerValueInit(start, finish)
+{
+	$("#start").val(start);
+	$("#finish").val(finish);
+}
+
 

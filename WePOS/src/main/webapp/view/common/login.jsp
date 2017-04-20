@@ -37,20 +37,37 @@
 	{
 		var id = document.loginForm.id.value;
 		var password = document.loginForm.password.value;
+		$("#checkState").val($("input[type='checkbox']").is(":checked"));
 		
 		if(id == "" || password == "")
 		{
 			alert("아이디와 패스워드를 입력하세요.");
 			return false;	
 		}
+		
 		document.loginForm.submit();
+	}
+	
+	function getCookie(cookieId)
+	{
+		if(cookieId != null && cookieId != "")
+		{
+			$("#id").val(cookieId);
+			$("#password").focus();
+			$("input[type='checkbox']").attr("checked", true);
+		}
+		else
+		{
+			$("#id").focus();
+			$("input[type='checkbox']").attr("checked", false);
+		}
 	}
 </script>
 
 <title>We POS</title>
 </head>
 
-<body onload="document.loginForm.id.focus()">
+<body>
 	<jsp:include page="../common/header.jsp" flush="false" />
 
 	<!--=== Content Part ===-->
@@ -64,17 +81,18 @@
 			<form name="loginForm" action="login.do" method="post">
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="icon-user"></i></span>
-					<input type="text" name="id" class="form-control" placeholder="ID">
+					<input type="text" id="id" name="id" class="form-control" placeholder="ID">
 				</div>
 				<div class="input-group margin-bottom-30">
 					<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					<input type="password" name="password" class="form-control" placeholder="패스워드" onKeyDown="if (event.keyCode==13) checkLogin()">
+					<input type="password" id="password" name="password" class="form-control" placeholder="패스워드" onKeyDown="if (event.keyCode==13) checkLogin()">
 				</div>
 				<div class="checkbox">
-					<label> <input type="checkbox">
-						<p>로그인 유지</p>
+					<label> <input type="checkbox" >
+						<p>아이디 저장</p>
 					</label>
-				</div>
+					<input type="hidden" id="checkState" name="checkState">
+				</div>				
 				<span class="input-group-addon">
 					<a class="color-green" href="terms.do">회원가입</a>
 				</span>
@@ -114,6 +132,7 @@
 	<script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        getCookie("${cookieId}");
         });
 </script>
 	<script type="text/javascript">

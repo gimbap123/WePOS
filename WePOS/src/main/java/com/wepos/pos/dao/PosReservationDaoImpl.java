@@ -1,10 +1,12 @@
 package com.wepos.pos.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ReservationDto;
+import com.wepos.pos.dto.PosLogDto;
 
 public class PosReservationDaoImpl extends SqlSessionDaoSupport implements PosReservationDao {
 	
@@ -23,5 +25,12 @@ public class PosReservationDaoImpl extends SqlSessionDaoSupport implements PosRe
 	public int selectStateZero(int shopCode) {
 		return getSqlSession().selectOne("selectStateZero", shopCode);
 	}
+
+	public List<ReservationDto> selectStateList(Map<String, Object> map) {
+		return getSqlSession().selectList("selectStateList", map);
+	}
 	
+	public int selectCountState(Map<String, Object> map) {
+		return getSqlSession().selectOne("selectCountState", map);
+	}
 }

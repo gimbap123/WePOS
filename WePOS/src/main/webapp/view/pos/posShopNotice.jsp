@@ -51,8 +51,8 @@
 						<h1>공지사항</h1>
 					</div>
 				</div>
-				<input type="hidden" id="shopCode" value="${shopCode}">					
-			<section class="content" style="padding-top: 0px;">			
+				<input type="hidden" id="shopCode" value="${shop.shopCode}">					
+			<section class="content" style="padding-top: 0px;">
 				<jsp:include page="../common/shopNoticeTab.jsp" flush="false" />
 			</section>	
 			</div>

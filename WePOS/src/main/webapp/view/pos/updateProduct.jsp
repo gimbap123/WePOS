@@ -79,7 +79,7 @@
 					</div>
 					<hr>
 					<span style="float: right; margin-right: 20px">
-						<button class="btn btn-success" type="button" onclick="createProduct()">메뉴 추가</button>	
+						<button class="btn btn-primary" type="button" onclick="createProduct()">메뉴 추가</button>	
 						<button class="btn btn-success" type="button" onclick="location.href='updateCategoryView.do?mgrId=${sessionScope.id}'">상품분류 관리</button>
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
