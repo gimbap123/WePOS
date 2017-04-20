@@ -68,7 +68,7 @@
 	                <hr style="margin: 20px 0 20px 0"> 
 	                <div class="col-md-3 btn-buy animated fadeInRight">
 	                    <c:if test="${sessionScope.id!=null}">
-	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal"  data-target="#responsive">
+	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal" data-target="#responsive" onclick="location.href='../common/reservationGo.do?userId=${sessionScope.id}&shopCode=${shop.shopCode}">
 							<i class="fa fa-clock-o"></i> 예약하기</button>
 						</c:if>
 						<c:if test="${sessionScope.id==null}">

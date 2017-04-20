@@ -162,7 +162,7 @@ public class SearchShopController {
   	//매장 상세보기
 	@RequestMapping(value="/common/shopDetail.do")
 	public ModelAndView shopDetailView(HttpServletRequest request, 
-			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
+			@RequestParam("shopCode") int shopCode) throws Exception
 	{
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.indexOf("\\WePOS");
@@ -206,17 +206,37 @@ public class SearchShopController {
 				coordinateMap.put("y", (String)location.get("lng").toString());				
 			}
 		}	
+//		ReservationDto reservationDto = new ReservationDto();
+//		reservationDto.setShopCode(shopCode);
+//		//reservationDto.setUserId(userId);
+//		System.out.println("shopDetail의 userId="+reservationDto.getUserId());
+//		int countRes = reservationDao.countRes(reservationDto);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/shopDetail");
+//		mav.addObject("countRes", countRes);
+		mav.addObject("shop", shop);
+		mav.addObject("coordinateMap", coordinateMap);		
+		
+		return mav;
+	}
+	
+	//RESERVATION 버튼을 눌렀을때
+	@RequestMapping(value="/common/reservationGo.do")
+	public ModelAndView reservationGo(HttpServletRequest request, 
+			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
+	{
 		ReservationDto reservationDto = new ReservationDto();
 		reservationDto.setShopCode(shopCode);
 		reservationDto.setUserId(userId);
+		System.out.println("reservationGo의 userId="+reservationDto.getUserId());
+		System.out.println("reservationGo의 userId="+userId);
+		System.out.println("reservationGo의 shopCode="+shopCode);
 		int countRes = reservationDao.countRes(reservationDto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopDetail");
 		mav.addObject("countRes", countRes);
-		mav.addObject("shop", shop);
-		mav.addObject("coordinateMap", coordinateMap);		
-		
 		return mav;
 	}
 	

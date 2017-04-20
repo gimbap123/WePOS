@@ -30,4 +30,7 @@ public class PosReservationDaoImpl extends SqlSessionDaoSupport implements PosRe
 		return getSqlSession().selectList("selectStateList", map);
 	}
 	
+	public int selectCountState(Map<String, Object> map) {
+		return getSqlSession().selectOne("selectCountState", map);
+	}
 }

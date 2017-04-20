@@ -29,4 +29,10 @@
 				where res_state = to_char(#{searchType})
 	</select>
 	
+	<select id="selectCountState" parameterType="map" resultType="int">
+		select count(*) from (select * from (select * from reservation where shop_code=#{shopCode}) 
+			where res_date between #{calendarBegin} and #{calendarEnd})
+				where res_state = to_char(#{searchType})
+	</select>
+	
 </mapper>

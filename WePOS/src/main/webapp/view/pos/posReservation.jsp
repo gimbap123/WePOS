@@ -149,12 +149,17 @@
 									<tr>
 										<th colspan="6" style="text-align: center;">
 											<h3>
-												대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;
 												<c:if test="${countStateZero!=null}">
+												대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;
 													<fmt:formatNumber value="${countStateZero}" type="number" /> 건
 												</c:if>
 												<c:if test="${stateListSize!=null}">
-													<fmt:formatNumber value="${stateListSize}" type="number" /> 건
+													<c:forEach var="stateList" items="${stateList}">												
+														<c:if test="${stateList.resState==0 }">대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
+														<c:if test="${stateList.resState==1 }">예약이 완료된 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
+														<c:if test="${stateList.resState==2 }">예약이 취소된 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
+															<fmt:formatNumber value="${stateListSize}" type="number" /> 건
+													</c:forEach>
 												</c:if>
 											</h3>
 										</th>

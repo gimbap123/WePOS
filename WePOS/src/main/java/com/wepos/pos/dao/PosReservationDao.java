@@ -23,4 +23,7 @@ public interface PosReservationDao {
 	//예약상태에 따른 예약자 리스트 불러오기
 	public List<ReservationDto> selectStateList(Map<String, Object> map);
 	
+	//예약상태에 따른 건수 불러오기
+	public int selectCountState(Map<String, Object> map);
+	
 }

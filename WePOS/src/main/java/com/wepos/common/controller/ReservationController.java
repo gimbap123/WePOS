@@ -51,7 +51,6 @@ public class ReservationController {
 		{
 		
 		String resDate = reservationCheckDto.getResDate();
-		System.out.println("resDate="+resDate);
 
 		reservationCheckDto.setResDate(resDate.substring(0, 10));
 		businessHoursDto.setStartHourType(resDate.substring(17));

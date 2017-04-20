@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wepos.common.dao.ReservationDao;
 import com.wepos.common.dto.ReservationDto;
 import com.wepos.pos.dao.PosReservationDao;
 import com.wepos.pos.dto.PosLogDto;
@@ -67,12 +68,10 @@ public class PosReservationContoroller {
 		map.put("calendarEnd", calendarEnd);
 		
 		List<ReservationDto> stateList = posReservationDao.selectStateList(map);
-		System.out.println("stateList.size="+stateList.size());
-		int stateListSize = stateList.size();
-		System.out.println("stateListSize="+stateListSize);
+		
+		int stateListSize = posReservationDao.selectCountState(map);
 		
 		ModelAndView mav = new ModelAndView("pos/posReservation");
-		
 		mav.addObject("stateList", stateList);
 		mav.addObject("stateListSize", stateListSize);
 		return mav;
