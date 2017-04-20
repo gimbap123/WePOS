@@ -87,7 +87,7 @@ public class SearchShopController {
 	  if(shop.getShopTypeCode() == 0 && shop.getCityCode() == 0 && shop.getLocalCode() == 0 
 			  && shop.getShopName() == null)
 	  {
-		  page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
+		  page = new PagingUtil(currentPage, shopCount, 9, 5, "searchShop.do");
 	  }
 	  else
 	  {
@@ -103,7 +103,7 @@ public class SearchShopController {
 					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
 		  }
 		 
-		  page = new PagingUtil(paramString, currentPage, shopCount, 6, 5, "searchShop.do");
+		  page = new PagingUtil(paramString, currentPage, shopCount, 9, 5, "searchShop.do");
 	  }	  
 	  	  
 	  map.put("start", page.getStartCount());
