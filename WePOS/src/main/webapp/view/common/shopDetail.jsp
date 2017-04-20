@@ -130,7 +130,7 @@
 <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/datepickers.js"></script>
 
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MH-LfB9ijazDzhwbfkceUzZAO0LiYsk&callback=initMap">

@@ -19,4 +19,14 @@
 		select count(*) from (select * from reservation where shop_code=#{shopCode}) where res_state=0
 	</select>
 	
+	<!-- <select id="selectStateList" parameterType="PosLogDto" resultType="ReservationDto">
+		select * from (select * from reservation where shop_code=#{shopCode}) where res_date between #{calendarBegin} and #{calendarEnd}
+	</select> -->
+	
+	<select id="selectStateList" parameterType="map" resultType="ReservationDto">
+		select * from (select * from (select * from reservation where shop_code=#{shopCode}) 
+			where res_date between #{calendarBegin} and #{calendarEnd})
+				where res_state = to_char(#{searchType})
+	</select>
+	
 </mapper>

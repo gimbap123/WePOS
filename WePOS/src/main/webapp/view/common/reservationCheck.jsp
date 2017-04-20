@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/reservation.js?ver=3"></script>
+<script language="JavaScript" src="../js/common/reservation.js?ver=2"></script>
 
 </head>
 
@@ -169,7 +169,7 @@
 	<script type="text/javascript" src="../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=1"></script>
 	<script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
