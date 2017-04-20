@@ -116,7 +116,7 @@
 	   	 				<div class="cbp-item">
 	   	 					<div class="cbp-caption margin-bottom-20">
 	   	 						<div class="cbp-caption-defaultWrap">
-	                        		<img src="${shop.shopFile}" alt="" style="height: 350px;">
+	                        		<img src="${shop.shopFile}" alt="" style="height: 300px;">
 	                    		</div>
 	                    		<div class="cbp-caption-activeWrap">
 	                    			<div class="cbp-l-caption-alignCenter">
@@ -155,7 +155,7 @@
 <script type="text/javascript" src="../assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-4-fw-tx.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();

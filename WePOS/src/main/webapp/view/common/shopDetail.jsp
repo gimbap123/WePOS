@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 <script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/reservation.js?v=1"></script>
 
 <title>We POS</title>
 </head>
@@ -68,7 +69,7 @@
 	                <hr style="margin: 20px 0 20px 0"> 
 	                <div class="col-md-3 btn-buy animated fadeInRight">
 	                    <c:if test="${sessionScope.id!=null}">
-	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal" data-target="#responsive" onclick="location.href='../common/reservationGo.do?userId=${sessionScope.id}&shopCode=${shop.shopCode}">
+	                    <button class="btn-u btn-u-lg" type="button" data-toggle="modal" data-target="#responsive" onclick="reservationMove('${sessionScope.id}', ${shop.shopCode})">
 							<i class="fa fa-clock-o"></i> 예약하기</button>
 						</c:if>
 						<c:if test="${sessionScope.id==null}">
@@ -76,7 +77,9 @@
 							<h6 style="color: white;font-weight: bold;"><i class="fa fa-clock-o"></i>예약을 하시려면 로그인이 필요합니다</h6></button>
 						</c:if>
 	                </div>	
-	                <jsp:include page="reservationModal.jsp" flush="false" />	
+	                <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	               		<%-- <jsp:include page="reservationModal.jsp" flush="false" /> --%>
+	                </div>
 	            </div>
 	        </div>
 	        
@@ -123,6 +126,7 @@
 <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
 <script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="../assets/plugins/backstretch/jquery.backstretch.min.js"></script>
 <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
 <!-- 추가  -->
 <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
@@ -130,7 +134,7 @@
 <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="../assets/js/app.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/datepickers.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=1"></script>
 
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MH-LfB9ijazDzhwbfkceUzZAO0LiYsk&callback=initMap">
@@ -174,8 +178,8 @@
 	
     jQuery(document).ready(function() {
     	App.init();    	
-    	tabClick('shopNoticeTab')
     	Datepicker.initDatepicker();
+    	tabClick('shopNoticeTab')
     });
 </script>	
 </body>

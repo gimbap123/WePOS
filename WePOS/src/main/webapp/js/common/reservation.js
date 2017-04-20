@@ -1,3 +1,14 @@
+//예약 버튼을 눌렀을때
+function reservationMove(userId, shopCode)
+{
+	$("#responsive").html("");	
+		
+		$.get("../common/reservationModal.do", {shopCode : shopCode, userId : userId}, function(result)
+		{		
+			$("#responsive").append(result);		
+		})	
+}
+
 //예약 확인
 function checkRes()
 {
@@ -7,13 +18,13 @@ function checkRes()
 	}else if($('#start').val()==''){
 		alert("예약 날짜를 선택해주세요");
 		return false;
-	}else if($('#resHourType').val()==0){
+	}else if($('#startHourType').val()==0){
 		alert("예약 시간 타입을 선택해주세요");
 		return false;
-	}else if($('#resHour').val()==0){
+	}else if($('#startHour').val()==0){
 		alert("예약하실 시간을 선택해주세요");
 		return false;
-	}else if($('#resMinute').val()==0){
+	}else if($('#startMinute').val()==0){
 		alert("예약하실 시간을 선택해주세요");
 		return false;
 	}else if($('#resDesc').val()==""){
@@ -25,7 +36,8 @@ function checkRes()
 		{
 		alert("예약이 성공적으로 진행되었습니다!")
 		alert("예약하신 내역은 상단 예약확인 페이지를 통해 확인하실 수 있습니다.")
-		document.resForm.submit();
+//		document.resForm.submit();
+		$("#resForm").submit();
 		}
 		else
 		{

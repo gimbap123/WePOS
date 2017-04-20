@@ -71,7 +71,7 @@
 									<c:if test="${shopType.shopTypeCode == shop.shopTypeCode}">
 										<option value="${shopType.shopTypeCode}" selected="selected">${shopType.shopTypeName}</option>
 									</c:if>
-									<c:if test="${shopType.shopTypeCode != shop.shopCode}">
+									<c:if test="${shopType.shopTypeCode != shop.shopTypeCode}">
 										<option value="${shopType.shopTypeCode}">${shopType.shopTypeName}</option>
 									</c:if>															
 								</c:forEach>

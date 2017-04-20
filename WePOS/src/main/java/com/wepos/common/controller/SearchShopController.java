@@ -87,7 +87,7 @@ public class SearchShopController {
 	  if(shop.getShopTypeCode() == 0 && shop.getCityCode() == 0 && shop.getLocalCode() == 0 
 			  && shop.getShopName() == null)
 	  {
-		  page = new PagingUtil(currentPage, shopCount, 6, 5, "searchShop.do");
+		  page = new PagingUtil(currentPage, shopCount, 9, 5, "searchShop.do");
 	  }
 	  else
 	  {
@@ -103,7 +103,7 @@ public class SearchShopController {
 					  "&cityCode=" + shop.getCityCode() + "&localCode=" + shop.getLocalCode();
 		  }
 		 
-		  page = new PagingUtil(paramString, currentPage, shopCount, 6, 5, "searchShop.do");
+		  page = new PagingUtil(paramString, currentPage, shopCount, 9, 5, "searchShop.do");
 	  }	  
 	  	  
 	  map.put("start", page.getStartCount());
@@ -222,21 +222,19 @@ public class SearchShopController {
 	}
 	
 	//RESERVATION 버튼을 눌렀을때
-	@RequestMapping(value="/common/reservationGo.do")
+	@RequestMapping(value="/common/reservationModal.do", method=RequestMethod.GET)
 	public ModelAndView reservationGo(HttpServletRequest request, 
 			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
 	{
 		ReservationDto reservationDto = new ReservationDto();
 		reservationDto.setShopCode(shopCode);
 		reservationDto.setUserId(userId);
-		System.out.println("reservationGo의 userId="+reservationDto.getUserId());
-		System.out.println("reservationGo의 userId="+userId);
-		System.out.println("reservationGo의 shopCode="+shopCode);
 		int countRes = reservationDao.countRes(reservationDto);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/shopDetail");
+		mav.setViewName("/common/reservationModal");
 		mav.addObject("countRes", countRes);
+		mav.addObject("shopCode", shopCode);
 		return mav;
 	}
 	
