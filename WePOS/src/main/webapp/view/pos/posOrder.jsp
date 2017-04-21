@@ -49,7 +49,7 @@
                             <c:set var="stock" value="${productList[i].productStock}" />
                             <div class="panel-body orderList" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
                               <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                              <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                              <span class="label label-primary">${productList[i].productPrice}원</span>
                             </div>
                           </div>
                           <!-- 메뉴 패널 종료 -->
@@ -73,7 +73,7 @@
                                 <c:set var="stock" value="${productList[i].productStock}" />
                                 <div class="panel-body" onclick="javascript:orderMenu(${i}, ${price}, ${stock})">
                                   <h3 id="${productList[i].productCode}" class="menuName">${productList[i].productName}</h3>
-                                  <span class="label label-primary">${productList[i].productPrice}원</span> <span class="badge">${productList[i].productStock}</span>
+                                  <span class="label label-primary">${productList[i].productPrice}원</span>
                                 </div>
                               </div>
                               <!-- 메뉴 패널 종료 -->
