@@ -105,7 +105,7 @@
 			<!--/container-->
 
 			<!--=== End Search Block Version 2 ===-->
-			<div class="container content-sm" style="min-height: 300px">
+			<div class="container content-sm" style="min-height: 300px;margin-bottom:120px">
 				<!-- Begin Table Search Panel v1 -->
 				<div class="table-search-v1 panel panel-u margin-bottom-50">
 					<div class="panel-heading">
@@ -119,25 +119,10 @@
 							
 							<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
 
-							<hr style="margin: 1px 0 1px 0">
-
-							<div align="right" style="vertical-align: middle;">
-								<select name="keyField" style="color: black; font-size: small;">
-									<option value="title">글제목</option>
-									<option value="writer">작성자</option>
-									<option value="content">글내용</option>
-									<option value="all">전체</option>
-								</select> <input type="text" size="20" name="keyWord"
-									style="height: 20px; color: black;">
-								<!-- <input type="submit" value="검색" style="width: 50px; height: 20px; vertical-align: middle; text-align: center; color: gray;"> -->
-								<b><a href="javascript:document.searchBoard.submit()"
-									style="color: white; text-decoration: none;">검색</a></b>
-							</div>
-
 						</h3>
 
 					</div>
-					<div class="table-responsive" style="min-height:360px">
+					<div class="table-responsive">
 						<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
 							<thead>
 								<tr>
@@ -175,11 +160,28 @@
 							</c:if>
 						</table>
 						
-						<div align="center" style="margin-top:150px">
+						<div align="center" style="margin-top:70px; margin-bottom:20px">
 							${pagingHtml}
+							<div class="col-md-2 col-md-offset-4">
+								<select class="form-control" name="keyField" style="color: black; font-size: small;">
+									<option value="title">글제목</option>
+									<option value="writer">작성자</option>
+									<option value="content">글내용</option>
+									<option value="all">전체</option>
+								</select> 
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<input type="text" class="form-control" name="keyWord"> 
+									<span class="input-group-btn">
+										<button class="btn-u" type="button" style="height: 34px"
+													onclick="javascript:document.searchBoard.submit()">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</div>							
 						</div>
-
-						<hr style="margin: 10px">
 
 						<div align="right">
 							<c:if test="${sessionScope.id==null}">

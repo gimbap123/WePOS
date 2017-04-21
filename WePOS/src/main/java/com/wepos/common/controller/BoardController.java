@@ -67,7 +67,7 @@ public class BoardController {
 			paramString = "?boardTypeCode=" + boardTypeCode + "&keyField=" + keyField + "&keyWord=" + keyWord;
 		}
 		
-		PagingUtil page = new PagingUtil(paramString, currentPage, count, 2, 3, "showBoard.do");
+		PagingUtil page = new PagingUtil(paramString, currentPage, count, 10, 10, "showBoard.do");
 				
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

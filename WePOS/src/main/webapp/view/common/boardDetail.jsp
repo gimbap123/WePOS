@@ -154,7 +154,7 @@
 							</div>
 							<br>
 							<div style="min-height: 250px">
-							<p>${boardDto.boardContent}</p>
+							<pre style="border:0;background-color:white">${boardDto.boardContent}</pre>
 							</div>
 							<hr>
 							
