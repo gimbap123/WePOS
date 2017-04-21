@@ -173,12 +173,8 @@
 								</c:forEach>
 							</tbody>
 							</c:if>
-
-							<%-- <tr>
-								<td align="center" colspan="5">${pagingHtml}</td>
-							</tr> --%>
-
 						</table>
+						
 						<div align="center" style="margin-top:150px">
 							${pagingHtml}
 						</div>
