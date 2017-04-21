@@ -34,7 +34,7 @@
           </div> --%>
 			<div class="logo">
 				<a href="../common/main.do"> <img id="logo-header"
-					src="<c:url value="/image/common/logo.png"/>" alt="Logo" />
+					src="<c:url value="/image/common/weposlogo.png"/>" alt="Logo" />
 				</a>
 			</div>
 			<!-- End Logo -->
