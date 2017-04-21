@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.wepos.common.dto.BusinessHoursDto;
 import com.wepos.common.dto.ReservationDto;
 import com.wepos.common.dto.ShopDto;
+import com.wepos.mgr.dto.MgrDto;
 
 public class ReservationDaoImpl extends SqlSessionDaoSupport implements ReservationDao {
 
@@ -32,6 +33,18 @@ public class ReservationDaoImpl extends SqlSessionDaoSupport implements Reservat
 	
 	public int countRes(ReservationDto reservationDto) {
 		return getSqlSession().selectOne("countRes", reservationDto);
+	}
+	
+	public List<MgrDto> selectMgrId() {
+		return getSqlSession().selectList("selectMgrId");
+	}
+	
+	public int selectCheckId(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("selectCheckId", reservationDto);
+	}
+
+	public int selectResCount(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("selectResCount", reservationDto);
 	}
 	
 }
