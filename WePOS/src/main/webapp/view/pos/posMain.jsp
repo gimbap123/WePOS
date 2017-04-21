@@ -53,7 +53,6 @@
 	
     <div class="content-side-right pos-main">
       <div class="row">
-      ${orderList}
 		<c:if test="${tableCount < 1}">
 			<div align="center" style="vertical-align:center;margin-top:300px">
 	          <h1 align="center">등록된 테이블이 없습니다.</h1>
