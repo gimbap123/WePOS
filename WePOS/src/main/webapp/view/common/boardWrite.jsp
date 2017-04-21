@@ -58,7 +58,7 @@
 	href="<c:url value="/assets/js/table_sorter/blue/style.css" />"
 	type="text/css">
 
-<script language="JavaScript" src="../js/common/boardJs.js?v=1"></script>
+<script language="JavaScript" src="../js/common/boardJs.js?v=99"></script>
 
 </head>
 <body>

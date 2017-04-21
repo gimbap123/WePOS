@@ -45,7 +45,12 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>회원정보 수정</h2>	
+				<c:if test="${sessionScope.userType== 1}">
+					<h2>회원정보 수정</h2>	
+				</c:if>
+				<c:if test="${sessionScope.userType== 3}">
+					<h2>Master 정보 수정</h2>
+				</c:if>
 			</div>
 			
 			<form name="updateForm" action="updateUserInfo.do" method="post">
