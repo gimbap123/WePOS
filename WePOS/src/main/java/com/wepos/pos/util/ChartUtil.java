@@ -1,5 +1,13 @@
 package com.wepos.pos.util;
 
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +20,7 @@ import com.wepos.pos.dto.ChartStatsDto;
 public class ChartUtil {
 	
 	@SuppressWarnings("unchecked")
-	public static JSONObject barChartStat(List<ChartStatsDto> chartStatsList)
+	public static JSONObject barLineChartStat(List<ChartStatsDto> chartStatsList)
 	{		
 		JSONObject jsonChartData = new JSONObject();
 		
@@ -90,9 +98,28 @@ public class ChartUtil {
 		chartTypeList.put("1", "월별 매출");		
 		chartTypeList.put("2", "상품별 매출");		
 		chartTypeList.put("3", "결제방식별 매출");
-		chartTypeList.put("4", "회원, 비회원별 매출");
+		/*chartTypeList.put("4", "회원, 비회원별 매출");*/
 		
 		return chartTypeList;
 	}	
-
+	
+	public static int monthGap(String monthStart, String monthFinish) throws ParseException
+	{
+		int gap = 0;
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat monthSdf = new SimpleDateFormat("yyyy-MM");
+		
+		while(!monthStart.equals(monthFinish))
+		{
+			Date dateMonth = monthSdf.parse(monthStart);
+			cal.setTime(dateMonth);
+			cal.add(Calendar.MONTH, 1);
+			dateMonth = cal.getTime();
+			monthStart = monthSdf.format(dateMonth);
+			gap++;		
+		}
+		
+		return gap;
+	}
+	
 }

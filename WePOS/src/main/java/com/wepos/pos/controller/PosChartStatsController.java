@@ -3,6 +3,7 @@ package com.wepos.pos.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -75,13 +76,48 @@ public class PosChartStatsController {
 		if(chartType == 1)
 		{
 			chartStatsList = posChartStatsDao.monthStats(map);
-			jsonChartData = ChartUtil.barChartStat(chartStatsList);				
+			
+			SimpleDateFormat monthSdf = new SimpleDateFormat("yyyy-MM");
+			Date dateMonthStart = monthSdf.parse(start);
+			Date dateMonthFinish = monthSdf.parse(finish);
+			String stringMonthStart = monthSdf.format(dateMonthStart);
+			String stringMonthFinish = monthSdf.format(dateMonthFinish);
+			
+			int gap = ChartUtil.monthGap(stringMonthStart, stringMonthFinish);					
+			
+			for(int i = 0; i < gap; i++)
+			{
+				int flag = 1;
+				for(ChartStatsDto chartStats : chartStatsList)
+				{
+					if(stringMonthStart.equals(chartStats.getLabel()))
+					{
+						flag = 0;
+						break;						
+					}
+				}
+				if(flag == 1)
+				{
+					ChartStatsDto chartStats = new ChartStatsDto();
+					chartStats.setLabel(stringMonthStart);
+					chartStats.setTotalPrice("0");
+					chartStatsList.add(chartStats);
+				}
+				cal.setTime(dateMonthStart);
+				cal.add(Calendar.MONTH, 1);
+				dateMonthStart = cal.getTime();
+				stringMonthStart = monthSdf.format(dateMonthStart);		
+			}			
+			
+			Collections.sort(chartStatsList);
+			
+			jsonChartData = ChartUtil.barLineChartStat(chartStatsList);				
 			chartTitle = "월별 매출 (기간 : " + start + " ~ " + finish + ")";		
 		}
 		else if(chartType == 2)
 		{
 			chartStatsList = posChartStatsDao.productStats(map);
-			jsonChartData = ChartUtil.barChartStat(chartStatsList);
+			jsonChartData = ChartUtil.barLineChartStat(chartStatsList);
 			chartTitle = "상품별 매출 (기간 : " + start + " ~ " + finish + ")";
 		}
 		else if(chartType == 3)
