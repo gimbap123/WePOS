@@ -80,7 +80,7 @@ function shopBoardReplyWrite()
 								<img class="img-responsive" src="${shopBoard.boardFile}" alt="" style="width: 80%;">
 							</div>
 						</c:if>	
-						<p style="font-size: 20px;">${shopBoard.boardContent}</p>
+						<pre style="font-size: 20px; background-color: white; border: 0px;">${shopBoard.boardContent}</pre>
 						<hr>
 						<b>첨부파일 : </b>
 						<c:if test="${shopBoard.boardFile == null}">

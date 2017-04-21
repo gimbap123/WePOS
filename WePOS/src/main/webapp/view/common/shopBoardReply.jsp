@@ -11,7 +11,7 @@
                         <small>${shopBoardReply.replyDate}</small>
                     </h4>
                     <div id="contentDiv${shopBoardReply.replyNumber}">
-                    	<p>${shopBoardReply.replyContent}</p>
+                    	<pre style="background-color: white; border: 0px;">${shopBoardReply.replyContent}</pre>                    	
                     </div>                                       
 				</div>
 				<c:if test="${sessionScope.id eq shopBoardReply.totalId}">

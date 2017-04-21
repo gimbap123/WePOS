@@ -60,7 +60,7 @@
 								<img class="img-responsive" src="${shopNotice.noticeFile}" alt="" style="width: 80%;">
 							</div>
 						</c:if>	
-						<p style="font-size: 20px;">${shopNotice.noticeContent}</p>
+						<pre style="font-size: 20px; background-color: white; border: 0px;">${shopNotice.noticeContent}</pre>
 						<hr>
 						<b>첨부파일 : </b>
 						<c:if test="${shopNotice.noticeFile == null}">
