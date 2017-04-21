@@ -8,7 +8,8 @@ var ParallaxSlider = function () {
 			    current     : 0,    
 			    // index of current slide
 			     
-			    bgincrement : 50,  
+			    // bgincrement 50에서 200으로 수정함
+			    bgincrement : 200,  
 			    // increment the background position 
 			    // (parallax effect) when sliding
 			     

@@ -1,10 +1,15 @@
 function productInfo(code,name,price,stock,desc,categoryCode,countOrder, productFile){
 	$('#productFileTr').show();
 	$('#uploadTr').show();
+	$('#categoryCode').prop("disabled",false);
+	$('#productName').prop("disabled",false);
+	$('#productPrice').prop("disabled",false);
+	$('#productStock').prop("disabled",false);
+	$('#productDesc').prop("disabled",false);
+	$('#okButton').prop("disabled",false);
+	$('#deleteButton').prop("disabled",false);
 	
 	$('#productInfoTag').text("상품 수정");
-	$('#productName').prop("disabled",false);
-	$('#productCode').attr("style","visibility:visibility;text-align:center;color:blue;border:0;")
 	$('#productCode').val(code);
 	$('#productName').val(name);
 	$('#productPrice').val(price);
@@ -17,8 +22,6 @@ function productInfo(code,name,price,stock,desc,categoryCode,countOrder, product
 		productFile = "파일이 없습니다.";
 	}
 	$('#productFile').val(productFile);
-	$('#okButton').prop("disabled",false);
-	$('#deleteButton').prop("disabled",false);
 }
 
 function checkNull(){
@@ -80,7 +83,6 @@ function checkProductName(){
 }
 
 function createProduct(){
-	$('#productName').prop("disabled",false);
 	if($('#categoryCode option').size()==1){
 		alert("상품분류를 먼저 등록하세요");
 		return false;
@@ -88,6 +90,13 @@ function createProduct(){
 	else{
 		$('#productFileTr').hide();
 		$('#uploadTr').show();
+		$('#categoryCode').prop("disabled",false);
+		$('#productName').prop("disabled",false);
+		$('#productPrice').prop("disabled",false);
+		$('#productStock').prop("disabled",false);
+		$('#productDesc').prop("disabled",false);
+		$('#okButton').prop("disabled",false);
+		$('#deleteButton').prop("disabled",true);
 		
 		$('#productInfoTag').text("상품 추가");
 		$('#productCode').val(0);
@@ -102,10 +111,7 @@ function createProduct(){
 		$('#productPrice').attr("placeholder","가격 입력");
 		$('#productStock').attr("placeholder","재고량 입력");
 		$('#productDesc').attr("placeholder","상품 설명 입력");
-		$('#productCode').attr("style","visibility:hidden");		
-		
-		$('#okButton').prop("disabled",false);
-		$('#deleteButton').prop("disabled",true);
+		$('#productCode').attr("style","visibility:hidden");
 	}
 	
 }

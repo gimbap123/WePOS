@@ -126,13 +126,15 @@
 					<!-- Table -->
 					<div class="panel-heading" align="center"><h3 id="categoryInfoTag">상품분류 정보</h3></div>					
 					<form id="updateCategoryForm" name="updateCategoryForm" action="updateCategory.do?mgrId=${sessionScope.id}" method="post">
+						<input type="hidden" id="shopCode" name="shopCode" value="${shop.shopCode}">
+						<input type="hidden" id="categoryCode" name="categoryCode" value="">
 						<table class="table table-striped table-bordered">
 							<tbody>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">날짜</th>
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
 								</tr>
-								<tr>
+								<%-- <tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">매장 번호</th>
 									<th>
 										<input type="text" id="shopCode" name="shopCode" value="${shop.shopCode}" size="15px" style="text-align:center;border:0" readonly>
@@ -143,7 +145,7 @@
 									<th>
 										<input type="text" id="categoryCode" name="categoryCode" value="" size="15px" style="text-align:center;border:0" readonly >
 									</th>
-								</tr>
+								</tr> --%>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">상품분류명</th>
 									<td>

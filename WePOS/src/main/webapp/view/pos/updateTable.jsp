@@ -54,7 +54,7 @@
 	href="<c:url value="/assets/css/custom.css?ver=1" /> ">
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
-<script language="JavaScript" src="../js/pos/updateTable.js?ver=3"></script>
+<script language="JavaScript" src="../js/pos/updateTable.js?ver=4"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -135,29 +135,23 @@
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">날짜</th>
 									<td style="text-align:center;vertical-align:middle"><span id="realTime"></span></td>
-								</tr>								
-								<!-- <tr>
-									<th style="text-align:center;vertical-align:middle;width:90px;height:41px">고유번호</th>
-									<th>
-										<input type="text" id="tableCode" name="tableCode" value="" size="15px" style="border:0" readonly>
-									</th>
-								</tr> -->
+								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">테이블 이름</th>
 									<td>
-										<input type="text" id="tableName" name="tableName" value="" size="15px" style="text-align:center">
+										<input type="text" id="tableName" name="tableName" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">테이블 설명</th>
 									<td>
-										<input type="text" id="tableDesc" name="tableDesc" value="" size="15px" style="text-align:center">
+										<input type="text" id="tableDesc" name="tableDesc" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align:center;vertical-align:middle;width:90px">정원</th>
 									<td>
-										<input type="text" id="tableMax" name="tableMax" value="" size="15px" style="text-align:center">
+										<input type="text" id="tableMax" name="tableMax" value="" size="15px" style="text-align:center" disabled>
 									</td>
 								</tr>
 							</tbody>
@@ -169,10 +163,10 @@
 				<div role="group" aria-label="..."
 					class="btn-group btn-group-justified">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-lg btn-danger" onclick="checkNull()">완료</button>
+						<button type="button" class="btn btn-lg btn-primary" onclick="checkNull()">완료</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-lg btn-primary" 
+						<button type="button" class="btn btn-lg btn-danger" 
 									onclick="location.href='updateTableView.do?mgrId=${sessionScope.id}'">취소</button>
 					</div>
 				</div>
