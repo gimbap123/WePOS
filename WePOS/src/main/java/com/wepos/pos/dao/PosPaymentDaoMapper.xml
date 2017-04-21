@@ -20,6 +20,7 @@
         payment_code = #{paymentCode}
     where shop_code = #{shopCode}
     and table_code = #{tableCode} 
+    and order_state = 0
   </update>
   
   <update id="updateTableStatusToUnused" parameterType="Integer">
