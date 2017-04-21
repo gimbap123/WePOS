@@ -85,39 +85,41 @@
 	</select>
 	
 	<select id="categoryDayLog" parameterType="PosLogDto" resultType="PosLogDto">
-	select t.order_date,c.category_name,t.order_amount,t.order_price
-	from
-		(select to_char(o.order_date,'yy-mm-dd') as order_date,p.category_code, sum(od.order_price) as order_price, sum(od.order_amount) as order_amount
-		from orders o  
-		inner join orders_detail od on o.order_code= od.order_code  
-		inner join product p on od.product_code = p.product_code
-		inner join category c on p.category_code=c.category_code
-		where o.shop_code=#{shopCode} and o.order_date between #{calendarBegin} and #{calendarEnd}+1 and o.order_state=1
-		group by to_char(o.order_date,'yy-mm-dd'),p.category_code) t
-	inner join category c on t.category_code=c.category_code
-	where c.shop_code = #{shopCode}
-	<if test="categoryCode!=000">
-		and t.category_code=#{categoryCode}
-	</if>
-	order by t.order_date desc
+		select t.order_date,c.category_name,sum(t.order_amount) "order_amount",sum(t.order_price) "order_price"
+		from
+			(
+				select to_char(o.order_date,'yy-mm-dd') as order_date,p.category_code, od.order_price, od.order_amount
+				from orders o
+				inner join orders_detail od on o.order_code= od.order_code  
+				inner join product p on od.product_code = p.product_code
+				where (o.order_date between #{calendarBegin} and #{calendarEnd}+1) and o.order_state=1 and o.shop_code=#{shopCode}
+			) t
+		inner join category c on t.category_code=c.category_code
+		where c.shop_code=#{shopCode}
+		<if test="categoryCode!=000">
+			and c.category_code=#{categoryCode}
+		</if>
+		group by c.category_name,t.order_date
+		order by t.order_date desc
 	</select>
 	
 	<select id="categoryMonthLog" parameterType="PosLogDto" resultType="PosLogDto">
-	select t.order_date,c.category_name,t.order_amount,t.order_price
-	from
-		(select to_char(o.order_date,'yy-mm') as order_date,p.category_code, sum(od.order_price) as order_price, sum(od.order_amount) as order_amount
-		from orders o  
-		inner join orders_detail od on o.order_code= od.order_code  
-		inner join product p on od.product_code = p.product_code
-		inner join category c on p.category_code=c.category_code
-		where o.shop_code=#{shopCode} and o.order_date between #{monthBegin} and #{monthEnd}+1 and o.order_state=1
-		group by to_char(o.order_date,'yy-mm'),p.category_code) t
-	inner join category c on t.category_code=c.category_code
-	where c.shop_code = #{shopCode}
-	<if test="categoryCode!=000">
-		and t.category_code=#{categoryCode}
-	</if>
-	order by t.order_date desc
+		select t.order_date,c.category_name,sum(t.order_amount) "order_amount",sum(t.order_price) "order_price"
+		from
+			(
+				select to_char(o.order_date,'yy-mm') as order_date,p.category_code, od.order_price, od.order_amount
+				from orders o
+				inner join orders_detail od on o.order_code= od.order_code  
+				inner join product p on od.product_code = p.product_code
+				where (o.order_date between #{calendarBegin} and #{calendarEnd}+1) and o.order_state=1 and o.shop_code=#{shopCode}
+			) t
+		inner join category c on t.category_code=c.category_code
+		where c.shop_code=#{shopCode}
+		<if test="categoryCode!=000">
+			and c.category_code=#{categoryCode}
+		</if>
+		group by c.category_name,t.order_date
+		order by t.order_date desc
 	</select>
 
 </mapper>

@@ -16,7 +16,7 @@ function replyChecks(replyNumber){
 		$('#updateContents'+replyNumber).focus();
 		return false;
 	}
-	alert("댓글 수정 확인 호출 작동")
+	alert("댓글 수정 성공")
 	var replyContent = $("#updateContents" + replyNumber).val();	
 	var pageNum = $("#pageNum").val();
 	var boardNumber = $("#boardNumber").val();
