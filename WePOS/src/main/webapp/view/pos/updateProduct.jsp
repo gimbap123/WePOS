@@ -73,7 +73,7 @@
 					<div class="breadcrumbs-v3 img-v1" style="background:url(../image/common/updateMenu.jpg);background-size: cover;
 		  																				background-position: center;height:30px">
 						<div class="container text-center" style="width:100%">
-							<h1>메뉴 관리</h1>
+							<h1>상품 관리</h1>
 						</div>
 						<!--/end container-->
 					</div>

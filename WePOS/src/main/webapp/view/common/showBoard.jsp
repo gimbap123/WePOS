@@ -137,9 +137,8 @@
 						</h3>
 
 					</div>
-					<div class="table-responsive">
-						<table id="resultTable"
-							class="table table-bordered table-striped table-hover tablesorter">
+					<div class="table-responsive" style="min-height:340px">
+						<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
 							<thead>
 								<tr>
 									<th style="text-align:center" width="10%">글번호</th>
