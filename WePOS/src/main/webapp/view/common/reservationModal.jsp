@@ -17,7 +17,7 @@
 								
 								<%-- <c:set var="countRes" value="0" /> --%>
                                  
-                                <c:if test="${countRes > 0 }">
+                                <c:if test="${countRes > 0}">
                                  <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
@@ -33,7 +33,23 @@
                                 </c:if>
                                 
                                 
-                                <c:if test="${countRes < 1 }">
+                                <c:if test="${countRes < 1 && selectResCount > 0}">
+                                 <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="headline" style="margin: 0 0 20px 0; padding-bottom: -10px; display: inline-block; border-bottom: 2px solid #72c02c;">
+                                    <h5><i class="icon-shield"></i> ${sessionScope.id }님은 이미 예약중인 건이 있습니다.</h5></div>
+                                   	<div style="text-align: center;"><a href="../common/reservationCheck.do?userId=${sessionScope.id}">[예약 확인하러 가기]</a></div>
+                                    </div>	
+                                <div class="modal-footer">
+                                	<button type="button" class="btn-u btn-u-default" data-dismiss="modal">돌아가기</button>
+                                </div>
+                                </c:if>
+                                
+                                
+                                <c:if test="${countRes < 1 && selectCheckId > 0 && selectResCount < 1}">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
@@ -82,7 +98,7 @@
 												<div class="col-md-4">
 	                                            <p>
 	                                            	<select class="form-control" id="startMinute" name="startMinute">
-		                                            	<option value="0">분</option>
+		                                            	<option value="">분</option>
 														<c:forEach var="i" begin="0" end="59" step="1">
 															<c:if test="${i < 10}">
 																<c:set var="i" value="0${i}" />
@@ -101,6 +117,23 @@
                                         <button type="button" class="btn-u btn-u-primary" onclick="checkRes()">예약하기</button>
                                     </div>
                                     </c:if>
+                                    
+                                    
+                                    <c:forEach var="mgrIdList" items="${mgrIdList}">
+                                    <c:if test="${mgrIdList.mgrId == sessionScope.id}">
+                                    	<div class="modal-header">
+		                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                                        <h4 class="modal-title" id="myModalLabel4" style="font-weight: bold;">MAKE A RESERVATION!</h4>
+		                                </div>
+		                                    <div class="modal-body">
+		                                    <div class="headline" style="margin: 0 0 20px 0; padding-bottom: -10px; display: inline-block; border-bottom: 2px solid #72c02c;">
+		                                    <h5><i class="icon-shield"></i> 관리자는 예약을 진행할 수 없습니다.</h5></div>
+		                                    </div>	
+		                                <div class="modal-footer">
+		                                	<button type="button" class="btn-u btn-u-default" data-dismiss="modal">돌아가기</button>
+		                                </div>
+                                    </c:if>
+                                    </c:forEach>
                                     
                                     
                                 </div>

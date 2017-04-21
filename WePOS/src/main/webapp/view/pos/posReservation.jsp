@@ -325,6 +325,8 @@
 		src="<c:url value="/assets/js/plugins/progress-bar.js"/>"></script>
 	<script type="text/javascript"
 		src="<c:url value="/assets/js/plugins/owl-carousel.js"/>"></script>
+		
+			<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=3"></script>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {

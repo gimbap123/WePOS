@@ -151,21 +151,15 @@
 				</c:if>
 				<c:if test="${resState=='예약 완료'}">
 				<div class="row">
-					<span class="col-md-6 col-md-offset-0">
-						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
-					</span>
-					<span class="col-md-6 col-md-offset-0">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="완료확인" float="right">
+					<span class="col-md-12 col-md-offset-0">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="예약 완료 확인" float="right">
 					</span>
 				</div>
 				</c:if>
 				<c:if test="${resState=='예약 취소'}">
 				<div class="row">
-					<span class="col-md-6 col-md-offset-0">
-						<input type="button" id="cancel" class="btn-u btn-block" onclick="history.back()" value="취 소" float="left">
-					</span>
-					<span class="col-md-6 col-md-offset-0">
-						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="취소확인" float="right">
+					<span class="col-md-12 col-md-offset-0">
+						<input type="button" id="ok" class="btn-u btn-block" onclick="" value="예약 취소 확인" float="right">
 					</span>
 				</div>
 				</c:if>
@@ -194,7 +188,7 @@
 	<script type="text/javascript" src="../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=1"></script>
+	<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=2"></script>
 	<script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
