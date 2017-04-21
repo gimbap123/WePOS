@@ -88,8 +88,8 @@
 </script>
 	<script type="text/javascript">
     $.backstretch([
-      "../assets/img/bg/16.jpg",
-      "../assets/img/bg/25.jpg",
+      "../assets/img/bg/7.jpg",
+      "../assets/img/bg/19.jpg",
       ], {
         fade: 1000,
         duration: 3000
