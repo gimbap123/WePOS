@@ -56,7 +56,7 @@
 <link href="<c:url value="/assets/css/headers/header-v7.css"/>"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" href='<c:url value="/assets/css/pages/pricing/pricing_v1.css"/>'>
-<script language="JavaScript" src="../js/pos/updateProduct.js?v=6"></script>
+<script language="JavaScript" src="../js/pos/updateProduct.js?v=99"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 

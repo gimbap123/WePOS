@@ -35,11 +35,9 @@ function checkNull(){
 		return false;
 	}
 	
-	var exptext1= /^[a-z0-9가-힣]{1,12}$/;
-	
 	// 상품명 글자수 제한
-	if($('#productName').val().length>12){
-		$('#checkNameTh').html("상품명은 12자리 이하로 설정하세요");
+	if($('#productName').val().length>20){
+		$('#checkNameTh').html("상품명은 20자리 이하로 설정하세요");
 		$('#checkNameTh').attr("style","color:red");
 		return false;
 	}

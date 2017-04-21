@@ -7,7 +7,7 @@
 <div class="header">
 	<div class="container">
 		<!-- Logo -->		
-		<a class="logo" href="../common/main.do"> <img src="../image/common/logo.png" alt="Logo">
+		<a class="logo" href="../common/main.do"> <img src="../image/common/weposlogo.png" alt="Logo">
 		</a>		
 		<!-- End Logo -->
 		<!-- Topbar -->
