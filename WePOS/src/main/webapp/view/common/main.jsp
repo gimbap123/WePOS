@@ -29,6 +29,7 @@
 
 <link rel="stylesheet" href="../assets/plugins/parallax-slider/css/parallax-slider.css">
 
+
 <title>We POS</title>
 </head>
 <body>
@@ -92,12 +93,12 @@
     			<!-- Service Box -->
 	            <div class="row text-center margin-bottom-60">
 	                <div class="col-md-4 md-margin-bottom-50">
-	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/01.png" alt="">  
+	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/01.png" alt="">
 	                    <h1 class="title-v3-md margin-bottom-10">매장 정보</h1>	                    
 	                    <p>We POS를 사용하는 매장의 메뉴, 테이블 정보등을 <br /> 확인할 수 있습니다.</p>
 	                </div>
 	                <div class="col-md-4 flat-service md-margin-bottom-50">
-	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/02.png" alt="">  
+	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/02.png" alt="">
 	                    <h2 class="title-v3-md margin-bottom-10">POS 시스템</h2>
 	                    <p>웹을 통한 POS 시스템으로 매장 관리를 도와줍니다.</p>
 	                </div>
