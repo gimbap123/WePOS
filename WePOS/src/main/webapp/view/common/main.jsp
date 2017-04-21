@@ -29,6 +29,7 @@
 
 <link rel="stylesheet" href="../assets/plugins/parallax-slider/css/parallax-slider.css">
 
+
 <title>We POS</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	            <div class="da-slide">
 	                <h2><i>We POS에</i> <br /> <i>오신걸</i> <br /> <i>환영합니다.</i></h2>
 	                <p><i>We POS에 가입된 매장들의</i> <br /> <i>정보와 상품을 만나볼 수 있습니다.</i></p>
-	                <div class="da-img"><img class="img-responsive" src="../assets/plugins/parallax-slider/img/1.png" alt=""></div>
+	                <div class="da-img"><img class="img-responsive" src="../image/common/posfinal.png" alt=""></div>
 	            </div>
 	            <div class="da-slide">
 	                <h2><i>RESPONSIVE VIDEO</i> <br /> <i>SUPPORT AND</i> <br /> <i>MANY MORE</i></h2>
@@ -74,7 +75,7 @@
 	                </c:if>
 	                <c:if test="${sessionScope.id != null}">        	
 		                <div class="col-md-9 animated fadeInLeft">
-		                    <span>${sessionScope.id}님 We POS 오신걸 환영합니다.</span>
+		                    <span><font color="#72c02c">${sessionScope.id}</font>님 We POS 오신걸 환영합니다.</span>
 		                    <p>매장 정보, 상품 정보, 상품 평점, 테이블 현황 등의 다양한 기능을 사용하실 수 있습니다.</p>
 		                </div>	                	                          
 		                <div class="col-md-3 btn-buy animated fadeInRight">
@@ -92,12 +93,12 @@
     			<!-- Service Box -->
 	            <div class="row text-center margin-bottom-60">
 	                <div class="col-md-4 md-margin-bottom-50">
-	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/01.png" alt="">  
+	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/01.png" alt="">
 	                    <h1 class="title-v3-md margin-bottom-10">매장 정보</h1>	                    
 	                    <p>We POS를 사용하는 매장의 메뉴, 테이블 정보등을 <br /> 확인할 수 있습니다.</p>
 	                </div>
 	                <div class="col-md-4 flat-service md-margin-bottom-50">
-	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/02.png" alt="">  
+	                    <img class="image-md margin-bottom-20" src="../assets/img/icons/flat/02.png" alt="">
 	                    <h2 class="title-v3-md margin-bottom-10">POS 시스템</h2>
 	                    <p>웹을 통한 POS 시스템으로 매장 관리를 도와줍니다.</p>
 	                </div>

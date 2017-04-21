@@ -28,9 +28,9 @@ public class ChartUtil {
 			
 			JSONObject jsonData = new JSONObject();
 			jsonData.put("label", "총 매출");
-			jsonData.put("fillColor", "rgba(210, 214, 222, 1)");
-			jsonData.put("strokeColor", "rgba(210, 214, 222, 1)");
-			jsonData.put("pointColor", "rgba(210, 214, 222, 1)");
+			jsonData.put("fillColor", "rgba(64, 224, 208, 1)");
+			jsonData.put("strokeColor", "rgba(64, 224, 208, 1)");
+			jsonData.put("pointColor", "rgba(64, 224, 208, 1)");
 			jsonData.put("pointStrokeColor", "#c1c7d1");
 			jsonData.put("pointHighlightFill", "#fff");
 			jsonData.put("pointHighlightStroke", "rgba(220,220,220,1)");
@@ -58,7 +58,7 @@ public class ChartUtil {
 	{
 		JSONArray jsonChartArray = new JSONArray();
 		
-		String[] colorArr = {"#f56954", "#00a65a", "#00a65a"};
+		String[] colorArr = {"#40e0d0", "#ff6666", "#ffff66"};
 		
 		if(chartStatsList.size() == 0)
 		{
@@ -87,8 +87,8 @@ public class ChartUtil {
 	{
 		Map<String, Object> chartTypeList = new HashMap<String, Object>();
 		chartTypeList.put("0", "선택");
-		chartTypeList.put("1", "월별 매출");
-		chartTypeList.put("2", "상품별 매출");
+		chartTypeList.put("1", "월별 매출");		
+		chartTypeList.put("2", "상품별 매출");		
 		chartTypeList.put("3", "결제방식별 매출");
 		chartTypeList.put("4", "회원, 비회원별 매출");
 		

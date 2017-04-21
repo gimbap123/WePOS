@@ -61,8 +61,9 @@ public class ReservationController {
 		String Hours = businessHoursDto.getStartHour();
 		String Minute = businessHoursDto.getStartMinute();
 		
+		reservationDto.setReseNumber(reservationCheckDto.getReseNumber());
 		ShopDto ShopNameDto = reservationDao.selectShopName(reservationDto);
-
+		
 		String resState = reservationCheckDto.getResState();
 		if(resState.equals("0"))	{	resState = "예약 대기";	}
 		if(resState.equals("1"))	{	resState = "예약 완료";	}

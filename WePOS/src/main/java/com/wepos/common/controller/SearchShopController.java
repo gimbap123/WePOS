@@ -42,6 +42,7 @@ import com.wepos.common.dto.ShopDto;
 import com.wepos.common.util.FileUtil;
 import com.wepos.common.util.PagingUtil;
 import com.wepos.mgr.dto.CategoryDto;
+import com.wepos.mgr.dto.MgrDto;
 import com.wepos.mgr.dto.ShopNoticeDto;
 import com.wepos.user.dao.UserDao;
 import com.wepos.user.dto.ProductGradeDto;
@@ -223,7 +224,7 @@ public class SearchShopController {
 	
 	//RESERVATION 버튼을 눌렀을때
 	@RequestMapping(value="/common/reservationModal.do", method=RequestMethod.GET)
-	public ModelAndView reservationGo(HttpServletRequest request, 
+	public ModelAndView reservationGo(HttpServletRequest request, @ModelAttribute MgrDto mgrDto,
 			@RequestParam("shopCode") int shopCode, @RequestParam("userId") String userId) throws Exception
 	{
 		ReservationDto reservationDto = new ReservationDto();
@@ -231,10 +232,23 @@ public class SearchShopController {
 		reservationDto.setUserId(userId);
 		int countRes = reservationDao.countRes(reservationDto);
 		
+		mgrDto = new MgrDto();
+		List<MgrDto> mgrIdList = reservationDao.selectMgrId();
+		
+		int selectCheckId = reservationDao.selectCheckId(reservationDto);
+		System.out.println("selectCheckId="+selectCheckId);
+		
+		int selectResCount = reservationDao.selectResCount(reservationDto);
+		System.out.println("selectResCount="+selectResCount);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/common/reservationModal");
 		mav.addObject("countRes", countRes);
 		mav.addObject("shopCode", shopCode);
+		mav.addObject("mgrIdList", mgrIdList);
+		mav.addObject("userId", userId);
+		mav.addObject("selectCheckId", selectCheckId);
+		mav.addObject("selectResCount", selectResCount);
 		return mav;
 	}
 	

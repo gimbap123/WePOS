@@ -137,7 +137,7 @@
 </script>
 	<script type="text/javascript">
     $.backstretch([
-      "../assets/img/bg/16.jpg",
+      "../assets/img/bg/13.jpg",
       "../assets/img/bg/25.jpg",
       ], {
         fade: 1000,

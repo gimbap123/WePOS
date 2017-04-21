@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wepos.common.dao.ReservationDao;
 import com.wepos.common.dto.ReservationDto;
+import com.wepos.common.dto.ShopDto;
+import com.wepos.pos.dao.PosMainDao;
 import com.wepos.pos.dao.PosReservationDao;
 import com.wepos.pos.dto.PosLogDto;
 
@@ -22,12 +23,16 @@ public class PosReservationContoroller {
 	
 	@Autowired
 	private PosReservationDao posReservationDao;
+	
+	@Autowired
+	private PosMainDao posMainDao;
 
 	// 예약 관리 메인 페이지로 이동
 	@RequestMapping("/pos/posReservation.do")
 	public ModelAndView showPosReservation(@RequestParam("mgrId") String mgrId, @RequestParam("shopCode") int shopCode)
 	{
-		ReservationDto reservationDto = new ReservationDto();
+		// 매장 코드 번호로 매장 정보 Select
+	    ShopDto shop = posMainDao.getShop( shopCode );
 		
 		int countStateZero = posReservationDao.selectStateZero(shopCode);
 		
@@ -39,6 +44,7 @@ public class PosReservationContoroller {
 		mav.addObject("resList", resList);
 		mav.addObject("countPosRes", countPosRes);
 		mav.addObject("countStateZero", countStateZero);
+		mav.addObject( "shop", shop );
 		return mav;
 	}
 	
@@ -58,6 +64,7 @@ public class PosReservationContoroller {
 	public ModelAndView searchState(@RequestParam("mgrId") String mgrId, @RequestParam("searchType") int searchType,
 			@ModelAttribute PosLogDto posLogDto, @RequestParam("shopCodes") int shopCode, @ModelAttribute ReservationDto reservationDto)
 	{
+		ShopDto shop = posMainDao.getShop( shopCode );
 		String calendarBegin = posLogDto.getCalendarBegin().toString();
 		String calendarEnd = posLogDto.getCalendarEnd().toString();
 		
@@ -74,6 +81,7 @@ public class PosReservationContoroller {
 		ModelAndView mav = new ModelAndView("pos/posReservation");
 		mav.addObject("stateList", stateList);
 		mav.addObject("stateListSize", stateListSize);
+		mav.addObject( "shop", shop );
 		return mav;
 	}
 	

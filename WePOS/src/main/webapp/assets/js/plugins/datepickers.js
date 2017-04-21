@@ -16,6 +16,7 @@ var Datepicker = function () {
 	            // dateFormat 수정
 	        	/*dateFormat: 'dd.mm.yy',*/
 	        	showMonthAfterYear : true,
+	        	minDate : '-0',
 				maxDate : '+30',
 				yearSuffix : '년',
 				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',

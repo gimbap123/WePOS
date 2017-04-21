@@ -54,7 +54,7 @@
 	                <div class="box-shadow shadow-effect-2">
 	                    <img class="img-responsive img-bordered full-width" src="${shop.shopFile}" alt="" style="height: 305px;">
 	                </div>
-	            </div>	
+	            </div>
 	            <div class="col-sm-7">	            
 	            	<h3>${shop.shopName }</h3>
                 	<p>${shop.shopDesc}</p>

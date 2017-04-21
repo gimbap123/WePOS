@@ -144,7 +144,14 @@
 												<h3>검색된 예약 데이터가 없습니다.</h3>
 											</th>
 										</tr>
-									</c:if>	
+									</c:if>
+									<c:if test="${stateListSize==0}">
+										<tr>
+											<th colspan="6" style="text-align: center;">
+												<h3>검색된 예약 데이터가 없습니다.</h3>
+											</th>
+										</tr>
+									</c:if>
 		
 									<tr>
 										<th colspan="6" style="text-align: center;">
@@ -153,13 +160,17 @@
 												대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;
 													<fmt:formatNumber value="${countStateZero}" type="number" /> 건
 												</c:if>
-												<c:if test="${stateListSize!=null}">
+												<c:if test="${stateListSize!=0}">
 													<c:forEach var="stateList" items="${stateList}">												
 														<c:if test="${stateList.resState==0 }">대기중인 예약 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
 														<c:if test="${stateList.resState==1 }">예약이 완료된 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
 														<c:if test="${stateList.resState==2 }">예약이 취소된 수 &nbsp;&nbsp;:&nbsp;&nbsp;</c:if>
 															<fmt:formatNumber value="${stateListSize}" type="number" /> 건
 													</c:forEach>
+												</c:if>
+												<c:if test="${stateListSize==0}">										
+														검색결과&nbsp;&nbsp;:&nbsp;&nbsp;
+															0 건
 												</c:if>
 											</h3>
 										</th>
@@ -325,6 +336,8 @@
 		src="<c:url value="/assets/js/plugins/progress-bar.js"/>"></script>
 	<script type="text/javascript"
 		src="<c:url value="/assets/js/plugins/owl-carousel.js"/>"></script>
+		
+			<script type="text/javascript" src="../assets/js/plugins/datepickers.js?v=3"></script>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
