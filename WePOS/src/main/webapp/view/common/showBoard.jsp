@@ -137,7 +137,7 @@
 						</h3>
 
 					</div>
-					<div class="table-responsive" style="min-height:340px">
+					<div class="table-responsive" style="min-height:360px">
 						<table id="resultTable" class="table table-bordered table-striped table-hover tablesorter">
 							<thead>
 								<tr>
@@ -174,11 +174,14 @@
 							</tbody>
 							</c:if>
 
-							<tr>
+							<%-- <tr>
 								<td align="center" colspan="5">${pagingHtml}</td>
-							</tr>
+							</tr> --%>
 
 						</table>
+						<div align="center" style="margin-top:150px">
+							${pagingHtml}
+						</div>
 
 						<hr style="margin: 10px">
 
