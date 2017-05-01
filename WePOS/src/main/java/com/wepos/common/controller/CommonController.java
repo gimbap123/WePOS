@@ -33,14 +33,14 @@ public class CommonController {
 	@Autowired
 	private CommonDao commonDao;
 	
-	// 메인 페이지로 이동-----------------------------------------------------------------------------------------
+	// 메인 페이지로 이동
 	@RequestMapping("/common/main.do")
 	public String mainView()
 	{
 		return "common/main";
 	}
 	
-	// 회원가입 ------------------------------------------------------------------------------------------------
+	// 회원가입 
 	@RequestMapping(value="/common/registration.do",method=RequestMethod.GET)
 	public String registrationView()
 	{
@@ -48,10 +48,10 @@ public class CommonController {
 	}
 	
 	@RequestMapping(value="/common/registration.do",method=RequestMethod.POST)
-	public ModelAndView registrationProcess(@ModelAttribute UsersDto users){
+	public ModelAndView registrationProcess(@ModelAttribute UsersDto users)
+	{
 		ModelAndView mav=new ModelAndView();
 		int result=commonDao.registration(users);
-		System.out.println("result = "+result);
 		mav.addObject("result", result);
 		
 		if(result==1){			
@@ -63,12 +63,14 @@ public class CommonController {
 		}		
 		return mav;
 	}
+	
 	// 이용약관
 	@RequestMapping("/common/terms.do")
 	public String termsView()
 	{
 		return "common/terms";
 	}
+	
 	// 아이디 중복검사
 	@RequestMapping(value="/common/checkId.do", method=RequestMethod.POST)
 	//public ModelAndView checkIdProcess(@RequestParam("userId") UsersDto id)
@@ -77,10 +79,7 @@ public class CommonController {
 		ModelAndView mav=new ModelAndView();
 		int checkIdFromUsers = commonDao.checkIdFromUsers(id);
 		int checkIdFromMgr = commonDao.checkIdFromMgr(id);
-		int checkIdFromList=commonDao.checkIdFromDeletedId(id);
-		System.out.println("checkIdFromUsers 중복여부 : " + checkIdFromUsers);
-		System.out.println("checkIdFromMgr 중복여부 : " + checkIdFromMgr);
-		System.out.println("checkIdFromList 중복여부 : " + checkIdFromList);
+		int checkIdFromList=commonDao.checkIdFromDeletedId(id);	
 		String comment="";
 		
 		if(checkIdFromUsers==1 || checkIdFromMgr==1 || checkIdFromList==1)
@@ -279,7 +278,6 @@ public class CommonController {
 	public ModelAndView updateUserInfoProcess(@ModelAttribute UsersDto users){
 		ModelAndView mav=new ModelAndView();
 		int result=commonDao.updateUserInfo(users);
-		System.out.println("수정결과 = "+result);
 		mav.addObject("result", result);
 		
 		if(result==1){			
@@ -306,22 +304,17 @@ public class CommonController {
 	{
 		ModelAndView mav=new ModelAndView();
 		int userType=(Integer)session.getAttribute("userType");
-		System.out.println("userType="+userType);
 		if(userType==1){
 			int deleteFromUserLogin=commonDao.deleteUserInfoFromUserLogin((String)session.getAttribute("id"));
 			if(deleteFromUserLogin>=1){
 				int deleteFromUsers=commonDao.deleteUserInfoFromUsers((String)session.getAttribute("id"));
-				System.out.println("회원탈퇴 성공 여부 = "+deleteFromUsers);
 				if(deleteFromUsers==1){
-					int deletedId=commonDao.deletedId((String)session.getAttribute("id"));
-					if(deletedId==1)
-						System.out.println("삭제 아이디 등록성공");
+					commonDao.deletedId((String)session.getAttribute("id"));				
 					session.removeAttribute("id");
 					session.removeAttribute("userType");
 					mav.setViewName("common/main");
 				}
-			}else{
-				System.out.println("에러");
+			}else{				
 				mav.setViewName("common/deleteUserInfo");
 			}
 		}
@@ -329,18 +322,16 @@ public class CommonController {
 			int deleteFromMgrLogin=commonDao.deleteUserInfoFromMgrLogin((String)session.getAttribute("id"));
 			if(deleteFromMgrLogin>=1){
 				int deleteFromMgr=commonDao.deleteUserInfoFromMgr((String)session.getAttribute("id"));
-				System.out.println("회원탈퇴 성공 여부 = "+deleteFromMgr);
+				
 				if(deleteFromMgr==1){
-					int deletedId=commonDao.deletedId((String)session.getAttribute("id"));
-					if(deletedId==1)
-						System.out.println("삭제 아이디 등록성공");
+					commonDao.deletedId((String)session.getAttribute("id"));
+					
 					session.removeAttribute("id");
 					session.removeAttribute("userType");
 					session.removeAttribute("shopCode");
 					mav.setViewName("common/main");
 				}
 			}else{
-				System.out.println("에러");
 				mav.setViewName("common/deleteUserInfo");
 			}
 		}
@@ -350,7 +341,8 @@ public class CommonController {
 	
 	//WEPOS 소개 페이지로 이동
 	@RequestMapping("/common/posIntroduce.do")
-	public String showIntroduce(){
+	public String showIntroduce()
+	{
 		return "common/posIntroduce";
 	}
 

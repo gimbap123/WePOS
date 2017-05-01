@@ -207,15 +207,9 @@ public class SearchShopController {
 				coordinateMap.put("y", (String)location.get("lng").toString());				
 			}
 		}	
-//		ReservationDto reservationDto = new ReservationDto();
-//		reservationDto.setShopCode(shopCode);
-//		//reservationDto.setUserId(userId);
-//		System.out.println("shopDetail의 userId="+reservationDto.getUserId());
-//		int countRes = reservationDao.countRes(reservationDto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/shopDetail");
-//		mav.addObject("countRes", countRes);
 		mav.addObject("shop", shop);
 		mav.addObject("coordinateMap", coordinateMap);		
 		
@@ -235,11 +229,10 @@ public class SearchShopController {
 		mgrDto = new MgrDto();
 		List<MgrDto> mgrIdList = reservationDao.selectMgrId();
 		
-		int selectCheckId = reservationDao.selectCheckId(reservationDto);
-		System.out.println("selectCheckId="+selectCheckId);
+		int selectCheckId = reservationDao.selectCheckId(reservationDto);	
 		
 		int selectResCount = reservationDao.selectResCount(reservationDto);
-		System.out.println("selectResCount="+selectResCount);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/common/reservationModal");
@@ -680,7 +673,7 @@ public class SearchShopController {
 	@RequestMapping(value="/common/shopNoticeWrite.do", method=RequestMethod.POST)
 	public String shopNoticeWriteProcess(HttpServletRequest request, @ModelAttribute ShopNoticeDto shopNotice,
 			@RequestParam("menuType") String menuType) throws IOException, Exception
-	{		
+	{			
 		String newFileName = "";
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
 		

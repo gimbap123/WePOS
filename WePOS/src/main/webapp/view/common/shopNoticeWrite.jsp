@@ -32,7 +32,9 @@
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="../assets/css/pages/page_search_inner_tables.css">
 
-<script language="JavaScript" src="../js/common/shopDetailJs.js?v=1"></script>
+<script type="text/javascript" src="../js/common/shopDetailJs.js"></script>
+
+<script type="text/javascript" src="../smarteditor/js/service/HuskyEZCreator.js" charset="UTF-8"></script>
 
 <title>We POS</title>
 </head>
@@ -65,8 +67,8 @@
 							</tr>
 							<tr>
 								<td style="vertical-align: middle; text-align: center;">내 용</td>
-								<td>
-									<textarea class="form-control" rows="15" id="noticeContent" name="noticeContent" placeholder="내용을 입력하세요." style="resize: none;"></textarea>
+								<td>									
+									<textarea rows="15" id="noticeContent" name="noticeContent"  style="width: 100%"></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -101,6 +103,23 @@
     jQuery(document).ready(function() {
         App.init();        
         });
+    
+    var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+    	oAppRef: oEditors,
+    	elPlaceHolder: "noticeContent",
+    	sSkinURI: "../smarteditor/SmartEditor2Skin.html",
+   	 	fCreator: "createSEditor2",
+   	 	htParams : {
+	         // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+	         bUseToolbar : true,             
+	         // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+	         bUseVerticalResizer : false,     
+	         // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+	         bUseModeChanger : false, 
+     	}
+	});	
+	
 </script>
 </body>
 </html>

@@ -59,8 +59,10 @@
 							<div class="blog-img">
 								<img class="img-responsive" src="${shopNotice.noticeFile}" alt="" style="width: 80%;">
 							</div>
-						</c:if>	
-						<pre style="font-size: 20px; background-color: white; border: 0px;">${shopNotice.noticeContent}</pre>
+						</c:if>
+						<div style="min-height: 350px; margin-top: 30px;">
+							${shopNotice.noticeContent}
+						</div>
 						<hr>
 						<b>첨부파일 : </b>
 						<c:if test="${shopNotice.noticeFile == null}">

@@ -19,14 +19,14 @@ public class PosTableController {
 
 	@Autowired
 	private PosMainDao posMainDao;
-	
+
 	@Autowired
 	private PosTableDao posTableDao;
 
 	// 테이블 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateTableView.do")
-	public ModelAndView getTableInfo(@RequestParam(value = "mgrId") String mgrId) {
-
+	public ModelAndView getTableInfo(@RequestParam(value = "mgrId") String mgrId)
+	{
 		int shopCode = posMainDao.getShopCode(mgrId);
 		// 매장 코드 번호로 매장 정보 Select
 		ShopDto shop = posMainDao.getShop(shopCode);
@@ -48,34 +48,29 @@ public class PosTableController {
 
 	// 테이블 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateTable.do")
-	public String updateTableInfo(@RequestParam(value = "mgrId") String mgrId,TablesDto tablesDto) {
-		
+	public String updateTableInfo(@RequestParam(value = "mgrId") String mgrId, TablesDto tablesDto) 
+	{
 		int shopCode = posMainDao.getShopCode(mgrId);
 		tablesDto.setShopCode(shopCode);
-		int createTable=0;
-		int updateTable=0;
-		if(tablesDto.getTableCode()==0){
-			createTable=posTableDao.createTable(tablesDto);
-			System.out.println("등록 성공여부 = "+createTable);
-		}else{
-			updateTable=posTableDao.updateTable(tablesDto);			
-			System.out.println("수정 성공여부 = "+updateTable);
+		int createTable = 0;
+		int updateTable = 0;
+		if (tablesDto.getTableCode() == 0) 
+		{
+			createTable = posTableDao.createTable(tablesDto);
+		} else 
+		{
+			updateTable = posTableDao.updateTable(tablesDto);
 		}
-		return "redirect:updateTableView.do?mgrId="+mgrId;
+		return "redirect:updateTableView.do?mgrId=" + mgrId;
 	}
-	
+
 	// 테이블 삭제
-		@RequestMapping(value = "/pos/deleteTable.do")
-		public String deleteTable(@RequestParam(value = "tableCode") int tableCode,
-													@RequestParam(value = "mgrId") String mgrId) {
-			int result=posTableDao.deleteTable(tableCode);
-			System.out.println("result="+result);
-			return "redirect:updateTableView.do?mgrId="+mgrId;
-		}
-	
+	@RequestMapping(value = "/pos/deleteTable.do")
+	public String deleteTable(@RequestParam(value = "tableCode") int tableCode,
+			@RequestParam(value = "mgrId") String mgrId)
+	{
+		int result = posTableDao.deleteTable(tableCode);
+		return "redirect:updateTableView.do?mgrId=" + mgrId;
+	}
+
 }
-
-
-
-
-

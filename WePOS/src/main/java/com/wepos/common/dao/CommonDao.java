@@ -47,7 +47,7 @@ public interface CommonDao {
 	public int deleteUserInfoFromUsers(String userId);
 	public int deleteUserInfoFromMgrLogin(String mgrId);
 	public int deleteUserInfoFromMgr(String mgrId);
-	public int deletedId(String userId);	
+	public void deletedId(String userId);	
 	
 	// 회원 등급 확인
 	public int userGradeCode(String userId);

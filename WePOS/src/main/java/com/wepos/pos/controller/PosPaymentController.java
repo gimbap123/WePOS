@@ -21,45 +21,47 @@ import com.wepos.pos.dao.PosPaymentDao;
 @Controller
 public class PosPaymentController {
 
-  @Autowired
-  private PosPaymentDao posPaymentDao;
+	@Autowired
+	private PosPaymentDao posPaymentDao;
 
-  @RequestMapping(value = "/pos/getPaymentInfo.do", method=RequestMethod.GET, produces="text/json;charset=UTF8")
-  public void paymentAjax( 
-    @RequestParam("tableCode") String tableCode, HttpServletResponse response ) {
-    response.setContentType( "text/html;charset=UTF-8" );
-    
-    Gson gson = new Gson();
-    String paymentJson = null;
-   
-    List<SumOrdersDetailDto> oddList = posPaymentDao.getPaymentInfoOfTable( tableCode );
-    
-    if( oddList != null ) {
-      paymentJson = gson.toJson( oddList );
-    }
-    try {
-      response.getWriter().print( paymentJson );
-    }
-    catch( IOException e ) {
-      e.printStackTrace();
-    }
-  }
+	@RequestMapping(value = "/pos/getPaymentInfo.do", method = RequestMethod.GET, produces = "text/json;charset=UTF8")
+	public void paymentAjax(@RequestParam("tableCode") String tableCode, HttpServletResponse response)
+	{
+		response.setContentType("text/html;charset=UTF-8");
 
-  @RequestMapping( value = "/pos/posPayment.do", method=RequestMethod.POST )
-  public String posPayment( @RequestParam("shopCode") int shopCode,
-                            @RequestParam("tableCode") int tableCode,
-                            @RequestParam("paymentCode") int paymentCode,
-                            HttpSession session) {
-    
-    Map<String, Integer> paymentInfo = new HashMap<String, Integer>();
-    
-    paymentInfo.put( "shopCode", shopCode );
-    paymentInfo.put( "tableCode", tableCode );
-    paymentInfo.put( "paymentCode", paymentCode );
-    posPaymentDao.updatePaymentComplete( paymentInfo );
-    posPaymentDao.updateTableStatusToUnused( tableCode );
-    
-    return "redirect:posMain.do?mgrId="+session.getAttribute( "id" );
-  }
-     
+		Gson gson = new Gson();
+		String paymentJson = null;
+
+		List<SumOrdersDetailDto> oddList = posPaymentDao.getPaymentInfoOfTable(tableCode);
+
+		if (oddList != null)
+		{
+			paymentJson = gson.toJson(oddList);
+		}
+		try 
+		{
+			response.getWriter().print(paymentJson);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/pos/posPayment.do", method = RequestMethod.POST)
+	public String posPayment(@RequestParam("shopCode") int shopCode, @RequestParam("tableCode") int tableCode,
+			@RequestParam("paymentCode") int paymentCode, HttpSession session) 
+	{
+
+		Map<String, Integer> paymentInfo = new HashMap<String, Integer>();
+
+		paymentInfo.put("shopCode", shopCode);
+		paymentInfo.put("tableCode", tableCode);
+		paymentInfo.put("paymentCode", paymentCode);
+		posPaymentDao.updatePaymentComplete(paymentInfo);
+		posPaymentDao.updateTableStatusToUnused(tableCode);
+
+		return "redirect:posMain.do?mgrId=" + session.getAttribute("id");
+	}
+
 }

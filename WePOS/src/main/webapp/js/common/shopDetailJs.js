@@ -179,8 +179,11 @@ function shopNoticeWrite()
 		alert("제목을 입력해주세요.")
 		return false;
 	}	
+	
+	oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []); 
+	
 	document.shopNoticeWriteForm.submit();
-}	
+}
 
 function shopNoticeUpdate()
 {
@@ -189,6 +192,9 @@ function shopNoticeUpdate()
 		alert("제목을 입력해주세요.")
 		return false;
 	}
+	
+	oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+	
 	document.shopNoticeUpdateForm.submit();
 }
 

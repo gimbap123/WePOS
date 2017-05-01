@@ -20,48 +20,41 @@ import com.wepos.pos.dao.PosFunctionDao;
 @Controller
 public class PosFunctionController {
 
-  @Autowired
-  private PosFunctionDao posFunctionDao;
+	@Autowired
+	private PosFunctionDao posFunctionDao;
 
-  @RequestMapping( value = "/pos/moveTable.do" )
-  public String moveTable(
-      @RequestParam( "shopCode" ) int shopCode,
-      @RequestParam( "fromTableCode" ) int fromTableCode,
-      @RequestParam( "toTableCode" ) int toTableCode, HttpSession session ) {
-  
-    Map<String, Integer> shopInfo = new HashMap<String, Integer>();
-    shopInfo.put( "shopCode", shopCode );
-    shopInfo.put( "fromTableCode", fromTableCode );
-    shopInfo.put( "toTableCode", toTableCode );
-    
-    posFunctionDao.moveTable( shopInfo );
-    return "redirect:posMain.do?mgrId="+session.getAttribute( "id" );
-  }
+	@RequestMapping(value = "/pos/moveTable.do")
+	public String moveTable(@RequestParam("shopCode") int shopCode, @RequestParam("fromTableCode") int fromTableCode,
+			@RequestParam("toTableCode") int toTableCode, HttpSession session) 
+	{
+		Map<String, Integer> shopInfo = new HashMap<String, Integer>();
+		shopInfo.put("shopCode", shopCode);
+		shopInfo.put("fromTableCode", fromTableCode);
+		shopInfo.put("toTableCode", toTableCode);
 
-  @RequestMapping( value = "/pos/getMovableTableList.do" )
-  public ModelAndView getMovableTableList(
-      @RequestParam( "shopCode" ) int shopCode,
-      HttpServletResponse response ) {
-    List<Integer> movableTableCode = posFunctionDao
-        .getMovableTableList( shopCode );
+		posFunctionDao.moveTable(shopInfo);
+		return "redirect:posMain.do?mgrId=" + session.getAttribute("id");
+	}
 
-    Gson gson = new Gson();
-    String jsonData = null;
+	@RequestMapping(value = "/pos/getMovableTableList.do")
+	public ModelAndView getMovableTableList(@RequestParam("shopCode") int shopCode, HttpServletResponse response) 
+	{
+		List<Integer> movableTableCode = posFunctionDao.getMovableTableList(shopCode);
 
-    if ( movableTableCode != null ) {
-      jsonData = gson.toJson( movableTableCode );
-      System.out.println( jsonData );
-    }
-    try {
-      response.getWriter().print( jsonData );
-    }
-    catch ( IOException e ) {
-      e.printStackTrace();
-    }
+		Gson gson = new Gson();
+		String jsonData = null;
 
-    System.out.println( ">>" + movableTableCode );
-    ModelAndView mav = new ModelAndView( "pos/posMove" );
-    mav.addObject( "movableTableCode", movableTableCode );
-    return mav;
-  }
+		if (movableTableCode != null) {
+			jsonData = gson.toJson(movableTableCode);
+		}
+		try {
+			response.getWriter().print(jsonData);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView mav = new ModelAndView("pos/posMove");
+		mav.addObject("movableTableCode", movableTableCode);
+		return mav;
+	}
 }

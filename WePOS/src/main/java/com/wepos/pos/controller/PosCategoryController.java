@@ -25,8 +25,8 @@ public class PosCategoryController {
 
 	// 메뉴 관리 페이지 이동
 	@RequestMapping(value = "/pos/updateCategoryView.do")
-	public ModelAndView getCategoryInfo(@RequestParam(value = "mgrId") String mgrId) {
-
+	public ModelAndView getCategoryInfo(@RequestParam(value = "mgrId") String mgrId) 
+	{
 		int shopCode = posMainDao.getShopCode(mgrId);		
 		ShopDto shop = posMainDao.getShop(shopCode);
 		List<CategoryDto> categoryList = posCategoryDao.selectCategory(shopCode);
@@ -42,29 +42,28 @@ public class PosCategoryController {
 
 	// 메뉴 등록 및 수정
 	@RequestMapping(value = "/pos/updateCategory.do")
-	public String updateCategoryInfo(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) {
-		
+	public String updateCategoryInfo(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) 
+	{		
 		int shopCode = posMainDao.getShopCode(mgrId);
 		categoryDto.setShopCode(shopCode);		
 		int createCategory=0;
 		int updateCategory=0;
 		if(categoryDto.getCategoryCode()==0){
 			createCategory=posCategoryDao.createCategory(categoryDto);
-			System.out.println("등록 성공여부 = "+createCategory);
 		}else{
 			updateCategory=posCategoryDao.updateCategory(categoryDto);			
-			System.out.println("수정 성공여부 = "+updateCategory);
 		}
 		return "redirect:updateCategoryView.do?mgrId="+mgrId;
 	}
 	
 	// 테이블 삭제
 	@RequestMapping(value = "/pos/deleteCategory.do")
-	public String deleteCategory(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) {
+	public String deleteCategory(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) 
+	{
 		int shopCode = posMainDao.getShopCode(mgrId);
 		categoryDto.setShopCode(shopCode);
 		int result=posCategoryDao.deleteCategory(categoryDto);
-		System.out.println("result="+result);
+		
 		return "redirect:updateCategoryView.do?mgrId="+mgrId;
 	}
 	
@@ -79,8 +78,7 @@ public class PosCategoryController {
 		categoryDto.setCategoryName(categoryName);
 		categoryDto.setShopCode(shopCode);
 		int checkResult = posCategoryDao.checkName(categoryDto);
-		System.out.println("checkName 중복여부 : " + checkResult);		
-		
+				
 		if(checkResult>=1)
 			comment="이미 등록된 이름입니다.";
 		else if(checkResult==0)

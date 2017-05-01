@@ -88,7 +88,7 @@ public class ReservationController {
 	{
 		String resDate = reservationDto.getResDate() + " " + businessHoursDto.getStartHour() + ":" + businessHoursDto.getStartMinute() + " " + businessHoursDto.getStartHourType();
 		reservationDto.setResFinalDate(resDate);
-			System.out.println("userId="+reservationDto.getUserId());
+			
 		reservationDao.updateRes(reservationDto);
 		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
@@ -99,15 +99,7 @@ public class ReservationController {
 			@RequestParam("userId") String userId, @RequestParam("shopCode") int shopCode, @RequestParam("reseNumber") int reseNumber,
 			@RequestParam("resState") String resState)
 	{
-		reservationDao.deleteRes(reseNumber);
-		System.out.println("예약 삭제의 userId="+reservationDto.getUserId());
-		System.out.println("예약 삭제의 userId="+userId);
-		System.out.println("예약 삭제의 resState="+resState);
-		
-		if(resState.equals("예약 완료"))
-		{
-			
-		}
+		reservationDao.deleteRes(reseNumber);	
 		
 		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}

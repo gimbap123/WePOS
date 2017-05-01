@@ -106,7 +106,7 @@
 	
 		<br>
 		<!--=== Cube-Portfdlio ===-->
-   	 	<div class="cube-portfolio container margin-bottom-30" style="min-height: 390px;">  
+   	 	<div class="cube-portfolio container margin-bottom-30" style="min-height: 500px;">  
    	 		<c:if test="${shopCount == 0}">
        			<h2>등록된 매장이 없습니다.</h2>
        		</c:if>

@@ -27,8 +27,7 @@ public class FileUtil {
 		String newFileName=""; //새 파일명
 		
 		if(idx!=-1){
-			extention=boardFile.substring(idx);
-			System.out.println("extention="+extention);
+			extention=boardFile.substring(idx);			
 		}
 		
 		//넘어온 파일명 => 확장자가 들어가 있는 경우(text.TXT ==> text.txt)

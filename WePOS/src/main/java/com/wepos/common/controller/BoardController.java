@@ -39,8 +39,7 @@ public class BoardController {
 			@RequestParam(value="boardTypeCode") int boardTypeCode)
 	{ 
 		if(log.isDebugEnabled())
-		{
-			System.out.println("ListController의 list.do");
+		{			
 			log.debug("currentPage : " + currentPage);
 			log.debug("keyField : " + keyField);
 			log.debug("keyWord : " + keyWord);
@@ -55,8 +54,7 @@ public class BoardController {
 		
 		//총글의 갯수 또는 검색된 글의 갯수(총 레코드 수)
 		int count = boardDao.getRowCount(map);
-		System.out.println("count="+count);
-	    
+			    
 		String paramString = null;
 		if("".equals(keyField) && "".equals(keyWord))
 		{
@@ -111,27 +109,23 @@ public class BoardController {
 		{
 			String newName=""; //변경할 파일 이름을 저장하려고
 			String filePath=request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
-			System.out.println("filePath=>"+filePath);
-			
+						
 			//업로드된 파일이 존재한다면
 			if(!boardDto.getUpload().isEmpty())  //!를 주어서 isEmpty를 부정
 			{ 
 				newName=FileUtil.rename(boardDto.getUpload().getOriginalFilename());				
 				//DTO의 객체 filename => 변경된 파일명 => 실제로 DB상의 filename				
 				boardDto.setBoardFile(newName);
-				
-				System.out.println("newName=>"+newName);
-				
-				//실제 업로드 기능 => 업로드된 변경된 파일 => 지정한 업로드 위치로 이동시키기(복사해서!)
-//				File file=new File(FileUtil.UPLOAD_PATH+"/"+newName);
+												
+				// 실제 업로드 기능 => 업로드된 변경된 파일 => 지정한 업로드 위치로 이동시키기(복사해서!)
+				// File file=new File(FileUtil.UPLOAD_PATH+"/"+newName);
 				File file = new File(filePath + newName);
-//				boardDto.getUpload().transferTo(file);
-				System.out.println("file=>"+file);
-				
+				// boardDto.getUpload().transferTo(file);
+								
 				//전송시켜라!
 				boardDto.getUpload().transferTo(file); //~transferTo(전송할객체명)
 			}
-			System.out.println("확인합니다");
+			
 			//DB저장
 			boardDao.boardInsert(boardDto); //입력받은값+게시물번호, 파일변경		
 		}
@@ -184,7 +178,6 @@ public class BoardController {
 		//업로드된 파일이 존재한다면
 		if(!boardDto.getUpload().isEmpty())
 		{ 
-			System.out.println("원본파일명="+boardDto.getUpload().getOriginalFilename());
 			try
 			{
 				//새로운 탐색기에서 새로 변경할 파일을 업로드하는 경우(메모리상)
@@ -232,8 +225,7 @@ public class BoardController {
 		String filePath = request.getSession().getServletContext().getRealPath("/") + "uploadFile\\";
 		int index = filePath.lastIndexOf("\\WePOS");
 		filePath = filePath.substring(index);
-		//System.out.println("filePath=>"+filePath);
-				
+						
     	//조회수를 증가시킵니다
     	boardDao.plusReadCnt(boardNumber);
     	
@@ -247,18 +239,13 @@ public class BoardController {
 		{
 			String fileName=boardDto.getBoardFile();
 			boardDto.setBoardFile(filePath + fileName);
-			//System.out.println("fileName=>"+fileName);
 		}
-		//System.out.println("boardDto.setBoardFile=>"+boardDto.getBoardFile());
-
-		
+				
 		//★해당 글에 댓글을 불러옵니다
 		ReplyDto replyDto=new ReplyDto();
 		List<ReplyDto> replyList=null;
 		
-		int repCount = boardDao.getReplyCount(boardNumber);
-		System.out.println("repCount="+repCount);
-		System.out.println("Reply의 boardNumber="+boardNumber);
+		int repCount = boardDao.getReplyCount(boardNumber);		
 		
 		if(repCount > 0){
 			replyList = boardDao.replyList(boardNumber);
@@ -317,10 +304,7 @@ public class BoardController {
     @RequestMapping(value="/common/boardDelete.do", method=RequestMethod.POST)
 	public String boardDeleteProc(@RequestParam("boardNumber") int boardNumber,
 														@RequestParam(value="boardTypeCode") int boardTypeCode)
-    {
-		//boardDao.boardDelete(boardNumber);		
-		//return "redirect:/common/showBoard.do?boardTypeCode="+boardTypeCode;
-    	ReplyDto replyDto=new ReplyDto();
+    {    	
 		BoardDto boardDto=new BoardDto();
 		boardDao.boardReplyDelete(boardNumber);
     	boardDto.setBoardNumber(boardNumber);
