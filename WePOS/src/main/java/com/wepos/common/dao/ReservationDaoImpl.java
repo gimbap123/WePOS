@@ -47,4 +47,24 @@ public class ReservationDaoImpl extends SqlSessionDaoSupport implements Reservat
 		return getSqlSession().selectOne("selectResCount", reservationDto);
 	}
 	
+	public int selectPastResCount(ReservationDto reservationDto) {
+		return getSqlSession().selectOne("selectPastResCount", reservationDto);
+	}
+	
+	public List<ReservationDto> selectReservationAll(ReservationDto reservationDto) {
+		return getSqlSession().selectList("selectReservationAll", reservationDto);
+	}
+	
+	public List<ReservationDto> selectReservationOne(ReservationDto reservationDto) {
+		return getSqlSession().selectList("selectReservationOne", reservationDto);
+	}
+	
+	public List<ReservationDto> selectReservationTwo(ReservationDto reservationDto) {
+		return getSqlSession().selectList("selectReservationTwo", reservationDto);
+	}
+	
+	public List<ShopDto> selectResAllShopName(ReservationDto reservationDto) {
+		return getSqlSession().selectList("selectResAllShopName", reservationDto);
+	}
+	
 }

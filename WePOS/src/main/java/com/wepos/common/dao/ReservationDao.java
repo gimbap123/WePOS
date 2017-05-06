@@ -35,4 +35,19 @@ public interface ReservationDao {
 	//예약한 곳이 1군데인지 체크(예약 두군데 이상 방지)
 	public int selectResCount(ReservationDto reservationDto);
 	
+	//이전 예약건수 조회하기
+	public int selectPastResCount(ReservationDto reservationDto);
+	
+	//이전 예약 모든 정보 가져오기
+	public List<ReservationDto> selectReservationAll(ReservationDto reservationDto);
+	
+	//이전 예약완료 정보 가져오기
+	public List<ReservationDto> selectReservationOne(ReservationDto reservationDto);
+	
+	//이전 예약취소 정보 가져오기
+	public List<ReservationDto> selectReservationTwo(ReservationDto reservationDto);
+	
+	//이전 예약 정보에서 매장 이름 가져오기
+	public List<ShopDto> selectResAllShopName(ReservationDto reservationDto);
+	
 }

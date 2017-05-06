@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-<script language="JavaScript" src="../js/common/reservation.js?ver=2"></script>
+<script language="JavaScript" src="../js/common/reservation.js?ver=3"></script>
 
 </head>
 
@@ -49,11 +49,18 @@
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>예약내역 확인</h2>	
+				<h2>예약내역 확인</h2>
+				
+				<center>
+				<button class="btn-u" type="button" data-toggle="modal" style="background-color: white;color: green;font-size:small;margin-top: -10px" data-target="#reservationControl" onclick="reservationControl('${sessionScope.id}')">[지난 예약내역 조회]</button>
+				</center>
+      		 	
+	            <div class="modal fade" id="reservationControl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	            </div>
+      		 	
 			</div>
 			
 			 <form id="updateResForm" name="updateResForm" action="reservationCheck.do" method="post">
-			  <%-- <input type="hidden" id="userId" name="userId" value="${sessionScope.id }"> --%>
 			  <input type="hidden" id="reseNumber" name="reseNumber" value="${reservationCheckDto.reseNumber}">
               <input type="hidden" id="shopCode" name="shopCode" value="${reservationCheckDto.shopCode}">
 				<div class="input-group margin-bottom-10">
@@ -133,8 +140,7 @@
 					<span class="input-group-addon">예약상태</span>
 					<input type="text" id="resState" name="resState" class="form-control" value="${resState}" readonly>
 				</div>
-				<hr>
-				
+				<hr style="margin-bottom: 20px">
 				
 				<c:if test="${resState=='예약 대기'}">
 				<div class="row">

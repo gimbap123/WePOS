@@ -1,3 +1,14 @@
+//지난 예약들 확인
+function reservationControl(userId)
+{
+	$("#reservationControl").html("");	
+	
+	$.get("../common/reservationControl.do", {userId : userId}, function(result)
+	{		
+		$("#reservationControl").append(result);		
+	})	
+}
+
 //예약 버튼을 눌렀을때
 function reservationMove(userId, shopCode)
 {

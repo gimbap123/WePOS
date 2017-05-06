@@ -40,4 +40,24 @@
 		select count(*) from reservation where user_id=#{userId} and res_state=0
 	</select>
 
+	<select id="selectPastResCount" parameterType="ReservationDto" resultType="int">
+		select count(*) from reservation where user_id=#{userId} and res_state!=0
+	</select>
+
+	<select id="selectReservationAll" parameterType="ReservationDto" resultType="ReservationDto">
+		select * from reservation where user_id=#{userId} and res_state !=0 order by res_date desc
+	</select>
+
+	<select id="selectReservationOne" parameterType="ReservationDto" resultType="ReservationDto">
+		select * from reservation where user_id=#{userId} and res_state =1
+	</select>
+	
+	<select id="selectReservationTwo" parameterType="ReservationDto" resultType="ReservationDto">
+		select * from reservation where user_id=#{userId} and res_state =2
+	</select>
+
+	<select id="selectResAllShopName" parameterType="ReservationDto" resultType="ShopDto">
+		select * from shop where shop_code in (select shop_code from reservation where user_id=#{userId} and res_state !=0)
+	</select>
+
 </mapper>

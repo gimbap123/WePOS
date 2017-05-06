@@ -1,5 +1,7 @@
 package com.wepos.common.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,6 +104,36 @@ public class ReservationController {
 		reservationDao.deleteRes(reseNumber);	
 		
 		return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
+	}
+	
+	//지난 예약 확인
+	@RequestMapping(value="/common/reservationControl.do", method=RequestMethod.GET)
+	public ModelAndView deleteReservationProcess(@ModelAttribute ReservationDto reservationDto,
+			@RequestParam("userId") String userId)
+	{
+		int selectPastResCount = reservationDao.selectPastResCount(reservationDto);
+		List<ReservationDto> reservationControlAllList = null;
+		List<ReservationDto> reservationControlOneList = null;
+		List<ReservationDto> reservationControlTwoList = null;
+		
+		ShopDto shopDto = new ShopDto();
+		List<ShopDto> shopNameList = null;
+		shopNameList = reservationDao.selectResAllShopName(reservationDto);
+		
+		reservationControlAllList = reservationDao.selectReservationAll(reservationDto);
+		reservationControlOneList = reservationDao.selectReservationOne(reservationDto);
+		reservationControlTwoList = reservationDao.selectReservationTwo(reservationDto);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/common/reservationControl");
+		mav.addObject("reservationControlAllList", reservationControlAllList);  
+		mav.addObject("reservationControlOneList", reservationControlOneList);  
+		mav.addObject("reservationControlTwoList", reservationControlTwoList);  
+		mav.addObject("selectPastResCount", selectPastResCount);  
+		mav.addObject("shopNameList", shopNameList);  
+		
+		return mav;
+		//return "redirect:/common/shopDetail.do?userId="+reservationDto.getUserId()+"&shopCode="+reservationDto.getShopCode();
 	}
 	
 }
