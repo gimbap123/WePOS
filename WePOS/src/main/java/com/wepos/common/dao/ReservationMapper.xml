@@ -17,7 +17,7 @@
 	</select>
 
 	<update id="updateRes" parameterType="ReservationDto">
-		update reservation set res_persons=#{resPersons}, res_date=#{resFinalDate}, res_desc=#{resDesc} where user_id=#{userId}	
+		update reservation set res_persons=#{resPersons}, res_date=#{resFinalDate}, res_desc=#{resDesc} where user_id=#{userId} and rese_number=#{reseNumber}	
 	</update>
 
 	<delete id="deleteRes" parameterType="int">
