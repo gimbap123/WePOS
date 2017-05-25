@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,6 +81,11 @@
 				<div class="input-group margin-bottom-10">
 					<span class="input-group-addon"><i class="icon-envelope-open"></i></span>
 					<input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="이메일" value="${userInfo.userEmail}">
+				</div>
+				<div class="input-group margin-bottom-10">
+					<span class="input-group-addon"><i class="icon-wallet"></i></span>
+					<input type="text" id="userExpense" name="userExpense" class="form-control" 
+							value="누적 결제액 - <fmt:formatNumber value="${userInfo.userExpense}" type="number" /> 원" readonly>
 				</div>
 				<hr>
 				<c:if test="${sessionScope.userType== 1}">

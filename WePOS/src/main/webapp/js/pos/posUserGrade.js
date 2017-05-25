@@ -24,8 +24,14 @@ $(document).on('click','#searchUserButton', function(){
 	$('#searchUserTable').children('tbody').empty();
 	$('#selectedUserName').empty();
 	var phoneNumber=$('#userPhoneNum').val();
+	var exptext= /^[0-9]{4,4}$/;
 	if(phoneNumber==''){
 		alert("연락처를 입력하세요");
+		$('#userPhoneNum').focus();
+		return false;
+	}
+	if(phoneNumber.indexOf(' ') > -1 || exptext.test(phoneNumber)==false){
+		alert("핸드폰 번호 뒤 4자리를 입력하세요");
 		$('#userPhoneNum').focus();
 		return false;
 	}
