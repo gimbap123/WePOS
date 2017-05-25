@@ -18,6 +18,10 @@ $('#paymentModal').on('hide.bs.modal', function() {
 
 //
 $(document).on('click', '#cashPaymentButton', function() {
+  $('#userPhoneNum').val("");
+  $('#userName').text("");
+  $('#comment').text("");
+  $('#userId').val("");
   if( checkActiveTable() == true ) {
     $('#paymentTab a[href="#cash"]').tab( 'show' );
     getPaymentInfo();
@@ -28,6 +32,10 @@ $(document).on('click', '#cashPaymentButton', function() {
 });
 
 $(document).on('click', '#cardPaymentButton', function() {
+  $('#userPhoneNum').val("");
+  $('#userName').text("");
+  $('#comment').text("");
+  $('#userId').val("");
   if( checkActiveTable() == true ) {
     $('#paymentTab a[href="#card"]').tab( 'show' );
     getPaymentInfo();
@@ -75,6 +83,7 @@ function getPaymentInfo(){
          $('#paymentTable').find('.totalPaymentPrice').text( totalPaymentPrice );
          $('#cashPaymentPrice').val( totalPaymentPrice );
          $('#cardPaymentPrice').val( totalPaymentPrice );
+         $('input[name=userPaymentPrice]').val( totalPaymentPrice );
       }
    });
  }
@@ -96,22 +105,32 @@ $('#totalReceivedMoney').on('change', function() {
   $('.receivedMoneyButton').trigger('click');
 });
 
-$('#paymentSubmitButton').on('click', function() {
+$('#paymentSubmitButton').on('click', function() {	
   
-  if ( $('#paymentTab>li[id="cashNavTab"]').attr("class") == "active") {
-    $('#cashPaymentForm').children('#shopCode').attr('value', shopCode );
-    $('#cashPaymentForm').children('#tableCode').attr('value', tableCode );
-
-    $('#cashPaymentForm').submit();
-  }
-  else if( $('#paymentTab>li[id="cardNavTab"]').attr("class") == "active" ) {
-    $('#cardPaymentForm').children('#shopCode').attr('value', shopCode );
-    $('#cardPaymentForm').children('#tableCode').attr('value', tableCode );
-   
-    $('#cardPaymentForm').submit();
-  }
+  if($('#userId').val()==''){
+	  var result=confirm("회원 적립없이 결제하시겠습니까?");
+	  if(result==true){
+		  submitPayment();
+	  }else
+		  return false;
+  }else
+	  submitPayment();
   
 });
+
+function submitPayment() {
+	if ($('#paymentTab>li[id="cashNavTab"]').attr("class") == "active") {
+		$('#cashPaymentForm').children('#shopCode').attr('value', shopCode);
+		$('#cashPaymentForm').children('#tableCode').attr('value', tableCode);
+
+		$('#cashPaymentForm').submit();
+	} else if ($('#paymentTab>li[id="cardNavTab"]').attr("class") == "active") {
+		$('#cardPaymentForm').children('#shopCode').attr('value', shopCode);
+		$('#cardPaymentForm').children('#tableCode').attr('value', tableCode);
+
+		$('#cardPaymentForm').submit();
+	}
+}
 
 // 카드번호 랜덤생성
 $(document).on('click', '#cardReadButton', function() {

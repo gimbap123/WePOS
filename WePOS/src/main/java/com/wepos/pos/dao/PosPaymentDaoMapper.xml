@@ -28,4 +28,22 @@
     set table_state = 0
     where table_code = #{tableCode}
   </update>
+  
+  <select id="getUserGradeInfo" parameterType="String" resultType="UsersDto">
+  	select user_name,user_id,user_expense 
+  	from users
+  	<where>
+  		and user_phone like '%' || #{userPhone}
+  	</where>
+  </select>
+  
+  <update id="updateUsersExpense" parameterType="UsersDto">
+  	update users set 
+  		user_expense = (select user_expense
+  								from users
+  								where user_id=#{userId})
+  								+ #{userExpense}
+  	where user_id = #{userId}
+  </update>
+  
 </mapper>

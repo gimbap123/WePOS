@@ -165,6 +165,7 @@
     <jsp:include page="./posPayment.jsp" flush="false" />
     <jsp:include page="./posMove.jsp" flush="false" />
     <jsp:include page="./posJoin.jsp" flush="false" />
+    <jsp:include page="./posUserGrade.jsp" flush="false" />
 
 
   </div>
@@ -198,8 +199,9 @@
   <!-- JS user custom -->
   <script type="text/javascript" src="<c:url value="../js/pos/posMoveTable.js"/>"></script>
   <script type="text/javascript" src="<c:url value="../js/pos/posJoinTable.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="../js/pos/posOrder.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js?ver=1"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posOrder.js?ver=4"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posPayment.js?ver=11"/>"></script>
+  <script type="text/javascript" src="<c:url value="../js/pos/posUserGrade.js?ver=11"/>"></script>
 
   <!--[if lt IE 9]>
     <script src="<c:url value="/assets/plugins/respond.js"/>"></script>

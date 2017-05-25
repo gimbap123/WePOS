@@ -52,6 +52,8 @@
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="cash">
                   <form id="cashPaymentForm" action="posPayment.do" method="post">
+                    <input type="hidden" id="userId" name="userId" value=""/> 
+                    <input type="hidden" id="userPaymentPrice" name="userPaymentPrice" value=""/>
                     <input type="hidden" id="shopCode" name="shopCode" value="" />
                     <input type="hidden" id="tableCode" name="tableCode" value="" />
                     <input type="hidden" id="paymentCode" name="paymentCode" value="1" />
@@ -98,7 +100,7 @@
                       <div class="panel-body form-inline paymentMoney">
                         <div class="input-group">
                           <div class="input-group-addon">￦</div>
-                          <input type="number" class="form-control input-lg" id="cashPaymentPrice" readonly>
+                          <input type="number" class="form-control input-lg" id="cashPaymentPrice" name="cashPaymentPrice" readonly>
                         </div>
                       </div>
                       <!-- End paymentMoney -->
@@ -110,6 +112,7 @@
                           <input type="number" class="form-control input-lg" id="changePrice" readonly>
                         </div>
                       </div>
+                                           
                       <!-- End change -->
                     </div>
                     <!-- End payment Panel -->
@@ -119,6 +122,8 @@
 
                 <div role="tabpanel" class="tab-pane" id="card">
                   <form id="cardPaymentForm" action="posPayment.do" method="post">
+                    <input type="hidden" id="userId" name="userId" value="">
+                    <input type="hidden" id="userPaymentPrice" name="userPaymentPrice" value="">
                     <input type="hidden" id="shopCode" name="shopCode" value="" />
                     <input type="hidden" id="tableCode" name="tableCode" value="" />
                     <input type="hidden" id="paymentCode" name="paymentCode" value="2" />
@@ -143,7 +148,7 @@
                       <div class="panel-body form-inline paymentMoney">
                         <div class="input-group">
                           <div class="input-group-addon">￦</div>
-                          <input type="number" class="form-control input-lg" id="cardPaymentPrice" readonly>
+                          <input type="number" class="form-control input-lg" id="cardPaymentPrice" name="cardPaymentPrice" readonly>
                         </div>
                       </div>
                       <!-- End paymentMoney -->
@@ -176,6 +181,15 @@
       <div class="modal-footer">
         <button type="button" id="paymentCancelButton" class="btn btn-default" data-dismiss="modal">취소</button>
         <button type="button" id="paymentSubmitButton" class="btn btn-primary">결제</button>
+        <span style="float:left">
+	      	<h3>적립 : 
+	      	<input type="text" id="userPhoneNum" class="userPhoneNum" placeholder="연락처 뒤 4자리">
+	      	<input type="button" id="searchUserButton" name="searchUserButton" class="btn btn-danger" value="회원검색">
+	      	&nbsp;&nbsp;
+      		<span id="userName" name="userName"></span>
+      		<span id="comment" name="comment"></span><br>      		     		
+	      	</h3>
+      	</span>
       </div>
     </div>
   </div>
