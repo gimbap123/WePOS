@@ -86,7 +86,7 @@
 						<c:if test="${fn:length(productList)>0}">
 							<c:set var="breakLoop" value="false"/>
 							<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
-								<div class="col-md-3 col-sm-6" style="width:100%">
+								<div class="col-md-3 col-sm-6" style="width:100%; margin-bottom:15px">
 									<input type="button" class="btn btn-primary" value="${categoryList[j].categoryName}" disabled>									
 								</div>
 								<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
