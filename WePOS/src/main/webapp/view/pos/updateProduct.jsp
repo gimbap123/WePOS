@@ -84,31 +84,39 @@
 					</span>
 					<div class="row margin-bottom-40 pricing-table-v1" style="padding-top:20px">
 						<c:if test="${fn:length(productList)>0}">
-							<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
-								<div class="col-md-3 col-sm-6">
-					                <div class="pricing-v1 pricing-v1-blue">
-					                	<c:if test="${fn:length(countOrder)>0}">
-					                		<c:if test="${countOrder[i].countOrder!=null}">
-							                    <div class="pricing-head" 
-							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','${countOrder[i].countOrder}', '${productList[i].productFile}')">
-							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
-							                    </div>
-						                    </c:if>
-						                    <c:if test="${countOrder[i].countOrder==null}">
-							                    <div class="pricing-head" 
-							                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
-							                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
-							                    </div>
-						                    </c:if>
-					                    </c:if>
-					                    <c:if test="${fn:length(countOrder)==0}">
-						                    <div class="pricing-head" 
-						                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
-						                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
-						                    </div>
-					                    </c:if>
-				                	</div>
-					            </div>
+							<c:set var="breakLoop" value="false"/>
+							<c:forEach var="j" begin="0" end="${fn:length(categoryList)-1}">
+								<div class="col-md-3 col-sm-6" style="width:100%">
+									<input type="button" class="btn btn-primary" value="${categoryList[j].categoryName}" disabled>									
+								</div>
+								<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+									<c:if test="${productList[i].categoryCode==j+1 }">
+										<div class="col-md-3 col-sm-6">
+							                <div class="pricing-v1 pricing-v1-blue">
+							                	<c:if test="${fn:length(countOrder)>0}">
+							                		<c:if test="${countOrder[i].countOrder!=null}">
+									                    <div class="pricing-head" 
+									                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','${countOrder[i].countOrder}', '${productList[i].productFile}')">
+									                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+									                    </div>
+								                    </c:if>
+								                    <c:if test="${countOrder[i].countOrder==null}">
+									                    <div class="pricing-head" 
+									                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
+									                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+									                    </div>
+								                    </c:if>
+							                    </c:if>
+							                    <c:if test="${fn:length(countOrder)==0}">
+								                    <div class="pricing-head" 
+								                    		onclick="productInfo('${productList[i].productCode}','${productList[i].productName}','${productList[i].productPrice}','${productList[i].productStock}','${productList[i].productDesc}','${productList[i].categoryCode}','0', '${productList[i].productFile}')">
+								                        <h3 class="text-center"><label style="color:#5cb85c">${productList[i].productName}</label></h3>
+								                    </div>
+							                    </c:if>
+						                	</div>
+							            </div>
+							        </c:if>
+								</c:forEach>
 							</c:forEach>
 						</c:if>
 						<c:if test="${fn:length(productList)==0}">

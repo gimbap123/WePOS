@@ -41,7 +41,7 @@
     WHERE p.category_code=c.category_code 
     and p.shop_code = #{shopCode}
     and c.shop_code = #{shopCode}
-    order by p.product_code asc
+    order by p.category_code asc, p.product_code asc
   </select>
   
   <!-- 카테고리 이름 select -->
