@@ -1,7 +1,5 @@
 package com.wepos.common.dto;
 
-import java.sql.Date;
-
 public class ReservationDto {
 
 	private int reseNumber;

@@ -172,7 +172,7 @@ public class BoardController {
 		oldFileName=board.getBoardFile();
 		
 		
-		String newName=""; //변경할 파일 이름을 저장하려고
+		//String newName=""; //변경할 파일 이름을 저장하려고
 		String filePath=request.getSession().getServletContext().getRealPath("/") + "uploadFile/";
 
 		//업로드된 파일이 존재한다면
@@ -242,7 +242,7 @@ public class BoardController {
 		}
 				
 		//★해당 글에 댓글을 불러옵니다
-		ReplyDto replyDto=new ReplyDto();
+		//ReplyDto replyDto=new ReplyDto();
 		List<ReplyDto> replyList=null;
 		
 		int repCount = boardDao.getReplyCount(boardNumber);		

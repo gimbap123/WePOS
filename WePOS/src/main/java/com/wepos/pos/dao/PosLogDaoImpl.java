@@ -1,11 +1,9 @@
 package com.wepos.pos.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.wepos.common.dto.ProductDto;
 import com.wepos.pos.dto.PosLogDto;
 
 public class PosLogDaoImpl extends SqlSessionDaoSupport implements PosLogDao {

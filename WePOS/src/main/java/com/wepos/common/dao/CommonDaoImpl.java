@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrLoginDto;
 import com.wepos.user.dto.UserLoginDto;

@@ -2,17 +2,16 @@ package com.wepos.pos.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.wepos.mgr.dto.CategoryDto;
 import com.wepos.common.dto.OrdersDetailDto;
 import com.wepos.common.dto.OrdersDto;
 import com.wepos.common.dto.ProductDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.SumOrdersDetailDto;
 import com.wepos.common.dto.TablesDto;
+import com.wepos.mgr.dto.CategoryDto;
 
 public class PosMainDaoImpl extends SqlSessionDaoSupport implements PosMainDao{
   

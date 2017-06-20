@@ -6,7 +6,6 @@ import com.wepos.admin.dto.CityDto;
 import com.wepos.admin.dto.LocalDto;
 import com.wepos.admin.dto.ShopTypeDto;
 import com.wepos.common.dto.ShopDto;
-import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrDto;
 
 public interface AdminDao {

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.wepos.common.dto.ReservationDto;
-import com.wepos.pos.dto.PosLogDto;
 
 public interface PosReservationDao {
 

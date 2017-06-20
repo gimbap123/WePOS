@@ -52,14 +52,12 @@ public class PosTableController {
 	{
 		int shopCode = posMainDao.getShopCode(mgrId);
 		tablesDto.setShopCode(shopCode);
-		int createTable = 0;
-		int updateTable = 0;
 		if (tablesDto.getTableCode() == 0) 
 		{
-			createTable = posTableDao.createTable(tablesDto);
+			posTableDao.createTable(tablesDto);
 		} else 
 		{
-			updateTable = posTableDao.updateTable(tablesDto);
+			posTableDao.updateTable(tablesDto);
 		}
 		return "redirect:updateTableView.do?mgrId=" + mgrId;
 	}
@@ -69,7 +67,7 @@ public class PosTableController {
 	public String deleteTable(@RequestParam(value = "tableCode") int tableCode,
 			@RequestParam(value = "mgrId") String mgrId)
 	{
-		int result = posTableDao.deleteTable(tableCode);
+		posTableDao.deleteTable(tableCode);
 		return "redirect:updateTableView.do?mgrId=" + mgrId;
 	}
 

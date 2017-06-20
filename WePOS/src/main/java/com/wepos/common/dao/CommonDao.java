@@ -2,7 +2,6 @@ package com.wepos.common.dao;
 
 import java.util.Map;
 
-import com.wepos.common.dto.ShopDto;
 import com.wepos.common.dto.UsersDto;
 import com.wepos.mgr.dto.MgrLoginDto;
 import com.wepos.user.dto.UserLoginDto;

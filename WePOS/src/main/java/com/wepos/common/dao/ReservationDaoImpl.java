@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.wepos.common.dto.BusinessHoursDto;
 import com.wepos.common.dto.ReservationDto;
 import com.wepos.common.dto.ShopDto;
 import com.wepos.mgr.dto.MgrDto;

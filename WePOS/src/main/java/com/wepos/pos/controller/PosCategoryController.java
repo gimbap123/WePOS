@@ -45,13 +45,11 @@ public class PosCategoryController {
 	public String updateCategoryInfo(@RequestParam(value = "mgrId") String mgrId,CategoryDto categoryDto) 
 	{		
 		int shopCode = posMainDao.getShopCode(mgrId);
-		categoryDto.setShopCode(shopCode);		
-		int createCategory=0;
-		int updateCategory=0;
+		categoryDto.setShopCode(shopCode);
 		if(categoryDto.getCategoryCode()==0){
-			createCategory=posCategoryDao.createCategory(categoryDto);
+			posCategoryDao.createCategory(categoryDto);
 		}else{
-			updateCategory=posCategoryDao.updateCategory(categoryDto);			
+			posCategoryDao.updateCategory(categoryDto);			
 		}
 		return "redirect:updateCategoryView.do?mgrId="+mgrId;
 	}
@@ -62,7 +60,7 @@ public class PosCategoryController {
 	{
 		int shopCode = posMainDao.getShopCode(mgrId);
 		categoryDto.setShopCode(shopCode);
-		int result=posCategoryDao.deleteCategory(categoryDto);
+		posCategoryDao.deleteCategory(categoryDto);
 		
 		return "redirect:updateCategoryView.do?mgrId="+mgrId;
 	}

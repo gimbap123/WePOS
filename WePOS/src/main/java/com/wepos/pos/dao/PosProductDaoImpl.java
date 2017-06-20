@@ -5,7 +5,6 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ProductDto;
-import com.wepos.mgr.dto.CategoryDto;
 
 public class PosProductDaoImpl extends SqlSessionDaoSupport implements PosProductDao{
 	

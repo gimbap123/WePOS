@@ -64,8 +64,6 @@ public class PosProductController {
 
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
-		int createProduct = 0;
-		int updateProduct = 0;
 		if (productDto.getProductCode() == 0) 
 		{
 			if (!productDto.getUpload().isEmpty()) 
@@ -75,7 +73,7 @@ public class PosProductController {
 				File file = new File(filePath + newFileName);
 				productDto.getUpload().transferTo(file);
 			}
-			createProduct = posProductDao.createProduct(productDto);
+			posProductDao.createProduct(productDto);
 		} 
 		else 
 		{
@@ -93,7 +91,7 @@ public class PosProductController {
 				productDto.setProductFile(oldFileName);
 			}
 
-			updateProduct = posProductDao.updateProduct(productDto);
+			posProductDao.updateProduct(productDto);
 		}
 		return "redirect:updateProductView.do?mgrId=" + mgrId;
 	}
@@ -112,7 +110,7 @@ public class PosProductController {
 
 		int shopCode = posMainDao.getShopCode(mgrId);
 		productDto.setShopCode(shopCode);
-		int result = posProductDao.deleteProduct(productDto);
+		posProductDao.deleteProduct(productDto);
 
 		return "redirect:updateProductView.do?mgrId=" + mgrId;
 	}

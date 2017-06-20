@@ -6,7 +6,6 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wepos.common.dto.ReservationDto;
-import com.wepos.pos.dto.PosLogDto;
 
 public class PosReservationDaoImpl extends SqlSessionDaoSupport implements PosReservationDao {
 	

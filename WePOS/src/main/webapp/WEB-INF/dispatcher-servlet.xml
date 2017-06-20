@@ -3,80 +3,82 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context" 
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-       
+
 	<!-- @Autowired 사용을 위해 -->
-    <context:annotation-config/> 
-    
-    <!-- 경로 매핑설정 --> 
-    <mvc:annotation-driven />
-    <mvc:resources mapping="/assets/**" location="/assets/" />     
-    
-     
-    <!-- ViewResolver : 요청명령어에 따른 prefix(경로), suffix(파일의 확장자) -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">		
+	<context:annotation-config />
+
+	<!-- 경로 매핑설정 -->
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+
+
+	<!-- ViewResolver : 요청명령어에 따른 prefix(경로), suffix(파일의 확장자) -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	 <!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
- 	 <bean class="com.wepos.common.controller.CommonController" />
- 	 <bean class="com.wepos.common.controller.SearchShopController" />
- 	 <bean class="com.wepos.common.controller.BoardController" />
- 	 <bean class="com.wepos.admin.controller.AdminController" />
- 	 <bean class="com.wepos.pos.controller.PosMainController" />
- 	 <bean class="com.wepos.admin.controller.AdminMgrController" />
- 	 <bean class="com.wepos.pos.controller.PosLogController" />
- 	 <bean class="com.wepos.pos.controller.PosTableController" />
- 	 <bean class="com.wepos.pos.controller.PosProductController" />
- 	 <bean class="com.wepos.common.controller.SearchProductController" />
- 	 <bean class="com.wepos.common.controller.ReservationController" />
- 	 <bean class="com.wepos.mgr.controller.MgrController" />
- 	 <bean class="com.wepos.pos.controller.PosChartStatsController" />
- 	 <bean class="com.wepos.pos.controller.PosCategoryController" />
- 	 <bean class="com.wepos.pos.controller.PosFunctionController" />
-   <bean class="com.wepos.pos.controller.PosPaymentController" />
- 	 <bean class="com.wepos.user.controller.UserController" />
- 	 <bean class="com.wepos.pos.controller.PosReservationContoroller" />
 
-   
-	 <!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
-     <bean class="com.wepos.common.dao.BoardDaoImpl" /> 
-     <bean class="com.wepos.common.dao.CommonDaoImpl" />
-     <bean class="com.wepos.common.dao.ShopDaoImpl" />
-     <bean class="com.wepos.admin.dao.AdminDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosMainDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosLogDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosTableDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosProductDaoImpl" />
-     <bean class="com.wepos.common.dao.ProductDaoImpl" />
-     <bean class="com.wepos.common.dao.ReservationDaoImpl" />
-     <bean class="com.wepos.mgr.dao.MgrDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosChartStatsDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosCategoryDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosPaymentDaoImpl" />
-     <bean class="com.wepos.user.dao.UserDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosFunctionDaoImpl" />
-     <bean class="com.wepos.pos.dao.PosReservationDaoImpl" />
-          
+	<!-- 요청을 처리해주는 컨트롤러 객체를 등록 -->
+	<bean class="com.wepos.common.controller.CommonController" />
+	<bean class="com.wepos.common.controller.SearchShopController" />
+	<bean class="com.wepos.common.controller.BoardController" />
+	<bean class="com.wepos.admin.controller.AdminController" />
+	<bean class="com.wepos.pos.controller.PosMainController" />
+	<bean class="com.wepos.admin.controller.AdminMgrController" />
+	<bean class="com.wepos.pos.controller.PosLogController" />
+	<bean class="com.wepos.pos.controller.PosTableController" />
+	<bean class="com.wepos.pos.controller.PosProductController" />
+	<bean class="com.wepos.common.controller.SearchProductController" />
+	<bean class="com.wepos.common.controller.ReservationController" />
+	<bean class="com.wepos.mgr.controller.MgrController" />
+	<bean class="com.wepos.pos.controller.PosChartStatsController" />
+	<bean class="com.wepos.pos.controller.PosCategoryController" />
+	<bean class="com.wepos.pos.controller.PosFunctionController" />
+	<bean class="com.wepos.pos.controller.PosPaymentController" />
+	<bean class="com.wepos.user.controller.UserController" />
+	<bean class="com.wepos.pos.controller.PosReservationContoroller" />
+
+	<!-- 요청을 처리해주는 DaoImpl 객체를 등록 -->
+	<bean class="com.wepos.common.dao.BoardDaoImpl" />
+	<bean class="com.wepos.common.dao.CommonDaoImpl" />
+	<bean class="com.wepos.common.dao.ShopDaoImpl" />
+	<bean class="com.wepos.admin.dao.AdminDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosMainDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosLogDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosTableDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosProductDaoImpl" />
+	<bean class="com.wepos.common.dao.ProductDaoImpl" />
+	<bean class="com.wepos.common.dao.ReservationDaoImpl" />
+	<bean class="com.wepos.mgr.dao.MgrDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosChartStatsDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosCategoryDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosPaymentDaoImpl" />
+	<bean class="com.wepos.user.dao.UserDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosFunctionDaoImpl" />
+	<bean class="com.wepos.pos.dao.PosReservationDaoImpl" />
 	<!-- 뷰에 관련된 부분 => 다운로드를 받을 수 있는 뷰 객체를 하나 등록합니다 -->
 	<bean id="downloadView" class="com.wepos.common.view.DownloadView" />
 
 
-	<!-- 파일 업로드 및 다운로드 설정  -->
- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
- 		<property name="maxUploadSize" value="52428800" />
- 		<property name="defaultEncoding" value="UTF-8" />
- 	</bean>
+	<!-- 파일 업로드 및 다운로드 설정 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="52428800" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
 
 	<!-- 다운로드 할 때만 처리해주는 전용 ViewResolver -->
- 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="0" />
 
 
 
